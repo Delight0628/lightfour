@@ -35,12 +35,13 @@ __pycache__/
 venv/
 .env
 
-# --- 系统 / 编辑器 ---
+# --- 系统 / 编辑器 / agent 本地状态 ---
 Thumbs.db
 Desktop.ini
 .DS_Store
 .idea/
 .vscode/
+.claude/
 *.swp
 
 # --- 敏感配置 ---
