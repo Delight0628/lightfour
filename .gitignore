@@ -25,6 +25,14 @@ data/beatport/*.json
 # --- 含敏感信息的会话文档 ---
 恢复会话_*.md
 
+# --- 会话临时脚本 ---
+check_*.py
+install_*.py
+test_*.py
+load_model.py
+verify_tv.py
+reconnect.py
+
 # --- 临时 / 本地 ---
 .tmp/
 *.log
