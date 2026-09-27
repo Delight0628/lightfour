@@ -1,0 +1,8 @@
+{
+  "error": {
+    "code": 429,
+    "message": "Rate limit exceeded for project 28471 using model 'aliyun/qwen3.5-omni-plus'",
+    "request_id": "ef5228b9c582f8482c7145c3fdaa9ada",
+    "type": "user_project_rate_limit_exceeded"
+  }
+}

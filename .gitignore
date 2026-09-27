@@ -1,0 +1,50 @@
+# --- 模型权重 / 大二进制（勿入 git）---
+*.safetensors
+*.gguf
+*.ckpt
+*.pt
+*.pth
+*.bin
+*.onnx
+*.zip
+*.7z
+*.rar
+Qwen2.5-Omni-3B/
+Qwen2.5-Omni-3B.zip
+
+# --- 音频 / 大数据集 ---
+*.wav
+*.mp3
+*.flac
+*.aac
+data/fma/fma_metadata/
+data/fma/fma_small*
+data/fma/fma_small_download.err
+data/beatport/*.json
+
+# --- 含敏感信息的会话文档 ---
+恢复会话_*.md
+
+# --- 临时 / 本地 ---
+.tmp/
+*.log
+*.pickle
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.env
+
+# --- 系统 / 编辑器 ---
+Thumbs.db
+Desktop.ini
+.DS_Store
+.idea/
+.vscode/
+*.swp
+
+# --- 敏感配置 ---
+*.pem
+*.key
+secrets.*
+*credentials*
