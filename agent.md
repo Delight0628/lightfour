@@ -154,3 +154,4 @@ D:\lightfour\
 | 日期 | 变更 |
 |---|---|
 | 2026-09-25 | 首次建立 `agent.md`，汇总目标、路线、数据结论、目录与待办 |
+| 2026-09-28 | GitHub 初始化：`https://github.com/Delight0628/lightfour`；历史中剔除含凭据的 `check_now.py` / `sftp_*.py`；补 README/LICENSE |
