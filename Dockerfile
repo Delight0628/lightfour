@@ -59,6 +59,14 @@ RUN pip install --no-cache-dir --timeout 300 --retries 5 \
         "scikit-learn>=1.3.0" \
         "protobuf>=3.20,<4.0"
 
+# ---------- TensorFlow + MAPPO 依赖 ----------
+# rider-dispatch-mappo 项目训练用（agent.md §3 同服务器跑）
+RUN pip install --no-cache-dir --timeout 300 --retries 5 \
+        "tensorflow==2.15.0" \
+        "pettingzoo>=1.24.0" \
+        "gymnasium>=0.29.0" \
+        "simpy>=4.0.0"
+
 # ---------- PyTorch + CUDA ----------
 # 大包（~554MB），加大超时防下载中断
 RUN pip install --no-cache-dir --timeout 300 --retries 10 \
@@ -108,7 +116,8 @@ RUN pip install --no-cache-dir --timeout 300 --retries 5 \
 RUN pip install --no-cache-dir --timeout 300 --retries 5 \
         "matplotlib>=3.6.0" \
         "seaborn>=0.12.0" \
-        "plotly>=5.0.0"
+        "plotly>=5.0.0" \
+        "streamlit==1.32.0"
 
 # ---------- 开发工具 ----------
 RUN pip install --no-cache-dir \
@@ -117,12 +126,13 @@ RUN pip install --no-cache-dir \
 
 # ---------- 验证安装 ----------
 RUN python -c "import torch; print(f'torch {torch.__version__} cuda={torch.cuda.is_available()}')" && \
+    python -c "import tensorflow as tf; print(f'tensorflow {tf.__version__}')" && \
     python -c "import transformers; print(f'transformers {transformers.__version__}')" && \
-    python -c "import peft; print(f'peft {peft.__version__}')" && \
-    python -c "import bitsandbytes; print(f'bitsandbytes {bitsandbytes.__version__}')" && \
+    python -c "import peft, bitsandbytes; print(f'peft {peft.__version__} bnb {bitsandbytes.__version__}')" && \
+    python -c "import swift; print(f'ms-swift {swift.__version__}')" && \
     python -c "import librosa; print(f'librosa {librosa.__version__}')" && \
-    python -c "import modelscope; print(f'modelscope {modelscope.__version__}')" && \
-    python -c "import qwen_omni_utils; print('qwen-omni-utils OK')"
+    python -c "import qwen_omni_utils; print('qwen-omni-utils OK')" && \
+    python -c "import pettingzoo, gymnasium, simpy; print('MAPPO deps OK')"
 
 # ---------- 工作目录 ----------
 WORKDIR /workspace/lightfour
@@ -134,7 +144,7 @@ COPY . /workspace/lightfour
 RUN mkdir -p data output logs checkpoints
 
 # ---------- 启动说明（平台不允许 CMD） ----------
-# QLoRA 微调（ms-swift）：
+# QLoRA 微调（ms-swift 4.x）：
 #   swift sft \
 #     --model ${MODEL_PATH} \
 #     --train_type lora \
