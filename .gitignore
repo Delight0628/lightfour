@@ -21,6 +21,7 @@ data/fma/fma_metadata/
 data/fma/fma_small*
 data/fma/fma_small_download.err
 data/beatport/*.json
+data/beatbox/
 
 # --- 含敏感信息的会话文档 ---
 恢复会话_*.md

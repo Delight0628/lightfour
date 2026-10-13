@@ -3,7 +3,7 @@
 > **每次对话开始时必须先读本文件**，确保对项目目标、数据、环境和下一步动作有统一认知。  
 > 有重大决策、路径变更、训练进度变化时，**同步更新本文件**。
 
-最后更新：2026-09-25
+最后更新：2026-10-13
 
 ---
 
@@ -46,6 +46,7 @@
 | 训练 | **租 NVIDIA 卡**（A10/4090/A100）。QLoRA 微调 7B 约需 18–24GB；3B 更宽松 |
 | 云端 SSH | virtaicloud（`ssh.virtaicloud.com:30022`，注意厂商文档 hostname）。详见会话恢复文档；**凭据勿写入 git / 勿外传** |
 | 模型存储（云端） | **`/gemini/code/models/`**（可写、超大共享盘）。`/var/tmp/orion/comm` **只读不可用**（曾误判，已纠正） |
+| 趋动云实例 765029853309157376（2026-10-13 检查） | GPU 仅 **B1.gpu.small 6.2GB vGPU 切片**（宿主 8×RTX 3090）；503GB 内存 / 96 核；`/gemini/pretrain` **已挂载 Qwen2.5-Omni-3B**；训练依赖已齐（详见 §6） |
 | 本地路径注意 | 历史脚本写死 `D:\butheisDelight\...`，当前工作区是 **`D:\lightfour`**。新脚本请用相对路径或本仓库路径 |
 
 ---
@@ -75,7 +76,7 @@
 ### 4.4 模型权重
 
 - 本地：`Qwen2.5-Omni-3B.zip`（约 19GB，在仓库根目录，**已在 .gitignore**）
-- 云端：截至 2026-09-24 检查**尚未下载** Qwen 权重；需 ModelScope/HF 拉到 `/gemini/code/models/`
+- 云端（2026-10-13 核实）：**`/gemini/pretrain` 已挂载 Qwen2.5-Omni-3B**（`model_type=qwen2_5_omni`，3 个 safetensors 分片共约 12GB，含 `spk_dict.pt`），**无需再传本地 zip**；`/gemini/code/models/` 尚不存在（可作训练输出目录）
 
 ---
 
@@ -117,8 +118,9 @@ D:\lightfour\
 
 ### 进行中
 
-- [ ] 将 `Qwen2.5-Omni-3B` 上传云端并解压到 `/gemini/code/models/`
-- [ ] 云端安装训练依赖（torch/transformers/peft/librosa/qwen-omni-utils 等）
+- [x] ~~将 `Qwen2.5-Omni-3B` 上传云端~~ — **无需上传**：`/gemini/pretrain` 已挂载同款权重（2026-10-13 核实）
+- [x] ~~云端安装训练依赖~~ — **已就绪**（2026-10-13 经 JupyterLab 通道核实）：torch 2.14.0+cu130（CUDA 可用，nvcc 12.1）、transformers 5.16.1（`Qwen2_5OmniForConditionalGeneration` 导入 OK）、ms-swift 4.5.3（`swift sft` CLI 正常；`swift --help` 本身报 KeyError 属正常）、peft 0.20.0 / accelerate 1.15.0 / bitsandbytes 0.50.2 / datasets / librosa / soundfile / torchaudio / qwen-omni-utils 齐全；缺 flash-attn、deepspeed（可选）
+- [ ] **GPU 显存不足（阻塞项）**：实例仅 **6.2GB vGPU**（B1.gpu.small），3B QLoRA 训练需 ~18–24GB。需在租卡时选整卡规格（3090 24G / A10 / A100）再开训
 
 ### 待做（建议顺序）
 
@@ -155,3 +157,4 @@ D:\lightfour\
 |---|---|
 | 2026-09-25 | 首次建立 `agent.md`，汇总目标、路线、数据结论、目录与待办 |
 | 2026-09-28 | GitHub 初始化：`https://github.com/Delight0628/lightfour`；历史中剔除含凭据的 `check_now.py` / `sftp_*.py`；补 README/LICENSE |
+| 2026-10-13 | 经 JupyterLab 通道核实趋动云实例 765029853309157376 环境：训练依赖已齐、`/gemini/pretrain` 已挂 Qwen2.5-Omni-3B；**GPU 仅 6.2GB 为微调阻塞项** |
