@@ -23,6 +23,15 @@ data/fma/fma_small_download.err
 data/beatport/*.json
 data/beatbox/
 
+# --- 训练数据中间产物（均可由 scripts/ 构建脚本重建）---
+data/sft/
+data/sft_v4/
+data/gen_v1/
+data/feat_w2v/
+data/upload_v4/
+*.npz
+*.npy
+
 # --- 含敏感信息的会话文档 ---
 恢复会话_*.md
 
@@ -34,6 +43,7 @@ install_*.py
 test_*.py
 load_model.py
 verify_tv.py
+lightfour/verify_*.py
 reconnect.py
 
 # --- 编辑器 / agent 本地 ---
