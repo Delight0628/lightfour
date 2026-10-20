@@ -62,12 +62,28 @@ v1/v2/v3 三轮 QLoRA 微调的教训（详见 `docs/微调lightfour.md`）：
 
 **目标**：训一个真正"听音频"的 beatbox 分类器。
 
-| 动作 | 交付物 | Gate（通过条件） |
-|---|---|---|
-| 1. 专用分类器（log-mel CNN 起步 → wav2vec2/Dasheng） | `scripts/train_beatbox_classifier.py` + checkpoint | 在 AVP-LVT 上跑通 |
-| 2. 标签设计采纳音节级监督（A1 论文结论：音节级 > 鼓级） | 类目表（kd/sd/hhc/hho → 中文+音节+IPA） | 标签口径统一 |
-| 3. **验收评测**：test 准确率 + 音频敏感性测试 | 评测脚本 | **4 类准确率 ≥ 70%**（随机 25%）；敏感性测试通过（不同音频→不同输出） |
-| 4. 音频加长：2-5s 窗口 | `build_beatbox_windows.py` | 窗口 ≥2s 占比 100% |
+| 动作 | 交付物 | Gate（通过条件） | 状态 |
+|---|---|---|---|
+| 1. 专用分类器（log-mel CNN 起步 → wav2vec2/Dasheng） | `scripts/train_beatbox_classifier*.py` + checkpoint | 在 AVP-LVT 上跑通 | ✅ v1/v2/v3 三版跑通 |
+| 2. 标签设计采纳音节级监督 | 类目表（kd/sd/hhc/hho） | 标签口径统一 | ✅ |
+| 3. **验收评测**：test 准确率 + 音频敏感性 | `scripts/eval_beatbox_classifier.py` | **4 类准确率 ≥ 70%**（随机 25%） | 🟡 v1=0.5008，v3 训练中 |
+| 4. 音频加长 2-5s 窗口 | `build_sft_v4_omni.py`（beatbox_windows 6,445 个） | 窗口 ≥2s 占比 100% | ✅ |
+
+**迭代记录（本地 CPU，`py -3.12`，torch 2.14.1+cpu）**：
+
+| 版本 | 关键改动 | 结果 | 结论 |
+|---|---|---|---|
+| v1 | log-mel CNN，BatchNorm，per-clip 归一化 | test **0.5008**（Kick 95%/Snare 40%/闭镲 43%/开镲 8%） | ✅ 证明"模型不听音频"是 Omni 模板背诵的锅，换专用分类器就解决；❌ 类别偏置 + 跨人泛化差（val 0.72 vs test 0.50） |
+| v2 | +类权重 +波形增强(增益/噪/变调/变速) | val 在 0.53~0.63 剧烈震荡 | ❌ 发现**致命缺陷**：`pitch_shift` 重采样后按原长裁剪 → 截掉 hi-hat 衰减尾巴，而闭镲/开镲的唯一判别特征就是衰减时长 |
+| v3 | **mel 域频率增强（保时间轴）** + GroupNorm + EMA + LR 1e-3 | 运行中 | 目标 test ≥ 0.70 |
+
+**技术要点**：
+- **判定衰减类差异必须保住时间轴** → 频率增强在 mel 域做（沿 mel 轴 warp），不要在波形域重采样
+- BatchNorm 在小 val 集上导致 epoch 间剧烈震荡 → 换 GroupNorm + 权重 EMA
+- Windows 上 `torch.set_num_threads(1)` + `OMP_NUM_THREADS=1` 必设，否则 OpenMP 死锁（表现为"进程无 CPU 增长"）
+- `py` 启动器 CPU 占用低是假象，真实进程是 `python.exe` 子进程（认 CPU 增量要找对 PID）
+
+
 
 **验收铁律**：准确率 ≥70% 且音频敏感性通过，才能进入 Stage 2。识别不过关，飞轮是垃圾进垃圾出。
 
@@ -97,6 +113,31 @@ v1/v2/v3 三轮 QLoRA 微调的教训（详见 `docs/微调lightfour.md`）：
 - **做条件生成**：用 AVP-LVT 的音节/IPA 标注当"乐谱"，训练「IPA/音素序列 → beatbox 音频」（类似 TTS 反向），数据需求小得多，且与识别模型共享数据标注。
 - 数据来源 = Stage 2 飞轮滚出的「音频片段 + 鼓谱序列」配对库。
 - **Gate**：能按给定鼓谱生成可辨识的 beatbox 片段（人耳能听出对应鼓类）。
+
+---
+
+### 并行轨道：Omni SFT 数据 v4（已就绪，不依赖 beatbox 分类器）
+
+> 这条轨道与 Stage 1/2 **并行推进**，不必等识别模型。SFT 管线和原始数据早已齐备，缺的是"修正后的配方"。
+
+**v3 失败的根因与 v4 修正**：
+
+| 问题 | v3 | v4 修正 |
+|---|---|---|
+| 答案 99% 是公共模板 token → eval_loss 虚低、模型背模板 | "这段音频模仿的是鼓组的**X**音色" | **答案只留类别标签**（如"闭镲"），实测答案均值 **3.2 字符**、最大 11 → 类别 token 占 loss 100% |
+| beatbox 单音 0.06-1.5s，音频特征太少 | 单音切片 | **2/3/5 秒滑动窗口**，6,445 个 |
+| 音频塔冻结 | `freeze_vit` 默认 True | `--freeze_vit false --freeze_aligner false` |
+| 职责错位：让 Omni 自己做 beatbox 识别 | Omni 直出类别 | **职责拆分**：beatbox 类别由 Stage A 分类器产出（"耳朵"），Omni 只负责按标签组织语言（"嘴巴"）→ 蒸馏式混合架构，绕开 Omni 音频塔短板 |
+
+**已产出**（`data/sft_v4/`，脚本 `scripts/build_sft_v4_omni.py`）：
+
+| 集合 | 条数 | 构成 |
+|---|---|---|
+| train | 8,370 | beatbox 窗口 + FMA 音乐 |
+| eval | 348 | 同上 |
+| test | 1,216 | beatbox 按参与者留出（P9/11/19/24）+ FMA 随机 10% |
+
+**Omni 侧 Gate**：不再看 eval_loss，改看 **① 音频敏感性测试通过 ② test 准确率（beatbox 4 类 ≥70% / FMA 8 类 ≥55%）**。
 
 ---
 
@@ -169,3 +210,4 @@ v1/v2/v3 三轮 QLoRA 微调的教训（详见 `docs/微调lightfour.md`）：
 | 2026-10-16 | v3 修复 audio_tower 仍不听音频；音频敏感性测试证实模板背诵；eval_loss 判死刑 |
 | 2026-10-18 | 识别模型资源调研（`beatbox_recognition_models.md`）：beatbox 太小众无现成权重，自训即稀缺资产 |
 | 2026-10-19 | **战略转向**：Omni → 专用音频分类器 + 伪标注数据飞轮（Stage 1 识别 → Stage 2 飞轮 → Stage 3 生成）定为主线 |
+| 2026-10-20 | Stage A 专用分类器落地：v1 test 0.5008（证实"不听音频"是 Omni 模板背诵的锅）；v2 发现波形域 pitch_shift 截断衰减尾巴的致命缺陷；v3 改 mel 域增强 + GroupNorm + EMA 重训。**Omni v4 SFT 数据同步就绪**（纯标签配方 + 2-5s 窗口，train 8,370/eval 348/test 1,216），确立"分类器当耳朵、Omni 当嘴巴"的蒸馏式混合架构 |
