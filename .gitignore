@@ -27,7 +27,14 @@ data/beatbox/
 data/sft/
 data/sft_v4/
 data/gen_v1/
+data/gen_synth/
+data/hit_bank/
 data/feat_w2v/
+
+# --- 临时上传/打包产物 ---
+.upload_code_only/
+.upload_staging/
+*.tar.gz
 data/upload_v4/
 *.npz
 *.npy

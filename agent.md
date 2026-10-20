@@ -3,7 +3,7 @@
 > **每次对话开始时必须先读本文件**，确保对项目目标、当前主线、进度和下一步动作有统一认知。
 > 有重大决策、路线变更、训练进度变化时，**同步更新本文件**。
 
-最后更新：2026-10-19
+最后更新：2026-10-20（生成型数据集管线落地）
 
 ---
 
@@ -114,6 +114,42 @@ v1/v2/v3 三轮 QLoRA 微调的教训（详见 `docs/微调lightfour.md`）：
 - 数据来源 = Stage 2 飞轮滚出的「音频片段 + 鼓谱序列」配对库。
 - **Gate**：能按给定鼓谱生成可辨识的 beatbox 片段（人耳能听出对应鼓类）。
 
+#### ⭐ 生成型数据集进展（2026-10-20，独立于 Stage 1/2 先行推进）
+
+**瓶颈已破**：真实录音仅 0.55h，远不够生成模型（需 10-50h+）。但 beatbox 本质是**离散打击乐事件序列**，可用"采样合成器"原理从极少真实素材无限扩量：
+
+```
+真实录音(140 段/0.55h) → 按 onset 精确切出每次击打 → 打击乐样本库(hit_bank)
+                                                      ↓
+                          按任意鼓谱重新排布叠加 → 无限 (鼓谱→音频) 配对
+```
+
+**两步管线（本地 + 趋动云双端跑通，结果逐项一致）**：
+
+| 步骤 | 脚本 | 产出 | 状态 |
+|---|---|---|---|
+| 1. 切击打样本库 | `scripts/build_hit_bank.py` | `data/hit_bank/` 4,872 个 hit（底鼓 1446 / 军鼓 1253 / 闭镲 1164 / 开镲 1009），总 0.330h | ✅ 本地+服务器双端 |
+| 2. 合成生成数据 | `scripts/render_synth.py` | `data/gen_synth/`（scores.jsonl + omni_pairs.jsonl + mel/ + wav/） | 🔄 服务器跑 `--hours 5` 中 |
+
+**击打切分的关键技术**（`build_hit_bank.py`）：
+- **起音对齐**：在 `[onset-50ms, onset+120ms]` 内找能量上升点（帧 RMS > 峰值 25%），回退 10ms 保留起音瞬间
+- **尾部自适应截断**：帧 RMS > 峰值 5% 的最后一帧为终点，**保住 hi-hat 衰减尾巴**（闭镲/开镲判别特征，见 v2 教训）
+- 归一化到统一峰值，混音时按 hit 的 RMS 再做力度分配
+
+**合成的关键技术**（`render_synth.py`）：
+- 随机 tempo 70-160 BPM + groove/velocity + 击打随机性 → 覆盖快慢/密集稀疏
+- hit 重叠相加 + `tanh` 软限幅防爆音
+- 输出与 `gen_v1` **完全同格式**（可复用下游管线），双路线齐备：Route A（Omni 音频 token）/ Route B（mel→wav 声码器）
+
+**已产出的生成型数据**：
+
+| 集合 | 规模 | 来源 | 用途 |
+|---|---|---|---|
+| `data/gen_v1/` | 1,744 窗口 / **0.97h** | 真实录音（AVP-LVT） | 真实音色的锚点数据 |
+| `data/gen_synth/` | 9,000 窗口（目标 5h）🔄 | hit_bank 合成 | 可无限扩量 |
+
+**下一步**：① 当前批次跑完 → 打包下载回本地 → 音质抽检 + Stage-A 分类器做生成质量闭环评测；② 改 tar 流式输出（现瓶颈是 seaweedfs 写小文件）→ 扩到 50h。
+
 ---
 
 ### 并行轨道：Omni SFT 数据 v4（已就绪，不依赖 beatbox 分类器）
@@ -145,11 +181,23 @@ v1/v2/v3 三轮 QLoRA 微调的教训（详见 `docs/微调lightfour.md`）：
 
 | 资源 | 现状 | 协调 |
 |---|---|---|
-| 本地算力 | Windows / AMD RX 7800 XT（ROCm 不可用）/ RAM 15.4GB / D 盘 ~130GB 空闲 | **专用分类器本地 CPU/小模型可训**（log-mel CNN / wav2vec2 小模型）；大模型上云 |
+| 本地算力 | Windows / AMD RX 7800 XT（ROCm 不可用）/ RAM 15.4GB / D 盘 ~120GB 空闲 | **专用分类器本地 CPU/小模型可训**（log-mel CNN / wav2vec2 小模型）；大模型上云 |
 | 云端 GPU | 趋动云 B1.gpu.large 25GB vGPU（历史用过） | Dasheng/wav2vec2 扩展训练、Demucs 批处理上云 |
-| 持久化盘 | `/gemini/code`（seaweedfs，用量计费） | 产物直写持久化盘（v1 教训：overlay 盘停机即丢） |
+| **云端开发实例** | 趋动云「开发环境」**96 核 CPU / 无 GPU** / Python 3.11.8 | **数据生成专用**（CPU 密集，不占本机） |
+| 持久化盘 | `/gemini/code`（seaweedfs，14P 池，用量计费） | 产物直写持久化盘（v1 教训：overlay 盘停机即丢）。**注意小文件写慢** |
+| 只读数据区 | `/gemini/data-1/`：`AVP-LVT_Dataset.zip`(310M)、`fma_small.zip.part001-004`(各1.8G)、`sft_samples.zip` | 走【数据】栏上传，**只读** |
 | 数据资产 | AVP-LVT 5,714 boxeme（4,873 带音频）+ FMA 8,000 首 + Beatport 32 类 | 本地 `data/` |
 | 模型资产 | Qwen2.5-Omni-3B（基座 11.97GB）+ v2 checkpoint-1000（已下载校验） | 作对照基线/对话层，非识别主路径 |
+
+**⚠️ 数据安全约定**：**只允许代码上行（.py/.sh），禁止数据上行**（会触发公司数据安全拦截）；数据**下行**（服务器→本地）允许。生成数据在服务器用 `/gemini/data-1/` 原料就地构建。
+
+**远程操作技术要点**（`jupyterlab-remote-shell` skill，2026-10-20 打通）：
+1. **`_xsrf` cookie 是 path 限定的**——必须 `browser_navigate` 到 JupyterLab **直连 URL**（path 匹配 baseUrl）才能读到，否则所有 POST/PUT 403。
+2. **写文件**：Contents API `PUT` + `format:'text'`；**中文内容会 500** → 传 base64（纯 ASCII）+ 服务器端 `base64 -d`。
+3. **执行命令**：`POST api/terminals`（带 `X-XSRFToken`）→ WebSocket `terminals/websocket/<name>` 发 stdin → 输出重定向到文件 → Contents API 读回。**注意 shell 引号会被吞**，避免内嵌引号。
+4. **零手抄传脚本**：本地起带 CORS 的 `ThreadingHTTPServer` → 浏览器 `fetch('http://127.0.0.1:PORT/x.py')` → PUT 上去。**手抄 base64 曾把 `CLASSES` 抄成 `CL@SSES`**，务必用此法 + md5 校验。
+5. **脚本放 `scripts/` 子目录**（与本地结构一致），否则 `ROOT = dirname(dirname(__file__))` 会多算一层。
+6. **browser 工具会间歇卡死**（60s 超时）→ 用 computer use 点浏览器刷新按钮恢复。
 
 **风险应对**：
 1. **识别不过关**（≥70% 不达标）→ 切换 backbone（log-mel CNN → wav2vec2 → Dasheng），不在单一模型恋战。
@@ -164,8 +212,12 @@ v1/v2/v3 三轮 QLoRA 微调的教训（详见 `docs/微调lightfour.md`）：
 
 ### 数据
 - `data/beatbox/AVP-LVT_Dataset/` — beatbox 原始（141 wav + 180 CSV，onset+鼓类+音节+IPA）
+- `data/hit_bank/` — ⭐ **4,872 个打击乐击打样本**（4 类 × 28 参与者，16k 单声道 + index.json），生成型数据的原料
+- `data/gen_v1/` — ⭐ 生成型数据·真实录音版（1,744 窗口 / 0.97h，scores.jsonl + omni_pairs.jsonl + mel/）
+- `data/gen_synth/` — ⭐ 生成型数据·合成版（hit_bank 按鼓谱重排，可无限扩量）
 - `data/sft/beatbox_clips/` — 4,872 单音切片（wav）
 - `data/sft/beatbox_sft.jsonl` / `fma_sft.jsonl` — SFT 样本
+- `data/sft_v4/` — Omni v4 识别型 SFT（train 8,370 / eval 348 / test 1,216，纯标签配方）
 - `data/fma/` — FMA 元数据 + 8,000 首 mp3
 - `data/beatport/` — 32 类 taxonomy + 榜单元数据
 
@@ -181,7 +233,24 @@ v1/v2/v3 三轮 QLoRA 微调的教训（详见 `docs/微调lightfour.md`）：
 
 ---
 
-## 6. 会话启动检查清单（Agent 必做）
+## 6. 下一步行动计划（2026-10-20 排定）
+
+> **优先级**：Stage 1 识别过 Gate 是飞轮启动前提（铁律，不可跳过）；生成型数据集可并行推进（不依赖识别模型）。
+
+| # | 行动 | 交付物 | 依赖 | 状态 |
+|---|---|---|---|---|
+| **1** | **完成 gen_synth 首批并下载回本地** | `data/gen_synth/` 5h 数据 + 音质抽检报告 | 服务器 render_synth 跑完 | 🔄 约 50% |
+| **2** | **render_synth 改 tar 流式输出** → 扩到 50h | 50h 生成型数据集 | 行动 1 完成 | ⬜ |
+| **3** | **Stage 1 识别模型冲 70% Gate** | 候选：修 v3 补零 bug 重训 / 增大 val 参与者 / 全量参与者 k-fold CNN / 上云 wav2vec2 全参微调 | — | ⬜ 最高优先 |
+| **4** | 生成质量闭环评测 | 用 Stage-A 分类器判生成音频能否命中目标鼓类 | 行动 1 + Stage 1 | ⬜ |
+| **5** | Omni 生成路线可行性核实 | 服务器查 ms-swift 是否支持 Talker 音频 token 训练 | 服务器通道 | ⬜ |
+| **6** | Stage 2 伪标注飞轮落地 | `preprocess_video.py` + `pseudo_label.py` 用真实 beatbox 视频跑通 | **行动 3（Gate ≥70%）** | ⬜ 阻塞中 |
+
+**行动 3 的判定铁律**（复述）：只认 **test 准确率 + 音频敏感性测试**，**绝不看 eval_loss**。当前分类器最好成绩 test 0.5721（v2），未过 70%；且 val→test 系统性 gap ≈ 0.20（2 人 val 集高估），选 checkpoint 结论不可信 → 需 k-fold 参与者 CV 补救。
+
+---
+
+## 7. 会话启动检查清单（Agent 必做）
 
 1. **读本文件** — 恢复主线（数据飞轮）与当前阶段。
 2. **验收铁律**：识别/评测只认 **test 准确率 + 音频敏感性测试**，**绝不看 eval_loss**（§2.1 教训）。
@@ -191,7 +260,7 @@ v1/v2/v3 三轮 QLoRA 微调的教训（详见 `docs/微调lightfour.md`）：
 
 ---
 
-## 7. 安全与规范
+## 8. 安全与规范
 
 1. **禁止**提交 SSH/SFTP 口令、API Key、`恢复会话_*.md`、`docs/微调lightfour.md` 之外的敏感信息进 git。
 2. 新脚本以 `D:\lightfour` 或相对路径为准，**不要写死**历史路径。
@@ -200,7 +269,7 @@ v1/v2/v3 三轮 QLoRA 微调的教训（详见 `docs/微调lightfour.md`）：
 
 ---
 
-## 8. 变更日志
+## 9. 变更日志
 
 | 日期 | 变更 |
 |---|---|
@@ -211,3 +280,4 @@ v1/v2/v3 三轮 QLoRA 微调的教训（详见 `docs/微调lightfour.md`）：
 | 2026-10-18 | 识别模型资源调研（`beatbox_recognition_models.md`）：beatbox 太小众无现成权重，自训即稀缺资产 |
 | 2026-10-19 | **战略转向**：Omni → 专用音频分类器 + 伪标注数据飞轮（Stage 1 识别 → Stage 2 飞轮 → Stage 3 生成）定为主线 |
 | 2026-10-20 | Stage A 专用分类器落地：v1 test 0.5008（证实"不听音频"是 Omni 模板背诵的锅）；v2 发现波形域 pitch_shift 截断衰减尾巴的致命缺陷；v3 改 mel 域增强 + GroupNorm + EMA 重训。**Omni v4 SFT 数据同步就绪**（纯标签配方 + 2-5s 窗口，train 8,370/eval 348/test 1,216），确立"分类器当耳朵、Omni 当嘴巴"的蒸馏式混合架构 |
+| 2026-10-20 pm | **生成型数据集管线落地**：`build_hit_bank.py` 切出 4,872 个真实人声击打（本地+趋动云双端结果一致）；`render_synth.py` 按鼓谱重排合成「鼓谱→音频」配对，突破真实录音仅 0.55h 的瓶颈（可无限扩量）。打通 jupyterlab-remote-shell 远程通道（`_xsrf` path 限制 / base64 传脚本 / CORS 服务器零手抄 / md5 校验）。确立数据安全约定：**代码上行、数据下行**。新增 §6 下一步行动计划 |
