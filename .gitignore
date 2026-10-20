@@ -28,6 +28,7 @@ data/sft/
 data/sft_v4/
 data/gen_v1/
 data/gen_synth/
+data/gen_synth_tar/
 data/hit_bank/
 data/feat_w2v/
 

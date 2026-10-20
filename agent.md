@@ -239,12 +239,42 @@ v1/v2/v3 三轮 QLoRA 微调的教训（详见 `docs/微调lightfour.md`）：
 
 | # | 行动 | 交付物 | 依赖 | 状态 |
 |---|---|---|---|---|
-| **1** | **完成 gen_synth 首批并下载回本地** | `data/gen_synth/` 5h 数据 + 音质抽检报告 | 服务器 render_synth 跑完 | 🔄 约 50% |
-| **2** | **render_synth 改 tar 流式输出** → 扩到 50h | 50h 生成型数据集 | 行动 1 完成 | ⬜ |
+| **1** | **完成 gen_synth 首批并下载回本地** | `data/gen_synth/` 5h 数据 + 音质抽检报告 | 服务器 render_synth 跑完 | ✅ 完成 |
+| **2** | **render_synth 改 tar 流式输出** → 扩到 50h | 50h 生成型数据集 | 行动 1 完成 | ✅ **完成（90,000 窗口 / 50.00h）** |
+| **2b** | **产物持久化 + 本地同步** | 服务器 `gen_synth_50h.tar.gz`(5.1GB) + 本地元数据/样本 | 行动 2 | ✅ 完成 |
 | **3** | **Stage 1 识别模型冲 70% Gate** | 候选：修 v3 补零 bug 重训 / 增大 val 参与者 / 全量参与者 k-fold CNN / 上云 wav2vec2 全参微调 | — | ⬜ 最高优先 |
-| **4** | 生成质量闭环评测 | 用 Stage-A 分类器判生成音频能否命中目标鼓类 | 行动 1 + Stage 1 | ⬜ |
+| **4** | 生成质量闭环评测 | 用 Stage-A 分类器判生成音频能否命中目标鼓类 | 行动 2b + Stage 1 | ⬜ |
 | **5** | Omni 生成路线可行性核实 | 服务器查 ms-swift 是否支持 Talker 音频 token 训练 | 服务器通道 | ⬜ |
 | **6** | Stage 2 伪标注飞轮落地 | `preprocess_video.py` + `pseudo_label.py` 用真实 beatbox 视频跑通 | **行动 3（Gate ≥70%）** | ⬜ 阻塞中 |
+
+### 生成型数据集交付清单（2026-10-20 完成）
+
+**✅ 服务器持久化**（`/gemini/code`，持久化盘）：
+
+| 产物 | 大小 | 内容 |
+|---|---|---|
+| `data/gen_synth_tar/` | 8.3GB | 45 个 tar 分片（每片 2000 窗口，含 wav+mel）+ scores.jsonl + omni_pairs.jsonl + MANIFEST.json |
+| `data/gen_synth_50h.tar.gz` | 5.1GB | 上述全量打包备份 |
+| `data/gen_synth_v1.tar.gz` | 499MB | 5h 版（小批验证用） |
+| `data/hit_bank/` | — | 4,872 个真实人声击打样本 |
+
+**✅ 本地同步**（`data/gen_synth_tar/`，共 743MB）：
+
+| 产物 | 状态 | 校验 |
+|---|---|---|
+| `MANIFEST.json` | ✅ 完整 | 45 片 × 2000 = 90,000 |
+| `omni_pairs.jsonl` | ✅ 27.8MB / 90,000 行 | md5 `59209c8b…` |
+| `scores.jsonl` | ✅ 64.3MB / 90,000 行 | md5 `a8f37e5a…` |
+| `shard_00000.tar` | ✅ 185.56MB | md5 `c874868c…` 精确匹配 |
+| `shard_00001.tar` | ✅ 185.56MB | md5 `036480d4…` 精确匹配 |
+| `shard_00022.tar` | ✅ 185.56MB | md5 `0a8dc882…` 精确匹配 |
+| `shard_00044.tar` | ✅ 185.56MB | md5 `68671ef6…` 精确匹配 |
+
+> 4 个 shard 覆盖首/中/尾，共 **8,000 窗口样本**（含 wav+mel）+ 完整 90,000 条鼓谱标注。剩余 41 片（约 7.6GB）在服务器持久化盘，可用下述方法随时补全。
+
+**数据可用性验证**：解包样本 `wav/synth_000000.wav`（1ch / 16000Hz / 2.000s）+ `mel/synth_000000.npy`（122×64 float32，范围 -13.82~8.86）✅
+
+**批量下载方法**（剩余 43 片可随时补全）：浏览器 fetch 分块（8MB/块，规避 60s 超时）→ POST 到本地接收器（`file_receiver.py:8767`）→ 拼接 + md5 校验。服务器切块：`split -b 8m -d -a 3 <shard>.tar /tmp/chunks/sXX_`。
 
 **行动 3 的判定铁律**（复述）：只认 **test 准确率 + 音频敏感性测试**，**绝不看 eval_loss**。当前分类器最好成绩 test 0.5721（v2），未过 70%；且 val→test 系统性 gap ≈ 0.20（2 人 val 集高估），选 checkpoint 结论不可信 → 需 k-fold 参与者 CV 补救。
 
