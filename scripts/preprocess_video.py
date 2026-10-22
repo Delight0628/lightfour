@@ -9,7 +9,7 @@ Stage B — beatbox 视频/音频预处理管线
 依赖：本地轻量（soundfile+numpy）；full 模式需云端 demucs/yt-dlp
 版权：输入音频仅研究用途，不入 git、不外传。
 """
-import os, argparse, json, subprocess
+import os, sys, argparse, json, subprocess
 import numpy as np
 
 def ensure_dir(p): os.makedirs(p, exist_ok=True)
@@ -20,13 +20,58 @@ def download_audio(url, out_dir):
     try: subprocess.run(cmd, check=True)
     except Exception as e: print(f"[warn] yt-dlp 失败（需云端/网络）: {e}")
 
-def separate_vocals(in_path, out_dir):
-    out = os.path.join(out_dir, "vocals"); ensure_dir(out)
-    cmd = ["python", "-m", "demucs", "--two-stems=vocals", "-n", "htdemucs", "-o", out, in_path]
-    try:
-        subprocess.run(cmd, check=True); return out
-    except Exception as e:
-        print(f"[warn] Demucs 不可用（需云端 GPU），用原音频: {e}"); return in_path
+def _run_demucs(in_path, out_root):
+    """对单个文件跑 Demucs，返回 vocals.wav；失败抛异常。"""
+    cmd = [sys.executable, "-m", "demucs", "--two-stems=vocals", "-n", "htdemucs", "-o", out_root, in_path]
+    subprocess.run(cmd, check=True)
+    stem = os.path.splitext(os.path.basename(in_path))[0]
+    vocals = os.path.join(out_root, "htdemucs", stem, "vocals.wav")
+    if os.path.exists(vocals):
+        return vocals
+    for root, _dirs, files in os.walk(out_root):
+        if "vocals.wav" in files:
+            return os.path.join(root, "vocals.wav")
+    raise FileNotFoundError("Demucs 未找到 vocals.wav")
+
+
+def separate_vocals(in_path, out_dir, chunk_sec=60):
+    """返回分离后的 vocals.wav 路径；长音频按 chunk_sec 切块跑，失败回退原音频。"""
+    import soundfile as sf
+    out = os.path.join(out_dir, "demucs"); ensure_dir(out)
+    wav, sr = sf.read(in_path, dtype="float32")
+    if wav.ndim > 1:
+        wav = wav.mean(axis=1)
+    dur = len(wav) / sr
+    if dur <= chunk_sec:
+        try:
+            return _run_demucs(in_path, out)
+        except Exception as e:
+            print(f"[warn] Demucs 失败，用原音频: {e}")
+            return in_path
+
+    # 长音频：切块跑，规避 Windows 上长音频 Demucs 的内存/崩溃问题
+    print(f"[demucs] 长音频 {dur:.1f}s -> 按 {chunk_sec}s 切块")
+    chunk_dir = os.path.join(out, "chunks"); ensure_dir(chunk_dir)
+    parts, out_sr = [], None
+    for i, start in enumerate(range(0, len(wav), int(chunk_sec * sr))):
+        seg = wav[start:start + int(chunk_sec * sr)]
+        cp = os.path.join(chunk_dir, f"chunk_{i:03d}.wav")
+        sf.write(cp, seg, sr)
+        try:
+            vp = _run_demucs(cp, out)
+            v, vsr = sf.read(vp, dtype="float32")
+            if v.ndim > 1:
+                v = v.mean(axis=1)
+            parts.append(v)
+            out_sr = vsr
+            print(f"  chunk {i:03d}: {len(seg)/sr:.1f}s -> vocals {len(v)/vsr:.1f}s")
+        except Exception as e:
+            print(f"[warn] Demucs 在 chunk {i:03d} 失败，整体回退原音频: {e}")
+            return in_path
+    full = np.concatenate(parts)
+    fp = os.path.join(out, "vocals_full.wav")
+    sf.write(fp, full, out_sr or sr)
+    return fp
 
 def load_audio(path, sr=22050):
     import soundfile as sf
@@ -68,6 +113,7 @@ def main():
     ap.add_argument("--out", default="data/bbox_raw")
     ap.add_argument("--mode", default="light", choices=["light","full"])
     ap.add_argument("--keep_wav", action="store_true")
+    ap.add_argument("--demucs_chunk", type=float, default=60.0, help="Demucs 长音频切块秒数")
     args=ap.parse_args()
     ensure_dir(args.out); seg_dir=os.path.join(args.out,"segments"); ensure_dir(seg_dir)
 
@@ -80,7 +126,7 @@ def main():
     manifest=[]
     for path in inputs:
         print(f"\n=== {os.path.basename(path)} ===")
-        src = separate_vocals(path, args.out) if args.mode=="full" else path
+        src = separate_vocals(path, args.out, args.demucs_chunk) if args.mode=="full" else path
         wav, sr = load_audio(src)
         print(f"  时长 {len(wav)/sr:.1f}s")
         if args.mode=="full": wav=energy_vad_zero(wav, sr)

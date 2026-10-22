@@ -133,9 +133,10 @@ class MelCNN(nn.Module):
 
 def evaluate(model, loader):
     model.eval(); cm = np.zeros((4, 4), dtype=int); confs = []
+    dev = next(model.parameters()).device
     with torch.no_grad():
         for x, y in loader:
-            p = F.softmax(model(x), 1); pr = p.argmax(1)
+            p = F.softmax(model(x.to(dev)), 1); pr = p.argmax(1).cpu()
             for t, q in zip(y.tolist(), pr.tolist()): cm[t, q] += 1
             confs += p.max(1).values.tolist()
     acc = np.trace(cm) / max(cm.sum(), 1)
@@ -200,7 +201,7 @@ def main():
 
     model.eval()
     with torch.no_grad():
-        zp = F.softmax(model(torch.zeros(1, 1, N_MELS, MAX_FRAMES)), 1).squeeze()
+        zp = F.softmax(model(torch.zeros(1, 1, N_MELS, MAX_FRAMES, device=dev)), 1).squeeze().cpu()
     print(f"静音输入 -> {CLASS_CN[CLASSES[int(zp.argmax())]]} 置信 {zp.max():.3f} (应显著低于 test 均值 {tconf:.3f})", flush=True)
 
     rep = {"best_epoch": best_ep, "val_acc": vacc, "test_acc": tacc, "random_baseline": 0.25,

@@ -22,6 +22,8 @@ data/fma/fma_small*
 data/fma/fma_small_download.err
 data/beatport/*.json
 data/beatbox/
+data/bbox_raw/
+data/bbox_pseudo/
 
 # --- 训练数据中间产物（均可由 scripts/ 构建脚本重建）---
 data/sft/
