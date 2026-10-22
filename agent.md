@@ -3,7 +3,7 @@
 > **每次对话开始时必须先读本文件**，确保对项目目标、当前主线、进度和下一步动作有统一认知。
 > 有重大决策、路线变更、训练进度变化时，**同步更新本文件**。
 
-最后更新：2026-10-20（生成型数据集管线落地）
+最后更新：2026-10-22 pm（B 站管线全量完成 + 典型样本本地留档）
 
 ---
 
@@ -66,7 +66,7 @@ v1/v2/v3 三轮 QLoRA 微调的教训（详见 `docs/微调lightfour.md`）：
 |---|---|---|---|
 | 1. 专用分类器（log-mel CNN 起步 → wav2vec2/Dasheng） | `scripts/train_beatbox_classifier*.py` + checkpoint | 在 AVP-LVT 上跑通 | ✅ v1/v2/v3 三版跑通 |
 | 2. 标签设计采纳音节级监督 | 类目表（kd/sd/hhc/hho） | 标签口径统一 | ✅ |
-| 3. **验收评测**：test 准确率 + 音频敏感性 | `scripts/eval_beatbox_classifier.py` | **4 类准确率 ≥ 70%**（随机 25%） | 🟡 v1=0.5008，v3 训练中 |
+| 3. **验收评测**：test 准确率 + 音频敏感性 | `scripts/eval_beatbox_classifier.py` | **4 类准确率 ≥ 70%**（随机 25%） | ❌ 未过 Gate：v2 **0.5721**（本地最好）/ **0.5147**（服务器重训），v3 0.4558，w2v 4-fold CV 0.5435 |
 | 4. 音频加长 2-5s 窗口 | `build_sft_v4_omni.py`（beatbox_windows 6,445 个） | 窗口 ≥2s 占比 100% | ✅ |
 
 **迭代记录（本地 CPU，`py -3.12`，torch 2.14.1+cpu）**：
@@ -75,7 +75,8 @@ v1/v2/v3 三轮 QLoRA 微调的教训（详见 `docs/微调lightfour.md`）：
 |---|---|---|---|
 | v1 | log-mel CNN，BatchNorm，per-clip 归一化 | test **0.5008**（Kick 95%/Snare 40%/闭镲 43%/开镲 8%） | ✅ 证明"模型不听音频"是 Omni 模板背诵的锅，换专用分类器就解决；❌ 类别偏置 + 跨人泛化差（val 0.72 vs test 0.50） |
 | v2 | +类权重 +波形增强(增益/噪/变调/变速) | val 在 0.53~0.63 剧烈震荡 | ❌ 发现**致命缺陷**：`pitch_shift` 重采样后按原长裁剪 → 截掉 hi-hat 衰减尾巴，而闭镲/开镲的唯一判别特征就是衰减时长 |
-| v3 | **mel 域频率增强（保时间轴）** + GroupNorm + EMA + LR 1e-3 | 运行中 | 目标 test ≥ 0.70 |
+| v3 | mel 域频率增强 + GroupNorm + EMA + LR 1e-3 | test **0.4558**（val 0.6364） | ❌ 比 v2 差，未过 Gate |
+| w2v | 冻结 wav2vec2-base 12 层特征 + 可学习层权重 | test **0.5271**；4-fold 参与者 CV **0.5435 ± 0.016** | 🟡 当前最可信泛化估计，仍未过 70% |
 
 **技术要点**：
 - **判定衰减类差异必须保住时间轴** → 频率增强在 mel 域做（沿 mel 轴 warp），不要在波形域重采样
@@ -150,6 +151,141 @@ v1/v2/v3 三轮 QLoRA 微调的教训（详见 `docs/微调lightfour.md`）：
 
 **下一步**：① 当前批次跑完 → 打包下载回本地 → 音质抽检 + Stage-A 分类器做生成质量闭环评测；② 改 tar 流式输出（现瓶颈是 seaweedfs 写小文件）→ 扩到 50h。
 
+#### ⭐ 真实 B 站 beatbox 数据管线（2026-10-22）
+
+**网络实测（本地 + 趋动云）**：
+
+| 目标 | 结果 | 用法 |
+|---|---|---|
+| YouTube | ❌ 超时（本地/服务器均不可达） | 放弃直连 |
+| swissbeatbox.com | ✅ 可开，但视频全是 YouTube iframe | 只能当索引用 |
+| Bilibili 首页/API | ✅ 可达；服务器带 cookies 后 API 正常 | **yt-dlp 视频页在服务器 412 → 改走 API 直链** |
+
+**脚本（代码已入库/服务器同步）**：
+
+| 脚本 | 作用 |
+|---|---|
+| `scripts/fetch_bilibili_api.py` | B 站 API 取 cid + dash.audio 直链，ffmpeg 转 wav |
+| `scripts/fetch_bilibili_audio.py` | 本地 yt-dlp 版（cookies） |
+| `scripts/segment_beatbox_onsets.py` | librosa onset_detect → 单次击打切片 |
+| `scripts/ast_filter_beatbox.py` | AST（AudioSet 527 类）10s 窗口打 Beatboxing/Drum 分 |
+| `scripts/filter_segments_by_ast.py` | 去掉主持/采访/纯伴奏区域 |
+| `scripts/pseudo_label_v2.py` | 兼容 v2/v3 架构的伪标（全局归一化） |
+| `scripts/hybrid_label_segments.py` | 模型 + 镲类规则（高频/谱质心/衰减）重平衡 |
+| `scripts/train_beatbox_classifier_robust.py` | 混入真实 `no_vocals` 背景做域随机化 |
+| `scripts/train_beatbox_features.py` | 手工特征 RandomForest 备选 |
+| `scripts/preprocess_video.py` | 修复 Demucs 返回路径、长音频 60s 分块、`sys.executable` |
+
+**当前数据（服务器 `/gemini/code/lightfour-train/data/real_bbox/`）**：
+
+| 项 | 实测 |
+|---|---:|
+| 已下载视频 | **143 个**（全量候选已下完） |
+| Demucs vocals | **108 个**（pipeline5 全部完成） |
+| onset 切片 | **53,633 段 / 4.49h**（AST 过滤后 **39,171 段 / 2.93h**） |
+| 混合弱标高置信（≥0.7） | 78 视频 **13,074 段 / 0.865h** + 新增 3 条对战 **1,327 段 / 0.078h** = **14,401 段 / 0.943h** |
+| 高置信类别 | 底鼓 2,478 / 军鼓 6,336 / 闭镲 3,171 / 开镲 1,089 |
+| 真实「鼓谱→音频」生成对 | **3,036 窗口 / 1.69h**，65 个来源；kd 2,220 / sd 5,860 / hhc 2,924 / hho 945 |
+| 规则重判镲 | 全量 8,777 段（其余沿用模型） |
+
+**Stage A 现状（服务器重训）**：
+
+| 模型 | AVP test | 真实切片平均置信 |
+|---|---:|---:|
+| v2（BatchNorm，AVP 训练） | **0.5147**（val 0.8026，gap≈0.29） | 0.447 |
+| robust（混真实 `no_vocals` 背景） | **0.4372**（val 0.7221） | 0.556 |
+| hybrid（模型 + 镲类规则） | — | 高置信 0.796 |
+
+**关键结论**：
+
+1. **自动伪标不足以直接滚库**：真实域 ≥0.85 的高置信为 0；hybrid 规则后 ≥0.7 共 13,074 段（33.4%），开镲补到 1,089，但军鼓仍占 48%。
+2. **AST 过滤有效**：53,633 → 39,171 段（73%），去掉了主持/采访/纯伴奏，真实域平均置信 0.447→0.525→0.574（robust/AST）。
+3. **omni 音频输出训练仍不可行**：ms-swift 4.5.3 的 `Qwen2_5OmniTemplate` 只支持音频输入→文本；Talker 音频输出训练只存在于 **Qwen3-TTS** 模板；transformers 的 `Qwen2_5OmniTalkerForConditionalGeneration.forward` 无 `labels`/loss。**换 24GB 卡也训不了 Omni3 生成**。
+4. **数据安全**：本轮由用户在对话中授权服务器直接下载/处理公开视频；音频只做研究，落 `data/bbox_raw/`、`data/real_bbox/`（已 gitignore），不入 git、不外传；服务器直接下载，未从本地上传音频。
+
+#### 典型连续 beatbox 样本（2026-10-22 修正）
+
+用户指出首批 3 条更像阿卡贝拉/Showcase，不是经典竞技 beatbox，判定正确。`b23.tv/ZO2ResT` 解析后指向 **`space.bilibili.com/171444239`（Swissbeatbox 官方账号）**，已改用该账号的经典对战视频：
+
+| 文件 | 来源 | 时长 | RMS | 0.5s 静音帧 |
+|---|---|---:|---:|---:|
+| `BV1CPnr6VEeE_GBB26_Final_M1xx1ng_vs_电池.wav` | GBB26 第二联赛 **决赛** | 498.1s | 0.207 | 1.1% |
+| `BV1QW411u7NJ_WBC_Semi_HIRAM_vs_PASH.wav` | WBC Solo Battle **半决赛** | 470.9s | 0.215 | 0.5% |
+| `BV1xErMBqE1P_GBB25_SmallFinal_KAJI_vs_BlackRoll.wav` | GBB25 Solo **小决赛** | 379.7s | 0.136 | 0.0% |
+
+路径：`data/bbox_raw/samples_competitive/`（gitignore）；3 条均为连续对战全程，不是 a cappella cover/Showcase/Shoutout。
+旧 3 条保留在 `data/bbox_raw/samples/` 作对照，但**不再作为竞技 beatbox 代表**。
+
+**数据源策略修正**：后续优先从 Swissbeatbox 官方账号抓 **vs / Battle / Elimination / 决赛** 类视频；纯 cover、Showcase、Shoutout 只作辅助；**明确排除 loopstation**（另一门类，中文标题里的「环站」同样是 loopstation，必须一并排除）。第一轮搜到 12 条对战候选，新增下载 6 条；其中 `BV1QW411u7NJ`、`BV1xErMBqE1P`、`BV1CPnr6VEeE` 已进入 Demucs 批处理。第二轮扩展到 **137 条候选**，累计下载 **269 条**（新增 126 条），其中 **101 条 ≤650s 进入 Demucs 批处理**；Showcase/Shoutout/合集会进入分离但**入库时按标题再次排除**。
+
+**第三轮扩展（2026-10-22 晚）**：
+- 关键词搜索 49 条清洗后候选（排除「环站」3 条、冠军表演 2 条、海选 2 条），下载时全部已存在（skip）。
+- **WBI 签名空间 API**（`x/space/wbi/arc/search`，mid 171444239）拿到最新 **100 条**视频，其中 **26 条 2026 最新对战**全部下载：GBB26 Florida 决赛/半决赛/小决赛、vokal.total 2026 八强/四强、GBB26 非洲 MENA 与亚太区预选赛。第 3 页起被 **412/-352 风控**拦截，换新 cookies 无效。
+- **related 相关推荐扩展**（`x/web-interface/archive/related`，100 个已下载对战作种子）再获 **117 条**新候选并已启动下载，覆盖 GBB19/GBB21/GBB23/GBB24/GBB25、WBC 7ToSmoke、SBX Kickback、Crowd POV 等历史赛事。
+- 规则修正：`championship`（锦标赛）保留，只有 `champions`（冠军表演）排除，避免误杀 `French Tag Team Beatbox Championship | Final` 这类对战。
+- Demucs 并发提升：原 `-P 2` 处理 101 条，新增 `-P 4` 处理 30 条无重叠批次（96 核余量充足）。
+- **伪标抽检包**：从高置信库分层抽 9 条（kd 2 / sd 2 / hhc 2 / hho 3，conf≥0.80），本地 `data/bbox_raw/spotcheck_20261022/`，附 `manifest.json`（来源视频、起点、时长、AST 分数、手工特征），供人耳核对。
+
+**第 3 批流水线结果（2026-10-22 深夜）**：90 个新增视频（已按标题剔除 Showcase/POV/合辑等 23 条）→ **63,114 段 onset** → AST 过滤 **39,796 段（63.1%）** → 伪标（robust ckpt，GPU）→ hybrid 重平衡。高置信（≥0.7）**14,088 段 / 0.958h**，类别 kd 1,959 / sd 9,220 / hhc 2,083 / hho 826，平均置信 0.6299（规则补镲 6,492 段）。累计高置信：13,074 + 1,327 + 14,088 = **28,489 段 / 1.901h**（较上轮 0.943h **翻倍**）。
+- 工程加速：AST 从 12 进程 CPU（约 1 视频/10 分钟）改为 **GPU 单进程**（约 4 视频/分钟，快 ~40×）；伪标从串行 5 段/秒改为 **spawn 16 进程**（8 分钟跑完 39,796 段）；vocals 先复制到本地 overlay 盘，绕开 seaweedfs 小文件读瓶颈；GPU Demucs 改 3 并发（单条约 3 audio-s/s，CPU 约 0.55 audio-s/s）。
+- 注意：`ProcessPoolExecutor` 默认 fork 在 torch 下会死锁（worker 全 sleeping），必须用 `mp.get_context("spawn")`。
+
+**Stage 1 伪标质量交叉验证（2026-10-22 晚，回答“鼓谱数据库实际质量如何”）**：用独立的手工特征 RandomForest（`checkpoints/beatbox_feat/rf.joblib`，15 维：频谱占比/质心/衰减/ZCR/RMS 等，训练于 AVP-LVT）对全部 **28,489 条高置信样本**重新预测，与 CNN/规则标签对比：
+
+| 指标 | 结果 |
+|---|---:|
+| 总体一致率 | **70.89%** |
+| kd 一致率 | **91.75%**（4,641 条，RF 判 sd 293 / hhc 69） |
+| hhc 一致率 | **84.47%**（5,601 条，RF 判 hho 238 / kd 422） |
+| sd 一致率 | **65.27%**（16,256 条，**RF 判 kd 5,489 = 33.8%**） |
+| hho 一致率 | **29.98%**（1,991 条，RF 判 hhc 658 / kd 380 / sd 356） |
+| 高置信但两模型分歧 | **1,470 条（5.2%）** |
+| 按标签来源 | model 71.1% / rule_hat 70.2%（无明显差异） |
+
+特征均值：kd 低频占比仅 **0.079**、mid 0.665（底鼓低频主导性不足，疑似混入中频 kick/hum）；sd mid 0.411 / high 0.326；hhc/hho high 0.71–0.73、质心 5,300–5,370，**decay 区分明显（hhc 0.057 vs hho 0.236）**。
+
+**结论**：kd、hhc 基本可用；**sd 约 1/3 与 kd 混淆**（最大风险，且 sd 占库 57%）；**hho 基本不可靠，不能直接用于训练**。该交叉验证是域外检验（RF 训于 AVP-LVT、真实数据来自 Swissbeatbox），本身有域偏移误差，不能当 ground truth；但 29% 的分歧率足以说明必须人工抽检。
+
+**已备好的三份人耳抽检包（本地）**：
+- `data/bbox_raw/spotcheck_20261022/`：9 条高置信分层样本（kd 2 / sd 2 / hhc 2 / hho 3）
+- `data/bbox_raw/spotcheck_batch3/`：12 条第 3 批样本（每类 3 条）
+- `data/bbox_raw/suspicious_spotcheck/`：**12 条两模型分歧样本**（文件名直接标 `cnn-X_rf-Y`，最适合裁决谁错）
+
+**质量 Gate（未通过前不应继续滚库）**：人工试听上述 33 条，若错误率 >10%，停止伪标滚库，转人工 seed/域适应；hho 需单独降阈值或人工补标；sd-kd 需加衰减/低频规则约束。
+
+**音色命名体系（2026-10-22 晚，用户提出先建 taxonomy）**：已建立 `docs/beatbox_sound_taxonomy.md` + `data/beatbox_taxonomy.json`，以 [Beatbox Science Sound Library](https://beatboxscience.nazcabeats.com/sound-library) 的 **103 个标准音色**为基准，含标准记法（P/PF/K/T/W/Drh…）、发声机制（喉部/肺部/哼鸣/空腔）、气流方向（外送/内吸）、中英文名、鼓组映射。
+- 核心判断：现有 `kd/sd/hhc/hho` 只是**鼓组 L1 映射**，不是完整音色体系；竞技 beatbox 有 100+ 音色，lip roll（7）、throat/chest bass（4）、click roll（3+）、scratch、whistle、synth 等**被强行塞进 4 类**，正是 sd 占 57%、sd/kd 混淆、hho 不可靠的结构性原因。
+- 分层方案：L1 鼓组 4 类（现有，继续可用）→ L2 家族 6–8 类（kicks/snares/hihats/cymbal/bass/click/lip/fx，需人工 seed 200–500 条）→ L3 音色 20–100 类。
+- manifest 扩展：新增 `drum_class`（兼容旧标签）、`sound_notation`、`sound_family`、`sound_confidence`，不删旧字段。
+- 中文视频资源：B 站邹Sir_BEATBOX课堂（BASS 4 种 `BV1CK4y1g7dq`、R 音 `BV1x64y1R7Bi`）、啊宾 bbox 教学基础三音（`BV1TpLC63EsE`）；文字资源：School of Beatbox、BecomeSingers、Devon Guinn kicks/snares。
+
+**音色种子库 + L2 家族重标注（2026-10-22 深夜已跑通）**：
+- 从 Beatbox Science 的 Supabase 公开接口（`sounds` 表，含 `audio_url`）下载 **95 条有音频的音色种子**（8 条无音频：Cough/High Cough/Slizzer Roll/Zekka Click Roll/Inward Throat Bass/Vortex Whistle/Smile Bass/Inward Chest Bass）。本地留档 `data/beatbox_seeds/`（音频 0.8MB，研究用、不入 git）；元数据 103 条在 `sounds.json`。
+- 服务器直接下载同批种子，提取 9 维特征（时长/低中高频占比/质心/ZCR/衰减/RMS/峰值），对 **28,489 条高置信样本**做最近邻 L2 家族映射，输出 `data/real_bbox/hybrid_labels_all_highconf_l2.jsonl`（17MB）。
+- **家族分布**：Snares 13,000（45.6%）、Drag 3,220（11.3%）、Hi-hats 2,115、Other 1,935、Clicks 1,589、Vocal 1,265、Kicks 1,057、Zippers 1,016、Liprolls 1,002、Cymbal 666、Synth 426、Clops 374、Reverse 253、Lip oscillations 189、Scratch 176、Pops 89、Teeth 38、Nasal 9、Tongue 1。
+- **关键交叉表**：`sd → Snares` 仅 8,081（占 sd 的 50%），其余分散到 Drag 3,055 / Clicks 1,133 / Zippers 933 / Other 1,477 / Liprolls 344 / Vocal 204 / Kicks 188；`hhc → Snares` 3,635（65%，闭镲被大量判成军鼓，异常）；`kd → Vocal` 1,061、`kd → Liprolls` 657、`kd → Clops` 318；`hho → Snares` 1,142、`hho → Cymbal` 459、`hho → Hi-hats` 309。
+- **结论**：4 类标签内部音色构成极其混杂，sd 只有一半是真军鼓，hhc 反而 65% 被判军鼓——这是当前数据库最大的结构性问题。L2 最近邻结果本身有误差（尤其 Drag/Zippers），必须人工抽检确认后再用于训练。
+- **Omni 关系澄清**：音色种子 + 音频可以支撑「L2 家族分类器」和「生成模型的音色素材库（hit bank）」，但**不能自动解决 Omni 音频输出训练缺失**——ms-swift 4.5.3 / transformers 的 Qwen2.5-Omni Talker 仍无 labels/loss，这是工程管线问题，不是数据量问题。
+
+**Qwen3-Omni 调研（2026-10-23，回答“能否一体化识别+生成”）**：
+- **架构上有进步**：transformers 5.16.1 已实现 `qwen3_omni_moe`，`Qwen3OmniMoeTalkerForConditionalGeneration.forward` **有 `labels` 和 CE loss**（`loss_function(logits, labels, vocab_size)`），即 Talker 的音频 codec token 可以被监督训练。Qwen3-Omni 是 Thinker-Talker MoE（30B-A3B），Talker 多码本自回归 + MTP 生成残差码本，输出语音。
+- **但当前仍不能直接落地 beatbox 生成**，三个硬阻碍：
+  1. **ms-swift 4.5.3 的 `Qwen3OmniTemplate` 继承 `Qwen2_5OmniTemplate`，只做音频输入→文本**，没有音频输出 SFT 数据管线；真正能训音频输出的只有 **`Qwen3TTSTemplate`**（依赖 `qwen_tts` 库，需要 `tts_audio_codes`（16 码本）+ `ref_audios` mel），且那是**纯语音 TTS**，不是通用音频。
+  2. **codec 是语音专用**：Qwen3-Omni / Qwen3-TTS 的码本为 24kHz 语音设计，beatbox 的宽频瞬态（低频 kick、高频 hi-hat、唇卷）不在其训练分布，重建保真度未经验证。
+  3. **规模与显存**：Qwen3-Omni 30B-A3B，当前 6.2GB GPU 连 QLoRA 都跑不了（至少 24GB+）。
+- **结论**：Qwen3-Omni 是未来「单模型一体化」的候选载体，但当前不具备低成本直接微调出 beatbox 生成的条件。要验证可行性，最低成本实验是：**用 Qwen3-TTS-Tokenizer 对 beatbox 音频做 encode→decode 重建，听保真度损失**；若重建可接受，再考虑 24GB+ GPU 上自写 Talker 音频输出训练管线（参考 `Qwen3TTSTemplate`）。在验证前，主线仍是「专用分类器（识别）+ Route B（生成）+ Omni 语言层」。
+
+**竞技对战管线结果（新增 3 条）**：
+
+| 项 | 结果 |
+|---|---:|
+| onset 切片 | **4,459 段** |
+| AST 过滤后 | **3,652 段（81.9%）** |
+| 混合弱标高置信（≥0.7） | **1,327 段 / 0.078h**，平均置信 **0.792** |
+| 高置信类别 | 底鼓 204 / 军鼓 700 / 闭镲 347 / 开镲 76 |
+
+对比旧混合内容：AST 保留率 **81.9% vs 73.0%**，高置信占比 **36.3% vs 33.4%**，平均置信 **0.6425 vs 0.625**。竞技对战确实更干净。合计高置信：13,074 + 1,327 = **14,401 段 / 0.943h**。
+
 ---
 
 ### 并行轨道：Omni SFT 数据 v4（已就绪，不依赖 beatbox 分类器）
@@ -183,7 +319,7 @@ v1/v2/v3 三轮 QLoRA 微调的教训（详见 `docs/微调lightfour.md`）：
 |---|---|---|
 | 本地算力 | Windows / AMD RX 7800 XT（ROCm 不可用）/ RAM 15.4GB / D 盘 ~120GB 空闲 | **专用分类器本地 CPU/小模型可训**（log-mel CNN / wav2vec2 小模型）；大模型上云 |
 | 云端 GPU | 趋动云 B1.gpu.large 25GB vGPU（历史用过） | Dasheng/wav2vec2 扩展训练、Demucs 批处理上云 |
-| **云端开发实例** | 趋动云「开发环境」**96 核 CPU / 无 GPU** / Python 3.11.8 | **数据生成专用**（CPU 密集，不占本机） |
+| **云端开发实例** | 趋动云开发环境 **96 核 / 503GB RAM / B1.gpu.small 6.2GB** / Python 3.11.8 | 数据生成 + Demucs 专用；6.2GB 不足以 Omni3 QLoRA。持久化 `pylibs` + `TORCH_HOME` 缓存 |
 | 持久化盘 | `/gemini/code`（seaweedfs，14P 池，用量计费） | 产物直写持久化盘（v1 教训：overlay 盘停机即丢）。**注意小文件写慢** |
 | 只读数据区 | `/gemini/data-1/`：`AVP-LVT_Dataset.zip`(310M)、`fma_small.zip.part001-004`(各1.8G)、`sft_samples.zip` | 走【数据】栏上传，**只读** |
 | 数据资产 | AVP-LVT 5,714 boxeme（4,873 带音频）+ FMA 8,000 首 + Beatport 32 类 | 本地 `data/` |
@@ -218,12 +354,18 @@ v1/v2/v3 三轮 QLoRA 微调的教训（详见 `docs/微调lightfour.md`）：
 - `data/sft/beatbox_clips/` — 4,872 单音切片（wav）
 - `data/sft/beatbox_sft.jsonl` / `fma_sft.jsonl` — SFT 样本
 - `data/sft_v4/` — Omni v4 识别型 SFT（train 8,370 / eval 348 / test 1,216，纯标签配方）
+- `data/real_bbox/` — ⭐ **真实 B 站切片**：`segments_78v.tar`（53,633 段 / 4.49h）、`hybrid_labels_78v.jsonl`（39,171 条弱标）、`hybrid_highconf_0.7_78v/`（13,074 段 / 0.865h）、`sft_hybrid_highconf_78v.jsonl`、`real_gen_3036.tar`（3,036 窗口 / 1.69h）
+- `data/real_gen/` — 真实音频生成对元数据：`scores.jsonl`、`omni_pairs.jsonl`、`stats.json`
+- `data/bbox_raw/` — 原始下载（143 视频）、Demucs vocals（89/6.37h）、AST windows、cookies（gitignore）
 - `data/fma/` — FMA 元数据 + 8,000 首 mp3
 - `data/beatport/` — 32 类 taxonomy + 榜单元数据
 
 ### 模型
 - `lightfour/Qwen2.5-Omni-3B/` — 基座（对照/对话层）
 - `lightfour/checkpoint-1000/` — v2 LoRA adapter（失败基线，留作对照）
+- 服务器 `checkpoints/beatbox_cls_v2/best.pt` — Stage A v2（test 0.5147）
+- 服务器 `checkpoints/beatbox_cls_robust/best.pt` — 真实背景域随机化（test 0.4372，真实域置信 0.556）
+- 服务器 `checkpoints/beatbox_feat/rf.joblib` — 手工特征 RandomForest（test 0.4791）
 
 ### 文档
 - `docs/beatbox.md` / `docs/edm.md` — 领域数据集调研
@@ -242,10 +384,11 @@ v1/v2/v3 三轮 QLoRA 微调的教训（详见 `docs/微调lightfour.md`）：
 | **1** | **完成 gen_synth 首批并下载回本地** | `data/gen_synth/` 5h 数据 + 音质抽检报告 | 服务器 render_synth 跑完 | ✅ 完成 |
 | **2** | **render_synth 改 tar 流式输出** → 扩到 50h | 50h 生成型数据集 | 行动 1 完成 | ✅ **完成（90,000 窗口 / 50.00h）** |
 | **2b** | **产物持久化 + 本地同步** | 服务器 `gen_synth_50h.tar.gz`(5.1GB) + 本地元数据/样本 | 行动 2 | ✅ 完成 |
-| **3** | **Stage 1 识别模型冲 70% Gate** | 候选：修 v3 补零 bug 重训 / 增大 val 参与者 / 全量参与者 k-fold CNN / 上云 wav2vec2 全参微调 | — | ⬜ 最高优先 |
+| **3** | **Stage 1 识别模型冲 70% Gate** | 候选：修 v3 补零 bug 重训 / 增大 val 参与者 / 全量参与者 k-fold CNN / 上云 wav2vec2 全参微调 | — | 🟡 未过 Gate：本地 v2 **0.5721**；服务器 v2 **0.5147**；robust **0.4372**；需真实 seed 或域适应 |
 | **4** | 生成质量闭环评测 | 用 Stage-A 分类器判生成音频能否命中目标鼓类 | 行动 2b + Stage 1 | ⬜ |
-| **5** | Omni 生成路线可行性核实 | 服务器查 ms-swift 是否支持 Talker 音频 token 训练 | 服务器通道 | ⬜ |
-| **6** | Stage 2 伪标注飞轮落地 | `preprocess_video.py` + `pseudo_label.py` 用真实 beatbox 视频跑通 | **行动 3（Gate ≥70%）** | ⬜ 阻塞中 |
+| **5** | Omni 生成路线可行性核实 | 服务器查 ms-swift 是否支持 Talker 音频 token 训练 | 服务器通道 | ✅ 已核实：**不支持 Qwen2.5-Omni 音频输出**；Talker 训练仅 Qwen3-TTS；Qwen2.5-Omni Talker forward 无 labels/loss |
+| **6** | Stage 2 伪标注飞轮落地 | `preprocess_video.py` + `pseudo_label.py` 用真实 beatbox 视频跑通 | **行动 3（Gate ≥70%）** | 🟡 真实数据管线已跑通：143 视频；89 vocals/6.37h；53,633 切片（AST 后 39,171/2.93h）；13,074 高置信弱标/0.865h；3,036 真实生成对/1.69h。Stage A 未过 Gate，未全量滚库 |
+| **7** | 真实 B 站数据批量采集 + AST 过滤 + 混合弱标 | `data/real_bbox/` + 2s 生成对 | 行动 3/6 | 🟡 后台继续（目标 5–10h vocals） |
 
 ### 生成型数据集交付清单（2026-10-20 完成）
 
@@ -295,6 +438,7 @@ v1/v2/v3 三轮 QLoRA 微调的教训（详见 `docs/微调lightfour.md`）：
 3. Stage 1 未过 Gate（≥70%）前，**不启动** Stage 2 飞轮滚数据。
 4. 远程操作：产物直写 `/gemini/code`；实例可能重建，先确认通道。
 5. 版权约定：爬取音频只做研究、不入 git、不外传。
+6. 真实数据：服务器直接下载（B 站 API），音频落 `data/bbox_raw/`、`data/real_bbox/`（已 gitignore）；自动伪标未过人工审计前，不并入 Omni SFT。
 
 ---
 
@@ -319,3 +463,5 @@ v1/v2/v3 三轮 QLoRA 微调的教训（详见 `docs/微调lightfour.md`）：
 | 2026-10-19 | **战略转向**：Omni → 专用音频分类器 + 伪标注数据飞轮（Stage 1 识别 → Stage 2 飞轮 → Stage 3 生成）定为主线 |
 | 2026-10-20 | Stage A 专用分类器落地：v1 test 0.5008（证实"不听音频"是 Omni 模板背诵的锅）；v2 发现波形域 pitch_shift 截断衰减尾巴的致命缺陷；v3 改 mel 域增强 + GroupNorm + EMA 重训。**Omni v4 SFT 数据同步就绪**（纯标签配方 + 2-5s 窗口，train 8,370/eval 348/test 1,216），确立"分类器当耳朵、Omni 当嘴巴"的蒸馏式混合架构 |
 | 2026-10-20 pm | **生成型数据集管线落地**：`build_hit_bank.py` 切出 4,872 个真实人声击打（本地+趋动云双端结果一致）；`render_synth.py` 按鼓谱重排合成「鼓谱→音频」配对，突破真实录音仅 0.55h 的瓶颈（可无限扩量）。打通 jupyterlab-remote-shell 远程通道（`_xsrf` path 限制 / base64 传脚本 / CORS 服务器零手抄 / md5 校验）。确立数据安全约定：**代码上行、数据下行**。新增 §6 下一步行动计划 |
+| **2026-10-22** | **真实 B 站数据管线落地**：服务器持久化 `pylibs` + Demucs + `TORCH_HOME`；B 站 API 直连下载 **143 视频**（前 100 个元数据 14.59h）；Demucs **89 vocals / 6.37h**；**53,633 个 onset 段 / 4.49h**（AST 过滤后 **39,171 段 / 2.93h**）；混合弱标高置信 **13,074 段 / 0.865h**（kd 2,478 / sd 6,336 / hhc 3,171 / hho 1,089，平均置信≈0.796）；真实「鼓谱→音频」生成对 **3,036 窗口 / 1.69h**（65 来源）。Stage A：本地 v2 **0.5721**、服务器 v2 **0.5147**、robust **0.4372**，均未过 70% Gate；真实域伪标置信度低（≥0.85 为 0，开镲靠 hybrid 规则补到 1,089）。**核实 ms-swift 4.5.3 不支持 Qwen2.5-Omni 音频输出训练**（Talker 训练仅 Qwen3-TTS；Qwen2.5-Omni Talker forward 无 labels/loss）。新增 `fetch_bilibili_api.py`、`segment_beatbox_onsets.py`、`ast_filter_beatbox.py`、`filter_segments_by_ast.py`、`pseudo_label_v2.py`、`hybrid_label_segments.py`、`train_beatbox_classifier_robust.py`、`train_beatbox_features.py`、`build_real_gen_pairs.py`。**样本修正**：首批 3 条误选为 a cappella/Showcase，已改用 Swissbeatbox 官方账号（mid 171444239）的经典对战 3 条；新增对战管线 4,459 切片 → AST 3,652（81.9%）→ 高置信 1,327/0.078h |
+| 2026-10-22 晚 | **竞技对战数据源三轮扩展**：① 关键词第三轮 49 条清洗后候选（排除「环站」/冠军表演/海选）下载时全部已存在；② **WBI 空间 API** 最新 100 条 → **26 条 2026 最新对战**（GBB26 Florida 决赛/半决赛、vokal.total 2026、GBB26 非洲 MENA 与亚太预选赛）下载；③ **related 相关推荐**以 100 个对战为种子扩出 **117 条**历史赛事（GBB19/21/23/24/25、WBC 7ToSmoke、SBX Kickback）并下载；WAV 累计 269 → **352+**。Demucs 双队列（101 条 `-P 2` + 30 条 `-P 4`）。新增**伪标分层抽检包** 9 条（kd 2 / sd 2 / hhc 2 / hho 3，conf≥0.80）本地 `data/bbox_raw/spotcheck_20261022/`。规则修正：`championship` 保留、`champions` 排除；「环站」= loopstation 必排除 |
