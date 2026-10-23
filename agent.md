@@ -152,6 +152,19 @@ beatbox 音频 ──► AuT 音频塔 ──► Thinker（Qwen3-Omni MoE）
 
 **结论**：Omni 一体化在模型接口上可行，缺的是**自写 Talker 训练管线 + 通用 codec 对齐**，不是概念问题。
 
+**config 实测（2026-10-23，只下 config.json）**：
+- `talker_config.num_code_groups = 16`（16 码本组）
+- `position_id_per_seconds = 13`（**13Hz，约 77ms/帧**）
+- `talker.text_config.vocab_size = 3072`；`code_predictor_config.vocab_size = 2048`
+- `codec_bos_id = 2149`、`codec_eos_token_id = 2150`、`tts_bos/eos/pad` 齐全
+- `thinker_config.audio_config`：128 mel、d_model 1280、32 层、output 2048
+- transformers 5.16.1 **确有** `Qwen3OmniMoeTalkerForConditionalGeneration` 与 `Qwen3OmniMoeForConditionalGeneration`
+
+**Talker smoke（tiny config，已通过）**：
+- forward 签名关键参数：`inputs_embeds`、`attention_mask`、`labels`、`residual_codes`、`trailing_text_hidden`、`tts_pad_embed`、`generation_step`、`talker_input_ids`
+- 第一层：`logits (2, 20, 3072)`、loss 8.03、梯度正常
+- **16 层需要 `residual_codes`（MTP 残差码本），不是把 labels 堆成 16 层**；16 层 loss 待补
+
 ---
 
 ## 7. 通用 codec 选型（一体化关键）
@@ -173,8 +186,18 @@ beatbox 音频 ──► AuT 音频塔 ──► Thinker（Qwen3-Omni MoE）
 - **EnCodec 24kHz / 24kbps 是当前最佳候选**：短击打明显最好、时长零偏差、中位 mel 0.752。
 - EnCodec 48kHz 没有改善镲类（Cymbal 1.41–1.71、Hi-hats 1.09–1.33），反而略差；镲类高频损失是所有通用 codec 的共同短板。
 - DAC 24kHz 因 `audiotools` 依赖在当前镜像不可用，暂未测；后续可用独立 venv 或官方 wheel 补测。
-- **16 层对齐验证（关键）**：EnCodec 24kbps 输出 **32 层** codec token，而 Qwen3-Omni Talker 是 **16 码本**。取前 16 层（≈12kbps）重建，mel 均值 0.902 / 中位 **0.786**，仅比 32 层的 0.752 差 4.5%，**可接受**。
-- **选定**：Omni Talker 目标 codec = **EnCodec 24kHz、前 16 层（≈12kbps、75Hz、码本 1024）**，与 Omni 的 16 码本天然对齐，无需改 Talker 结构。镲类问题后续用更高码率微调或 Route B 声码器兜底。
+- **16 层维度对齐**：EnCodec 24kbps 输出 **32 层**，取前 16 层（≈12kbps）重建 mel 均值 0.902 / 中位 **0.786**，仅比 32 层的 0.752 差 4.5%——**码本层数对齐成立**。
+- **但帧率尚未对齐**：EnCodec 是 75Hz，Omni 原生是 13Hz。是否改位置编码/降采样，见 §7.1b 决策。
+
+### 7.1b codec_head 决策（租卡前必须拍板）
+
+| 方案 | 做法 | 代价 |
+|---|---|---|
+| **A 保留原生** | Omni 原生 13Hz / 16 组 / 2048 码本；用 Qwen3-TTS tokenizer | 77ms 时间分辨率；beatbox 短击打已实测失真（mel 0.838、+36ms） |
+| **B 换 EnCodec** | EnCodec 前 16 层 / 1024 / 75Hz；替换 `codec_head` + 位置编码 13→75Hz | 改架构；序列长 5.8×；丢预训练 codec 先验；训练更吃力 |
+| **C 折中** | EnCodec 16 层降采样到 25Hz 或 13Hz，码本 1024 | 需重测重建；25Hz（40ms）可能可接受 |
+
+**当前倾向**：先测 **C**（EnCodec 25Hz / 13Hz 降采样重建），若 25Hz mel 中位 <0.8 就用 C；否则评估 B。**未拍板前不写全量训练循环**（否则大概率返工）。
 
 ### 7.2 选型后的 token 设计
 
@@ -220,13 +243,32 @@ beatbox 音频 ──► AuT 音频塔 ──► Thinker（Qwen3-Omni MoE）
 
 | # | 行动 | 状态 |
 |---|---|---|
-| 1 | codec 选型（12Hz / EnCodec 24k / 48k / 16 层对齐） | ✅ 选定 EnCodec 16 层（≈12kbps） |
-| 2 | `beatbox→token / token→wav` 工具 | ✅ `scripts/codec_tokens.py`，往返 mel 中位 0.661 |
-| 3 | 103 音色 seed 标注候选 | ✅ 408 条候选 + 86 条试听包 + `data/sound_seed_annotation.csv`（待人工确认） |
-| 4 | Talker 数据与训练骨架 | ✅ `scripts/prepare_talker_data.py`（408 条）、`scripts/train_omni_talker.py --dry-run` 通过 |
-| 5 | 人工确认 seed 标注（填 CSV） | ⬜ 等用户试听 |
-| 6 | 买 24/48GB GPU | ⏸ 买卡后加载 30B 跑真实训练 |
-| 7 | 小数据过拟合 → 联合训练 → 扩数据 | ⏸ 依赖 5/6 |
+| 1 | codec 选型（12Hz / EnCodec 24k / 48k / 16 层） | ✅ 已测；**帧率决策待定（§7.1b）** |
+| 2 | `beatbox→token / token→wav` 工具 | ✅ `codec_tokens.py`，往返 mel 中位 0.661 |
+| 3 | 103 音色 seed 标注候选 | ✅ 408 条 / 19 家族 + 86 条试听包；`human_notation` 全空（待人工） |
+| 4 | Talker 数据审计 | ✅ 408 条 `(1,1,16,T)`、raw_q=32、0 失败、split 319/43/46；manifest 已生成 |
+| 5 | Talker 前向 smoke | ✅ 第一层 logits 3072 / loss 8.03 / 梯度正常；**16 层 `residual_codes` loss 待补** |
+| 6 | codec_head 决策（25Hz 降采样重建测试） | ⬜ 下一步 |
+| 7 | 序列数据（vocals 滑窗 3–8s → 103 音色序列） | ⬜ |
+| 8 | 人工确认 200–500 条 CSV（≥15 family） | ⬜ 等用户试听 |
+| 9 | 补 L2 映射脚本 / 产物 checksum 入库 | ⬜ |
+| 10 | 4bit + LoRA + gradient checkpointing 训练循环 | ⏸ codec_head 拍板后再写 |
+| 11 | 租 48GB，`--bench-step 1` 看显存 | ⏸ 6–10 完成后再租 |
+
+### 10.1 租卡前置阻塞项（P0，2026-10-23 评估）
+
+代码核对结论：当前不具备租 24/48GB 卡直接开训的条件，必须先清掉：
+
+1. **Talker 前向闭环未实现**：`train_omni_talker.py` 真实训练分支仍是骨架，Thinker hidden → Talker 的 `inputs_embeds/trailing_text_hidden` 拼接是 TODO；只监督第 1 层 codec，15 个残差层未接 loss。
+2. **显存路径与预算不符**：30B BF16 权重约 60GB，单卡 48GB 加载即 OOM；代码未注入 LoRA、未 4bit 量化、未 gradient checkpointing，AdamW 全参 Talker 的优化器状态会再爆一次。
+3. **数据形状未固化（原“切片写反”判断已撤回）**：dry-run 输出 `(4,16,15)` 与 transformers 5.16.1 的四维 `(B,C,Q,T)` 一致，`codes[:, :, :16]` 切的是 quantizer 维，未写反。但仍需在生成时加断言（`ndim==4`、`shape[2]==16`、`T≈dur×75`），并把 `raw_quantizers / codes_shape / T / dur` 写进 manifest，防止换 transformers 或换 bandwidth 后再次歧义。
+4. **任务形态不匹配**：当前数据是「单次击打 + 单记法」，Talker 目标是「鼓谱序列 → 数秒音频」；缺序列样本、缺 train/val/test、缺按 BV 分组。
+5. **标签未确认**：CSV 的 `human_notation` 全空，`candidate_notation` 来自 seed 最近邻；103 音色只覆盖 34 个记法。
+6. **权重与依赖缺失**：`/gemini/pretrain` 当前是 Qwen2.5-Omni-3B（12GB），不是 Qwen3-Omni 30B；Dockerfile/env_check 仍是 Qwen2.5 口径。
+7. **数据不在持久盘**：候选 wav 指向 `/tmp/batch3_segments`，实例重建即失效；`*.npz/*.npy` 不入 git 且无 manifest 入库。
+8. **无生成侧评测**：`eval_omni_v4.py` 是旧 4 类文本分类评测，不能验收 Talker 音频。
+
+租卡门槛：以上 8 条全部关闭，且 `--bench-step` 在目标卡上记录 peak < 40GB，再租卡长跑。
 
 **Route B** 已拆分到 [docs/route_b.md](file:///e:/lightfour/docs/route_b.md)，仅作对照/降级；其数据、taxonomy、codec 选型与本文共享。
 
@@ -253,3 +295,5 @@ beatbox 音频 ──► AuT 音频塔 ──► Thinker（Qwen3-Omni MoE）
 | 2026-10-20 | Stage A v1/v2/v3 + w2v；生成数据管线（hit_bank 4,872 / 合成 50h） |
 | 2026-10-22 | B 站管线：468 视频 / 380 vocals / 28,489 高置信 / 1.901h；103 音色 taxonomy + 95 种子；L2 重标注 |
 | 2026-10-23 | **All in Qwen3-Omni 决策**：移除三层架构、弃用 4 类、103 音色为唯一映射；Route B 拆分到 `docs/route_b.md`；Qwen3-TTS 12Hz 判死、EnCodec 24kbps 短击打可用、DAC 待测 |
+| 2026-10-23 | 租卡前置评估：**不满足**。Talker 闭环未打通、显存路径不符、数据仅单击打且标签未确认、30B 权重缺失、无划分/评测；阻塞项见 §10.1 |
+| 2026-10-23 | 修正 §10.1 P0-3：dry-run `(4,16,15)` 证实 Encodec 输出为四维 `(B,C,Q,T)`，`codes[:, :, :16]` 未写反；改为“形状未固化 + 需断言/manifest 审计” |

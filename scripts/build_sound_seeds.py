@@ -35,13 +35,20 @@ def main():
     ap.add_argument("--listen", type=int, default=5)
     ap.add_argument("--min-dur", type=float, default=0.06)
     ap.add_argument("--min-conf", type=float, default=0.8)
+    ap.add_argument("--segments-root", default=str(BASE / "data/real_bbox/segments_batch3"),
+                    help="切片根目录；持久盘优先，缺失时回退 /tmp")
     args = ap.parse_args()
 
     rows = [json.loads(l) for l in Path(args.labels).read_text(encoding="utf-8").splitlines()
             if l.strip()]
+    seg_root = Path(args.segments_root)
+    if not seg_root.exists():
+        fallback = Path("/tmp/batch3_segments")
+        print(f"[warn] {seg_root} 不存在，回退 {fallback}", flush=True)
+        seg_root = fallback
     for r in rows:
         r["wav"] = r["wav"].replace(
-            "/gemini/code/lightfour-train/data/real_bbox/segments_batch3/", "/tmp/batch3_segments/")
+            "/gemini/code/lightfour-train/data/real_bbox/segments_batch3/", str(seg_root) + "/")
     rows = [r for r in rows if Path(r["wav"]).exists()
             and r.get("dur", 0) >= args.min_dur
             and r.get("confidence", 0) >= args.min_conf]
