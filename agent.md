@@ -173,7 +173,8 @@ beatbox 音频 ──► AuT 音频塔 ──► Thinker（Qwen3-Omni MoE）
 - **EnCodec 24kHz / 24kbps 是当前最佳候选**：短击打明显最好、时长零偏差、中位 mel 0.752。
 - EnCodec 48kHz 没有改善镲类（Cymbal 1.41–1.71、Hi-hats 1.09–1.33），反而略差；镲类高频损失是所有通用 codec 的共同短板。
 - DAC 24kHz 因 `audiotools` 依赖在当前镜像不可用，暂未测；后续可用独立 venv 或官方 wheel 补测。
-- **选定**：Omni Talker 目标 codec = **EnCodec 24kHz / 24kbps（75Hz 帧率、码本 1024、24kbps 对应多码本层）**。镲类问题通过提高码率/微调解码器或 Route B 声码器兜底。
+- **16 层对齐验证（关键）**：EnCodec 24kbps 输出 **32 层** codec token，而 Qwen3-Omni Talker 是 **16 码本**。取前 16 层（≈12kbps）重建，mel 均值 0.902 / 中位 **0.786**，仅比 32 层的 0.752 差 4.5%，**可接受**。
+- **选定**：Omni Talker 目标 codec = **EnCodec 24kHz、前 16 层（≈12kbps、75Hz、码本 1024）**，与 Omni 的 16 码本天然对齐，无需改 Talker 结构。镲类问题后续用更高码率微调或 Route B 声码器兜底。
 
 ### 7.2 选型后的 token 设计
 
@@ -219,13 +220,13 @@ beatbox 音频 ──► AuT 音频塔 ──► Thinker（Qwen3-Omni MoE）
 
 | # | 行动 | 状态 |
 |---|---|---|
-| 1 | DAC 24kHz 对照实验，选定 codec | 🔄 待跑 |
-| 2 | 写 `beatbox→token / token→wav` 工具 | ⬜ |
-| 3 | 103 音色 seed 标注（200–500 条） | ⬜ |
-| 4 | 写 Talker 改造 + 训练管线骨架 | ⬜ |
-| 5 | 买 24/48GB GPU | ⏸ 等 A/B/C 完成 |
-| 6 | 小数据过拟合验证 | ⏸ 依赖 5 |
-| 7 | 联合训练 + 扩数据 | ⏸ 依赖 6 |
+| 1 | codec 选型（12Hz / EnCodec 24k / 48k / 16 层对齐） | ✅ 选定 EnCodec 16 层（≈12kbps） |
+| 2 | `beatbox→token / token→wav` 工具 | ✅ `scripts/codec_tokens.py`，往返 mel 中位 0.661 |
+| 3 | 103 音色 seed 标注候选 | ✅ 408 条候选 + 86 条试听包 + `data/sound_seed_annotation.csv`（待人工确认） |
+| 4 | Talker 数据与训练骨架 | ✅ `scripts/prepare_talker_data.py`（408 条）、`scripts/train_omni_talker.py --dry-run` 通过 |
+| 5 | 人工确认 seed 标注（填 CSV） | ⬜ 等用户试听 |
+| 6 | 买 24/48GB GPU | ⏸ 买卡后加载 30B 跑真实训练 |
+| 7 | 小数据过拟合 → 联合训练 → 扩数据 | ⏸ 依赖 5/6 |
 
 **Route B** 已拆分到 [docs/route_b.md](file:///e:/lightfour/docs/route_b.md)，仅作对照/降级；其数据、taxonomy、codec 选型与本文共享。
 
