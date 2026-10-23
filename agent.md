@@ -191,13 +191,25 @@ beatbox 音频 ──► AuT 音频塔 ──► Thinker（Qwen3-Omni MoE）
 
 ### 7.1b codec_head 决策（租卡前必须拍板）
 
-| 方案 | 做法 | 代价 |
-|---|---|---|
-| **A 保留原生** | Omni 原生 13Hz / 16 组 / 2048 码本；用 Qwen3-TTS tokenizer | 77ms 时间分辨率；beatbox 短击打已实测失真（mel 0.838、+36ms） |
-| **B 换 EnCodec** | EnCodec 前 16 层 / 1024 / 75Hz；替换 `codec_head` + 位置编码 13→75Hz | 改架构；序列长 5.8×；丢预训练 codec 先验；训练更吃力 |
-| **C 折中** | EnCodec 16 层降采样到 25Hz 或 13Hz，码本 1024 | 需重测重建；25Hz（40ms）可能可接受 |
+**实测澄清（2026-10-23，证据链闭合）**：`Qwen3-TTS-Tokenizer-12Hz` 的 config 是 **12.5Hz**（24000/1920）、encoder 32 层（`encoder_valid_num_quantizers=16`）、`codebook_size=2048`、decoder 16 层；与 Omni Talker 的 **13Hz / 16 组 / 2048 码本**完全对应。**它就是 Omni 音频输出的原生 codec 对**（encoder + decoder），不是"另一个模型"。因此 §7.1 的 20 条 beatbox 往返（mel 0.838、时长 +36ms、短击打失真）**就是原生 codec 的实测结果 → A' 基本不可行**。
 
-**当前倾向**：先测 **C**（EnCodec 25Hz / 13Hz 降采样重建），若 25Hz mel 中位 <0.8 就用 C；否则评估 B。**未拍板前不写全量训练循环**（否则大概率返工）。
+**真正的矛盾不是帧率，是 codec 空间**：原生 codec 是语音数据训练的 2048 码本（12.5Hz），EnCodec 是通用音频训练的 1024 码本（75Hz）。即使把帧率/层数对齐，token 语义也不一样；换 codec = `codec_head` 从零重训，预训练先验丢失。
+
+| 方案 | 做法 | 代价 | 数据需求 |
+|---|---|---|---|
+| **A' 原生 + LoRA** | 不改 codec；只用 LoRA 训 Talker | **已实测否**：12.5Hz/2048 往返 mel 0.838、+36ms，短击打失真 | — |
+| **B 换 EnCodec 75Hz** | `codec_head` 1024 + `code_predictor` 1024 + 位置编码 13→75Hz + special token 重映射 | 丢预训练先验；序列 5.8×；需重训 codec head | 50h+，408 条不够 |
+| **C 降采样** | 把 EnCodec 75Hz 压到 25/13Hz | **机制不成立**：离散 token 不能抽帧/平均；75→13 非整数比；瞬态帧丢失；抽帧失败不能归因于帧率 | 需学习式 adapter，成本高 |
+| **E 混合** | Omni 只做“听懂 + 输出 103 音色文本”，Route B/EnCodec 出声 | 不是单模型，违背 All in Omni | 50h 合成 + 1.9h 真实已有 |
+
+**决策顺序**：
+1. ~~确认 Omni 原生 codec 是否带 encoder~~ ✅ 已完成：原生 codec 就是 Qwen3-TTS-Tokenizer-12Hz（12.5Hz / 16 有效层 / 2048 码本）。
+2. 检查 `residual_codes`、`codec_head`、`code_predictor`、`embed_tokens` 的实际 shape 和 3072 词表构成（需要权重 index，或从 config 推断）。
+3. ~~若原生往返可接受 → A'~~ ❌ 已实测否。
+4. **在 B 和 E 之间拍板**：坚持单模型 + 有 50h+ → B（48GB、改 5 处、从零训 codec head）；要低风险 + 6.2GB 先出成果 → E。
+5. C 只在愿意训练 25Hz adapter 时才做；**不要把抽帧重建当作 25Hz 可行性的证据**。
+
+**未拍板前不写全量训练循环。**
 
 ### 7.2 选型后的 token 设计
 
@@ -248,10 +260,10 @@ beatbox 音频 ──► AuT 音频塔 ──► Thinker（Qwen3-Omni MoE）
 | 3 | 103 音色 seed 标注候选 | ✅ 408 条 / 19 家族 + 86 条试听包；`human_notation` 全空（待人工） |
 | 4 | Talker 数据审计 | ✅ 408 条 `(1,1,16,T)`、raw_q=32、0 失败、split 319/43/46；manifest 已生成 |
 | 5 | Talker 前向 smoke | ✅ 第一层 logits 3072 / loss 8.03 / 梯度正常；**16 层 `residual_codes` loss 待补** |
-| 6 | codec_head 决策（25Hz 降采样重建测试） | ⬜ 下一步 |
-| 7 | 序列数据（vocals 滑窗 3–8s → 103 音色序列） | ⬜ |
-| 8 | 人工确认 200–500 条 CSV（≥15 family） | ⬜ 等用户试听 |
-| 9 | 补 L2 映射脚本 / 产物 checksum 入库 | ⬜ |
+| 6 | codec_head 决策（原生 13Hz 往返 + head shape 审计） | ⬜ 下一步；先测 A'，C 降为备选 |
+| 7 | 补 L2 映射脚本 / 产物 checksum 入库 | ⬜ 序列数据的前置 |
+| 8 | 序列数据（vocals 滑窗 3–8s → 103 音色序列） | ⬜ 依赖 7 |
+| 9 | 人工确认 200–500 条 CSV（≥15 family） | ⬜ 立即启动；86 条试听包优先 |
 | 10 | 4bit + LoRA + gradient checkpointing 训练循环 | ⏸ codec_head 拍板后再写 |
 | 11 | 租 48GB，`--bench-step 1` 看显存 | ⏸ 6–10 完成后再租 |
 
