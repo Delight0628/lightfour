@@ -26,15 +26,27 @@ def rms_env(y, hop=64):
     return librosa.feature.rms(y=y, frame_length=256, hop_length=hop)[0]
 
 
-def first_onset(y):
-    env = rms_env(y)
+def first_onset(y, sr=24000, win_ms=2.0, rel=0.1):
+    """首个能量起点，返回**样本级浮点位置**（线性插值到阈值交点）。
+
+    旧实现用 RMS 帧索引（hop=64 -> 2.67ms 量化）且实测系统性低估 1 帧：
+    真值 5.33/10/20/40ms -> 测得 2.67/5.33/16/37.33ms。改样本级 + 插值后
+    校准误差 < 1ms（见 scripts/eval_gen_audio.py 自检）。
+    """
+    w = max(1, int(round(sr * win_ms / 1000.0)))
+    env = np.convolve(np.abs(y), np.ones(w, dtype=np.float64) / w, mode="same")
     if env.size == 0:
         return None
     peak = float(env.max())
     if peak <= 0:
         return None
-    idx = np.argmax(env > 0.1 * peak)
-    return int(idx)
+    thr = rel * peak
+    idx = int(np.argmax(env > thr))
+    if idx > 0:
+        y0, y1 = float(env[idx - 1]), float(env[idx])
+        frac = (thr - y0) / (y1 - y0) if y1 > y0 else 0.0
+        idx = idx - 1 + max(0.0, min(1.0, frac))
+    return float(idx)
 
 
 def decay_ms(y, hop=64):
@@ -103,7 +115,8 @@ def compare(gt_path, gen_path):
     o1, o2 = first_onset(y), first_onset(g)
     onset_err = None
     if o1 is not None and o2 is not None:
-        onset_err = round(abs(o1 - o2) * 64 / 24000 * 1000, 1)
+        # first_onset 现在返回样本位置（浮点），直接换算 ms
+        onset_err = round(abs(o1 - o2) / 24000 * 1000, 2)
 
     f1, f2 = spectral_flux(y), spectral_flux(g)
     return {
@@ -132,7 +145,12 @@ def main():
         gen = gt.with_name(gt.name.replace("_gt.wav", "_gen.wav"))
         if not gen.exists():
             continue
-        rec = {"name": gt.stem.replace("_gt", "")}
+        rec = {
+            "name": gt.stem.replace("_gt", ""),
+            # 显式记录配对文件名，保证 report 行可 join 回磁盘 wav（配合 eval_pack_index.py）
+            "gen_file": gen.name,
+            "gt_file": gt.name,
+        }
         rec.update(compare(gt, gen))
         rows.append(rec)
 
@@ -145,7 +163,7 @@ def main():
         return None if not vs else (round(float(np.mean(vs)), 3), round(float(np.median(vs)), 3))
 
     keys = ["dur_ratio", "onset_err_ms", "env_corr", "decay_gt_ms", "decay_gen_ms",
-            "hf_ratio_gt", "hf_ratio_gen", "flux_corr", "mel_dist"]
+            "hf_ratio_gt", "hf_ratio_gen", "flux_corr", "mel_dist"]  # gen/gt_file 不聚合
     print(f"{'metric':<16}{'mean':>10}{'median':>10}")
     for k in keys:
         v = agg(k)

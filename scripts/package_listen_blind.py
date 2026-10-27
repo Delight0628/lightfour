@@ -1,11 +1,12 @@
-"""把 codec_rate_ab 的试听包封装成盲听包（24 REF + 96 候选，其中 24 条为隐藏 dup）。
+"""把 codec_rate_ab 的试听包封装成盲听包（24 REF + 72 候选，其中 24 条为隐藏 dup）。
 
 设计约束（来自 Eval 12-6-6 盲听协议 + PI ㉝）：
   * REF  = 原始波形（`_true` 臂），24 条；
-  * 候选 = 24 条 × 3 臂（75 / 13c / 13p）= 72 条，**匿名**；
+  * 候选 = 24 条 × 2 臂（75 / 13p）= 48 条，**匿名**；13c 出局（见 `AUDIT_ARMS`），
+    只在审计时使用，不进候选、不进 dup；
   * 隐藏 dup = 每击重复投喂 1 条候选的字节副本（另给新 id），共 24 条
     （cymbal 12 / hihats 6 / click_60_200ms 6），用于「同一段听两次是否给同一分」的一致性门；
-  * 因此 `cand/` = 96 个文件 = 72 唯一 + 24 dup，判决人无法区分；
+  * 因此 `cand/` = 72 个文件 = 48 唯一 + 24 dup，判决人无法区分；
   * 答案键只写 `key/blind_key.json`，**不得随包发给判决人**。
 
 本脚本只读 `listen/` 下已渲染好的 wav，不重新渲染、不触碰 R4 三件套。
@@ -29,7 +30,11 @@ from pathlib import Path
 import soundfile as sf
 
 ARMS = ("true", "75", "13c", "13p")
-CAND_ARMS = ("75", "13c", "13p")
+# 13c 出局：物理文件存在、可作审计臂，但**不进候选**（PI 裁决 60–62 与 Eval 12/6/6 锁定）。
+# 候选 = 24 击 × 2 臂（75 / 13p）= 48；dup 只从候选臂里取副本，避免 dup 指向包内不存在的文件。
+AUDIT_ARMS = ("13c",)
+CAND_ARMS = ("75", "13p")
+assert set(CAND_ARMS).isdisjoint(AUDIT_ARMS)
 SR_EXPECT = 24000
 
 
@@ -76,9 +81,11 @@ def main() -> int:
     for w in sorted(listen.glob("*.wav")):
         key = parse_name(w.stem)
         files[key] = w
-    # 硬断言：24 击 × 4 臂 = 96，一个不多一个不少
-    if len(files) != 4 * len(pool_of):
-        raise SystemExit(f"wav 数 {len(files)} != 4×{len(pool_of)}")
+    # 硬断言：每击必须有 true + 全部候选臂（13c 为审计臂，存在与否都不进组装）
+    required_arms = ("true",) + CAND_ARMS
+    missing = [f"{h}_{i}_{a}" for (h, i) in pool_of for a in required_arms if (h, i, a) not in files]
+    if missing:
+        raise SystemExit(f"缺必需 wav（true + 候选臂 {CAND_ARMS}）: {missing[:5]} 共 {len(missing)}")
 
     # 每个 wav 必须是 24kHz FLOAT（PCM_16 会把复现抖到 1e-2 并重新引入量化差）
     bad = []

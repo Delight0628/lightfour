@@ -63,6 +63,13 @@ def decode_codes(codes, model, device):
         out = model.decode(codes_t, [None], None)
     audio = out.audio_values if hasattr(out, "audio_values") else out[0]
     w = audio[0].mean(dim=0).cpu().numpy().astype("float32")
+    # 回归护栏：EnCodec 24kHz / hop 320 → 每帧 320 采样点。任何把帧级 mask 传进
+    # decode 的写法都会把波形截成 T 个采样点，这里直接报错而不是静默通过。
+    expected = int(codes.shape[-1]) * 320
+    if abs(len(w) - expected) > 320:
+        raise RuntimeError(
+            f"decode 输出长度异常: {len(w)} 采样点，期望 ~{expected}"
+            f"（{codes.shape[-1]} 帧 × 320）。检查是否给 decode 传了帧级 padding_mask。")
     return w
 
 

@@ -15,6 +15,7 @@
 """
 import argparse
 import csv
+import hashlib
 import json
 import random
 import shutil
@@ -23,6 +24,12 @@ from collections import defaultdict
 from pathlib import Path
 
 BASE = Path("/gemini/code/lightfour-train")
+
+
+def split_of(source):
+    """按 source(BV) 的 md5 分组切分；与 prepare_talker_data.py 同口径。"""
+    h = int(hashlib.md5(str(source).encode()).hexdigest()[:8], 16) % 100
+    return "train" if h < 80 else ("val" if h < 90 else "test")
 
 
 def main():
@@ -37,10 +44,22 @@ def main():
     ap.add_argument("--min-conf", type=float, default=0.8)
     ap.add_argument("--segments-root", default=str(BASE / "data/real_bbox/segments_batch3"),
                     help="切片根目录；持久盘优先，缺失时回退 /tmp")
+    ap.add_argument("--crosswalk", default=str(BASE / "data/beatbox_seed_crosswalk.csv"),
+                    help="种子库记法 -> canonical 103 记法 的 crosswalk（由 build_seed_manifest.py 生成）")
     args = ap.parse_args()
 
     rows = [json.loads(l) for l in Path(args.labels).read_text(encoding="utf-8").splitlines()
             if l.strip()]
+    # canonical 103 体系 crosswalk：种子库记法（带 '<' 前缀）-> canonical 记法/家族
+    canon_by_not = {}
+    if Path(args.crosswalk).exists():
+        import csv as _csv
+        with open(args.crosswalk, encoding="utf-8", newline="") as f:
+            for row in _csv.DictReader(f):
+                canon_by_not[row["seedlib_notation"]] = row
+    else:
+        print(f"[warn] crosswalk 不存在: {args.crosswalk}，canonical 字段将全部为 unknown",
+              flush=True)
     seg_root = Path(args.segments_root)
     if not seg_root.exists():
         fallback = Path("/tmp/batch3_segments")
@@ -83,15 +102,29 @@ def main():
                 "nearest_seed": r.get("nearest_seed"), "seed_dist": r.get("seed_dist"),
                 "confidence": r.get("confidence"), "dur": r.get("dur"),
                 "start": r.get("start"),
+                # canonical 103 体系字段（由 seed 记法经 crosswalk 归一而来）
+                "sound_id": canon_by_not.get(r.get("seed_notation"), {}).get("canonical_sound_id", ""),
+                "sound_notation": canon_by_not.get(r.get("seed_notation"), {}).get("canonical_notation", "unknown"),
+                "sound_en": canon_by_not.get(r.get("seed_notation"), {}).get("canonical_en", "unknown"),
+                "sound_cn": canon_by_not.get(r.get("seed_notation"), {}).get("canonical_cn", "unknown"),
+                "sound_family": canon_by_not.get(r.get("seed_notation"), {}).get("canonical_family", "unknown"),
+                "label_source": "seed_match", "sound_confidence": 0.0,
             }, ensure_ascii=False) + "\n")
-
     with open(args.csv, "w", encoding="utf-8-sig", newline="") as f:
         w = csv.writer(f)
         w.writerow(["id", "family", "candidate_notation", "nearest_seed", "wav",
-                    "human_notation", "note"])
+                    "human_notation", "note", "source", "split",
+                    "canonical_notation", "canonical_en", "canonical_family",
+                    "sound_id", "label_source", "sound_confidence",
+                    "annotate_status", "annotator"])
         for r in picked:
+            c = canon_by_not.get(r.get("seed_notation"), {})
             w.writerow([r["id"], r.get("sound_family"), r.get("seed_notation"),
-                        r.get("nearest_seed"), r["wav"], "", ""])
+                        r.get("nearest_seed"), r["wav"], "", "",
+                        r.get("source", ""), split_of(r.get("source") or r["id"]),
+                        c.get("canonical_notation", "unknown"), c.get("canonical_en", "unknown"),
+                        c.get("canonical_family", "unknown"), c.get("canonical_sound_id", ""),
+                        "seed_match", 0.0, "pending", ""])
 
     pack = Path(args.pack)
     if pack.exists():

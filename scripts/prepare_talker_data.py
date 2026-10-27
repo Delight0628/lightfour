@@ -27,7 +27,8 @@ from pathlib import Path
 import numpy as np
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from codec_tokens import load_model, encode_wav, SR, BANDWIDTH  # noqa: E402
+# codec_tokens 依赖 librosa/transformers，--self-test 不需要它们，
+# 因此延迟到真正要编码时才导入，保证 self-test 在纯 numpy 环境可跑。
 
 BASE = Path("/gemini/code/lightfour-train")
 HOP = 320  # 24kHz / 75Hz
@@ -76,6 +77,8 @@ def main():
     code_dir = out_dir / "codes"
     code_dir.mkdir(parents=True, exist_ok=True)
 
+    from codec_tokens import load_model, encode_wav, SR, BANDWIDTH  # noqa: E402
+
     import torch
     device = "cuda" if torch.cuda.is_available() else "cpu"
     model, proc = load_model(args.model, device)
@@ -94,16 +97,24 @@ def main():
             sliced = codes[:, :, : args.layers, :]
             audit_shape(sliced, y, args.layers)
             np.savez_compressed(code_dir / f"{r['id']}.npz", codes=sliced)
-            text = r.get("candidate_notation") or r.get("family") or "unknown"
+            # 文本标签必须取 canonical 103 体系的记法（sound_notation），
+            # 不能用 candidate_notation：后者是种子库记法空间（带 '<' 前缀），
+            # 与 103 音色词表不是同一空间，直接当 CE 标签会训出错的词表。
+            text = r.get("sound_notation") or r.get("human_notation") or "unknown"
             rec = {
                 "id": r["id"], "text": text, "codes": str(code_dir / f"{r['id']}.npz"),
-                "dur": round(len(y) / SR, 3), "family": r.get("family"),
-                "notation": r.get("candidate_notation"), "source": r.get("source"),
+                "dur": round(len(y) / SR, 3), "family": r.get("sound_family"),
+                "notation": r.get("sound_notation"),
+                "sound_id": r.get("sound_id"),
+                "label_source": r.get("label_source") or "seed_match",
+                "sound_confidence": r.get("sound_confidence", 0.0),
+                "source": r.get("source"),
                 "split": split_of(r.get("source") or r.get("id")),
             }
             train.append(rec)
             manifest.append({
-                **{k: rec[k] for k in ("id", "source", "split", "family", "notation", "dur")},
+                **{k: rec[k] for k in ("id", "source", "split", "family", "notation",
+                                        "sound_id", "label_source", "sound_confidence", "dur")},
                 "wav": wav, "raw_quantizers": raw_q, "layers": args.layers,
                 "codes_shape": list(sliced.shape), "T": int(sliced.shape[3]),
                 "codec_model": "encodec_24khz", "bandwidth": BANDWIDTH,
