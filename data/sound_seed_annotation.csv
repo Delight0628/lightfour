@@ -407,3 +407,7 @@ BV1DnBKYTEuj_0031,,Hw,Hollow Whistle,/tmp/batch3_segments/BV1DnBKYTEuj/BV1DnBKYT
 BV1DnBKYTEuj_0094,,Hw,Hollow Whistle,/tmp/batch3_segments/BV1DnBKYTEuj/BV1DnBKYTEuj_0094.wav,,,BV1DnBKYTEuj,test,Hw,Hollow Whistle,whistles,79,exact_notation,seed_match,0.0,pending,
 BV1JbZuBqEcq_0064,,Hw,Hollow Whistle,/tmp/batch3_segments/BV1JbZuBqEcq/BV1JbZuBqEcq_0064.wav,,,BV1JbZuBqEcq,train,Hw,Hollow Whistle,whistles,79,exact_notation,seed_match,0.0,pending,
 BV1M6pc65EDg_0118,,Hw,Hollow Whistle,/tmp/batch3_segments/BV1M6pc65EDg/BV1M6pc65EDg_0118.wav,,,BV1M6pc65EDg,train,Hw,Hollow Whistle,whistles,79,exact_notation,seed_match,0.0,pending,
+BV1A6yABfE9Y_0007,Nasal,<Rhm,Snore Bass,data/bbox_raw/family_gap_candidates/BV1A6yABfE9Y_0007.wav,,model 伪标签 conf=0.787 seed_dist=2.06；无种子参考，仅凭听感确认,BV1A6yABfE9Y,train,Rhm,Snore Bass,nasal,77,notation_ambiguous+name,model,0.787,pending,
+BV1Cs411n7mg_0869,Nasal,<Rhm,Snore Bass,data/bbox_raw/family_gap_candidates/BV1Cs411n7mg_0869.wav,,model 伪标签 conf=0.791 seed_dist=2.56；无种子参考，仅凭听感确认,BV1Cs411n7mg,train,Rhm,Snore Bass,nasal,77,notation_ambiguous+name,model,0.791,pending,
+BV1Cs411n7mg_0883,Nasal,<Rhm,Snore Bass,data/bbox_raw/family_gap_candidates/BV1Cs411n7mg_0883.wav,,model 伪标签 conf=0.761 seed_dist=2.75；无种子参考，仅凭听感确认,BV1Cs411n7mg,train,Rhm,Snore Bass,nasal,77,notation_ambiguous+name,model,0.761,pending,
+BV1hs411n77c_0639,Nasal,<Rhm,Snore Bass,data/bbox_raw/family_gap_candidates/BV1hs411n77c_0639.wav,,model 伪标签 conf=0.737 seed_dist=1.49；无种子参考，仅凭听感确认,BV1hs411n77c,train,Rhm,Snore Bass,nasal,77,notation_ambiguous+name,model,0.737,pending,
