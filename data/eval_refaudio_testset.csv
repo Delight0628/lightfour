@@ -1,0 +1,96 @@
+ref_id,audio,sound_id,sound_notation,sound_en,sound_cn,sound_family,mechanism,airflow,seedlib_name,seedlib_notation,is_short_variant,label_source,sound_confidence,split,note
+001_double_inward_k_rimshot,data\beatbox_seeds\audio\001_double_inward_k_rimshot.mp3,24,K'²,Double Inward K Rimshot,双内吸 K 边击,snares,laryngeal,inward,Double Inward K Rimshot,<K'²,0,seedlib_reference,1.0,test,零伪标参考集；域不同于 B 站实战切片
+002_hollow_click,data\beatbox_seeds\audio\002_hollow_click.mp3,46,-d*,Hollow Click,空腔点击,clicks,hollow,inward,Hollow Click,-d*,0,seedlib_reference,1.0,test,零伪标参考集；域不同于 B 站实战切片
+003_slap_kick,data\beatbox_seeds\audio\003_slap_kick.mp3,5,Lp👅,Slap Kick,拍击底鼓,kicks,pulmonary,outward,Slap Kick,Lp👅,0,seedlib_reference,1.0,test,零伪标参考集；域不同于 B 站实战切片
+004_inward_k_rimshot_shorter_for_fast_patterns,data\beatbox_seeds\audio\004_inward_k_rimshot_shorter_for_fast_patterns.mp3,25,K`,Inward K Rimshot (short),短内吸 K 边击,snares,laryngeal,inward,Inward K Rimshot (shorter - for fast patterns),<K`,1,seedlib_reference,1.0,test,零伪标参考集；域不同于 B 站实战切片
+005_throat_kick,data\beatbox_seeds\audio\005_throat_kick.mp3,7,Hb,Throat Kick,喉音底鼓,kicks,laryngeal,outward,Throat Kick,Hb,0,seedlib_reference,1.0,test,零伪标参考集；域不同于 B 站实战切片
+006_fat_kick_long,data\beatbox_seeds\audio\006_fat_kick_long.mp3,3,Pww,Fat Kick Long,厚底鼓（长）,kicks,pulmonary,outward,Fat Kick Long,Pww,0,seedlib_reference,1.0,test,零伪标参考集；域不同于 B 站实战切片
+007_inward_zipper_roll,data\beatbox_seeds\audio\007_inward_zipper_roll.mp3,86,Zip~,Inward Zipper Roll,内吸拉链卷,zippers,pulmonary,inward,Inward Zipper Roll,<Zip~,0,seedlib_reference,1.0,test,零伪标参考集；域不同于 B 站实战切片
+008_double_spit_snare,data\beatbox_seeds\audio\008_double_spit_snare.mp3,32,s²,Double Spit Snare,双吐音军鼓,snares,humming,outward,Double Spit Snare,s²,0,seedlib_reference,1.0,test,零伪标参考集；域不同于 B 站实战切片
+009_double_hollow_clop,data\beatbox_seeds\audio\009_double_hollow_clop.mp3,53,CL*,Double Hollow Clop,双空腔马蹄音,clops,hollow,outward,Double Hollow Clop,CL*,0,seedlib_reference,1.0,test,零伪标参考集；域不同于 B 站实战切片
+011_inward_k_snare_closing_release,data\beatbox_seeds\audio\011_inward_k_snare_closing_release.mp3,21,Kb,Inward K Snare (closing release),内吸 K 军鼓（闭合释放）,snares,pulmonary,inward,Inward K Snare (closing release),<Kb,0,seedlib_reference,1.0,test,零伪标参考集；域不同于 B 站实战切片
+012_click_do_phonem,data\beatbox_seeds\audio\012_click_do_phonem.mp3,45,do,Click (do phonem),do 点击,clicks,humming,inward,Click (do phonem),<do,0,seedlib_reference,1.0,test,零伪标参考集；域不同于 B 站实战切片
+013_fat_kick_short,data\beatbox_seeds\audio\013_fat_kick_short.mp3,2,Pw,Fat Kick Short,厚底鼓（短）,kicks,pulmonary,outward,Fat Kick Short,Pw,1,seedlib_reference,1.0,test,零伪标参考集；域不同于 B 站实战切片
+014_sub_bass_snare,data\beatbox_seeds\audio\014_sub_bass_snare.mp3,29,Kw,Sub Bass Snare,超低音军鼓,snares,pulmonary,outward,Sub Bass Snare,Kw,0,seedlib_reference,1.0,test,零伪标参考集；域不同于 B 站实战切片
+015_hi_hat_f,data\beatbox_seeds\audio\015_hi_hat_f.mp3,12,F,Hi-hat F,F 镲,hihats,laryngeal,outward,Hi-hat F,F,0,seedlib_reference,1.0,test,零伪标参考集；域不同于 B 站实战切片
+018_tongue_kick,data\beatbox_seeds\audio\018_tongue_kick.mp3,6,D,Tongue Kick,舌击底鼓,kicks,laryngeal,outward,Tongue Kick,D,0,seedlib_reference,1.0,test,零伪标参考集；域不同于 B 站实战切片
+019_pop_sound,data\beatbox_seeds\audio\019_pop_sound.mp3,94,🍾,Pop sound,瓶塞音,other,humming,outward,Pop sound,🍾,0,seedlib_reference,1.0,test,零伪标参考集；域不同于 B 站实战切片
+020_snore_bass,data\beatbox_seeds\audio\020_snore_bass.mp3,77,Rhm,Snore Bass,鼾声贝斯,nasal,pulmonary,inward,Snore Bass,<Rhm,0,seedlib_reference,1.0,test,零伪标参考集；域不同于 B 站实战切片
+021_hi_hat_f_humming,data\beatbox_seeds\audio\021_hi_hat_f_humming.mp3,15,f,Hi-Hat F (Humming),哼鸣 F 镲,hihats,humming,outward,Hi-Hat F (Humming),f,0,seedlib_reference,1.0,test,零伪标参考集；域不同于 B 站实战切片
+022_outward_k_snare,data\beatbox_seeds\audio\022_outward_k_snare.mp3,33,K,Outward K Snare,外送 K 军鼓,snares,pulmonary,outward,Outward K Snare,K,0,seedlib_reference,1.0,test,零伪标参考集；域不同于 B 站实战切片
+023_lip_roll,data\beatbox_seeds\audio\023_lip_roll.mp3,66,W,Lip Roll,唇卷,liprolls,humming,inward,Lip Roll,<W,0,seedlib_reference,1.0,test,零伪标参考集；域不同于 B 站实战切片
+024_hi_hat_t,data\beatbox_seeds\audio\024_hi_hat_t.mp3,9,T,Hi-hat T,T 镲,hihats,laryngeal,outward,Hi-hat T,T,0,seedlib_reference,1.0,test,零伪标参考集；域不同于 B 站实战切片
+025_kick,data\beatbox_seeds\audio\025_kick.mp3,0,P,Kick,底鼓,kicks,laryngeal,outward,Kick,P,0,seedlib_reference,1.0,test,零伪标参考集；域不同于 B 站实战切片
+026_outward_kch_snare_vocalized,data\beatbox_seeds\audio\026_outward_kch_snare_vocalized.mp3,34,Kch,Outward Kch Snare (Vocalized),外送 Kch 军鼓（带声）,snares,pulmonary,outward,Outward Kch Snare (Vocalized),Kch,0,seedlib_reference,1.0,test,零伪标参考集；域不同于 B 站实战切片
+027_inward_k_rimshot,data\beatbox_seeds\audio\027_inward_k_rimshot.mp3,23,K',Inward K Rimshot,内吸 K 边击,snares,laryngeal,inward,Inward K Rimshot,<K',0,seedlib_reference,1.0,test,零伪标参考集；域不同于 B 站实战切片
+028_kiss_hi_hat,data\beatbox_seeds\audio\028_kiss_hi_hat.mp3,16,-b,Kiss hi-hat,亲吻镲,hihats,humming,outward,Kiss hi-hat,-b,0,seedlib_reference,1.0,test,零伪标参考集；域不同于 B 站实战切片
+029_inward_lip_roll,data\beatbox_seeds\audio\029_inward_lip_roll.mp3,68,Ww,Inward Lip Roll,内吸唇卷,liprolls,pulmonary,inward,Inward Lip Roll,<Ww,0,seedlib_reference,1.0,test,零伪标参考集；域不同于 B 站实战切片
+030_reverse_kick,data\beatbox_seeds\audio\030_reverse_kick.mp3,89,ῤ,Reverse Kick,反向底鼓,reverse,pulmonary,inward,Reverse Kick,<ῤ,0,seedlib_reference,1.0,test,零伪标参考集；域不同于 B 站实战切片
+031_spit_snare,data\beatbox_seeds\audio\031_spit_snare.mp3,31,s,Spit Snare,吐音军鼓,snares,humming,outward,Spit Snare,s,0,seedlib_reference,1.0,test,零伪标参考集；域不同于 B 站实战切片
+032_click_da_phonem,data\beatbox_seeds\audio\032_click_da_phonem.mp3,44,da,Click (da phonem),da 点击,clicks,humming,inward,Click (da phonem),<da,0,seedlib_reference,1.0,test,零伪标参考集；域不同于 B 站实战切片
+033_inward_kick,data\beatbox_seeds\audio\033_inward_kick.mp3,1,P,Inward Kick,内吸底鼓,kicks,pulmonary,inward,Inward Kick,<P,0,seedlib_reference,1.0,test,零伪标参考集；域不同于 B 站实战切片
+034_kick_w_chest_bass,data\beatbox_seeds\audio\034_kick_w_chest_bass.mp3,4,Phrm,Kick w. Chest Bass,胸腔贝斯底鼓,kicks,pulmonary,outward,Kick w. Chest Bass,Phrm,0,seedlib_reference,1.0,test,零伪标参考集；域不同于 B 站实战切片
+035_outward_drag,data\beatbox_seeds\audio\035_outward_drag.mp3,83,A,Outward Drag,外送拖拽音,drag,pulmonary,outward,Outward Drag,A,0,seedlib_reference,1.0,test,零伪标参考集；域不同于 B 站实战切片
+037_synth,data\beatbox_seeds\audio\037_synth.mp3,91,Ow,Synth,合成器音,synth,pulmonary,outward,Synth,Ow,0,seedlib_reference,1.0,test,零伪标参考集；域不同于 B 站实战切片
+038_hollow_lip_roll,data\beatbox_seeds\audio\038_hollow_lip_roll.mp3,67,W*,Hollow Lip Roll,空腔唇卷,liprolls,hollow,inward,Hollow Lip Roll,<W*,0,seedlib_reference,1.0,test,零伪标参考集；域不同于 B 站实战切片
+039_pf_snare,data\beatbox_seeds\audio\039_pf_snare.mp3,17,PF,PF Snare,PF 军鼓,snares,laryngeal,outward,PF Snare,PF,0,seedlib_reference,1.0,test,零伪标参考集；域不同于 B 站实战切片
+040_k_palate_snare,data\beatbox_seeds\audio\040_k_palate_snare.mp3,18,k,K palate snare,腭音 K 军鼓,snares,laryngeal,outward,K palate snare,k,0,seedlib_reference,1.0,test,零伪标参考集；域不同于 B 站实战切片
+041_bongo_drum,data\beatbox_seeds\audio\041_bongo_drum.mp3,26,Km,Bongo Drum,邦戈鼓,snares,laryngeal,inward,Bongo Drum,<Km,0,seedlib_reference,1.0,test,零伪标参考集；域不同于 B 站实战切片
+042_double_inward_k_snare,data\beatbox_seeds\audio\042_double_inward_k_snare.mp3,22,K²,Double Inward K Snare,双内吸 K 军鼓,snares,pulmonary,inward,Double Inward K Snare,<K²,0,seedlib_reference,1.0,test,零伪标参考集；域不同于 B 站实战切片
+043_tongue_clap,data\beatbox_seeds\audio\043_tongue_clap.mp3,50,cl,Tongue Clap,舌拍,clicks,humming,inward,Tongue Clap,cl,0,seedlib_reference,1.0,test,零伪标参考集；域不同于 B 站实战切片
+044_inward_k_snare,data\beatbox_seeds\audio\044_inward_k_snare.mp3,20,K,Inward K Snare,内吸 K 军鼓,snares,pulmonary,inward,Inward K Snare,<K,0,seedlib_reference,1.0,test,零伪标参考集；域不同于 B 站实战切片
+045_inward_fd,data\beatbox_seeds\audio\045_inward_fd.mp3,99,<Fd,Inward Fd,内吸 Fd,other,laryngeal,outward,"Inward ""Fd""",<Fd,0,seedlib_reference,1.0,test,零伪标参考集；域不同于 B 站实战切片
+046_lip_oscillation_classic,data\beatbox_seeds\audio\046_lip_oscillation_classic.mp3,58,w,Lip Oscillation (classic),唇颤音（经典）,lip_oscillation,pulmonary,outward,Lip Oscillation (classic),w,0,seedlib_reference,1.0,test,零伪标参考集；域不同于 B 站实战切片
+047_inward_dp,data\beatbox_seeds\audio\047_inward_dp.mp3,98,Dp,Inward Dp,内吸 Dp,other,laryngeal,inward,"Inward ""Dp""",<Dp,0,seedlib_reference,1.0,test,零伪标参考集；域不同于 B 站实战切片
+048_sucker_punch,data\beatbox_seeds\audio\048_sucker_punch.mp3,95,HD,Sucker Punch,重击音,other,pulmonary,inward,Sucker Punch,<HD,0,seedlib_reference,1.0,test,零伪标参考集；域不同于 B 站实战切片
+049_inward_hollow_lip_roll_short,data\beatbox_seeds\audio\049_inward_hollow_lip_roll_short.mp3,70,Ww*,Inward Hollow Lip Roll (Short),内吸空腔唇卷（短）,liprolls,pulmonary,inward,Inward Hollow Lip Roll (Short),<Ww*,1,seedlib_reference,1.0,test,零伪标参考集；域不同于 B 站实战切片
+050_inward_lip_roll_with_tongue,data\beatbox_seeds\audio\050_inward_lip_roll_with_tongue.mp3,72,Wwd,Inward Lip Roll with Tongue,带舌内吸唇卷,liprolls,pulmonary,inward,Inward Lip Roll with Tongue,<Wwd,0,seedlib_reference,1.0,test,零伪标参考集；域不同于 B 站实战切片
+051_duf_snare,data\beatbox_seeds\audio\051_duf_snare.mp3,36,Df,Duf Snare,Duf 军鼓,snares,pulmonary,outward,Duf Snare,Df,0,seedlib_reference,1.0,test,零伪标参考集；域不同于 B 站实战切片
+052_synth_high_pitched,data\beatbox_seeds\audio\052_synth_high_pitched.mp3,92,Ow🎵,Synth (high pitched),合成器音（高音）,synth,pulmonary,outward,Synth (high pitched),Ow🎵,0,seedlib_reference,1.0,test,零伪标参考集；域不同于 B 站实战切片
+053_inward_drag,data\beatbox_seeds\audio\053_inward_drag.mp3,84,A,Inward Drag,内吸拖拽音,drag,pulmonary,inward,Inward Drag,<A,0,seedlib_reference,1.0,test,零伪标参考集；域不同于 B 站实战切片
+054_tch_hi_hat,data\beatbox_seeds\audio\054_tch_hi_hat.mp3,13,Tch,Tch Hi-hat,Tch 镲,hihats,laryngeal,outward,Tch Hi-hat,Tch,0,seedlib_reference,1.0,test,零伪标参考集；域不同于 B 站实战切片
+055_tight_tongue_roll,data\beatbox_seeds\audio\055_tight_tongue_roll.mp3,100,Dr',Tight Tongue Roll,紧舌卷,other,laryngeal,outward,Tight Tongue Roll,Dr',0,seedlib_reference,1.0,test,零伪标参考集；域不同于 B 站实战切片
+056_vocalized_lip_oscillation_perfect_octave,data\beatbox_seeds\audio\056_vocalized_lip_oscillation_perfect_octave.mp3,62,w🗣️P8,Vocalized Lip Oscillation (Perfect Octave),带声唇颤（八度）,lip_oscillation,pulmonary,outward,Vocalized Lip Oscillation (Perfect Octave),w🗣️P8,0,seedlib_reference,1.0,test,零伪标参考集；域不同于 B 站实战切片
+057_clop,data\beatbox_seeds\audio\057_clop.mp3,51,L,Clop,马蹄音,clops,humming,outward,Clop,L,0,seedlib_reference,1.0,test,零伪标参考集；域不同于 B 站实战切片
+058_dry_kick,data\beatbox_seeds\audio\058_dry_kick.mp3,93,D*,Dry Kick,干底鼓,other,hollow,outward,Dry Kick,D*,0,seedlib_reference,1.0,test,零伪标参考集；域不同于 B 站实战切片
+059_vocalized_lip_oscillation_unisson,data\beatbox_seeds\audio\059_vocalized_lip_oscillation_unisson.mp3,60,w🗣️P0,Vocalized Lip Oscillation (Unisson),带声唇颤（同度）,lip_oscillation,pulmonary,outward,Vocalized Lip Oscillation (Unisson),w🗣️P0,0,seedlib_reference,1.0,test,零伪标参考集；域不同于 B 站实战切片
+060_inward_kch_snare,data\beatbox_seeds\audio\060_inward_kch_snare.mp3,28,Kch,Inward Kch Snare,内吸 Kch 军鼓,snares,pulmonary,inward,Inward <Kch Snare,<Kch,0,seedlib_reference,1.0,test,零伪标参考集；域不同于 B 站实战切片
+061_throat_kick_with_nasal_resonance,data\beatbox_seeds\audio\061_throat_kick_with_nasal_resonance.mp3,8,Hm,Throat Kick (with Nasal Resonance),鼻音喉底鼓,kicks,pulmonary,outward,Throat Kick (with Nasal Resonance),Hm,0,seedlib_reference,1.0,test,零伪标参考集；域不同于 B 站实战切片
+062_msh_snare,data\beatbox_seeds\audio\062_msh_snare.mp3,37,M,Msh Snare,Msh 军鼓,snares,laryngeal,inward,Msh Snare,<M,0,seedlib_reference,1.0,test,零伪标参考集；域不同于 B 站实战切片
+063_hollow_whistle,data\beatbox_seeds\audio\063_hollow_whistle.mp3,79,Hw,Hollow Whistle,空腔哨音,whistles,pulmonary,outward,Hollow Whistle,Hw,0,seedlib_reference,1.0,test,零伪标参考集；域不同于 B 站实战切片
+064_k_palate_snare_short_for_fast_patterns,data\beatbox_seeds\audio\064_k_palate_snare_short_for_fast_patterns.mp3,19,k',K palate snare (short),短腭音 K 军鼓,snares,laryngeal,outward,K palate snare (short - for fast patterns),k',1,seedlib_reference,1.0,test,零伪标参考集；域不同于 B 站实战切片
+065_zede_scratch,data\beatbox_seeds\audio\065_zede_scratch.mp3,87,Juy,Zede Scratch,Zede 刮擦音,scratch,pulmonary,outward,Zede Scratch,Juy,0,seedlib_reference,1.0,test,零伪标参考集；域不同于 B 站实战切片
+066_hi_hat_t_humming,data\beatbox_seeds\audio\066_hi_hat_t_humming.mp3,14,t,Hi-Hat T (Humming),哼鸣 T 镲,hihats,humming,outward,Hi-Hat T (Humming),t,0,seedlib_reference,1.0,test,零伪标参考集；域不同于 B 站实战切片
+067_dsh_snare,data\beatbox_seeds\audio\067_dsh_snare.mp3,35,Dsh,Dsh Snare,Dsh 军鼓,snares,pulmonary,outward,Dsh Snare,Dsh,0,seedlib_reference,1.0,test,零伪标参考集；域不同于 B 站实战切片
+068_reverse_snare,data\beatbox_seeds\audio\068_reverse_snare.mp3,90,Chῤ,Reverse Snare,反向军鼓,reverse,pulmonary,outward,Reverse Snare,Chῤ,0,seedlib_reference,1.0,test,零伪标参考集；域不同于 B 站实战切片
+070_inward_hollow_lip_roll_longer,data\beatbox_seeds\audio\070_inward_hollow_lip_roll_longer.mp3,71,Ww*~,Inward Hollow Lip Roll (Longer),内吸空腔唇卷（长）,liprolls,pulmonary,inward,Inward Hollow Lip Roll (Longer),<Ww*~,0,seedlib_reference,1.0,test,零伪标参考集；域不同于 B 站实战切片
+071_uvula_click_ga_phonem,data\beatbox_seeds\audio\071_uvula_click_ga_phonem.mp3,48,G*a,Uvula Click (ga phonem),小舌点击（ga）,clicks,hollow,inward,Uvula Click (ga phonem),<G*a,0,seedlib_reference,1.0,test,零伪标参考集；域不同于 B 站实战切片
+072_inward_vocalized_tooth_whistle,data\beatbox_seeds\audio\072_inward_vocalized_tooth_whistle.mp3,82,🦷🗣️°,Inward Vocalized Tooth Whistle,内吸带声齿哨音,teeth,pulmonary,inward,Inward Vocalized Tooth Whistle,<🦷🗣️°,0,seedlib_reference,1.0,test,零伪标参考集；域不同于 B 站实战切片
+073_hollow_clop,data\beatbox_seeds\audio\073_hollow_clop.mp3,52,L*,Hollow Clop,空腔马蹄音,clops,hollow,outward,Hollow Clop,L*,0,seedlib_reference,1.0,test,零伪标参考集；域不同于 B 站实战切片
+074_inward_hd,data\beatbox_seeds\audio\074_inward_hd.mp3,96,Hd,Inward Hd,内吸 Hd,other,laryngeal,inward,"Inward ""Hd""",<Hd,0,seedlib_reference,1.0,test,零伪标参考集；域不同于 B 站实战切片
+075_inward_df,data\beatbox_seeds\audio\075_inward_df.mp3,97,Df,Inward Df,内吸 Df,other,laryngeal,inward,"Inward ""Df""",<Df,0,seedlib_reference,1.0,test,零伪标参考集；域不同于 B 站实战切片
+076_vibrator_lip_bass_short,data\beatbox_seeds\audio\076_vibrator_lip_bass_short.mp3,65,Z,Vibrator Lip Bass (Short),振动唇贝斯（短）,lip_oscillation,pulmonary,outward,Vibrator Lip Bass (Short),Z,1,seedlib_reference,1.0,test,零伪标参考集；域不同于 B 站实战切片
+077_whistling_crash,data\beatbox_seeds\audio\077_whistling_crash.mp3,42,Pss°,Whistling Crash,哨音碎镲,cymbal,pulmonary,outward,Whistling Crash,Pss°,0,seedlib_reference,1.0,test,零伪标参考集；域不同于 B 站实战切片
+078_inward_click_roll_whistle,data\beatbox_seeds\audio\078_inward_click_roll_whistle.mp3,78,Drh🦗,Inward Click Roll Whistle,内吸 click roll 哨音,whistles,pulmonary,inward,Inward Click Roll Whistle,<Drh🦗,0,seedlib_reference,1.0,test,零伪标参考集；域不同于 B 站实战切片
+079_fart_bass,data\beatbox_seeds\audio\079_fart_bass.mp3,63,Fb~,Fart Bass,放屁贝斯,lip_oscillation,pulmonary,outward,Fart Bass,Fb~,0,seedlib_reference,1.0,test,零伪标参考集；域不同于 B 站实战切片
+080_uvula_click,data\beatbox_seeds\audio\080_uvula_click.mp3,47,G*,Uvula Click,小舌点击,clicks,hollow,inward,Uvula Click,<G*,0,seedlib_reference,1.0,test,零伪标参考集；域不同于 B 站实战切片
+081_inward_click_roll,data\beatbox_seeds\audio\081_inward_click_roll.mp3,73,Drh,Inward Click Roll,内吸 click roll,tongue,pulmonary,inward,Inward Click Roll,<Drh,0,seedlib_reference,1.0,test,零伪标参考集；域不同于 B 站实战切片
+082_tooth_whistle,data\beatbox_seeds\audio\082_tooth_whistle.mp3,81,🦷°,Tooth Whistle,齿哨音,teeth,pulmonary,inward,Tooth Whistle,<🦷°,0,seedlib_reference,1.0,test,零伪标参考集；域不同于 B 站实战切片
+083_hi_hat_t_short_for_fast_patterns,data\beatbox_seeds\audio\083_hi_hat_t_short_for_fast_patterns.mp3,10,T',Hi-Hat T (short),短 T 镲,hihats,laryngeal,outward,Hi-Hat T (short - for fast patterns),T',1,seedlib_reference,1.0,test,零伪标参考集；域不同于 B 站实战切片
+084_mew_squeak,data\beatbox_seeds\audio\084_mew_squeak.mp3,101,Mew,Mew Squeak,喵叫,other,humming,outward,Mew Squeak,Mew,0,seedlib_reference,1.0,test,零伪标参考集；域不同于 B 站实战切片
+085_inward_click_roll_closing_release,data\beatbox_seeds\audio\085_inward_click_roll_closing_release.mp3,74,Drhb,Inward Click Roll (Closing Release),内吸 click roll（闭合释放）,tongue,pulmonary,inward,Inward Click Roll (Closing Release),<Drhb,0,seedlib_reference,1.0,test,零伪标参考集；域不同于 B 站实战切片
+086_peh_snare,data\beatbox_seeds\audio\086_peh_snare.mp3,38,Peh,Peh Snare,Peh 军鼓,snares,laryngeal,inward,Peh Snare,<Peh,0,seedlib_reference,1.0,test,零伪标参考集；域不同于 B 站实战切片
+087_throat_bass,data\beatbox_seeds\audio\087_throat_bass.mp3,54,O,Throat Bass,喉音贝斯,vocal,pulmonary,outward,Throat Bass,O,0,seedlib_reference,1.0,test,零伪标参考集；域不同于 B 站实战切片
+088_uvula_bass,data\beatbox_seeds\audio\088_uvula_bass.mp3,57,Rr,Uvula Bass,小舌贝斯,vocal,pulmonary,outward,Uvula Bass,Rr,0,seedlib_reference,1.0,test,零伪标参考集；域不同于 B 站实战切片
+089_click,data\beatbox_seeds\audio\089_click.mp3,43,d,Click,点击,clicks,humming,inward,Click,<d,0,seedlib_reference,1.0,test,零伪标参考集；域不同于 B 站实战切片
+092_uvula_click_go_phonem,data\beatbox_seeds\audio\092_uvula_click_go_phonem.mp3,49,G*o,Uvula Click (go phonem),小舌点击（go）,clicks,hollow,inward,Uvula Click (go phonem),<G*o,0,seedlib_reference,1.0,test,零伪标参考集；域不同于 B 站实战切片
+093_hi_hat_opened,data\beatbox_seeds\audio\093_hi_hat_opened.mp3,11,Tss,Hi-Hat (Opened),开镲,hihats,laryngeal,outward,Hi-Hat (Opened),Tss,0,seedlib_reference,1.0,test,零伪标参考集；域不同于 B 站实战切片
+094_inward_k_tonal_rimshot,data\beatbox_seeds\audio\094_inward_k_tonal_rimshot.mp3,27,Koo,Inward K Tonal Rimshot,内吸 K 音调边击,snares,laryngeal,inward,Inward K Tonal Rimshot,<Koo,0,seedlib_reference,1.0,test,零伪标参考集；域不同于 B 站实战切片
+095_inward_sub_lip_roll,data\beatbox_seeds\audio\095_inward_sub_lip_roll.mp3,69,Ww~,Inward Sub Lip Roll,内吸超低唇卷,liprolls,pulmonary,inward,Inward Sub Lip Roll,<Ww~,0,seedlib_reference,1.0,test,零伪标参考集；域不同于 B 站实战切片
+096_nasal_bass,data\beatbox_seeds\audio\096_nasal_bass.mp3,76,Rhm,Nasal Bass,鼻音贝斯,nasal,pulmonary,outward,Nasal Bass,Rhm,0,seedlib_reference,1.0,test,零伪标参考集；域不同于 B 站实战切片
+097_vocalized_lip_oscillation_perfect_fifth,data\beatbox_seeds\audio\097_vocalized_lip_oscillation_perfect_fifth.mp3,61,w🗣️5,Vocalized Lip Oscillation (Perfect Fifth),带声唇颤（五度）,lip_oscillation,pulmonary,outward,Vocalized Lip Oscillation (Perfect Fifth),w🗣️5,0,seedlib_reference,1.0,test,零伪标参考集；域不同于 B 站实战切片
+099_zipper,data\beatbox_seeds\audio\099_zipper.mp3,85,Zip,Zipper,拉链音,zippers,humming,inward,Zipper,<Zip,0,seedlib_reference,1.0,test,零伪标参考集；域不同于 B 站实战切片
+100_whistling_lip_oscillation,data\beatbox_seeds\audio\100_whistling_lip_oscillation.mp3,59,w°,Whistling Lip Oscillation,哨音唇颤,lip_oscillation,pulmonary,outward,Whistling Lip Oscillation,w°,0,seedlib_reference,1.0,test,零伪标参考集；域不同于 B 站实战切片
+101_inward_k_snare_click_roll,data\beatbox_seeds\audio\101_inward_k_snare_click_roll.mp3,30,Krr,Inward K Snare Click Roll,内吸 K 军鼓 click roll,snares,pulmonary,inward,Inward K Snare Click Roll,<Krr,0,seedlib_reference,1.0,test,零伪标参考集；域不同于 B 站实战切片
+102_crash,data\beatbox_seeds\audio\102_crash.mp3,41,Pss,Crash,碎音镲,cymbal,laryngeal,outward,Crash,Pss,0,seedlib_reference,1.0,test,零伪标参考集；域不同于 B 站实战切片
+103_shuy_air_scratch,data\beatbox_seeds\audio\103_shuy_air_scratch.mp3,88,Shuy,Shuy Air Scratch,Shuy 气刮擦音,scratch,pulmonary,outward,Shuy air scratch,Shuy,0,seedlib_reference,1.0,test,零伪标参考集；域不同于 B 站实战切片

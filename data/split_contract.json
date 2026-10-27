@@ -1,0 +1,34 @@
+{
+ "split_function": "md5(str(source).encode()).hexdigest()[:8] as int % 100 -> <80 train, <90 val, else test",
+ "group_key": "source (bilibili BV id) —— 同一 BV 的所有切片必须同 split",
+ "generated_by": "scripts/build_eval_splits.py",
+ "manifest": "data/seed_manifest.csv",
+ "rows": 408,
+ "rows_per_split": {
+  "val": 43,
+  "train": 319,
+  "test": 46
+ },
+ "sources_per_split": {
+  "test": 9,
+  "train": 53,
+  "val": 5
+ },
+ "cross_split_source_leakage": 0,
+ "leaked_sources": [],
+ "unique_ids": 408,
+ "duplicate_ids": 0,
+ "label_space": "canonical 103 (data/beatbox_taxonomy.json)",
+ "covered_sounds": 34,
+ "total_sounds": 103,
+ "covered_families": 18,
+ "total_families": 19,
+ "human_confirmed_rows": 0,
+ "gate": "human_notation 覆盖 >=15 family 前，识别准确率不得写入 agent.md §0",
+ "refaudio_testset": {
+  "rows": 95,
+  "sounds": 95,
+  "families": 19,
+  "label_source": "seedlib_reference（零伪标）"
+ }
+}

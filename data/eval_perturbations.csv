@@ -1,0 +1,9 @@
+perturb_id,kind,params,purpose,expected
+P0,none,,基线,准确率最高基准
+P1,time_stretch,"rate=0.9,1.1",音频敏感性：时长不变时模型应仍正确,准确率下降应 <10 个百分点
+P2,time_stretch,"rate=0.8,1.25",音频敏感性：强扰动,准确率显著下降但不应塌到随机
+P3,additive_noise,snr=20dB,音频敏感性：轻噪,轻微下降
+P4,additive_noise,"snr=10dB,0dB",音频敏感性：重噪（0dB 必测）,0dB 时准确率应大幅下降
+P5,seed_swap,同 family 另一 source 的同类片段,跨 source 泛化：换上下文不应改变音色判定,准确率不应显著下降
+P6,silence_pad,前后各加 0.5s 静音,切分鲁棒性,准确率基本不变
+P7,gain,"x0.5, x2.0",音量不变性,准确率基本不变

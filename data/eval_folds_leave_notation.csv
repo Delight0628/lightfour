@@ -1,0 +1,35 @@
+fold_id,held_out_sound_id,held_out_notation,held_out_en,held_out_family,held_out_count,held_out_splits,train_size,test_splits,note
+LOO-006,6,D,Tongue Kick,kicks,22,test|train|val,408,test,留出该音色全部片段；其余音色仍参与训练；跨 source 泄漏由 split 契约保证
+LOO-007,7,Hb,Throat Kick,kicks,3,test|train,408,test,留出该音色全部片段；其余音色仍参与训练；跨 source 泄漏由 split 契约保证
+LOO-011,11,Tss,Hi-Hat (Opened),hihats,12,train|val,408,test,留出该音色全部片段；其余音色仍参与训练；跨 source 泄漏由 split 契约保证
+LOO-012,12,F,Hi-hat F,hihats,12,train|val,408,test,留出该音色全部片段；其余音色仍参与训练；跨 source 泄漏由 split 契约保证
+LOO-013,13,Tch,Tch Hi-hat,hihats,1,train,408,test,留出该音色全部片段；其余音色仍参与训练；跨 source 泄漏由 split 契约保证
+LOO-025,25,K`,Inward K Rimshot (short),snares,1,test,408,test,留出该音色全部片段；其余音色仍参与训练；跨 source 泄漏由 split 契约保证
+LOO-037,37,M,Msh Snare,snares,23,test|train|val,408,test,留出该音色全部片段；其余音色仍参与训练；跨 source 泄漏由 split 契约保证
+LOO-038,38,Peh,Peh Snare,snares,1,train,408,test,留出该音色全部片段；其余音色仍参与训练；跨 source 泄漏由 split 契约保证
+LOO-041,41,Pss,Crash,cymbal,25,test|train|val,408,test,留出该音色全部片段；其余音色仍参与训练；跨 source 泄漏由 split 契约保证
+LOO-043,43,d,Click,clicks,2,test|train,408,test,留出该音色全部片段；其余音色仍参与训练；跨 source 泄漏由 split 契约保证
+LOO-044,44,da,Click (da phonem),clicks,23,test|train|val,408,test,留出该音色全部片段；其余音色仍参与训练；跨 source 泄漏由 split 契约保证
+LOO-051,51,L,Clop,clops,25,test|train|val,408,test,留出该音色全部片段；其余音色仍参与训练；跨 source 泄漏由 split 契约保证
+LOO-053,53,CL*,Double Hollow Clop,clops,22,train|val,408,test,留出该音色全部片段；其余音色仍参与训练；跨 source 泄漏由 split 契约保证
+LOO-054,54,O,Throat Bass,vocal,22,test|train|val,408,test,留出该音色全部片段；其余音色仍参与训练；跨 source 泄漏由 split 契约保证
+LOO-057,57,Rr,Uvula Bass,vocal,3,train,408,test,留出该音色全部片段；其余音色仍参与训练；跨 source 泄漏由 split 契约保证
+LOO-059,59,w°,Whistling Lip Oscillation,lip_oscillation,9,train|val,408,test,留出该音色全部片段；其余音色仍参与训练；跨 source 泄漏由 split 契约保证
+LOO-060,60,w🗣️P0,Vocalized Lip Oscillation (Unisson),lip_oscillation,1,train,408,test,留出该音色全部片段；其余音色仍参与训练；跨 source 泄漏由 split 契约保证
+LOO-062,62,w🗣️P8,Vocalized Lip Oscillation (Perfect Octave),lip_oscillation,8,test|train,408,test,留出该音色全部片段；其余音色仍参与训练；跨 source 泄漏由 split 契约保证
+LOO-065,65,Z,Vibrator Lip Bass (Short),lip_oscillation,4,train,408,test,留出该音色全部片段；其余音色仍参与训练；跨 source 泄漏由 split 契约保证
+LOO-066,66,W,Lip Roll,liprolls,25,test|train|val,408,test,留出该音色全部片段；其余音色仍参与训练；跨 source 泄漏由 split 契约保证
+LOO-074,74,Drhb,Inward Click Roll (Closing Release),tongue,1,train,408,test,留出该音色全部片段；其余音色仍参与训练；跨 source 泄漏由 split 契约保证
+LOO-079,79,Hw,Hollow Whistle,whistles,15,test|train,408,test,留出该音色全部片段；其余音色仍参与训练；跨 source 泄漏由 split 契约保证
+LOO-082,82,🦷🗣️°,Inward Vocalized Tooth Whistle,teeth,11,train|val,408,test,留出该音色全部片段；其余音色仍参与训练；跨 source 泄漏由 split 契约保证
+LOO-083,83,A,Outward Drag,drag,6,train,408,test,留出该音色全部片段；其余音色仍参与训练；跨 source 泄漏由 split 契约保证
+LOO-084,84,A,Inward Drag,drag,19,test|train|val,408,test,留出该音色全部片段；其余音色仍参与训练；跨 source 泄漏由 split 契约保证
+LOO-085,85,Zip,Zipper,zippers,1,train,408,test,留出该音色全部片段；其余音色仍参与训练；跨 source 泄漏由 split 契约保证
+LOO-086,86,Zip~,Inward Zipper Roll,zippers,24,test|train|val,408,test,留出该音色全部片段；其余音色仍参与训练；跨 source 泄漏由 split 契约保证
+LOO-087,87,Juy,Zede Scratch,scratch,11,test|train|val,408,test,留出该音色全部片段；其余音色仍参与训练；跨 source 泄漏由 split 契约保证
+LOO-088,88,Shuy,Shuy Air Scratch,scratch,9,train|val,408,test,留出该音色全部片段；其余音色仍参与训练；跨 source 泄漏由 split 契约保证
+LOO-090,90,Chῤ,Reverse Snare,reverse,15,train|val,408,test,留出该音色全部片段；其余音色仍参与训练；跨 source 泄漏由 split 契约保证
+LOO-091,91,Ow,Synth,synth,3,train,408,test,留出该音色全部片段；其余音色仍参与训练；跨 source 泄漏由 split 契约保证
+LOO-092,92,Ow🎵,Synth (high pitched),synth,22,test|train,408,test,留出该音色全部片段；其余音色仍参与训练；跨 source 泄漏由 split 契约保证
+LOO-094,94,🍾,Pop sound,other,24,test|train|val,408,test,留出该音色全部片段；其余音色仍参与训练；跨 source 泄漏由 split 契约保证
+LOO-101,101,Mew,Mew Squeak,other,3,train,408,test,留出该音色全部片段；其余音色仍参与训练；跨 source 泄漏由 split 契约保证

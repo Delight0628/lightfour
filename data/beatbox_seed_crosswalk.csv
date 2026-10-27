@@ -1,0 +1,104 @@
+seedlib_index,seedlib_id,seedlib_name,seedlib_notation,seedlib_subcategory,canonical_sound_id,canonical_notation,canonical_en,canonical_cn,canonical_family,canonical_mechanism,canonical_airflow,is_short_variant,variant_note,match_method,match_score,notation_ambiguous,has_reference_audio
+0,f302bcb3-0fdb-451b-b3b6-50f146fa53d4,Double Inward K Rimshot,<K'²,Snares,24,K'²,Double Inward K Rimshot,双内吸 K 边击,snares,laryngeal,inward,0,,exact_notation_stripped_lt,1.0,0,1
+1,731df47e-1799-4040-97c5-5315eb35abe6,Hollow Click,-d*,Clicks,46,-d*,Hollow Click,空腔点击,clicks,hollow,inward,0,,exact_notation,1.0,0,1
+2,a69e79ee-9c7a-4141-8e8e-a0aa4be850b6,Slap Kick,Lp👅,Kicks,5,Lp👅,Slap Kick,拍击底鼓,kicks,pulmonary,outward,0,,exact_notation,1.0,0,1
+3,d5a53e37-6a9d-433c-aeec-0c9d89b23df0,Inward K Rimshot (shorter - for fast patterns),<K`,Snares,25,K`,Inward K Rimshot (short),短内吸 K 边击,snares,laryngeal,inward,1,种子库 'Inward K Rimshot (shorter - for fast patterns)' -> canonical 'Inward K Rimshot (short)'（短变体，保留独立音色 id，不并入基型）,exact_notation_stripped_lt,1.0,0,1
+4,619d59fc-6e4c-4f42-9be0-77913cf1918e,Throat Kick,Hb,Kicks,7,Hb,Throat Kick,喉音底鼓,kicks,laryngeal,outward,0,,exact_notation,1.0,0,1
+5,1e6cf254-56d3-4697-8812-90d64318513b,Fat Kick Long,Pww,Kicks,3,Pww,Fat Kick Long,厚底鼓（长）,kicks,pulmonary,outward,0,,exact_notation,1.0,0,1
+6,02459f8d-36bb-4be6-bbb5-a7b1f35cbc05,Inward Zipper Roll,<Zip~,Zippers,86,Zip~,Inward Zipper Roll,内吸拉链卷,zippers,pulmonary,inward,0,,exact_notation_stripped_lt,1.0,0,1
+7,7a6a2409-f2c3-44f9-8c59-b8e039c0dad8,Double Spit Snare,s²,Snares,32,s²,Double Spit Snare,双吐音军鼓,snares,humming,outward,0,,exact_notation,1.0,0,1
+8,439e822c-f2f9-4688-8c3a-566ea6a6c1c6,Double Hollow Clop,CL*,Other,53,CL*,Double Hollow Clop,双空腔马蹄音,clops,hollow,outward,0,,exact_notation,1.0,0,1
+9,c0c5d70e-30cc-45ab-9ec6-6df7a0571e69,Cough Snare,Eh,Snares,39,Eh,Cough Snare,咳嗽军鼓,snares,pulmonary,outward,0,,exact_notation,1.0,0,0
+10,78a62712-3dd7-4496-b863-b93edd634cd3,Inward K Snare (closing release),<Kb,Snares,21,Kb,Inward K Snare (closing release),内吸 K 军鼓（闭合释放）,snares,pulmonary,inward,0,,exact_notation_stripped_lt,1.0,0,1
+11,df36623a-0924-4b9d-b127-6168749ca435,Click (do phonem),<do,Clicks,45,do,Click (do phonem),do 点击,clicks,humming,inward,0,,exact_notation_stripped_lt,1.0,0,1
+12,e7902f57-7bd9-44e0-b25c-8304937f5661,Fat Kick Short,Pw,Kicks,2,Pw,Fat Kick Short,厚底鼓（短）,kicks,pulmonary,outward,1,种子库 'Fat Kick Short' -> canonical 'Fat Kick Short'（短变体，保留独立音色 id，不并入基型）,exact_notation,1.0,0,1
+13,b349ca42-7cdd-414c-827e-ce45430bbaeb,Sub Bass Snare,Kw,Snares,29,Kw,Sub Bass Snare,超低音军鼓,snares,pulmonary,outward,0,,exact_notation,1.0,0,1
+14,348e30a2-2500-41ee-a32c-94a6bc7298e0,Hi-hat F,F,Hi-hats,12,F,Hi-hat F,F 镲,hihats,laryngeal,outward,0,,exact_notation,1.0,0,1
+15,46999be7-e273-4d1d-967d-c64e6db937df,High Cough Snare,Eh^,Snares,40,Eh^,High Cough Snare,高音咳嗽军鼓,snares,pulmonary,outward,0,,exact_notation,1.0,0,0
+16,d12533c3-8467-4242-acf7-d5ac57e42525,Slizzer Roll,<SR~,Other,102,SR~,Slizzer Roll,滑舌卷,other,pulmonary,inward,0,,exact_notation_stripped_lt,1.0,0,0
+17,c059bdaa-c1db-463f-906d-45c689fac0bd,Tongue Kick,D,Kicks,6,D,Tongue Kick,舌击底鼓,kicks,laryngeal,outward,0,,exact_notation,1.0,0,1
+18,64853f94-5282-4805-9c62-daf217659c4b,Pop sound,🍾,Pops,94,🍾,Pop sound,瓶塞音,other,humming,outward,0,,exact_notation,1.0,0,1
+19,f4c051bf-c4b7-476d-9397-d638537c88cc,Snore Bass,<Rhm,Nasal,77,Rhm,Snore Bass,鼾声贝斯,nasal,pulmonary,inward,0,,notation_ambiguous+name,1.0,1,1
+20,6e43b852-778b-4ded-90dc-68a0311e5775,Hi-Hat F (Humming),f,Hi-hats,15,f,Hi-Hat F (Humming),哼鸣 F 镲,hihats,humming,outward,0,,exact_notation,1.0,0,1
+21,c87ddab5-1934-4910-b673-24d7906c2880,Outward K Snare,K,Snares,33,K,Outward K Snare,外送 K 军鼓,snares,pulmonary,outward,0,,notation_ambiguous+name,1.0,1,1
+22,6790d9f4-db65-494f-a995-6edeb7a48832,Lip Roll,<W,Liprolls,66,W,Lip Roll,唇卷,liprolls,humming,inward,0,,exact_notation_stripped_lt,1.0,0,1
+23,ef8e2540-fc64-4b69-b4b6-a0dbecfda6d4,Hi-hat T,T,Hi-hats,9,T,Hi-hat T,T 镲,hihats,laryngeal,outward,0,,exact_notation,1.0,0,1
+24,e25535ed-21ec-4434-969d-259a47d40de5,Kick,P,Kicks,0,P,Kick,底鼓,kicks,laryngeal,outward,0,,notation_ambiguous+name,1.0,1,1
+25,f292e746-4c67-4cfc-9174-61f68729e635,Outward Kch Snare (Vocalized),Kch,Snares,34,Kch,Outward Kch Snare (Vocalized),外送 Kch 军鼓（带声）,snares,pulmonary,outward,0,,notation_ambiguous+name,1.0,1,1
+26,71623a6d-9578-484f-9a52-a32db970b23d,Inward K Rimshot,<K',Snares,23,K',Inward K Rimshot,内吸 K 边击,snares,laryngeal,inward,0,,exact_notation_stripped_lt,1.0,0,1
+27,a8519287-f331-4734-b352-5c4310abafc9,Kiss hi-hat,-b,Hi-hats,16,-b,Kiss hi-hat,亲吻镲,hihats,humming,outward,0,,exact_notation,1.0,0,1
+28,ead1af95-caea-44de-80ef-ef94020a8b10,Inward Lip Roll,<Ww,Liprolls,68,Ww,Inward Lip Roll,内吸唇卷,liprolls,pulmonary,inward,0,,exact_notation_stripped_lt,1.0,0,1
+29,088bbe5d-96df-4cea-aa85-dc13cad924ed,Reverse Kick,<ῤ,Reverse,89,ῤ,Reverse Kick,反向底鼓,reverse,pulmonary,inward,0,,exact_notation_stripped_lt,1.0,0,1
+30,ed857ec0-fcd6-4c8a-a909-fc657604da58,Spit Snare,s,Snares,31,s,Spit Snare,吐音军鼓,snares,humming,outward,0,,exact_notation,1.0,0,1
+31,3359c10c-9e05-4f95-8b13-6da87e292e94,Click (da phonem),<da,Clicks,44,da,Click (da phonem),da 点击,clicks,humming,inward,0,,exact_notation_stripped_lt,1.0,0,1
+32,ffba17c8-e259-4ad8-915c-36021ef95c23,Inward Kick,<P,Kicks,1,P,Inward Kick,内吸底鼓,kicks,pulmonary,inward,0,,notation_ambiguous+name,1.0,1,1
+33,08673d73-96ff-4476-b0c2-4ddfd7a474d2,Kick w. Chest Bass,Phrm,Kicks,4,Phrm,Kick w. Chest Bass,胸腔贝斯底鼓,kicks,pulmonary,outward,0,,exact_notation,1.0,0,1
+34,1b67ff35-f5c5-4ef3-bc03-e935853c75b2,Outward Drag,A,Drag,83,A,Outward Drag,外送拖拽音,drag,pulmonary,outward,0,,notation_ambiguous+name,1.0,1,1
+35,1ccbd923-7f15-42e9-a449-a28600b3ac5a,Inward Sharp Click Roll (Zekka Click Roll),<Drch,Tongue,75,Drch,Inward Sharp Click Roll (Zekka Click Roll),内吸锐利 click roll（Zekka）,tongue,pulmonary,inward,0,,exact_notation_stripped_lt,1.0,0,0
+36,9df2bd41-27a0-4985-a3a6-2c16d293ad1b,Synth,Ow,Synth,91,Ow,Synth,合成器音,synth,pulmonary,outward,0,,exact_notation,1.0,0,1
+37,3c05dcda-f803-4989-9e8c-8f3221525fcf,Hollow Lip Roll,<W*,Liprolls,67,W*,Hollow Lip Roll,空腔唇卷,liprolls,hollow,inward,0,,exact_notation_stripped_lt,1.0,0,1
+38,d3b2a5dc-3c64-4e09-8daf-137253ed356b,PF Snare,PF,Snares,17,PF,PF Snare,PF 军鼓,snares,laryngeal,outward,0,,exact_notation,1.0,0,1
+39,4b280206-e116-4cf1-b039-7fae684ab4c4,K palate snare,k,Snares,18,k,K palate snare,腭音 K 军鼓,snares,laryngeal,outward,0,,exact_notation,1.0,0,1
+40,cdfa7c00-039a-41e9-b607-7fac3312f9ea,Bongo Drum,<Km,Snares,26,Km,Bongo Drum,邦戈鼓,snares,laryngeal,inward,0,,exact_notation_stripped_lt,1.0,0,1
+41,c71d5116-cead-4ee4-9c66-98f80b2670ab,Double Inward K Snare,<K²,Snares,22,K²,Double Inward K Snare,双内吸 K 军鼓,snares,pulmonary,inward,0,,exact_notation_stripped_lt,1.0,0,1
+42,59ef7157-12de-4c22-b285-8317625f6498,Tongue Clap,cl,Clicks,50,cl,Tongue Clap,舌拍,clicks,humming,inward,0,,exact_notation,1.0,0,1
+43,4b3bd23c-b1bd-42bb-a236-e41df898c31a,Inward K Snare,<K,Snares,20,K,Inward K Snare,内吸 K 军鼓,snares,pulmonary,inward,0,,notation_ambiguous+name,1.0,1,1
+44,3c58ff59-2c2a-4c8f-a502-dfabdff36be3,"Inward ""Fd""",<Fd,Other,99,<Fd,Inward Fd,内吸 Fd,other,laryngeal,outward,0,,exact_notation,1.0,0,1
+45,128f1529-1d2c-4333-b839-76c9de0adc04,Lip Oscillation (classic),w,Lip oscillations,58,w,Lip Oscillation (classic),唇颤音（经典）,lip_oscillation,pulmonary,outward,0,,exact_notation,1.0,0,1
+46,139b8a81-c482-4bdc-a8f8-f46a7746b643,"Inward ""Dp""",<Dp,Other,98,Dp,Inward Dp,内吸 Dp,other,laryngeal,inward,0,,exact_notation_stripped_lt,1.0,0,1
+47,167bcf8f-bd01-45e0-a14d-74632e3e42e7,Sucker Punch,<HD,Other,95,HD,Sucker Punch,重击音,other,pulmonary,inward,0,,exact_notation_stripped_lt,1.0,0,1
+48,f6ba2cef-eb64-4ee9-bdd3-c1a23e7452cb,Inward Hollow Lip Roll (Short),<Ww*,Liprolls,70,Ww*,Inward Hollow Lip Roll (Short),内吸空腔唇卷（短）,liprolls,pulmonary,inward,1,种子库 'Inward Hollow Lip Roll (Short)' -> canonical 'Inward Hollow Lip Roll (Short)'（短变体，保留独立音色 id，不并入基型）,exact_notation_stripped_lt,1.0,0,1
+49,fbfd9636-fbf3-42c6-a6b1-3466cfe021d7,Inward Lip Roll with Tongue,<Wwd,Liprolls,72,Wwd,Inward Lip Roll with Tongue,带舌内吸唇卷,liprolls,pulmonary,inward,0,,exact_notation_stripped_lt,1.0,0,1
+50,5d6f927e-27bd-401b-a495-5af22f3a10a6,Duf Snare,Df,Snares,36,Df,Duf Snare,Duf 军鼓,snares,pulmonary,outward,0,,notation_ambiguous+name,1.0,1,1
+51,b0918036-d32c-419e-b9d6-cf83243e6ad4,Synth (high pitched),Ow🎵,Synth,92,Ow🎵,Synth (high pitched),合成器音（高音）,synth,pulmonary,outward,0,,exact_notation,1.0,0,1
+52,8d6ed347-f301-4c4e-b400-b90dff34daf2,Inward Drag,<A,Drag,84,A,Inward Drag,内吸拖拽音,drag,pulmonary,inward,0,,notation_ambiguous+name,1.0,1,1
+53,f24d832e-e800-45f8-b547-b37b33d57e30,Tch Hi-hat,Tch,Hi-hats,13,Tch,Tch Hi-hat,Tch 镲,hihats,laryngeal,outward,0,,exact_notation,1.0,0,1
+54,b43c6ad8-50b1-4bd2-af11-cf3b21a3b8ca,Tight Tongue Roll,Dr',Other,100,Dr',Tight Tongue Roll,紧舌卷,other,laryngeal,outward,0,,exact_notation,1.0,0,1
+55,ac72958f-d85c-4e8b-b360-7e3361e6f06f,Vocalized Lip Oscillation (Perfect Octave),w🗣️P8,Lip oscillations,62,w🗣️P8,Vocalized Lip Oscillation (Perfect Octave),带声唇颤（八度）,lip_oscillation,pulmonary,outward,0,,exact_notation,1.0,0,1
+56,cedbec1a-bbf1-4ca7-a473-f3e8f6882102,Clop,L,Clops,51,L,Clop,马蹄音,clops,humming,outward,0,,exact_notation,1.0,0,1
+57,ab870ac1-471c-4c8c-8ed6-744b8aa1a9d7,Dry Kick,D*,Other,93,D*,Dry Kick,干底鼓,other,hollow,outward,0,,exact_notation,1.0,0,1
+58,45af0650-e28d-4a9d-bd59-44ee699f92b3,Vocalized Lip Oscillation (Unisson),w🗣️P0,Lip oscillations,60,w🗣️P0,Vocalized Lip Oscillation (Unisson),带声唇颤（同度）,lip_oscillation,pulmonary,outward,0,,exact_notation,1.0,0,1
+59,ca5ca656-6632-49b7-8d2b-60307c5c5ee0,Inward <Kch Snare,<Kch,Snares,28,Kch,Inward Kch Snare,内吸 Kch 军鼓,snares,pulmonary,inward,0,,notation_ambiguous+name,1.0,1,1
+60,2391c7d1-a7a6-4e4f-80d8-a0ddf2515c48,Throat Kick (with Nasal Resonance),Hm,Kicks,8,Hm,Throat Kick (with Nasal Resonance),鼻音喉底鼓,kicks,pulmonary,outward,0,,exact_notation,1.0,0,1
+61,ecb1f4fb-e2d2-4b2e-9b84-2713afe436a8,Msh Snare,<M,Snares,37,M,Msh Snare,Msh 军鼓,snares,laryngeal,inward,0,,exact_notation_stripped_lt,1.0,0,1
+62,a3a471fa-2d4c-4cc4-853c-6aa62dfc8c18,Hollow Whistle,Hw,,79,Hw,Hollow Whistle,空腔哨音,whistles,pulmonary,outward,0,,exact_notation,1.0,0,1
+63,2b029e9b-b7e7-4828-9b6f-74134eb4e010,K palate snare (short - for fast patterns),k',Snares,19,k',K palate snare (short),短腭音 K 军鼓,snares,laryngeal,outward,1,种子库 'K palate snare (short - for fast patterns)' -> canonical 'K palate snare (short)'（短变体，保留独立音色 id，不并入基型）,exact_notation,1.0,0,1
+64,e7e38269-1604-455c-b1bd-6b2b08679ad9,Zede Scratch,Juy,Scratch,87,Juy,Zede Scratch,Zede 刮擦音,scratch,pulmonary,outward,0,,exact_notation,1.0,0,1
+65,aecaf211-a313-4cd6-9101-b7845801c7bf,Hi-Hat T (Humming),t,Hi-hats,14,t,Hi-Hat T (Humming),哼鸣 T 镲,hihats,humming,outward,0,,exact_notation,1.0,0,1
+66,818be59e-ac66-41dc-9d8f-499d7f1e878b,Dsh Snare,Dsh,Snares,35,Dsh,Dsh Snare,Dsh 军鼓,snares,pulmonary,outward,0,,exact_notation,1.0,0,1
+67,11468887-a746-4b52-ac83-d423c6aea761,Reverse Snare,Chῤ,Reverse,90,Chῤ,Reverse Snare,反向军鼓,reverse,pulmonary,outward,0,,exact_notation,1.0,0,1
+68,d547b0d4-fe33-4167-9b78-970d76a0494f,Inward Throat Bass,<👿🗣️,Vocal,55,👿🗣️,Inward Throat Bass,内吸喉音贝斯,vocal,pulmonary,inward,0,,exact_notation_stripped_lt,1.0,0,0
+69,ccccf5c1-f96c-411c-a5c0-66769868bd1f,Inward Hollow Lip Roll (Longer),<Ww*~,Liprolls,71,Ww*~,Inward Hollow Lip Roll (Longer),内吸空腔唇卷（长）,liprolls,pulmonary,inward,0,,exact_notation_stripped_lt,1.0,0,1
+70,6b9c25bf-61a2-4791-af08-8efc024ebd3c,Uvula Click (ga phonem),<G*a,Clicks,48,G*a,Uvula Click (ga phonem),小舌点击（ga）,clicks,hollow,inward,0,,exact_notation_stripped_lt,1.0,0,1
+71,1d8aeab9-5cf7-48ec-afb0-83ea07a0be08,Inward Vocalized Tooth Whistle,<🦷🗣️°,Teeth,82,🦷🗣️°,Inward Vocalized Tooth Whistle,内吸带声齿哨音,teeth,pulmonary,inward,0,,exact_notation_stripped_lt,1.0,0,1
+72,b3efdbc9-d24d-4294-adb6-6313fe638cd9,Hollow Clop,L*,Clops,52,L*,Hollow Clop,空腔马蹄音,clops,hollow,outward,0,,exact_notation,1.0,0,1
+73,cf80a4ca-67d4-441c-9859-99a72197d2a7,"Inward ""Hd""",<Hd,Other,96,Hd,Inward Hd,内吸 Hd,other,laryngeal,inward,0,,exact_notation_stripped_lt,1.0,0,1
+74,3a520e6c-8ee1-4868-a427-67f146c4d0a3,"Inward ""Df""",<Df,Other,97,Df,Inward Df,内吸 Df,other,laryngeal,inward,0,,notation_ambiguous+name,1.0,1,1
+75,e0bd9c97-8146-4556-8065-fb770281e87b,Vibrator Lip Bass (Short),Z,Lip oscillations,65,Z,Vibrator Lip Bass (Short),振动唇贝斯（短）,lip_oscillation,pulmonary,outward,1,种子库 'Vibrator Lip Bass (Short)' -> canonical 'Vibrator Lip Bass (Short)'（短变体，保留独立音色 id，不并入基型）,exact_notation,1.0,0,1
+76,b19c1b34-0308-4109-b9fa-fb7952b18cc7,Whistling Crash,Pss°,Cymbal,42,Pss°,Whistling Crash,哨音碎镲,cymbal,pulmonary,outward,0,,exact_notation,1.0,0,1
+77,ee44a0a1-4e9d-4635-873f-74169c38c0f3,Inward Click Roll Whistle,<Drh🦗,,78,Drh🦗,Inward Click Roll Whistle,内吸 click roll 哨音,whistles,pulmonary,inward,0,,exact_notation_stripped_lt,1.0,0,1
+78,3fad1884-03dd-4b2c-a1a4-1feeba7676a6,Fart Bass,Fb~,Lip oscillations,63,Fb~,Fart Bass,放屁贝斯,lip_oscillation,pulmonary,outward,0,,exact_notation,1.0,0,1
+79,fd49f13a-b3c7-4783-9d6e-f4478329df14,Uvula Click,<G*,Clicks,47,G*,Uvula Click,小舌点击,clicks,hollow,inward,0,,exact_notation_stripped_lt,1.0,0,1
+80,4b96fad5-10a2-4e64-8ebe-5946f0f1d782,Inward Click Roll,<Drh,Tongue,73,Drh,Inward Click Roll,内吸 click roll,tongue,pulmonary,inward,0,,exact_notation_stripped_lt,1.0,0,1
+81,020631f6-a0f8-4a3b-b880-37214ed87845,Tooth Whistle,<🦷°,Teeth,81,🦷°,Tooth Whistle,齿哨音,teeth,pulmonary,inward,0,,exact_notation_stripped_lt,1.0,0,1
+82,8f7602d1-0002-44c6-afb2-b08f9eee62a9,Hi-Hat T (short - for fast patterns),T',Hi-hats,10,T',Hi-Hat T (short),短 T 镲,hihats,laryngeal,outward,1,种子库 'Hi-Hat T (short - for fast patterns)' -> canonical 'Hi-Hat T (short)'（短变体，保留独立音色 id，不并入基型）,exact_notation,1.0,0,1
+83,aec2defe-cede-4d93-8c86-79dabcc20f36,Mew Squeak,Mew,Other,101,Mew,Mew Squeak,喵叫,other,humming,outward,0,,exact_notation,1.0,0,1
+84,32b2e87d-43a0-460c-a8de-f1f0e3c15ef3,Inward Click Roll (Closing Release),<Drhb,Tongue,74,Drhb,Inward Click Roll (Closing Release),内吸 click roll（闭合释放）,tongue,pulmonary,inward,0,,exact_notation_stripped_lt,1.0,0,1
+85,795c15be-ead4-4399-af30-c77b7de22d22,Peh Snare,<Peh,Snares,38,Peh,Peh Snare,Peh 军鼓,snares,laryngeal,inward,0,,exact_notation_stripped_lt,1.0,0,1
+86,3a3fc541-230a-4895-8091-0fa42da3eada,Throat Bass,O,Vocal,54,O,Throat Bass,喉音贝斯,vocal,pulmonary,outward,0,,exact_notation,1.0,0,1
+87,b29c5a98-a5bb-4ecc-8455-14113bb2bfa3,Uvula Bass,Rr,Vocal,57,Rr,Uvula Bass,小舌贝斯,vocal,pulmonary,outward,0,,exact_notation,1.0,0,1
+88,bb806839-2d74-4189-9361-01a58400d4ff,Click,<d,Clicks,43,d,Click,点击,clicks,humming,inward,0,,exact_notation_stripped_lt,1.0,0,1
+89,788df671-35ec-4c6c-81ec-f75673712976,Vortex Whistle,<🌀°,,80,🌀°,Vortex Whistle,涡流哨音,whistles,pulmonary,inward,0,,exact_notation_stripped_lt,1.0,0,0
+90,ee140cc6-5ce0-4376-8765-609d93a4c838,Smile Bass,w☺️,Lip oscillations,64,w☺️,Smile Bass,微笑贝斯,lip_oscillation,pulmonary,outward,0,,exact_notation,1.0,0,0
+91,200303a6-2797-4f09-acd3-7f09fd07c988,Uvula Click (go phonem),<G*o,Clicks,49,G*o,Uvula Click (go phonem),小舌点击（go）,clicks,hollow,inward,0,,exact_notation_stripped_lt,1.0,0,1
+92,04193886-935e-4e25-8783-c08a1e96b86b,Hi-Hat (Opened),Tss,Hi-hats,11,Tss,Hi-Hat (Opened),开镲,hihats,laryngeal,outward,0,,exact_notation,1.0,0,1
+93,8dbf51c4-11a2-4201-b5ac-4a93ab6aadfe,Inward K Tonal Rimshot,<Koo,Snares,27,Koo,Inward K Tonal Rimshot,内吸 K 音调边击,snares,laryngeal,inward,0,,exact_notation_stripped_lt,1.0,0,1
+94,71ea960d-ce35-446f-867c-f177fbb3f1d2,Inward Sub Lip Roll,<Ww~,Liprolls,69,Ww~,Inward Sub Lip Roll,内吸超低唇卷,liprolls,pulmonary,inward,0,,exact_notation_stripped_lt,1.0,0,1
+95,bb730ee9-9df0-42bf-b3f6-59f2a41d5de3,Nasal Bass,Rhm,Nasal,76,Rhm,Nasal Bass,鼻音贝斯,nasal,pulmonary,outward,0,,notation_ambiguous+name,1.0,1,1
+96,451860fa-99be-440a-8c23-fab77d835740,Vocalized Lip Oscillation (Perfect Fifth),w🗣️5,Lip oscillations,61,w🗣️5,Vocalized Lip Oscillation (Perfect Fifth),带声唇颤（五度）,lip_oscillation,pulmonary,outward,0,,exact_notation,1.0,0,1
+97,b5b7cb4d-ae55-48a8-b7b6-a0d148dc1a00,Inward Chest Bass,<👿🫁,Vocal,56,👿🫁,Inward Chest Bass,内吸胸腔贝斯,vocal,pulmonary,inward,0,,exact_notation_stripped_lt,1.0,0,0
+98,2339e52e-a43a-4233-9765-fdc547ba8be4,Zipper,<Zip,Zippers,85,Zip,Zipper,拉链音,zippers,humming,inward,0,,exact_notation_stripped_lt,1.0,0,1
+99,fb0cc654-550f-49e6-b160-de2bd83aee08,Whistling Lip Oscillation,w°,Lip oscillations,59,w°,Whistling Lip Oscillation,哨音唇颤,lip_oscillation,pulmonary,outward,0,,exact_notation,1.0,0,1
+100,57f9bf8a-feb3-4e0f-a540-5250122ee6d0,Inward K Snare Click Roll,<Krr,Snares,30,Krr,Inward K Snare Click Roll,内吸 K 军鼓 click roll,snares,pulmonary,inward,0,,exact_notation_stripped_lt,1.0,0,1
+101,93c78cb4-accd-45d3-8f71-1f8802b330eb,Crash,Pss,Cymbal,41,Pss,Crash,碎音镲,cymbal,laryngeal,outward,0,,exact_notation,1.0,0,1
+102,16e52c8c-34d4-4db2-9cb6-f83cc2bd92c0,Shuy air scratch,Shuy,Scratch,88,Shuy,Shuy Air Scratch,Shuy 气刮擦音,scratch,pulmonary,outward,0,,exact_notation,1.0,0,1

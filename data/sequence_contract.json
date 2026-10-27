@@ -1,0 +1,83 @@
+{
+ "generator": "scripts/build_sequence_samples.py",
+ "window": {
+  "min_sec": 3.0,
+  "max_sec": 8.0,
+  "min_hits": 12,
+  "max_gap_sec": 0.8,
+  "max_family_mix": 6,
+  "min_seed_dist": 2.5,
+  "overlap": false
+ },
+ "label_space": "canonical 103 (data/beatbox_taxonomy.json)",
+ "label_source_values": [
+  "model",
+  "rule_hat"
+ ],
+ "pseudo_label_4class_note": "pseudo_label 字段仅存档，已弃用的 kd/sd/hhc/hho 不得作为训练文本",
+ "rows_sequences": 287,
+ "rows_hits": 5472,
+ "sources": 80,
+ "sequences_per_split": {
+  "val": 38,
+  "train": 217,
+  "test": 32
+ },
+ "hits_per_split": {
+  "val": 712,
+  "train": 4192,
+  "test": 568
+ },
+ "cross_split_source_leakage": 0,
+ "leaked_sources": [],
+ "sequences_spanning_multiple_sources": 0,
+ "dropped_windows": {
+  "seed_dist": 227,
+  "family_mix": 75
+ },
+ "distinct_sound_ids": 49,
+ "families_covered": 16,
+ "total_families": 19,
+ "human_confirmed_hits": 0,
+ "audio_available_sequences": 152,
+ "audio_available_hits": 2943,
+ "audio_available_note": "audio_available = 本地切片(segments_batch3)是否存在，PI 2026-10-27 已钉死该语义，不是训练可用性；训练侧一律按 token manifest 取数",
+ "audio_token_available_sequences": 287,
+ "audio_token_available_hits": 5472,
+ "audio_truth_counts": {
+  "vocals": 287
+ },
+ "persisted_sources": 90,
+ "vocals_sources": 380,
+ "audio_note": "音频留在远端持久盘，本地不复制、不入 git。audio_token_available 以远端 demucs 输出 vocals.wav 为准（data/vocals_available_sources.txt，380 个 source 实测）：序列 token 就是在 vocals.wav 上整段编码的，切片 WAV 只是它的裁切，因此切片未持久化不代表不可用；audio_truth 标注真实来源（vocals / segments / none）",
+ "talker_handoff": {
+  "join_key": "data/sequence_hits.csv 的 sequence_id + hit_index",
+  "frame_rate_hz": 75.0,
+  "per_hit": "每击按 offset 拼进 3–8s 时间轴，token 段长 = dur * 75Hz（EnCodec 24kHz / hop 320 原生帧率）",
+  "text_label": "整条序列的 canonical 记法序列，用 '|' 连接（见 sound_notations 列）",
+  "shape": "(1,1,16,T)，T = ceil(dur * 75)（= EnCodec ceil(n_samples_24k / 320)）",
+  "frame_rate_note": "13Hz 是 Qwen3-Omni Talker 本体码本速率，不是本数据集 token 帧率；60–200ms 的一次击打在 13Hz 下只剩 0.8–2.6 帧，序列监督必须按 75Hz 做（Qwen3-TTS 12.5Hz 已判死同理）",
+  "max_frames": 600,
+  "warning": "全部为伪标签（model/rule_hat），仅可用于训练节奏/序列结构，不得作为 103 音色识别准确率证据"
+ },
+ "token_handoff": {
+  "generator": "scripts/prepare_seq_tokens.py（训练服务器上跑，音频不出服务器）",
+  "verifier": "scripts/verify_seq_tokens.py",
+  "loader": "scripts/seq_token_dataset.py",
+  "remote_codes_dir": "data/seq_tokens/codes/<sequence_id>.npz",
+  "remote_manifest": "data/seq_tokens/sequence_manifest.jsonl",
+  "remote_hit_frames": "data/seq_tokens/hit_frames.csv",
+  "codes_shape": "(1,1,16,T)，T = ceil(n_samples_24k/320) = round(dur * 75)",
+  "codebook": 1024,
+  "encoding": "EnCodec 24kHz，bandwidth=24.0 → 32 层 RVQ（raw_quantizers=32），本契约只取前 16 层（由粗到细），等效码率约 12kbps",
+  "raw_quantizers": 32,
+  "effective_layers": 16,
+  "effective_bitrate_kbps": 12.0,
+  "layer_semantics_note": "16 层 = 24kbps 码流（32 层）的前 16 层，不是 24kbps 本身；因此 EnCodec 的 16 层 vs 32 层不是控制变量（层数翻倍即码率翻倍），跨层比较只能表述为「码率加倍带来的增益」",
+  "join_key": "sequence_id + hit_index（hit_frames.csv 的 frame_start/frame_end 给帧区间）",
+  "text_label": "sequence_manifest.jsonl 的 text 字段：整条序列的 canonical 记法序列",
+  "encoding_granularity": "整段编码（不是逐击编码再拼接）：EnCodec 有感受野，单独编码 200ms 片段的码流与同段音频处于长音频中的码流不同；整段编码后每帧都是真实码，帧区间只用于记法->帧对齐",
+  "known_artifact": "切片起点是 onset-0.02s（segment_beatbox_onsets.py 的 pre-roll），因此相邻击打的帧区间有约 20ms（1.5 帧）重叠，hit_frame_coverage 可能略大于 1；这是切分设计而非泄漏"
+ },
+ "gate": "全部标签为伪标签（model/rule_hat），human 覆盖 >=15 family 前不得据此宣称识别准确率"
+}

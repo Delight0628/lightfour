@@ -1,0 +1,35 @@
+sound_id,sound_notation,sound_en,sound_cn,sound_family,mechanism,airflow,seed_count,is_short_variant,train,val,test,human_confirmed,notation_ambiguous
+6,D,Tongue Kick,舌击底鼓,kicks,laryngeal,outward,22,0,14,2,6,0,0
+7,Hb,Throat Kick,喉音底鼓,kicks,laryngeal,outward,3,0,2,0,1,0,0
+11,Tss,Hi-Hat (Opened),开镲,hihats,laryngeal,outward,12,0,10,2,0,0,0
+12,F,Hi-hat F,F 镲,hihats,laryngeal,outward,12,0,9,3,0,0,0
+13,Tch,Tch Hi-hat,Tch 镲,hihats,laryngeal,outward,1,0,1,0,0,0,0
+25,K`,Inward K Rimshot (short),短内吸 K 边击,snares,laryngeal,inward,1,1,0,0,1,0,0
+37,M,Msh Snare,Msh 军鼓,snares,laryngeal,inward,23,0,21,1,1,0,0
+38,Peh,Peh Snare,Peh 军鼓,snares,laryngeal,inward,1,0,1,0,0,0,0
+41,Pss,Crash,碎音镲,cymbal,laryngeal,outward,25,0,22,2,1,0,0
+43,d,Click,点击,clicks,humming,inward,2,0,1,0,1,0,0
+44,da,Click (da phonem),da 点击,clicks,humming,inward,23,0,18,4,1,0,0
+51,L,Clop,马蹄音,clops,humming,outward,25,0,20,1,4,0,0
+53,CL*,Double Hollow Clop,双空腔马蹄音,clops,hollow,outward,22,0,16,6,0,0,0
+54,O,Throat Bass,喉音贝斯,vocal,pulmonary,outward,22,0,17,1,4,0,0
+57,Rr,Uvula Bass,小舌贝斯,vocal,pulmonary,outward,3,0,3,0,0,0,0
+59,w°,Whistling Lip Oscillation,哨音唇颤,lip_oscillation,pulmonary,outward,9,0,5,4,0,0,0
+60,w🗣️P0,Vocalized Lip Oscillation (Unisson),带声唇颤（同度）,lip_oscillation,pulmonary,outward,1,0,1,0,0,0,0
+62,w🗣️P8,Vocalized Lip Oscillation (Perfect Octave),带声唇颤（八度）,lip_oscillation,pulmonary,outward,8,0,6,0,2,0,0
+65,Z,Vibrator Lip Bass (Short),振动唇贝斯（短）,lip_oscillation,pulmonary,outward,4,1,4,0,0,0,0
+66,W,Lip Roll,唇卷,liprolls,humming,inward,25,0,21,2,2,0,0
+74,Drhb,Inward Click Roll (Closing Release),内吸 click roll（闭合释放）,tongue,pulmonary,inward,1,0,1,0,0,0,0
+79,Hw,Hollow Whistle,空腔哨音,whistles,pulmonary,outward,15,0,10,0,5,0,0
+82,🦷🗣️°,Inward Vocalized Tooth Whistle,内吸带声齿哨音,teeth,pulmonary,inward,11,0,10,1,0,0,0
+83,A,Outward Drag,外送拖拽音,drag,pulmonary,outward,6,0,6,0,0,0,1
+84,A,Inward Drag,内吸拖拽音,drag,pulmonary,inward,19,0,12,4,3,0,1
+85,Zip,Zipper,拉链音,zippers,humming,inward,1,0,1,0,0,0,0
+86,Zip~,Inward Zipper Roll,内吸拉链卷,zippers,pulmonary,inward,24,0,18,4,2,0,0
+87,Juy,Zede Scratch,Zede 刮擦音,scratch,pulmonary,outward,11,0,9,1,1,0,0
+88,Shuy,Shuy Air Scratch,Shuy 气刮擦音,scratch,pulmonary,outward,9,0,8,1,0,0,0
+90,Chῤ,Reverse Snare,反向军鼓,reverse,pulmonary,outward,15,0,13,2,0,0,0
+91,Ow,Synth,合成器音,synth,pulmonary,outward,3,0,3,0,0,0,0
+92,Ow🎵,Synth (high pitched),合成器音（高音）,synth,pulmonary,outward,22,0,17,0,5,0,0
+94,🍾,Pop sound,瓶塞音,other,humming,outward,24,0,16,2,6,0,0
+101,Mew,Mew Squeak,喵叫,other,humming,outward,3,0,3,0,0,0,0

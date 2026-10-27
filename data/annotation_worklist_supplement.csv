@@ -1,0 +1,6 @@
+order,id,sound_family,sound_id,candidate_notation,canonical_notation,canonical_en,slice_wav,ref_wav,ref_notation,split,source,human_notation,annotate_status,annotator,note
+87,BV1A6yABfE9Y_0007,nasal,77,<Rhm,Rhm,Snore Bass,data/bbox_raw/family_gap_candidates/BV1A6yABfE9Y_0007.wav,,,train,BV1A6yABfE9Y,,pending,,model 伪标签 conf=0.787 seed_dist=2.06；无种子参考，仅凭听感确认
+88,BV1Cs411n7mg_0869,nasal,77,<Rhm,Rhm,Snore Bass,data/bbox_raw/family_gap_candidates/BV1Cs411n7mg_0869.wav,,,train,BV1Cs411n7mg,,pending,,model 伪标签 conf=0.791 seed_dist=2.56；无种子参考，仅凭听感确认
+89,BV1Cs411n7mg_0883,nasal,77,<Rhm,Rhm,Snore Bass,data/bbox_raw/family_gap_candidates/BV1Cs411n7mg_0883.wav,,,train,BV1Cs411n7mg,,pending,,model 伪标签 conf=0.761 seed_dist=2.75；无种子参考，仅凭听感确认
+90,BV1hs411n77c_0639,nasal,77,<Rhm,Rhm,Snore Bass,data/bbox_raw/family_gap_candidates/BV1hs411n77c_0639.wav,,,train,BV1hs411n77c,,pending,,model 伪标签 conf=0.737 seed_dist=1.49；无种子参考，仅凭听感确认
+91,BV1NZ4y1W7k2_0058,tongue,74,<Drhb,Drhb,Inward Click Roll (Closing Release),data/bbox_raw/family_gap_candidates/BV1NZ4y1W7k2_0058.wav,,,train,BV1NZ4y1W7k2,,pending,,model 伪标签 conf=0.865 seed_dist=1.49；无种子参考，仅凭听感确认
