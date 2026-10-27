@@ -1903,3 +1903,41 @@ Profile 根目录：`C:\Users\Administrator\.hermes\profiles\`；每个 profile 
 - 卡 v2.1 状态：`INSTRUMENT_CALIBRATION` 通过（链路连通性）+ 地板读数，**不进 §0、不作成绩**。@Eval 对 `agent.md` 的追加注记（:1459 裁决 107 下方）采信，只加不改，文件指纹 39fe88ff。
 
 **本轮通道（PI 一手）**：`test` exit 0 / `LF_ALIVE`；GPU **仅表头 ⇒ 不可观测（连续第 5 轮）**。远端 `outputs/instr_cal_ast_lin_v0/` 与 `scripts/eval_instrument_calibration.py` **不存在**（评测产物只在本地，未推）；远端 `data/beatbox_seed_crosswalk.csv = df15038d`（= 未加 `Drhb` 的旧版）。备份 `backups/2026-10-27_agent_pre_173.md` = `39fe88ff`。**§10.1 #1 维持不通过，阻塞 6 条，本轮关闭 0 条；租卡冻结不变。**
+
+## §14.38 裁决 177–181（2026-10-27 深夜，权重归 Delight / 代码入库 / 服务器同步 / 标注流程）
+
+**177 30B 权重下载改由 Delight 本人负责，@Talker 的下载任务全部撤销。**
+- 撤销范围：173（`kill 178118`）、174（modelscope 换源与测速）、及一切下载进度汇报/ETA 义务。**任何人不得再向 @Talker 派下载类任务**，也不得以"等权重"为由阻塞其它工作。
+- **不变的部分**：权重到位后仍须过裁决⑯ (iv) 四条 load gate（strict 0/0、`max_abs_diff ≤1e-3`、gate/up 拼接 ≥8/128、逐专家对拍），产出 `outputs/talker_load_gate.json` 全字段；无 JSON = 权重不可加载。`talker_subset.safetensors` md5 在重生成完成前仍不稳定，仍禁引用。
+- Talker 的本职收窄为：M2a（加载门槛）/ M4（参数账）/ M5（special 序列 + position_ids 对拍）/ codec_head re-tie 契约 / `talker_sequence.py:100` 取数口径。
+
+**178 代码版本以 git 为准（origin/master），本地工作树已清空。**
+- 本次入库 7 个提交（+ 既有 8 个未推 = 15 个），推送范围 `3f81bff..7f9096e`，远端 `master = 7f9096e`（`git ls-remote` 复核）。
+- 分批：`.gitignore` / `agent.md` / `scripts` 61 件 / `data` 30 件 / `docs` 8 件 / `outputs` 129 件 / `backups` 33 件。提交后 `git status` = **0 项**。
+- **清理方式 = 不清盘，只屏蔽**：新增忽略 `.codebuddy/`、`/build/`、`/tmp/`、`*.corrupt`。`tmp/`、`build/` 内的草稿文件仍留在盘上，未删除（避免误删在途材料）。
+- **二进制入库 = 0**：`git ls-tree -r HEAD` 中 `wav/mp3/flac/npy/npz/safetensors/bin/pt/pth` 计数 0。音频、权重、`secrets.*` 仍不入库。
+- **口径提醒**：仓库无 `.gitattributes`、`core.autocrlf=true` ⇒ 入库为 LF、工作树为 CRLF；**跨机 md5 会因行尾不同而漂**，引用 `235158c7`（CRLF）类指纹时必须标形态。这是已挂账风险，不是新问题。
+
+**179 服务器 git 同步（首次建立，非覆盖）。**
+- 事实：`/gemini/code/lightfour-train` **不是 git 仓库**（`fatal: not a git repository`），因此不存在"pull 一下就好"。
+- 已建镜像：`/gemini/code/lightfour-git`（clone 自 origin，HEAD `7f9096e`，21MB），作后续 `git pull` 的锚点；训练树仍是运行目录。
+- 三方差异（镜像 vs 训练树，`scripts/` 114 件）：**仅 git 有 63 件 / 内容不一致 11 件 / 仅 live 有 2 件**（`__pycache__`、`prepare_seq_tokens.py.lfb64.txt`）。11 件里 **8 件只是行尾差异**（去 CR 后 md5 相同），**实质差异只有 3 件**：`eval_gen_audio.py`（@Eval）、`prepare_talker_data.py`（@Talker）、`train_tiny_codec_lm.py`（@Talker）——与既有"3 个待认领脚本"一致。
+- 已执行（可回滚）：`backups/scripts_pre_git_sync_20261027.tar.gz`（283,611B）→ `cp -rn` 补入 63 个新脚本（**`-n` 不覆盖任何既有文件**），补后差异 13 项 → 5 个关键脚本 `py_compile` 通过。
+- **未做**：3 个实质差异脚本一个字节都没改，留给认领人收敛；不 `git init` 训练树（避免 `checkout` 误伤 data/checkpoints）。
+- 后续规则：每次 push 后先 `git -C /gemini/code/lightfour-git pull --ff-only`，再按差异表同步；**覆盖前必须 `backups/` 留档**。
+
+**180 人工记谱：文件全在本地，与服务器无关；UI 已实测可用。**
+- 位置：`E:\lightfour\data\annotation_worklist.csv`（86 行 = 17 family × 5 + tongue 1）、`annotation_worklist_supplement.csv`（5 行）、`sound_seed_annotation.csv`（408 行主队列，`human_notation` 仍 0）。
+- 音频也在本地：`data/bbox_raw/seed_candidates/cand408/`（408 个切片，工作单 86/86 全部可读）、`data/beatbox_seeds/audio/`（95 个参考音）。**不需要连服务器、不需要联网**。
+- 流程（PI 已跑通并 curl 验证 `/api/plan` = 18 family / 86 targets、`/api/taxonomy` = 103）：`python scripts/annotate_ui.py --port 8777` → 浏览器 `http://127.0.0.1:8777` → 保持勾选「仅工作单目标」→ 逐条「切片 vs 参考音」对照 → 下拉选 canonical 记法 → 状态选 `confirmed` → 导出。
+- 导出文件 `data/sound_seed_annotation_human.csv`（`*.human` 变体已在 .gitignore，人工结果确认后再单独提交）。
+- **已知缺口**：supplement 5 行里 **4 行（`BV1A6yABfE9Y_0007` / `BV1Cs411n7mg_0869` / `BV1Cs411n7mg_0883` / `BV1hs411n77c_0639`）不在 408 主队列，UI 里看不到**，须 @Data 先合并进 `sound_seed_annotation.csv` 才能标。第 5 行 `BV1NZ4y1W7k2_0058` 已在队列内。
+- 门槛不变：canonical family ≥15/19 且每 family n≥5；不确定一律标 `unknown`，不得硬凑。
+
+**181 派工调整（本节生效）。**
+- @Talker：删除 "kill 178118 / modelscope 测速 / 分片 sha256 汇报" 三项；只保留 §10.1 #1 的四条 load gate 与 M4/M5。
+- @Data：① 补 `Drhb` 到 crosswalk 103/103；② **把 supplement 4 行并入主队列**（追加到 408 之后，408 行逐字节不变），否则 Delight 无法标注这 4 条；③ v2 增量表仍待 PI 签字。
+- @Eval / @Codec：本轮未变。
+
+**本轮通道（PI 一手）**：本地 `git status` = 0；`git ls-remote origin master` = `7f9096e`；服务器 `git rev-parse` = `7f9096e`；`scripts/` 差异 13 项（3 实质 + 8 行尾 + 2 仅 live）。**§10.1 #1 维持不通过，阻塞 6 条（#6 权重项归 Delight），本轮关闭 0 条；租卡冻结不变。**
+
