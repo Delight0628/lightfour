@@ -40,14 +40,23 @@ from pathlib import Path
 
 import numpy as np
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from mel_metric import (  # noqa: E402  唯一 log-mel 实现，禁止在本文件里再复制一份
+    DEFAULT_FRAME_POLICY,
+    FRAME_POLICIES,
+    MEL_SPEC,
+    compare as mel_compare,
+    logmel,
+)
+
 SR = 24000
 HOP = 320
 SRC_FPS = 75.0
 LAYERS = 16
 CODEBOOK = 1024
-MEL_SPEC = {"sr": SR, "n_fft": 1024, "hop": 256, "n_mels": 128, "log_eps": 1e-6}
 HF_CUTOFF = 2000
 BASE = Path("/gemini/code/lightfour-train")
+MEL_FRAME_POLICY = DEFAULT_FRAME_POLICY   # main() 里按 --frame-policy 覆盖
 
 
 # ---------------------------------------------------------------- 可复现指纹
@@ -70,22 +79,11 @@ def _codes_digest(codes_dir, seq_ids):
 
 
 # ---------------------------------------------------------------- 指标实现
-def logmel(y):
-    import librosa
-    m = librosa.feature.melspectrogram(y=y, sr=SR, n_fft=MEL_SPEC["n_fft"],
-                                       hop_length=MEL_SPEC["hop"],
-                                       n_mels=MEL_SPEC["n_mels"])
-    return np.log(m + MEL_SPEC["log_eps"])
-
-
 def mel_dist(a, b):
+    """走 scripts/mel_metric.py：min 口径 + 帧差断言，超容差直接 raise（不许静默截断）。"""
     if len(a) < MEL_SPEC["n_fft"] or len(b) < MEL_SPEC["n_fft"]:
         return None
-    A, B = logmel(a), logmel(b)
-    m = min(A.shape[1], B.shape[1])
-    if m == 0:
-        return None
-    return float(np.mean(np.abs(A[:, :m] - B[:, :m])))
+    return mel_compare(a, b, MEL_FRAME_POLICY)["value"]
 
 
 def hf_ratio(y):
@@ -163,6 +161,98 @@ def self_test():
     print("self-test OK: 13Hz 视图帧数/覆盖率/hold-repeat/无损基线")
 
 
+# ---------------------------------------------------------------- 试听包选样
+# 配额权重：按 PI 验收门槛钉死「cymbal 4 / hihats 4 / click 4、共 48 个 wav」，
+# 所以 listen_n=12 时必须等分。想给镲类加量只能用 --listen-n 24（→12/6/6，96 wav），
+# 不能用改权重的方式偷偷改验收口径。
+# cymbal 池是 38 段 / 20 source / 全是 Pss+sid41 单音色，所以仍按 source 去重选样：
+# 4 条 = 4 个不同 source，比 4 条同 source 更有信息量。
+LISTEN_POOL_WEIGHT = {"cymbal": 1 / 3, "hihats": 1 / 3, "click_60_200ms": 1 / 3}
+
+
+def build_pools(rows):
+    return {
+        "cymbal": [r for r in rows if r["sound_family"] == "cymbal"],
+        "hihats": [r for r in rows if r["sound_family"] == "hihats"],
+        # 注意：这是「60–200ms 的**所有非镲类**击打」，跨 12 个 family
+        # （snares 1829 / drag 363 / clicks 253 / clops 183 / kicks 108 …），
+        # **不是 clicks 家族**（后者只有 253 段）。键名缺 _60_200ms 会被后来人读成家族证据。
+        "click_60_200ms": [r for r in rows if str(r["is_click_60_200"]) == "1"
+                           and r["sound_family"] not in ("hihats", "cymbal")],
+    }
+
+
+def _spread(sel, k):
+    """族内按退化排序后均匀取 k 条（最差/中位/最好都覆盖）。
+    不做「取 top-k」——那样镲类若整体退化更大就会把 hihats 全挤掉。"""
+    sel = sorted(sel, key=lambda r: float(r["mel13p_vs_75"]))
+    if len(sel) <= k:
+        return sel
+    if k == 1:
+        return [sel[len(sel) // 2]]
+    idx = [round(i * (len(sel) - 1) / (k - 1)) for i in range(k)]
+    return [sel[i] for i in idx]
+
+
+def _spread_by_source(sel, k):
+    """每个 source 最多 1 条：先取每 source 的中位退化代表，再按代表排序均匀取。
+    防的是「单 source 包场」——cymbal 38 段来自 20 个 source，但音色只有 Pss/sid41。"""
+    by_src = defaultdict(list)
+    for r in sel:
+        by_src[r["source"]].append(r)
+    reps = []
+    for hs in by_src.values():
+        hs.sort(key=lambda r: float(r["mel13p_vs_75"]))
+        reps.append(hs[len(hs) // 2])
+    return _spread(reps, k)
+
+
+def select_listen(rows, listen_n):
+    """纯函数：给逐击指标行，返回 (picked=[(pool,row)], composition)。不碰音频，可离线复算。"""
+    pools = build_pools(rows)
+    quota = {k: int(round(listen_n * w)) for k, w in LISTEN_POOL_WEIGHT.items()}
+    quota["click_60_200ms"] += listen_n - sum(quota.values())   # 舍入漂移补给最长的一池
+
+    picked = []
+    for name, pool in pools.items():
+        take = (_spread_by_source(pool, quota[name]) if name == "cymbal"
+                else _spread(pool, quota[name]))
+        picked += [(name, r) for r in take]
+    if len(picked) < listen_n:
+        used = {(r["sequence_id"], r["hit_index"]) for _, r in picked}
+        rest = sorted([r for r in rows if (r["sequence_id"], r["hit_index"]) not in used],
+                      key=lambda r: -float(r["mel13p_vs_75"]))
+        picked += [("fill", r) for r in rest[: listen_n - len(picked)]]
+    picked = picked[:listen_n]
+
+    counts = {name: sum(1 for n, _ in picked if n == name) for name in pools}
+    counts["fill"] = sum(1 for n, _ in picked if n == "fill")
+    composition = {
+        "listen_n": len(picked),
+        "quota_plan": quota,
+        "counts": counts,
+        **counts,                      # 兼容旧读法（顶层 cymbal/hihats/click_60_200ms）
+        "_per_family_quota": max(quota.values()),
+        "pool_sizes": {k: len(v) for k, v in pools.items()},
+        "pool_n_sources": {k: len({r["source"] for r in v}) for k, v in pools.items()},
+        "selection": "族内按 mel13p_vs_75 排序后均匀取（最差/中位/最好）；cymbal 先按 source 去重，"
+                     "每 source 至多 1 条；不足 listen_n 的余量按全局最差补齐（pool=fill）",
+        "frame_policy": MEL_FRAME_POLICY,
+        "warning": "click_60_200ms 是时长桶（跨 12 个 family，snares 占 1829/2891），"
+                   "不是 clicks 家族证据；本包只用于人耳试听，不构成任何 family 已验收的证明",
+        "picks": [{
+            "pool": name,
+            "hit_id": r["hit_id"], "hit_index": r["hit_index"],
+            "sequence_id": r["sequence_id"], "source": r["source"], "split": r["split"],
+            "sound_id": r["sound_id"], "sound_notation": r["sound_notation"],
+            "sound_family": r["sound_family"], "dur_ms": r["dur_ms"],
+            "mel75_vs_true": r["mel75_vs_true"],
+            "mel13c_vs_75": r["mel13c_vs_75"], "mel13p_vs_75": r["mel13p_vs_75"],
+        } for name, r in picked],
+    }
+    return picked, composition
+
+
 # ---------------------------------------------------------------- 主流程
 def main():
     ap = argparse.ArgumentParser()
@@ -175,7 +265,14 @@ def main():
     ap.add_argument("--dst-fps", type=float, default=13.0)
     ap.add_argument("--limit", type=int, default=0)
     ap.add_argument("--threads", type=int, default=8)
-    ap.add_argument("--listen-n", type=int, default=12, help="试听包导出条数（0=不导出）")
+    ap.add_argument("--listen-n", type=int, default=12,
+                    help="试听包导出条数（0=不导出）。默认 12：cymbal 4 + hihats 4 + "
+                         "click_60_200ms 4 = 12 条 ×4 臂 = 48 个 wav（PI 验收门槛）")
+    ap.add_argument("--frame-policy", default=DEFAULT_FRAME_POLICY, choices=FRAME_POLICIES,
+                    help="mel 帧长口径。min=决策口径（带帧差断言）；pad 只做敏感性附录")
+    ap.add_argument("--plan-listen", metavar="PER_HIT_CSV",
+                    help="不给音频/模型，只用已有 per_hit.csv 复算试听包选样与 composition，"
+                         "把 JSON 打到 stdout（离线核对用，不写任何文件）")
     ap.add_argument("--filter-local-audio", action="store_true",
                     help="只做 audio_available=1 的序列。默认关：口径按 PI 裁决用全量 287 条"
                          "（audio_available 只表示本地切片在不在，不是训练可用性）")
@@ -184,6 +281,15 @@ def main():
 
     if args.self_test:
         self_test()
+        return
+
+    global MEL_FRAME_POLICY
+    MEL_FRAME_POLICY = args.frame_policy
+
+    if args.plan_listen:
+        rows = list(csv.DictReader(open(args.plan_listen, encoding="utf-8")))
+        picked, comp = select_listen(rows, args.listen_n)
+        print(json.dumps(comp, ensure_ascii=False, indent=1))
         return
 
     import librosa
@@ -214,6 +320,11 @@ def main():
     wav_cache = {}
     rows = []
     skipped = []
+    # R1 的 ±1 桶位移量：按 **75Hz 网格的整数帧** 取，所以是 6 帧 × 320 = 1920 采样 = 80.0ms，
+    # 不是 1000/13 = 76.9ms。两个数必须分开写，混用会让「平移了多远」这条证据失真。
+    shift_frames = int(round(SRC_FPS / args.dst_fps))
+    shift_n = shift_frames * HOP
+    shift_ms = round(1000.0 * shift_n / SR, 2)
     for i, s in enumerate(samples, 1):
         sid = s["sequence_id"]
         npz = Path(args.codes_dir) / f"{sid}.npz"
@@ -248,7 +359,13 @@ def main():
             return o.audio_values[0].mean(dim=0).cpu().numpy().astype("float32")
 
         w75, w13c, w13p = dec(codes), dec(c13c), dec(c13p)
-        n = min(len(y), len(w75), len(w13c), len(w13p))
+        wav_len = [len(y), len(w75), len(w13c), len(w13p)]
+        n = min(wav_len)
+        # PI 裁决②：波形级截断才是真截断点，必须留证据；比例 >5% 说明臂间时长已不可比
+        trunc_ratio = 1.0 - n / max(wav_len)
+        if trunc_ratio > 0.05:
+            raise SystemExit(f"{sid} 波形截断比 {trunc_ratio:.2%} > 5%"
+                             f"（四臂采样数 {wav_len}），先查解码长度，不许硬截")
         y, w75, w13c, w13p = y[:n], w75[:n], w13c[:n], w13p[:n]
 
         for h in hits_by_seq.get(sid, []):
@@ -277,9 +394,9 @@ def main():
             n13p = mel_dist(ys, grms(s13p))
 
             # R1：13p 用真值 onset 做 ±1 个 13Hz 桶的时移对齐后再算 mel。
-            # 1 桶 = SRC/dst 帧 = 6 帧 = 6*320 采样。整窗平移（在更长的解码波形上取窗），
-            # 不做零填充、不改动波形本身；取 ±1 桶内最优值 = 对 13Hz 最有利的口径。
-            shift_n = int(round(SRC_FPS / args.dst_fps)) * HOP
+            # 1 桶 = SRC/dst 帧 = 6 帧 = 6*320 = 1920 采样 = 80.0ms（不是 76.9ms）。
+            # 整窗平移（在更长的解码波形上取窗），不做零填充、不改动波形本身；
+            # 取 ±1 桶内最优值 = 对 13Hz 最有利的口径。
             best, best_bucket = None, None
             for sh in (0, shift_n, -shift_n):
                 a2, b2 = a + sh, b + sh
@@ -288,6 +405,7 @@ def main():
                 e = mel_dist(ys, grms(w13p[a2:b2]))
                 if e is not None and (best is None or e < best):
                     best, best_bucket = e, sh // shift_n
+            frames = [logmel(x).shape[1] for x in (ys, s75, s13c, s13p)]
             rows.append({
                 "sequence_id": sid, "hit_index": h["hit_index"], "hit_id": h["hit_id"],
                 "source": src, "split": s["split"],
@@ -314,7 +432,14 @@ def main():
                 # R1 结果：±1 桶对齐后的 gain_matched mel 与获胜位移（桶）
                 "nmel13p_align_vs_true": round(best, 5) if best is not None else "",
                 "align_shift_bucket": best_bucket if best_bucket is not None else "",
-                "mel_frames": "|".join(str(logmel(x).shape[1]) for x in (ys, s75, s13c, s13p)),
+                # 四臂 mel 帧数（true|75|13c|13p）与**最大帧差**。自证必须报 max，
+                # 只报「≤1 帧的比例」会把 2 帧以上的 bug 藏起来（@Data 要求）。
+                "mel_frames": "|".join(str(x) for x in frames),
+                "mel_frames_max_diff": int(max(frames) - min(frames)),
+                "mel_frame_policy": MEL_FRAME_POLICY,
+                # 波形级截断审计（PI 裁决②）：截断前四臂采样数 + 截断比
+                "wav_len": "|".join(str(x) for x in wav_len),
+                "wav_trunc_ratio": round(trunc_ratio, 6),
             })
         if i % 20 == 0:
             print(f"[{i}/{len(samples)}] hits={len(rows)}", flush=True)
@@ -453,11 +578,31 @@ def main():
         "gap_median_ms": round(float(np.median(gaps)), 1),
     }
 
+    # 试听包选样（纯函数，不碰音频）——放这里是为了把实际构成写进 summary.json
+    picked, composition = (select_listen(rows, args.listen_n) if args.listen_n
+                           else (None, None))
+
+    frame_diffs = np.array([r["mel_frames_max_diff"] for r in rows], dtype=int)
+    mel_frames_stats = {
+        "policy": MEL_FRAME_POLICY,
+        "max": int(frame_diffs.max()),
+        "share_gt0": round(float((frame_diffs > 0).mean()), 4),
+        "share_gt1": round(float((frame_diffs > 1).mean()), 4),
+        "n_gt1": int((frame_diffs > 1).sum()),
+        "note": "报 max，不只报比例；max≥2 说明解码长度抖了不止 1 帧，先查上游",
+    }
+    wav_trunc_max = round(max(float(r["wav_trunc_ratio"]) for r in rows), 6)
+
     summary = {
         "experiment": "§10.1 #9(a) 75Hz 直通 vs 13Hz 视图（hold-repeat）",
         "codec": "encodec_24khz / bandwidth 24kbps / layers 16 / codebook 1024",
         "frame_rate_src_hz": SRC_FPS, "frame_rate_dst_hz": args.dst_fps,
         "mel_spec": MEL_SPEC, "hf_cutoff_hz": HF_CUTOFF,
+        "mel_frame_policy": MEL_FRAME_POLICY,
+        "mel_frames_stats": mel_frames_stats,
+        "wav_trunc_ratio_max": wav_trunc_max,
+        "listen": ({k: v for k, v in composition.items() if k != "picks"}
+                   if composition else None),
         "level_normalization": "两套口径：raw（不归一化，电平差算误差）+ gain_matched"
                                "（两臂都缩放到真值段 RMS，剥掉重复帧造成的电平增益，对 13Hz 更有利）",
         "n_sequences": len(samples), "n_hits": len(rows),
@@ -473,6 +618,11 @@ def main():
         "decision_basis": dec,
         "r1_onset_aligned": {
             "question": "13p 解码后用真值 onset 做 ±1 个 13Hz 桶时移对齐（整窗平移，不许改码流），再算 gain_matched mel",
+            "shift_frames_75hz": shift_frames,
+            "shift_samples": shift_n,
+            "shift_ms": shift_ms,
+            "shift_note": f"±1 桶位移 = {shift_frames} 帧(75Hz) × {HOP} 采样 = {shift_n} 采样 "
+                          f"= {shift_ms}ms；不是 1000/13=76.9ms，两者不可混用",
             "click_gain_matched_degr_median_pct": (agg_align(clicks) or {}).get("degr_median_pct"),
             "click_gain_matched_degr_mean_pct": (agg_align(clicks) or {}).get("degr_mean_pct"),
             "click_mel75_median": (agg_align(clicks) or {}).get("mel75_median"),
@@ -520,6 +670,9 @@ def main():
           f"（60–200ms {summary['n_click_60_200ms']}、hihats {summary['n_hihats']}、"
           f"cymbal {summary['n_cymbal']}）",
           f"- mel: {MEL_SPEC}；hf: >= {HF_CUTOFF}Hz；两套口径 raw / gain_matched",
+          f"- mel 帧口径: **{MEL_FRAME_POLICY}**（唯一实现 `scripts/mel_metric.py`，带帧差断言）；"
+          f"逐击最大帧差 max={mel_frames_stats['max']}、帧差>0 占 {mel_frames_stats['share_gt0']:.1%}、"
+          f"帧差>1 共 {mel_frames_stats['n_gt1']} 条；波形截断比最大 {wav_trunc_max:.4%}",
           f"- 判定规则: {summary['decision_rule']} → **{verdict}**", "",
           "| group | metric | arm | n | mel75 med | mel13 med | 退化中位 | 退化均值 | 13更差占比 | hf_true | hf75 | hf13 |",
           "|---|---|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|"]
@@ -542,7 +695,9 @@ def main():
            f"（n={r1['click_n']}，mel75 中位 {r1['click_mel75_median']} → "
            f"mel13 中位 {r1['click_mel13_median']}）",
            f"- 均值退化 {r1['click_gain_matched_degr_mean_pct']}%；"
-           "口径：整窗平移 ±1 桶（76.9ms），取三者最优，码流本身不动", ""]
+           f"口径：整窗平移 ±1 桶（{r1['shift_frames_75hz']} 帧 × {HOP} 采样 = "
+           f"{r1['shift_samples']} 采样 = {r1['shift_ms']}ms；不是 76.9ms），"
+           "取三者最优，码流本身不动", ""]
     for g, a in r1["by_group"].items():
         md.append(f"- {g}: n={a['n']} 退化中位 {a['degr_median_pct']}% "
                   f"位移分布 {a['shift_counts']}")
@@ -558,54 +713,21 @@ def main():
     md.append("")
     (out_dir / "summary.md").write_text("\n".join(md) + "\n", encoding="utf-8")
 
-    # ------------------------------------------------ 试听包（按 family 分层，不能只靠最差排序）
-    if args.listen_n:
+    # ------------------------------------------------ 试听包（分层抽样 + 构成可追溯）
+    if args.listen_n and picked:
         lp = out_dir / "listen"
         lp.mkdir(parents=True, exist_ok=True)
         for stale in lp.glob("*.wav"):   # 清掉上一轮的 wav，避免换基数后残留旧样本
             stale.unlink()
 
-        def fam(r):
-            return r["sound_family"]
-
-        def spread(sel, k):
-            """在 family 内按退化排序后均匀取 k 条（最差/中位/最好都覆盖），
-            不做「取 top-k」——那样镲类若整体退化更大就会把 hihats 全挤掉。"""
-            sel = sorted(sel, key=lambda r: r["mel13p_vs_75"])
-            if len(sel) <= k:
-                return sel
-            if k == 1:
-                return [sel[len(sel) // 2]]
-            idx = [round(i * (len(sel) - 1) / (k - 1)) for i in range(k)]
-            return [sel[i] for i in idx]
-
-        pools = {
-            "cymbal": [r for r in rows if fam(r) == "cymbal"],
-            "hihats": [r for r in rows if fam(r) == "hihats"],
-            "click": [r for r in rows if r["is_click_60_200"]
-                      and fam(r) not in ("hihats", "cymbal")],
-        }
-        per = max(1, args.listen_n // len(pools))
-        picked = []
-        for pool in pools.values():
-            picked += spread(pool, per)
-        if len(picked) < args.listen_n:
-            used = {(r["sequence_id"], r["hit_index"]) for r in picked}
-            rest = sorted([r for r in rows
-                           if (r["sequence_id"], r["hit_index"]) not in used],
-                          key=lambda r: -r["mel13p_vs_75"])
-            picked += rest[: args.listen_n - len(picked)]
-        picked = picked[: args.listen_n]
-        comp = {k: sum(1 for r in picked if r in v) for k, v in pools.items()}
-        comp["_per_family_quota"] = per
         (lp / "composition.json").write_text(
-            json.dumps(comp, ensure_ascii=False, indent=1), encoding="utf-8")
+            json.dumps(composition, ensure_ascii=False, indent=1), encoding="utf-8")
         # picked 存的是指标行（没有 offset），需要回查原始击打行
         orig = {(r["sequence_id"], r["hit_index"]): r
                 for r in csv.DictReader(open(args.hits, encoding="utf-8"))}
         # 需要重解码：为省内存只重建被选序列
         by_seq = defaultdict(list)
-        for r in picked:
+        for _, r in picked:
             by_seq[r["sequence_id"]].append(r)
         for sid, hs in by_seq.items():
             s = next(x for x in samples if x["sequence_id"] == sid)
@@ -634,15 +756,22 @@ def main():
                 a = int(round(float(oh["offset"]) * SR))
                 b = min(n, int(round((float(oh["offset"]) + float(oh["dur"])) * SR)))
                 for k, au in auds.items():
+                    # FLOAT：PCM_16 会把 mel 复现值抖到 1e-2 量级，
+                    # 听感无差别但 `mel_metric.py --reproduce-listen` 就对不上 index.json
                     sf.write(str(lp / f"{oh['hit_id']}_h{oh['hit_index']}_{k}.wav"),
-                             au[a:b], SR)
-        (lp / "index.json").write_text(json.dumps(picked, ensure_ascii=False, indent=1),
-                                       encoding="utf-8")
+                             au[a:b], SR, subtype="FLOAT")
+        (lp / "index.json").write_text(
+            json.dumps([{"pool": name, **r} for name, r in picked],
+                       ensure_ascii=False, indent=1), encoding="utf-8")
         with open(out_dir / "summary.md", "a", encoding="utf-8") as f:
             f.write("\n## 试听包构成（分层抽样，禁止当作 family 已验证的证据）\n\n")
-            f.write(f"- 每 family 配额 {per}，实际构成 {comp}\n")
+            f.write(f"- 配额 {composition['quota_plan']}，实际 {composition['counts']}\n")
+            f.write(f"- 池规模 {composition['pool_sizes']} / 来源数 "
+                    f"{composition['pool_n_sources']}\n")
+            f.write(f"- **{composition['warning']}**\n")
             f.write(f"- 包内 {len(picked)} 条，文件 {len(list(lp.glob('*.wav')))} 个"
-                    f"（每条 4 臂：true/75/13c/13p）\n")
+                    f"（每条 4 臂：true/75/13c/13p）；逐条明细见 "
+                    f"`listen/composition.json` 的 `picks`\n")
 
     print(json.dumps({"n_hits": len(rows), "verdict": verdict, "out": str(out_dir)},
                      ensure_ascii=False, indent=1))
