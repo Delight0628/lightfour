@@ -33,6 +33,10 @@ data/gen_synth/
 data/gen_synth_tar/
 data/hit_bank/
 data/feat_w2v/
+# 远端切片清单/标签原始副本（45MB，可由 lf_remote.py pull 从训练服务器重建）
+data/real_bbox/
+# 本地标注 UI 导出（人工标注结果，默认不入库，人工确认后再单独提交）
+data/sound_seed_annotation_human.csv
 
 # --- 临时上传/打包产物 ---
 .upload_code_only/
@@ -61,6 +65,7 @@ reconnect.py
 
 # --- 临时 / 本地 ---
 .tmp/
+.tmp_data/
 *.log
 *.pickle
 __pycache__/
@@ -85,3 +90,10 @@ secrets.*
 *credentials*
 .gh_token
 .push_github.ps1
+/.cache/
+
+# --- 本地工具状态 / 构建草稿 / 无效占位产物（不入库）---
+.codebuddy/
+/build/
+/tmp/
+*.corrupt
