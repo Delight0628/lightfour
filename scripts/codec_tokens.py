@@ -52,10 +52,15 @@ def encode_wav(path, model, proc, device):
 
 
 def decode_codes(codes, model, device):
+    """codes: (n_q, 1, T) -> 波形。
+
+    注意：transformers 的 EncodecModel.decode 会把 padding_mask.shape[-1] 当作
+    波形采样点上限来截断音频。这里传帧级 mask 会把 13 帧切成 13 个采样点，
+    所以必须传 None；audio_scales 传 [None] 表示不做归一化缩放。
+    """
     codes_t = torch.from_numpy(codes).to(device)
-    mask = torch.zeros((1, 1, codes.shape[-1]), dtype=torch.bool, device=device)
     with torch.no_grad():
-        out = model.decode(codes_t, [None], mask)
+        out = model.decode(codes_t, [None], None)
     audio = out.audio_values if hasattr(out, "audio_values") else out[0]
     w = audio[0].mean(dim=0).cpu().numpy().astype("float32")
     return w
