@@ -1,0 +1,151 @@
+{
+ "schema": "lightfour.listen_blind_midband/1",
+ "seed": 20261027,
+ "note": "answer key - NOT distributed with the pack",
+ "items": [
+  {
+   "item": "item_01",
+   "hit_id": "BV122BjYFEEg_0420",
+   "cand_arm": "dup_of_true",
+   "kind": "dup"
+  },
+  {
+   "item": "item_02",
+   "hit_id": "BV1Qb411G7Y7_0732",
+   "cand_arm": "dup_of_true",
+   "kind": "dup"
+  },
+  {
+   "item": "item_03",
+   "hit_id": "BV1UEZtY2EoL_0255",
+   "cand_arm": "75",
+   "kind": "real"
+  },
+  {
+   "item": "item_04",
+   "hit_id": "BV1Suy5YuEYa_0291",
+   "cand_arm": "75",
+   "kind": "real"
+  },
+  {
+   "item": "item_05",
+   "hit_id": "BV1SW411g7qK_0355",
+   "cand_arm": "75",
+   "kind": "real"
+  },
+  {
+   "item": "item_06",
+   "hit_id": "BV1np4nzGEiN_0549",
+   "cand_arm": "75",
+   "kind": "real"
+  },
+  {
+   "item": "item_07",
+   "hit_id": "BV1EeJR6TEzm_0164",
+   "cand_arm": "dup_of_true",
+   "kind": "dup"
+  },
+  {
+   "item": "item_08",
+   "hit_id": "BV1YssozfEXU_0030",
+   "cand_arm": "75",
+   "kind": "real"
+  },
+  {
+   "item": "item_09",
+   "hit_id": "BV1np4nzGEiN_0549",
+   "cand_arm": "dup_of_true",
+   "kind": "dup"
+  },
+  {
+   "item": "item_10",
+   "hit_id": "BV1Qb411G7Y7_0732",
+   "cand_arm": "75",
+   "kind": "real"
+  },
+  {
+   "item": "item_11",
+   "hit_id": "BV1Suy5YuEYa_0291",
+   "cand_arm": "dup_of_true",
+   "kind": "dup"
+  },
+  {
+   "item": "item_12",
+   "hit_id": "BV1VZ4y1W7sf_0170",
+   "cand_arm": "75",
+   "kind": "real"
+  },
+  {
+   "item": "item_13",
+   "hit_id": "BV1VonA6WEDs_1354",
+   "cand_arm": "dup_of_true",
+   "kind": "dup"
+  },
+  {
+   "item": "item_14",
+   "hit_id": "BV1VonA6WEDs_1354",
+   "cand_arm": "75",
+   "kind": "real"
+  },
+  {
+   "item": "item_15",
+   "hit_id": "BV11m421W7Xc_1005",
+   "cand_arm": "75",
+   "kind": "real"
+  },
+  {
+   "item": "item_16",
+   "hit_id": "BV1fRg1zBEyi_0104",
+   "cand_arm": "dup_of_true",
+   "kind": "dup"
+  },
+  {
+   "item": "item_17",
+   "hit_id": "BV1UEZtY2EoL_0255",
+   "cand_arm": "dup_of_true",
+   "kind": "dup"
+  },
+  {
+   "item": "item_18",
+   "hit_id": "BV1SW411g7qK_0355",
+   "cand_arm": "dup_of_true",
+   "kind": "dup"
+  },
+  {
+   "item": "item_19",
+   "hit_id": "BV122BjYFEEg_0420",
+   "cand_arm": "75",
+   "kind": "real"
+  },
+  {
+   "item": "item_20",
+   "hit_id": "BV1VZ4y1W7sf_0170",
+   "cand_arm": "dup_of_true",
+   "kind": "dup"
+  },
+  {
+   "item": "item_21",
+   "hit_id": "BV1fRg1zBEyi_0104",
+   "cand_arm": "75",
+   "kind": "real"
+  },
+  {
+   "item": "item_22",
+   "hit_id": "BV1YssozfEXU_0030",
+   "cand_arm": "dup_of_true",
+   "kind": "dup"
+  },
+  {
+   "item": "item_23",
+   "hit_id": "BV11m421W7Xc_1005",
+   "cand_arm": "dup_of_true",
+   "kind": "dup"
+  },
+  {
+   "item": "item_24",
+   "hit_id": "BV1EeJR6TEzm_0164",
+   "cand_arm": "75",
+   "kind": "real"
+  }
+ ]
+}

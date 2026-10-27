@@ -1,0 +1,785 @@
+{
+ "meta": {
+  "script_sha256_16": "33da358f1f899703",
+  "model_dir": "models/encodec_24khz",
+  "transformers": "5.16.1",
+  "torch": "2.14.0+cu130",
+  "sr": 24000,
+  "hop": 320,
+  "frame_rate_hz": 75.0,
+  "bandwidth_kbps": 24.0,
+  "n_q_total": 32,
+  "codebook_size": 1024,
+  "mel": {
+   "n_fft": 1024,
+   "hop": 256,
+   "n_mels": 128,
+   "norm": "rms->0.1"
+  },
+  "decode_padding_mask": null,
+  "input_csv": "data/eval_refaudio_testset.csv",
+  "input_sha256_16": "af21d7819535b438"
+ },
+ "files": [
+  {
+   "ref_id": "001_double_inward_k_rimshot",
+   "sound_id": "24",
+   "family": "snares",
+   "split": "test",
+   "T": 27,
+   "n_orig": 8463
+  },
+  {
+   "ref_id": "002_hollow_click",
+   "sound_id": "46",
+   "family": "clicks",
+   "split": "test",
+   "T": 13,
+   "n_orig": 3887
+  },
+  {
+   "ref_id": "003_slap_kick",
+   "sound_id": "5",
+   "family": "kicks",
+   "split": "test",
+   "T": 26,
+   "n_orig": 8175
+  },
+  {
+   "ref_id": "004_inward_k_rimshot_shorter_for_fast_patterns",
+   "sound_id": "25",
+   "family": "snares",
+   "split": "test",
+   "T": 9,
+   "n_orig": 2819
+  },
+  {
+   "ref_id": "005_throat_kick",
+   "sound_id": "7",
+   "family": "kicks",
+   "split": "test",
+   "T": 6,
+   "n_orig": 1697
+  },
+  {
+   "ref_id": "006_fat_kick_long",
+   "sound_id": "3",
+   "family": "kicks",
+   "split": "test",
+   "T": 59,
+   "n_orig": 18626
+  },
+  {
+   "ref_id": "007_inward_zipper_roll",
+   "sound_id": "86",
+   "family": "zippers",
+   "split": "test",
+   "T": 38,
+   "n_orig": 11882
+  },
+  {
+   "ref_id": "008_double_spit_snare",
+   "sound_id": "32",
+   "family": "snares",
+   "split": "test",
+   "T": 17,
+   "n_orig": 5391
+  },
+  {
+   "ref_id": "009_double_hollow_clop",
+   "sound_id": "53",
+   "family": "clops",
+   "split": "test",
+   "T": 16,
+   "n_orig": 4965
+  },
+  {
+   "ref_id": "011_inward_k_snare_closing_release",
+   "sound_id": "21",
+   "family": "snares",
+   "split": "test",
+   "T": 7,
+   "n_orig": 1967
+  },
+  {
+   "ref_id": "012_click_do_phonem",
+   "sound_id": "45",
+   "family": "clicks",
+   "split": "test",
+   "T": 6,
+   "n_orig": 1893
+  },
+  {
+   "ref_id": "013_fat_kick_short",
+   "sound_id": "2",
+   "family": "kicks",
+   "split": "test",
+   "T": 25,
+   "n_orig": 7856
+  },
+  {
+   "ref_id": "014_sub_bass_snare",
+   "sound_id": "29",
+   "family": "snares",
+   "split": "test",
+   "T": 20,
+   "n_orig": 6377
+  },
+  {
+   "ref_id": "015_hi_hat_f",
+   "sound_id": "12",
+   "family": "hihats",
+   "split": "test",
+   "T": 10,
+   "n_orig": 2999
+  },
+  {
+   "ref_id": "018_tongue_kick",
+   "sound_id": "6",
+   "family": "kicks",
+   "split": "test",
+   "T": 5,
+   "n_orig": 1532
+  },
+  {
+   "ref_id": "019_pop_sound",
+   "sound_id": "94",
+   "family": "other",
+   "split": "test",
+   "T": 18,
+   "n_orig": 5467
+  },
+  {
+   "ref_id": "020_snore_bass",
+   "sound_id": "77",
+   "family": "nasal",
+   "split": "test",
+   "T": 50,
+   "n_orig": 15964
+  },
+  {
+   "ref_id": "021_hi_hat_f_humming",
+   "sound_id": "15",
+   "family": "hihats",
+   "split": "test",
+   "T": 16,
+   "n_orig": 4954
+  },
+  {
+   "ref_id": "022_outward_k_snare",
+   "sound_id": "33",
+   "family": "snares",
+   "split": "test",
+   "T": 21,
+   "n_orig": 6676
+  },
+  {
+   "ref_id": "023_lip_roll",
+   "sound_id": "66",
+   "family": "liprolls",
+   "split": "test",
+   "T": 34,
+   "n_orig": 10742
+  },
+  {
+   "ref_id": "024_hi_hat_t",
+   "sound_id": "9",
+   "family": "hihats",
+   "split": "test",
+   "T": 13,
+   "n_orig": 4155
+  },
+  {
+   "ref_id": "025_kick",
+   "sound_id": "0",
+   "family": "kicks",
+   "split": "test",
+   "T": 15,
+   "n_orig": 4709
+  },
+  {
+   "ref_id": "026_outward_kch_snare_vocalized",
+   "sound_id": "34",
+   "family": "snares",
+   "split": "test",
+   "T": 105,
+   "n_orig": 33537
+  },
+  {
+   "ref_id": "027_inward_k_rimshot",
+   "sound_id": "23",
+   "family": "snares",
+   "split": "test",
+   "T": 23,
+   "n_orig": 7246
+  },
+  {
+   "ref_id": "028_kiss_hi_hat",
+   "sound_id": "16",
+   "family": "hihats",
+   "split": "test",
+   "T": 8,
+   "n_orig": 2384
+  },
+  {
+   "ref_id": "029_inward_lip_roll",
+   "sound_id": "68",
+   "family": "liprolls",
+   "split": "test",
+   "T": 50,
+   "n_orig": 15806
+  },
+  {
+   "ref_id": "030_reverse_kick",
+   "sound_id": "89",
+   "family": "reverse",
+   "split": "test",
+   "T": 7,
+   "n_orig": 2018
+  },
+  {
+   "ref_id": "031_spit_snare",
+   "sound_id": "31",
+   "family": "snares",
+   "split": "test",
+   "T": 26,
+   "n_orig": 8081
+  },
+  {
+   "ref_id": "032_click_da_phonem",
+   "sound_id": "44",
+   "family": "clicks",
+   "split": "test",
+   "T": 9,
+   "n_orig": 2852
+  },
+  {
+   "ref_id": "033_inward_kick",
+   "sound_id": "1",
+   "family": "kicks",
+   "split": "test",
+   "T": 10,
+   "n_orig": 2953
+  },
+  {
+   "ref_id": "034_kick_w_chest_bass",
+   "sound_id": "4",
+   "family": "kicks",
+   "split": "test",
+   "T": 38,
+   "n_orig": 12103
+  },
+  {
+   "ref_id": "035_outward_drag",
+   "sound_id": "83",
+   "family": "drag",
+   "split": "test",
+   "T": 22,
+   "n_orig": 6885
+  },
+  {
+   "ref_id": "037_synth",
+   "sound_id": "91",
+   "family": "synth",
+   "split": "test",
+   "T": 36,
+   "n_orig": 11210
+  },
+  {
+   "ref_id": "038_hollow_lip_roll",
+   "sound_id": "67",
+   "family": "liprolls",
+   "split": "test",
+   "T": 31,
+   "n_orig": 9816
+  },
+  {
+   "ref_id": "039_pf_snare",
+   "sound_id": "17",
+   "family": "snares",
+   "split": "test",
+   "T": 33,
+   "n_orig": 10413
+  },
+  {
+   "ref_id": "040_k_palate_snare",
+   "sound_id": "18",
+   "family": "snares",
+   "split": "test",
+   "T": 5,
+   "n_orig": 1491
+  },
+  {
+   "ref_id": "041_bongo_drum",
+   "sound_id": "26",
+   "family": "snares",
+   "split": "test",
+   "T": 16,
+   "n_orig": 4908
+  },
+  {
+   "ref_id": "042_double_inward_k_snare",
+   "sound_id": "22",
+   "family": "snares",
+   "split": "test",
+   "T": 17,
+   "n_orig": 5193
+  },
+  {
+   "ref_id": "043_tongue_clap",
+   "sound_id": "50",
+   "family": "clicks",
+   "split": "test",
+   "T": 21,
+   "n_orig": 6561
+  },
+  {
+   "ref_id": "044_inward_k_snare",
+   "sound_id": "20",
+   "family": "snares",
+   "split": "test",
+   "T": 20,
+   "n_orig": 6380
+  },
+  {
+   "ref_id": "045_inward_fd",
+   "sound_id": "99",
+   "family": "other",
+   "split": "test",
+   "T": 14,
+   "n_orig": 4308
+  },
+  {
+   "ref_id": "046_lip_oscillation_classic",
+   "sound_id": "58",
+   "family": "lip_oscillation",
+   "split": "test",
+   "T": 33,
+   "n_orig": 10386
+  },
+  {
+   "ref_id": "047_inward_dp",
+   "sound_id": "98",
+   "family": "other",
+   "split": "test",
+   "T": 8,
+   "n_orig": 2418
+  },
+  {
+   "ref_id": "048_sucker_punch",
+   "sound_id": "95",
+   "family": "other",
+   "split": "test",
+   "T": 16,
+   "n_orig": 5000
+  },
+  {
+   "ref_id": "049_inward_hollow_lip_roll_short",
+   "sound_id": "70",
+   "family": "liprolls",
+   "split": "test",
+   "T": 34,
+   "n_orig": 10861
+  },
+  {
+   "ref_id": "050_inward_lip_roll_with_tongue",
+   "sound_id": "72",
+   "family": "liprolls",
+   "split": "test",
+   "T": 44,
+   "n_orig": 14002
+  },
+  {
+   "ref_id": "051_duf_snare",
+   "sound_id": "36",
+   "family": "snares",
+   "split": "test",
+   "T": 52,
+   "n_orig": 16513
+  },
+  {
+   "ref_id": "052_synth_high_pitched",
+   "sound_id": "92",
+   "family": "synth",
+   "split": "test",
+   "T": 25,
+   "n_orig": 7874
+  },
+  {
+   "ref_id": "053_inward_drag",
+   "sound_id": "84",
+   "family": "drag",
+   "split": "test",
+   "T": 13,
+   "n_orig": 3937
+  },
+  {
+   "ref_id": "054_tch_hi_hat",
+   "sound_id": "13",
+   "family": "hihats",
+   "split": "test",
+   "T": 7,
+   "n_orig": 2110
+  },
+  {
+   "ref_id": "055_tight_tongue_roll",
+   "sound_id": "100",
+   "family": "other",
+   "split": "test",
+   "T": 13,
+   "n_orig": 3968
+  },
+  {
+   "ref_id": "056_vocalized_lip_oscillation_perfect_octave",
+   "sound_id": "62",
+   "family": "lip_oscillation",
+   "split": "test",
+   "T": 62,
+   "n_orig": 19652
+  },
+  {
+   "ref_id": "057_clop",
+   "sound_id": "51",
+   "family": "clops",
+   "split": "test",
+   "T": 15,
+   "n_orig": 4693
+  },
+  {
+   "ref_id": "058_dry_kick",
+   "sound_id": "93",
+   "family": "other",
+   "split": "test",
+   "T": 8,
+   "n_orig": 2294
+  },
+  {
+   "ref_id": "059_vocalized_lip_oscillation_unisson",
+   "sound_id": "60",
+   "family": "lip_oscillation",
+   "split": "test",
+   "T": 38,
+   "n_orig": 12117
+  },
+  {
+   "ref_id": "060_inward_kch_snare",
+   "sound_id": "28",
+   "family": "snares",
+   "split": "test",
+   "T": 14,
+   "n_orig": 4449
+  },
+  {
+   "ref_id": "061_throat_kick_with_nasal_resonance",
+   "sound_id": "8",
+   "family": "kicks",
+   "split": "test",
+   "T": 8,
+   "n_orig": 2523
+  },
+  {
+   "ref_id": "062_msh_snare",
+   "sound_id": "37",
+   "family": "snares",
+   "split": "test",
+   "T": 14,
+   "n_orig": 4184
+  },
+  {
+   "ref_id": "063_hollow_whistle",
+   "sound_id": "79",
+   "family": "whistles",
+   "split": "test",
+   "T": 41,
+   "n_orig": 12849
+  },
+  {
+   "ref_id": "064_k_palate_snare_short_for_fast_patterns",
+   "sound_id": "19",
+   "family": "snares",
+   "split": "test",
+   "T": 4,
+   "n_orig": 1025
+  },
+  {
+   "ref_id": "065_zede_scratch",
+   "sound_id": "87",
+   "family": "scratch",
+   "split": "test",
+   "T": 9,
+   "n_orig": 2588
+  },
+  {
+   "ref_id": "066_hi_hat_t_humming",
+   "sound_id": "14",
+   "family": "hihats",
+   "split": "test",
+   "T": 11,
+   "n_orig": 3349
+  },
+  {
+   "ref_id": "067_dsh_snare",
+   "sound_id": "35",
+   "family": "snares",
+   "split": "test",
+   "T": 27,
+   "n_orig": 8395
+  },
+  {
+   "ref_id": "068_reverse_snare",
+   "sound_id": "90",
+   "family": "reverse",
+   "split": "test",
+   "T": 19,
+   "n_orig": 5825
+  },
+  {
+   "ref_id": "070_inward_hollow_lip_roll_longer",
+   "sound_id": "71",
+   "family": "liprolls",
+   "split": "test",
+   "T": 49,
+   "n_orig": 15423
+  },
+  {
+   "ref_id": "071_uvula_click_ga_phonem",
+   "sound_id": "48",
+   "family": "clicks",
+   "split": "test",
+   "T": 10,
+   "n_orig": 2922
+  },
+  {
+   "ref_id": "072_inward_vocalized_tooth_whistle",
+   "sound_id": "82",
+   "family": "teeth",
+   "split": "test",
+   "T": 35,
+   "n_orig": 10927
+  },
+  {
+   "ref_id": "073_hollow_clop",
+   "sound_id": "52",
+   "family": "clops",
+   "split": "test",
+   "T": 11,
+   "n_orig": 3211
+  },
+  {
+   "ref_id": "074_inward_hd",
+   "sound_id": "96",
+   "family": "other",
+   "split": "test",
+   "T": 9,
+   "n_orig": 2809
+  },
+  {
+   "ref_id": "075_inward_df",
+   "sound_id": "97",
+   "family": "other",
+   "split": "test",
+   "T": 9,
+   "n_orig": 2684
+  },
+  {
+   "ref_id": "076_vibrator_lip_bass_short",
+   "sound_id": "65",
+   "family": "lip_oscillation",
+   "split": "test",
+   "T": 20,
+   "n_orig": 6367
+  },
+  {
+   "ref_id": "077_whistling_crash",
+   "sound_id": "42",
+   "family": "cymbal",
+   "split": "test",
+   "T": 42,
+   "n_orig": 13439
+  },
+  {
+   "ref_id": "078_inward_click_roll_whistle",
+   "sound_id": "78",
+   "family": "whistles",
+   "split": "test",
+   "T": 36,
+   "n_orig": 11499
+  },
+  {
+   "ref_id": "079_fart_bass",
+   "sound_id": "63",
+   "family": "lip_oscillation",
+   "split": "test",
+   "T": 31,
+   "n_orig": 9678
+  },
+  {
+   "ref_id": "080_uvula_click",
+   "sound_id": "47",
+   "family": "clicks",
+   "split": "test",
+   "T": 11,
+   "n_orig": 3376
+  },
+  {
+   "ref_id": "081_inward_click_roll",
+   "sound_id": "73",
+   "family": "tongue",
+   "split": "test",
+   "T": 31,
+   "n_orig": 9756
+  },
+  {
+   "ref_id": "082_tooth_whistle",
+   "sound_id": "81",
+   "family": "teeth",
+   "split": "test",
+   "T": 24,
+   "n_orig": 7405
+  },
+  {
+   "ref_id": "083_hi_hat_t_short_for_fast_patterns",
+   "sound_id": "10",
+   "family": "hihats",
+   "split": "test",
+   "T": 8,
+   "n_orig": 2527
+  },
+  {
+   "ref_id": "084_mew_squeak",
+   "sound_id": "101",
+   "family": "other",
+   "split": "test",
+   "T": 48,
+   "n_orig": 15231
+  },
+  {
+   "ref_id": "085_inward_click_roll_closing_release",
+   "sound_id": "74",
+   "family": "tongue",
+   "split": "test",
+   "T": 9,
+   "n_orig": 2726
+  },
+  {
+   "ref_id": "086_peh_snare",
+   "sound_id": "38",
+   "family": "snares",
+   "split": "test",
+   "T": 16,
+   "n_orig": 4923
+  },
+  {
+   "ref_id": "087_throat_bass",
+   "sound_id": "54",
+   "family": "vocal",
+   "split": "test",
+   "T": 26,
+   "n_orig": 8153
+  },
+  {
+   "ref_id": "088_uvula_bass",
+   "sound_id": "57",
+   "family": "vocal",
+   "split": "test",
+   "T": 33,
+   "n_orig": 10527
+  },
+  {
+   "ref_id": "089_click",
+   "sound_id": "43",
+   "family": "clicks",
+   "split": "test",
+   "T": 9,
+   "n_orig": 2877
+  },
+  {
+   "ref_id": "092_uvula_click_go_phonem",
+   "sound_id": "49",
+   "family": "clicks",
+   "split": "test",
+   "T": 13,
+   "n_orig": 4049
+  },
+  {
+   "ref_id": "093_hi_hat_opened",
+   "sound_id": "11",
+   "family": "hihats",
+   "split": "test",
+   "T": 23,
+   "n_orig": 7095
+  },
+  {
+   "ref_id": "094_inward_k_tonal_rimshot",
+   "sound_id": "27",
+   "family": "snares",
+   "split": "test",
+   "T": 22,
+   "n_orig": 7018
+  },
+  {
+   "ref_id": "095_inward_sub_lip_roll",
+   "sound_id": "69",
+   "family": "liprolls",
+   "split": "test",
+   "T": 46,
+   "n_orig": 14672
+  },
+  {
+   "ref_id": "096_nasal_bass",
+   "sound_id": "76",
+   "family": "nasal",
+   "split": "test",
+   "T": 38,
+   "n_orig": 12094
+  },
+  {
+   "ref_id": "097_vocalized_lip_oscillation_perfect_fifth",
+   "sound_id": "61",
+   "family": "lip_oscillation",
+   "split": "test",
+   "T": 45,
+   "n_orig": 14395
+  },
+  {
+   "ref_id": "099_zipper",
+   "sound_id": "85",
+   "family": "zippers",
+   "split": "test",
+   "T": 28,
+   "n_orig": 8787
+  },
+  {
+   "ref_id": "100_whistling_lip_oscillation",
+   "sound_id": "59",
+   "family": "lip_oscillation",
+   "split": "test",
+   "T": 40,
+   "n_orig": 12577
+  },
+  {
+   "ref_id": "101_inward_k_snare_click_roll",
+   "sound_id": "30",
+   "family": "snares",
+   "split": "test",
+   "T": 24,
+   "n_orig": 7568
+  },
+  {
+   "ref_id": "102_crash",
+   "sound_id": "41",
+   "family": "cymbal",
+   "split": "test",
+   "T": 39,
+   "n_orig": 12339
+  },
+  {
+   "ref_id": "103_shuy_air_scratch",
+   "sound_id": "88",
+   "family": "scratch",
+   "split": "test",
+   "T": 12,
+   "n_orig": 3715
+  }
+ ]
+}

@@ -12,6 +12,48 @@
    "log_eps": 1e-06
   },
   "hf_cutoff_hz": 2000,
+  "mel_frame_policy": "min",
+  "mel_frames_stats": {
+   "policy": "min",
+   "max": 0,
+   "share_gt0": 0.0,
+   "share_gt1": 0.0,
+   "n_gt1": 0,
+   "note": "报 max，不只报比例；max≥2 说明解码长度抖了不止 1 帧，先查上游"
+  },
+  "wav_trunc_ratio_max": 0.003948,
+  "listen": {
+   "listen_n": 12,
+   "quota_plan": {
+    "cymbal": 4,
+    "hihats": 4,
+    "click_60_200ms": 4
+   },
+   "counts": {
+    "cymbal": 4,
+    "hihats": 4,
+    "click_60_200ms": 4,
+    "fill": 0
+   },
+   "cymbal": 4,
+   "hihats": 4,
+   "click_60_200ms": 4,
+   "fill": 0,
+   "_per_family_quota": 4,
+   "pool_sizes": {
+    "cymbal": 38,
+    "hihats": 247,
+    "click_60_200ms": 2891
+   },
+   "pool_n_sources": {
+    "cymbal": 20,
+    "hihats": 43,
+    "click_60_200ms": 80
+   },
+   "selection": "族内按 mel13p_vs_75 排序后均匀取（最差/中位/最好）；cymbal 先按 source 去重，每 source 至多 1 条；不足 listen_n 的余量按全局最差补齐（pool=fill）",
+   "frame_policy": "min",
+   "warning": "click_60_200ms 是时长桶（跨 12 个 family，snares 占 1829/2891），不是 clicks 家族证据；本包只用于人耳试听，不构成任何 family 已验收的证明"
+  },
   "level_normalization": "两套口径：raw（不归一化，电平差算误差）+ gain_matched（两臂都缩放到真值段 RMS，剥掉重复帧造成的电平增益，对 13Hz 更有利）",
   "n_sequences": 287,
   "n_hits": 5472,
@@ -45,6 +87,10 @@
   },
   "r1_onset_aligned": {
    "question": "13p 解码后用真值 onset 做 ±1 个 13Hz 桶时移对齐（整窗平移，不许改码流），再算 gain_matched mel",
+   "shift_frames_75hz": 6,
+   "shift_samples": 1920,
+   "shift_ms": 80.0,
+   "shift_note": "±1 桶位移 = 6 帧(75Hz) × 320 采样 = 1920 采样 = 80.0ms；不是 1000/13=76.9ms，两者不可混用",
    "click_gain_matched_degr_median_pct": 150.4,
    "click_gain_matched_degr_mean_pct": 156.4,
    "click_mel75_median": 0.7436,
@@ -174,7 +220,7 @@
   "verdict": "KILL_13HZ",
   "skipped": [],
   "generated_by": "scripts/codec_rate_ab.py",
-  "code_sha256": "9d6452078babedbef4d3eae69428c68938a63d37bf6ef73a3e02c49bf36cf4d5",
+  "code_sha256": "de837b26dc117e4ede783596eadb357556fcf03066e4018db72d8333ba8c2748",
   "input_md5": {
    "sequence_samples": "4e2e61b71247b2a7ec4ef0c15cd5d616",
    "sequence_hits": "3bbcc3483ac6e446cd56d09140b1aa7a",
@@ -192,6 +238,8 @@
    "limit": 0,
    "threads": 8,
    "listen_n": 12,
+   "frame_policy": "min",
+   "plan_listen": null,
    "filter_local_audio": false,
    "self_test": false
   }

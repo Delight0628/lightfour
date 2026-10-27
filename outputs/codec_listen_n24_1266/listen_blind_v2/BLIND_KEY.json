@@ -1,0 +1,354 @@
+{
+ "seed": 20261027,
+ "note": "答案键：不得随包发给判决人。kind=dup 的候选是其 REF 的字节副本。",
+ "src_index_md5": "ad7c430f51b35027c79c474948b8377d",
+ "src_composition_md5": "baee2cdfa2142f96271c81bc9de99e8d",
+ "counts": {
+  "items": 24,
+  "cand_per_item": 3,
+  "dup": 24,
+  "arms_hidden": [
+   "75",
+   "13p",
+   "dup"
+  ]
+ },
+ "entries": {
+  "0": {
+   "hit_id": "BV1Pw411F7hx_1165",
+   "hit_index": "13",
+   "pool": "cymbal",
+   "sound_family": "cymbal",
+   "sound_notation": "Pss",
+   "split": "test",
+   "dur_ms": 353.8,
+   "slots": {
+    "c1": "13p",
+    "c2": "dup",
+    "c3": "75"
+   }
+  },
+  "1": {
+   "hit_id": "BV1CBqwYLENW_0904",
+   "hit_index": "16",
+   "pool": "cymbal",
+   "sound_family": "cymbal",
+   "sound_notation": "Pss",
+   "split": "val",
+   "dur_ms": 622.3,
+   "slots": {
+    "c1": "13p",
+    "c2": "75",
+    "c3": "dup"
+   }
+  },
+  "2": {
+   "hit_id": "BV1VT411L7Hc_0034",
+   "hit_index": "1",
+   "pool": "cymbal",
+   "sound_family": "cymbal",
+   "sound_notation": "Pss",
+   "split": "train",
+   "dur_ms": 571.5,
+   "slots": {
+    "c1": "75",
+    "c2": "13p",
+    "c3": "dup"
+   }
+  },
+  "3": {
+   "hit_id": "BV1prnA6eEts_0668",
+   "hit_index": "3",
+   "pool": "cymbal",
+   "sound_family": "cymbal",
+   "sound_notation": "Pss",
+   "split": "test",
+   "dur_ms": 462.6,
+   "slots": {
+    "c1": "13p",
+    "c2": "75",
+    "c3": "dup"
+   }
+  },
+  "4": {
+   "hit_id": "BV11L4AeCEYo_0837",
+   "hit_index": "13",
+   "pool": "cymbal",
+   "sound_family": "cymbal",
+   "sound_notation": "Pss",
+   "split": "val",
+   "dur_ms": 709.3,
+   "slots": {
+    "c1": "dup",
+    "c2": "75",
+    "c3": "13p"
+   }
+  },
+  "5": {
+   "hit_id": "BV1RW41157rA_0175",
+   "hit_index": "11",
+   "pool": "cymbal",
+   "sound_family": "cymbal",
+   "sound_notation": "Pss",
+   "split": "test",
+   "dur_ms": 491.7,
+   "slots": {
+    "c1": "13p",
+    "c2": "75",
+    "c3": "dup"
+   }
+  },
+  "6": {
+   "hit_id": "BV1hs411n77c_1021",
+   "hit_index": "11",
+   "pool": "cymbal",
+   "sound_family": "cymbal",
+   "sound_notation": "Pss",
+   "split": "train",
+   "dur_ms": 353.8,
+   "slots": {
+    "c1": "75",
+    "c2": "13p",
+    "c3": "dup"
+   }
+  },
+  "7": {
+   "hit_id": "BV1YssozfEXU_0049",
+   "hit_index": "10",
+   "pool": "cymbal",
+   "sound_family": "cymbal",
+   "sound_notation": "Pss",
+   "split": "train",
+   "dur_ms": 469.9,
+   "slots": {
+    "c1": "dup",
+    "c2": "13p",
+    "c3": "75"
+   }
+  },
+  "8": {
+   "hit_id": "BV1Suy5YuEYa_0127",
+   "hit_index": "16",
+   "pool": "cymbal",
+   "sound_family": "cymbal",
+   "sound_notation": "Pss",
+   "split": "train",
+   "dur_ms": 498.9,
+   "slots": {
+    "c1": "dup",
+    "c2": "75",
+    "c3": "13p"
+   }
+  },
+  "9": {
+   "hit_id": "BV1EeJR6TEzm_0373",
+   "hit_index": "18",
+   "pool": "cymbal",
+   "sound_family": "cymbal",
+   "sound_notation": "Pss",
+   "split": "train",
+   "dur_ms": 469.9,
+   "slots": {
+    "c1": "dup",
+    "c2": "13p",
+    "c3": "75"
+   }
+  },
+  "10": {
+   "hit_id": "BV1QZgG67EF2_0606",
+   "hit_index": "5",
+   "pool": "cymbal",
+   "sound_family": "cymbal",
+   "sound_notation": "Pss",
+   "split": "train",
+   "dur_ms": 455.4,
+   "slots": {
+    "c1": "dup",
+    "c2": "75",
+    "c3": "13p"
+   }
+  },
+  "11": {
+   "hit_id": "BV1aTJR6REKS_0404",
+   "hit_index": "8",
+   "pool": "cymbal",
+   "sound_family": "cymbal",
+   "sound_notation": "Pss",
+   "split": "val",
+   "dur_ms": 353.8,
+   "slots": {
+    "c1": "dup",
+    "c2": "75",
+    "c3": "13p"
+   }
+  },
+  "12": {
+   "hit_id": "BV1EeJR6TEzm_0372",
+   "hit_index": "17",
+   "pool": "hihats",
+   "sound_family": "hihats",
+   "sound_notation": "F",
+   "split": "train",
+   "dur_ms": 114.3,
+   "slots": {
+    "c1": "13p",
+    "c2": "75",
+    "c3": "dup"
+   }
+  },
+  "13": {
+   "hit_id": "BV1Pw411F7hx_0381",
+   "hit_index": "13",
+   "pool": "hihats",
+   "sound_family": "hihats",
+   "sound_notation": "F",
+   "split": "test",
+   "dur_ms": 252.2,
+   "slots": {
+    "c1": "13p",
+    "c2": "75",
+    "c3": "dup"
+   }
+  },
+  "14": {
+   "hit_id": "BV1iU4revEJG_0452",
+   "hit_index": "22",
+   "pool": "hihats",
+   "sound_family": "hihats",
+   "sound_notation": "F",
+   "split": "train",
+   "dur_ms": 172.4,
+   "slots": {
+    "c1": "13p",
+    "c2": "75",
+    "c3": "dup"
+   }
+  },
+  "15": {
+   "hit_id": "BV13p4perEqU_0077",
+   "hit_index": "3",
+   "pool": "hihats",
+   "sound_family": "hihats",
+   "sound_notation": "F",
+   "split": "val",
+   "dur_ms": 99.8,
+   "slots": {
+    "c1": "13p",
+    "c2": "75",
+    "c3": "dup"
+   }
+  },
+  "16": {
+   "hit_id": "BV1VonA6WEDs_1375",
+   "hit_index": "7",
+   "pool": "hihats",
+   "sound_family": "hihats",
+   "sound_notation": "Tch",
+   "split": "train",
+   "dur_ms": 92.6,
+   "slots": {
+    "c1": "75",
+    "c2": "13p",
+    "c3": "dup"
+   }
+  },
+  "17": {
+   "hit_id": "BV1VZ4y1W7sf_0122",
+   "hit_index": "0",
+   "pool": "hihats",
+   "sound_family": "hihats",
+   "sound_notation": "Tch",
+   "split": "train",
+   "dur_ms": 121.6,
+   "slots": {
+    "c1": "13p",
+    "c2": "75",
+    "c3": "dup"
+   }
+  },
+  "18": {
+   "hit_id": "BV1rt411B7Kw_0066",
+   "hit_index": "21",
+   "pool": "click_60_200ms",
+   "sound_family": "clops",
+   "sound_notation": "CL*",
+   "split": "train",
+   "dur_ms": 179.6,
+   "slots": {
+    "c1": "75",
+    "c2": "13p",
+    "c3": "dup"
+   }
+  },
+  "19": {
+   "hit_id": "BV1rt411B7Kw_0167",
+   "hit_index": "0",
+   "pool": "click_60_200ms",
+   "sound_family": "clops",
+   "sound_notation": "L",
+   "split": "train",
+   "dur_ms": 165.1,
+   "slots": {
+    "c1": "13p",
+    "c2": "dup",
+    "c3": "75"
+   }
+  },
+  "20": {
+   "hit_id": "BV1GHJg6qERL_0602",
+   "hit_index": "19",
+   "pool": "click_60_200ms",
+   "sound_family": "drag",
+   "sound_notation": "A",
+   "split": "train",
+   "dur_ms": 179.6,
+   "slots": {
+    "c1": "13p",
+    "c2": "75",
+    "c3": "dup"
+   }
+  },
+  "21": {
+   "hit_id": "BV1fiK66aEdJ_0090",
+   "hit_index": "10",
+   "pool": "click_60_200ms",
+   "sound_family": "clops",
+   "sound_notation": "CL*",
+   "split": "train",
+   "dur_ms": 165.1,
+   "slots": {
+    "c1": "dup",
+    "c2": "13p",
+    "c3": "75"
+   }
+  },
+  "22": {
+   "hit_id": "BV1bt411v77H_1165",
+   "hit_index": "4",
+   "pool": "click_60_200ms",
+   "sound_family": "snares",
+   "sound_notation": "M",
+   "split": "train",
+   "dur_ms": 136.1,
+   "slots": {
+    "c1": "dup",
+    "c2": "13p",
+    "c3": "75"
+   }
+  },
+  "23": {
+   "hit_id": "BV1VZ4y1W7sf_0551",
+   "hit_index": "17",
+   "pool": "click_60_200ms",
+   "sound_family": "snares",
+   "sound_notation": "Peh",
+   "split": "train",
+   "dur_ms": 136.1,
+   "slots": {
+    "c1": "13p",
+    "c2": "dup",
+    "c3": "75"
+   }
+  }
+ }
+}

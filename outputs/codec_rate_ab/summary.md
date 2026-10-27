@@ -3,6 +3,7 @@
 - codec: encodec_24khz / bandwidth 24kbps / layers 16 / codebook 1024
 - 序列 287 / 击打段 5472（60–200ms 3100、hihats 247、cymbal 38）
 - mel: {'sr': 24000, 'n_fft': 1024, 'hop': 256, 'n_mels': 128, 'log_eps': 1e-06}；hf: >= 2000Hz；两套口径 raw / gain_matched
+- mel 帧口径: **min**（唯一实现 `scripts/mel_metric.py`，带帧差断言）；逐击最大帧差 max=0、帧差>0 占 0.0%、帧差>1 共 0 条；波形截断比最大 0.3948%
 - 判定规则: click_60_200ms 的 gain_matched mel 退化中位 >10%（取退化更小的臂）→ 13Hz 作废 → **KILL_13HZ**
 
 | group | metric | arm | n | mel75 med | mel13 med | 退化中位 | 退化均值 | 13更差占比 | hf_true | hf75 | hf13 |
@@ -111,7 +112,7 @@
 ## R1：13p 用真值 onset ±1 桶对齐后的退化
 
 - **click_60_200ms gain_matched 退化中位 = 150.4%**（n=3100，mel75 中位 0.7436 → mel13 中位 1.8641）
-- 均值退化 156.4%；口径：整窗平移 ±1 桶（76.9ms），取三者最优，码流本身不动
+- 均值退化 156.4%；口径：整窗平移 ±1 桶（6 帧 × 320 采样 = 1920 采样 = 80.0ms；不是 76.9ms），取三者最优，码流本身不动
 
 - all_hits: n=5472 退化中位 144.4% 位移分布 {-1: 480, 0: 4567, 1: 425}
 - click_60_200ms: n=3100 退化中位 150.4% 位移分布 {-1: 319, 0: 2406, 1: 375}
@@ -136,5 +137,7 @@
 
 ## 试听包构成（分层抽样，禁止当作 family 已验证的证据）
 
-- 每 family 配额 4，实际构成 {'cymbal': 4, 'hihats': 4, 'click': 4, '_per_family_quota': 4}
-- 包内 12 条，文件 48 个（每条 4 臂：true/75/13c/13p）
+- 配额 {'cymbal': 4, 'hihats': 4, 'click_60_200ms': 4}，实际 {'cymbal': 4, 'hihats': 4, 'click_60_200ms': 4, 'fill': 0}
+- 池规模 {'cymbal': 38, 'hihats': 247, 'click_60_200ms': 2891} / 来源数 {'cymbal': 20, 'hihats': 43, 'click_60_200ms': 80}
+- **click_60_200ms 是时长桶（跨 12 个 family，snares 占 1829/2891），不是 clicks 家族证据；本包只用于人耳试听，不构成任何 family 已验收的证明**
+- 包内 12 条，文件 48 个（每条 4 臂：true/75/13c/13p）；逐条明细见 `listen/composition.json` 的 `picks`

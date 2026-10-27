@@ -1,0 +1,36 @@
+{
+  "preds_csv": {
+    "path": "outputs\\instr_cal_ast_lin_v0\\preds.csv",
+    "md5": "efc821bfe15b2a936d641cd4263e9c78",
+    "rows": 95
+  },
+  "perturb_preds_csv": {
+    "path": "outputs\\instr_cal_ast_lin_v0\\perturb_preds.csv",
+    "md5": "cb0f76d86cebecc37df90920d77713d9",
+    "rows": 1045
+  },
+  "testset": {
+    "path": "data/eval_refaudio_testset.csv",
+    "md5": "e668ce45e311cc2873847860240d52a5",
+    "rows": 95
+  },
+  "train_index": {
+    "path": "data/baseline_train_index.csv",
+    "md5": "8186ab5d44d47cf621e584bce9486b87",
+    "rows": 319
+  },
+  "label_space": {
+    "path": "data/baseline_label_space.csv",
+    "md5": "8a5788fb3ae0f3855b8e66a2793a191a",
+    "rows": 35
+  },
+  "versions": {
+    "python": "3.11.8",
+    "numpy": "1.26.4",
+    "sklearn": "1.9.1",
+    "torch": "2.2.2+cpu",
+    "transformers": "4.46.3",
+    "librosa": "0.11.0",
+    "soundfile": "0.14.0"
+  }
+}

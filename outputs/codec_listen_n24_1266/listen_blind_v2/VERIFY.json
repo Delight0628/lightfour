@@ -1,0 +1,35 @@
+{
+ "gate": "build-self-check",
+ "pass": true,
+ "n_items": 24,
+ "n_wav_on_disk": 96,
+ "n_sheet_rows": 72,
+ "join_sheet_to_files": "72/72",
+ "sha1_copy_equals_source": "72/72",
+ "dup_equals_ref_bytes": "24/24",
+ "filenames_ascii": true,
+ "wav_headers_readable": true,
+ "names_unique": true,
+ "riff_uniform": "3/1/24000/32（IEEE_FLOAT）",
+ "src_check": {
+  "n_items": 24,
+  "n_src_wav": 96,
+  "riff_fmt_ch_sr_bits": "3/1/24000/32（IEEE_FLOAT）",
+  "counts": {
+   "cymbal": 12,
+   "hihats": 6,
+   "click_60_200ms": 6,
+   "fill": 0
+  },
+  "src_index_md5": "ad7c430f51b35027c79c474948b8377d",
+  "src_composition_md5": "baee2cdfa2142f96271c81bc9de99e8d",
+  "per_hit_csv_md5": "235158c7877f5620e5443790c19f30e8",
+  "dup_files_in_src": [],
+  "split_by_pool": {
+   "cymbal": {},
+   "hihats": {},
+   "click_60_200ms": {}
+  }
+ },
+ "script_md5": "61810bc081d840a479782fd54ad9bacc"
+}

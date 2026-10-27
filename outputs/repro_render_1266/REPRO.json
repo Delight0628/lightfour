@@ -1,0 +1,156 @@
+{
+  "per_hit_a": "outputs/codec_rate_ab/per_hit.csv",
+  "per_hit_a_md5": "235158c7877f5620e5443790c19f30e8",
+  "per_hit_b_md5": "235158c7877f5620e5443790c19f30e8",
+  "n_rows_a": 5472,
+  "n_rows_b": 5472,
+  "n_common": 5472,
+  "only_a": [],
+  "only_b": [],
+  "per_col": {
+    "mel75_vs_true": {
+      "max_abs_delta": 0.0,
+      "median_abs_delta": 0.0,
+      "n_over_tol": 0
+    },
+    "mel13c_vs_true": {
+      "max_abs_delta": 0.0,
+      "median_abs_delta": 0.0,
+      "n_over_tol": 0
+    },
+    "mel13p_vs_true": {
+      "max_abs_delta": 0.0,
+      "median_abs_delta": 0.0,
+      "n_over_tol": 0
+    }
+  },
+  "rows_bitwise_equal": 5472,
+  "wav": {
+    "dir_a": "outputs/codec_listen_n24_1266/listen",
+    "dir_b": "/tmp/repro1266/listen",
+    "n_a": 96,
+    "n_b": 96,
+    "n_common": 96,
+    "bytes_equal": 0,
+    "bytes_diff": 96,
+    "pcm_bit_equal_on_byte_diff": 96,
+    "header_diff_stats": [
+      {
+        "file": "BV11L4AeCEYo_0837_h13_13c.wav",
+        "n_diff_bytes": 2,
+        "first_diff_offset": 60,
+        "last_diff_offset": 61,
+        "len_a": 68176,
+        "len_b": 68176
+      },
+      {
+        "file": "BV11L4AeCEYo_0837_h13_13p.wav",
+        "n_diff_bytes": 2,
+        "first_diff_offset": 60,
+        "last_diff_offset": 61,
+        "len_a": 68176,
+        "len_b": 68176
+      },
+      {
+        "file": "BV11L4AeCEYo_0837_h13_75.wav",
+        "n_diff_bytes": 2,
+        "first_diff_offset": 60,
+        "last_diff_offset": 61,
+        "len_a": 68176,
+        "len_b": 68176
+      },
+      {
+        "file": "BV11L4AeCEYo_0837_h13_true.wav",
+        "n_diff_bytes": 2,
+        "first_diff_offset": 60,
+        "last_diff_offset": 61,
+        "len_a": 68176,
+        "len_b": 68176
+      },
+      {
+        "file": "BV13p4perEqU_0077_h3_13c.wav",
+        "n_diff_bytes": 2,
+        "first_diff_offset": 60,
+        "last_diff_offset": 61,
+        "len_a": 9660,
+        "len_b": 9660
+      }
+    ],
+    "diff_examples": [
+      {
+        "file": "BV11L4AeCEYo_0837_h13_13c.wav",
+        "sha256_a": "952b4bb0e9ca969b1758d98ede7b6f04345409fc65057a56cdfc3cbd3589e4f4",
+        "sha256_b": "40565dc993d894d9013f6db4521f890de8698c5dbde1a107433b69ba31147342"
+      },
+      {
+        "file": "BV11L4AeCEYo_0837_h13_13p.wav",
+        "sha256_a": "d3d20a3b941bc75c9e1750b05751530a54209e33c36e0f82f3e19284e8146372",
+        "sha256_b": "28f1f341fa6ad73627416c789029896ca62c370b9dc984bde1b1130b47911752"
+      },
+      {
+        "file": "BV11L4AeCEYo_0837_h13_75.wav",
+        "sha256_a": "dce01e61b61838f2f95f8bc7073e0c8ebc82b01a39fd58fc346368d706342cec",
+        "sha256_b": "3055687e683082dc7a16d631df97975e908e15b9897188b7cd0f8bfa9a884a51"
+      },
+      {
+        "file": "BV11L4AeCEYo_0837_h13_true.wav",
+        "sha256_a": "a82c0c9db1f3381311d85d24d602207542e2fd76989fb657879d3fc5e18599e0",
+        "sha256_b": "4fe811b97844257fbdbf5ba3c1f3afe01c2a7fdf189b9afa30c4cef4fa1ed10e"
+      },
+      {
+        "file": "BV13p4perEqU_0077_h3_13c.wav",
+        "sha256_a": "34898dd9a1461725311d64e9352b23873b13f974aa70e912d811b5ae7c56b55f",
+        "sha256_b": "805020fcbea20598488a77a0679e064ebbe481a9bcb064050f050667d5d3f039"
+      }
+    ],
+    "mel_delta_on_diff": {
+      "max": 0.0,
+      "median": 0.0,
+      "n": 96,
+      "frames": [
+        {
+          "file": "BV11L4AeCEYo_0837_h13_13c.wav",
+          "n_frames": [
+            67,
+            67
+          ],
+          "frame_diff": 0
+        },
+        {
+          "file": "BV11L4AeCEYo_0837_h13_13p.wav",
+          "n_frames": [
+            67,
+            67
+          ],
+          "frame_diff": 0
+        },
+        {
+          "file": "BV11L4AeCEYo_0837_h13_75.wav",
+          "n_frames": [
+            67,
+            67
+          ],
+          "frame_diff": 0
+        },
+        {
+          "file": "BV11L4AeCEYo_0837_h13_true.wav",
+          "n_frames": [
+            67,
+            67
+          ],
+          "frame_diff": 0
+        },
+        {
+          "file": "BV13p4perEqU_0077_h3_13c.wav",
+          "n_frames": [
+            10,
+            10
+          ],
+          "frame_diff": 0
+        }
+      ]
+    }
+  },
+  "tol": 1e-06,
+  "verdict": "PASS_PCM"
+}

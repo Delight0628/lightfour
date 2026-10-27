@@ -1,0 +1,65 @@
+{
+ "artifact": "instr_cal_ast_lin_v0_card_ledger",
+ "owner": "Eval",
+ "date": "2026-10-27",
+ "note": "版本 md5 台账（裁决 ㊹口径/170）：卡面自述必须挂 card_field_diff 对账件",
+ "versions": [
+  {
+   "version": "v1",
+   "md5": "7908b65f62405ad2579dca7e0e0b11da",
+   "status": "archived",
+   "path": "outputs/instr_cal_ast_lin_v0/archive_pre_v2/INSTRUMENT_CALIBRATION.md"
+  },
+  {
+   "version": "v2_hand_signed",
+   "md5": "3943b33e52b1f3a77f71a49b0bdca02f",
+   "status": "archived_erratum",
+   "path": "outputs/instr_cal_ast_lin_v0/archive_pre_v21_handedit/INSTRUMENT_CALIBRATION.md",
+   "note": "A3 family 矩阵 3 行笔误（单元格 5 处，Σcells=33≠34），与自身 A6-2 矛盾；自述「全部实测数字未动」不属实（裁决 169）。只作笔误留痕，禁引用其 A3、禁用其矩阵做统计。"
+  },
+  {
+   "version": "v2.1",
+   "md5": "41e92309e9736d9464e98cb102aab6d3",
+   "status": "live",
+   "path": "outputs/instr_cal_ast_lin_v0/INSTRUMENT_CALIBRATION.md",
+   "generator_md5": "fa66ab18c741e604034eb4e57cfe03cf",
+   "note": "A3 三格按 preds.csv 数据真值；A9 三臂挂卡；171 矩阵闭合断言内建；169-1 自述句已删改"
+  }
+ ],
+ "generator": {
+  "path": "scripts/eval_instrument_calibration.py",
+  "md5": "fa66ab18c741e604034eb4e57cfe03cf",
+  "backup_pre_171": "backups/2026-10-27_eval_instrument_calibration_pre_171_7727aeaf.py",
+  "matrix_closure": "裁决 171：① Σcells==n ② per-hit 误分+top-1==n ③ 分类表投影逐格相等；不成立 ABORT(exit 2) 禁止出卡",
+  "neg_ctrl_modes": {
+   "plus1": "① 触发",
+   "plus1_pairs": "② 触发",
+   "move": "③ 触发（复刻手签件笔误）"
+  },
+  "runs_deterministic": "run1=run2 逐字节相同（staging_v21_final/）"
+ },
+ "recon_170": {
+  "tool": "scripts/card_field_diff.py",
+  "tool_md5": "e07084bc296c1cb7cd159452fe8f4e32",
+  "out": "outputs/instr_cal_ast_lin_v0/card_diff_v2_to_v21.json",
+  "out_md5": "952fe49825fa3b68127ae1aba8399452",
+  "pair": [
+   "outputs/instr_cal_ast_lin_v0/archive_pre_v21_handedit/INSTRUMENT_CALIBRATION.md",
+   "outputs/instr_cal_ast_lin_v0/INSTRUMENT_CALIBRATION.md"
+  ],
+  "verdict": "AUTHORIZED_ONLY",
+  "counts": {
+   "A9_NEW_SECTION": 36,
+   "VERSION_STRING": 2,
+   "A3_CELLS_AND_NOTES_AUTH_169": 6,
+   "UNAUTHORIZED": 0
+  },
+  "check_rerun": "PASS（同对文件重跑逐字节同 JSON）"
+ },
+ "sources": {
+  "preds.csv": "efc821bfe15b2a936d641cd4263e9c78",
+  "perturb_preds.csv": "cb0f76d86cebecc37df90920d77713d9",
+  "perm_null.json": "c6c3f177071de2be7664bcef1ced10ce",
+  "three_arm_table.json": "612278186b72435bf58e0e6d42f27241"
+ }
+}

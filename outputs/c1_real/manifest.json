@@ -1,0 +1,793 @@
+{
+ "meta": {
+  "script_sha256_16": "33da358f1f899703",
+  "model_dir": "models/encodec_24khz",
+  "transformers": "5.16.1",
+  "torch": "2.14.0+cu130",
+  "sr": 24000,
+  "hop": 320,
+  "frame_rate_hz": 75.0,
+  "bandwidth_kbps": 24.0,
+  "n_q_total": 32,
+  "codebook_size": 1024,
+  "mel": {
+   "n_fft": 1024,
+   "hop": 256,
+   "n_mels": 128,
+   "norm": "rms->0.1"
+  },
+  "decode_padding_mask": null,
+  "input_csv": "data/real_bbox/hybrid_labels_all_highconf_l2.jsonl",
+  "input_sha256_16": "dfce5e0b4af4fa43"
+ },
+ "files": [
+  {
+   "ref_id": "BV11L4AeCEYo_0038",
+   "sound_id": null,
+   "family": "hihats",
+   "split": "batch3",
+   "T": 13,
+   "n_orig": 3963
+  },
+  {
+   "ref_id": "BV13m411X7L6_0544",
+   "sound_id": null,
+   "family": "hihats",
+   "split": "batch3",
+   "T": 15,
+   "n_orig": 4660
+  },
+  {
+   "ref_id": "BV18W41167do_0542",
+   "sound_id": null,
+   "family": "hihats",
+   "split": "batch3",
+   "T": 13,
+   "n_orig": 3965
+  },
+  {
+   "ref_id": "BV1Cs411n7mg_0746",
+   "sound_id": null,
+   "family": "hihats",
+   "split": "batch3",
+   "T": 7,
+   "n_orig": 2222
+  },
+  {
+   "ref_id": "BV1EeJR6TEzm_0333",
+   "sound_id": null,
+   "family": "hihats",
+   "split": "batch3",
+   "T": 7,
+   "n_orig": 2222
+  },
+  {
+   "ref_id": "BV1KQ1QBzE1U_0569",
+   "sound_id": null,
+   "family": "hihats",
+   "split": "batch3",
+   "T": 7,
+   "n_orig": 2223
+  },
+  {
+   "ref_id": "BV1PBy5BfE2r_0064",
+   "sound_id": null,
+   "family": "hihats",
+   "split": "batch3",
+   "T": 15,
+   "n_orig": 4660
+  },
+  {
+   "ref_id": "BV1R4411t7Q8_0518",
+   "sound_id": null,
+   "family": "hihats",
+   "split": "batch3",
+   "T": 19,
+   "n_orig": 6054
+  },
+  {
+   "ref_id": "BV1UUvyBcEZr_0788",
+   "sound_id": null,
+   "family": "hihats",
+   "split": "batch3",
+   "T": 9,
+   "n_orig": 2569
+  },
+  {
+   "ref_id": "BV1WCM9zwEUR_0097",
+   "sound_id": null,
+   "family": "hihats",
+   "split": "batch3",
+   "T": 6,
+   "n_orig": 1874
+  },
+  {
+   "ref_id": "BV1bt411v77H_0143",
+   "sound_id": null,
+   "family": "hihats",
+   "split": "batch3",
+   "T": 11,
+   "n_orig": 3442
+  },
+  {
+   "ref_id": "BV1ji4y147N9_0402",
+   "sound_id": null,
+   "family": "hihats",
+   "split": "batch3",
+   "T": 11,
+   "n_orig": 3267
+  },
+  {
+   "ref_id": "BV11L4AeCEYo_0254",
+   "sound_id": null,
+   "family": "cymbal",
+   "split": "batch3",
+   "T": 28,
+   "n_orig": 8840
+  },
+  {
+   "ref_id": "BV167411W7zY_0075",
+   "sound_id": null,
+   "family": "cymbal",
+   "split": "batch3",
+   "T": 30,
+   "n_orig": 9362
+  },
+  {
+   "ref_id": "BV17b4GedEDW_0439",
+   "sound_id": null,
+   "family": "cymbal",
+   "split": "batch3",
+   "T": 69,
+   "n_orig": 21901
+  },
+  {
+   "ref_id": "BV1CBqwYLENW_0575",
+   "sound_id": null,
+   "family": "cymbal",
+   "split": "batch3",
+   "T": 40,
+   "n_orig": 12497
+  },
+  {
+   "ref_id": "BV1DW411u7oK_1296",
+   "sound_id": null,
+   "family": "cymbal",
+   "split": "batch3",
+   "T": 32,
+   "n_orig": 10233
+  },
+  {
+   "ref_id": "BV1JLpY6DEg4_0033",
+   "sound_id": null,
+   "family": "cymbal",
+   "split": "batch3",
+   "T": 72,
+   "n_orig": 22772
+  },
+  {
+   "ref_id": "BV1PBy5BfE2r_0050",
+   "sound_id": null,
+   "family": "cymbal",
+   "split": "batch3",
+   "T": 55,
+   "n_orig": 17547
+  },
+  {
+   "ref_id": "BV1R4411t7Q8_0435",
+   "sound_id": null,
+   "family": "cymbal",
+   "split": "batch3",
+   "T": 28,
+   "n_orig": 8666
+  },
+  {
+   "ref_id": "BV1V4411p7hq_0157",
+   "sound_id": null,
+   "family": "cymbal",
+   "split": "batch3",
+   "T": 27,
+   "n_orig": 8491
+  },
+  {
+   "ref_id": "BV1Vhhn6hE2p_1492",
+   "sound_id": null,
+   "family": "cymbal",
+   "split": "batch3",
+   "T": 49,
+   "n_orig": 15457
+  },
+  {
+   "ref_id": "BV1Ys411V7zC_0029",
+   "sound_id": null,
+   "family": "cymbal",
+   "split": "batch3",
+   "T": 35,
+   "n_orig": 11104
+  },
+  {
+   "ref_id": "BV1ji4y147N9_0360",
+   "sound_id": null,
+   "family": "cymbal",
+   "split": "batch3",
+   "T": 36,
+   "n_orig": 11278
+  },
+  {
+   "ref_id": "BV11L4AeCEYo_0007",
+   "sound_id": null,
+   "family": "snares",
+   "split": "batch3",
+   "T": 10,
+   "n_orig": 2919
+  },
+  {
+   "ref_id": "BV167411W7zY_0430",
+   "sound_id": null,
+   "family": "snares",
+   "split": "batch3",
+   "T": 26,
+   "n_orig": 8144
+  },
+  {
+   "ref_id": "BV19VcizVEkH_0139",
+   "sound_id": null,
+   "family": "snares",
+   "split": "batch3",
+   "T": 15,
+   "n_orig": 4660
+  },
+  {
+   "ref_id": "BV1Cs411n7mg_0735",
+   "sound_id": null,
+   "family": "snares",
+   "split": "batch3",
+   "T": 17,
+   "n_orig": 5181
+  },
+  {
+   "ref_id": "BV1FBrVYSEvy_0610",
+   "sound_id": null,
+   "family": "snares",
+   "split": "batch3",
+   "T": 13,
+   "n_orig": 3963
+  },
+  {
+   "ref_id": "BV1KQ1QBzE1U_1077",
+   "sound_id": null,
+   "family": "snares",
+   "split": "batch3",
+   "T": 19,
+   "n_orig": 6053
+  },
+  {
+   "ref_id": "BV1Qb411G7Y7_0318",
+   "sound_id": null,
+   "family": "snares",
+   "split": "batch3",
+   "T": 10,
+   "n_orig": 2920
+  },
+  {
+   "ref_id": "BV1UTEv6FEiC_0515",
+   "sound_id": null,
+   "family": "snares",
+   "split": "batch3",
+   "T": 14,
+   "n_orig": 4312
+  },
+  {
+   "ref_id": "BV1VZ4y1W7sf_0285",
+   "sound_id": null,
+   "family": "snares",
+   "split": "batch3",
+   "T": 10,
+   "n_orig": 2919
+  },
+  {
+   "ref_id": "BV1XBni6yEEZ_0946",
+   "sound_id": null,
+   "family": "snares",
+   "split": "batch3",
+   "T": 15,
+   "n_orig": 4486
+  },
+  {
+   "ref_id": "BV1bt411v77H_0905",
+   "sound_id": null,
+   "family": "snares",
+   "split": "batch3",
+   "T": 12,
+   "n_orig": 3614
+  },
+  {
+   "ref_id": "BV1qs411o777_0051",
+   "sound_id": null,
+   "family": "snares",
+   "split": "batch3",
+   "T": 13,
+   "n_orig": 4138
+  },
+  {
+   "ref_id": "BV11L4AeCEYo_0002",
+   "sound_id": null,
+   "family": "clicks",
+   "split": "batch3",
+   "T": 12,
+   "n_orig": 3615
+  },
+  {
+   "ref_id": "BV16jxwecERm_0534",
+   "sound_id": null,
+   "family": "clicks",
+   "split": "batch3",
+   "T": 17,
+   "n_orig": 5183
+  },
+  {
+   "ref_id": "BV19pC9BEEBW_1019",
+   "sound_id": null,
+   "family": "clicks",
+   "split": "batch3",
+   "T": 18,
+   "n_orig": 5705
+  },
+  {
+   "ref_id": "BV1CBqwYLENW_0334",
+   "sound_id": null,
+   "family": "clicks",
+   "split": "batch3",
+   "T": 7,
+   "n_orig": 2222
+  },
+  {
+   "ref_id": "BV1DW411u7oK_0771",
+   "sound_id": null,
+   "family": "clicks",
+   "split": "batch3",
+   "T": 12,
+   "n_orig": 3615
+  },
+  {
+   "ref_id": "BV1GW411z7MC_0885",
+   "sound_id": null,
+   "family": "clicks",
+   "split": "batch3",
+   "T": 14,
+   "n_orig": 4312
+  },
+  {
+   "ref_id": "BV1NZ4y1W7k2_0267",
+   "sound_id": null,
+   "family": "clicks",
+   "split": "batch3",
+   "T": 17,
+   "n_orig": 5357
+  },
+  {
+   "ref_id": "BV1UUvyBcEZr_0226",
+   "sound_id": null,
+   "family": "clicks",
+   "split": "batch3",
+   "T": 11,
+   "n_orig": 3441
+  },
+  {
+   "ref_id": "BV1Vhhn6hE2p_0495",
+   "sound_id": null,
+   "family": "clicks",
+   "split": "batch3",
+   "T": 13,
+   "n_orig": 3963
+  },
+  {
+   "ref_id": "BV1XBni6yEEZ_0899",
+   "sound_id": null,
+   "family": "clicks",
+   "split": "batch3",
+   "T": 11,
+   "n_orig": 3441
+  },
+  {
+   "ref_id": "BV1fZ39zaEQh_0652",
+   "sound_id": null,
+   "family": "clicks",
+   "split": "batch3",
+   "T": 9,
+   "n_orig": 2570
+  },
+  {
+   "ref_id": "BV1qs411o777_0048",
+   "sound_id": null,
+   "family": "clicks",
+   "split": "batch3",
+   "T": 13,
+   "n_orig": 3963
+  },
+  {
+   "ref_id": "BV11L4AeCEYo_0015",
+   "sound_id": null,
+   "family": "kicks",
+   "split": "batch3",
+   "T": 10,
+   "n_orig": 3093
+  },
+  {
+   "ref_id": "BV177tpz7EC3_1224",
+   "sound_id": null,
+   "family": "kicks",
+   "split": "batch3",
+   "T": 19,
+   "n_orig": 5879
+  },
+  {
+   "ref_id": "BV1BgGGz7EQW_0690",
+   "sound_id": null,
+   "family": "kicks",
+   "split": "batch3",
+   "T": 12,
+   "n_orig": 3789
+  },
+  {
+   "ref_id": "BV1Hwy5BWEUG_0273",
+   "sound_id": null,
+   "family": "kicks",
+   "split": "batch3",
+   "T": 15,
+   "n_orig": 4659
+  },
+  {
+   "ref_id": "BV1KbHX6SEz4_0498",
+   "sound_id": null,
+   "family": "kicks",
+   "split": "batch3",
+   "T": 13,
+   "n_orig": 3963
+  },
+  {
+   "ref_id": "BV1SfkDBPE86_0842",
+   "sound_id": null,
+   "family": "kicks",
+   "split": "batch3",
+   "T": 16,
+   "n_orig": 4833
+  },
+  {
+   "ref_id": "BV1UTEv6FEiC_1141",
+   "sound_id": null,
+   "family": "kicks",
+   "split": "batch3",
+   "T": 10,
+   "n_orig": 2919
+  },
+  {
+   "ref_id": "BV1V1Jo6qEVz_0212",
+   "sound_id": null,
+   "family": "kicks",
+   "split": "batch3",
+   "T": 16,
+   "n_orig": 5008
+  },
+  {
+   "ref_id": "BV1V1Jo6qEVz_0780",
+   "sound_id": null,
+   "family": "kicks",
+   "split": "batch3",
+   "T": 10,
+   "n_orig": 2919
+  },
+  {
+   "ref_id": "BV1V1Jo6qEVz_1218",
+   "sound_id": null,
+   "family": "kicks",
+   "split": "batch3",
+   "T": 9,
+   "n_orig": 2744
+  },
+  {
+   "ref_id": "BV1bt411v77H_1121",
+   "sound_id": null,
+   "family": "kicks",
+   "split": "batch3",
+   "T": 11,
+   "n_orig": 3267
+  },
+  {
+   "ref_id": "BV1ig4y1v7Fu_0393",
+   "sound_id": null,
+   "family": "kicks",
+   "split": "batch3",
+   "T": 11,
+   "n_orig": 3441
+  },
+  {
+   "ref_id": "BV11L4AeCEYo_0048",
+   "sound_id": null,
+   "family": "drag",
+   "split": "batch3",
+   "T": 13,
+   "n_orig": 3963
+  },
+  {
+   "ref_id": "BV16jxwecERm_0470",
+   "sound_id": null,
+   "family": "drag",
+   "split": "batch3",
+   "T": 19,
+   "n_orig": 6053
+  },
+  {
+   "ref_id": "BV1A6yABfE9Y_0141",
+   "sound_id": null,
+   "family": "drag",
+   "split": "batch3",
+   "T": 18,
+   "n_orig": 5532
+  },
+  {
+   "ref_id": "BV1DW411u7oK_0191",
+   "sound_id": null,
+   "family": "drag",
+   "split": "batch3",
+   "T": 12,
+   "n_orig": 3789
+  },
+  {
+   "ref_id": "BV1GHJg6qERL_0690",
+   "sound_id": null,
+   "family": "drag",
+   "split": "batch3",
+   "T": 16,
+   "n_orig": 5008
+  },
+  {
+   "ref_id": "BV1Lb411G7hR_0201",
+   "sound_id": null,
+   "family": "drag",
+   "split": "batch3",
+   "T": 21,
+   "n_orig": 6402
+  },
+  {
+   "ref_id": "BV1SfkDBPE86_0800",
+   "sound_id": null,
+   "family": "drag",
+   "split": "batch3",
+   "T": 16,
+   "n_orig": 5007
+  },
+  {
+   "ref_id": "BV1UTEv6FEiC_1309",
+   "sound_id": null,
+   "family": "drag",
+   "split": "batch3",
+   "T": 21,
+   "n_orig": 6576
+  },
+  {
+   "ref_id": "BV1VZ4y1W7sf_0445",
+   "sound_id": null,
+   "family": "drag",
+   "split": "batch3",
+   "T": 20,
+   "n_orig": 6227
+  },
+  {
+   "ref_id": "BV1XBni6yEEZ_0737",
+   "sound_id": null,
+   "family": "drag",
+   "split": "batch3",
+   "T": 22,
+   "n_orig": 6924
+  },
+  {
+   "ref_id": "BV1eykBY1EW9_0384",
+   "sound_id": null,
+   "family": "drag",
+   "split": "batch3",
+   "T": 18,
+   "n_orig": 5532
+  },
+  {
+   "ref_id": "BV1qs411o777_0054",
+   "sound_id": null,
+   "family": "drag",
+   "split": "batch3",
+   "T": 31,
+   "n_orig": 9710
+  },
+  {
+   "ref_id": "BV11L4AeCEYo_0194",
+   "sound_id": null,
+   "family": "liprolls",
+   "split": "batch3",
+   "T": 26,
+   "n_orig": 8317
+  },
+  {
+   "ref_id": "BV167411W7zY_0261",
+   "sound_id": null,
+   "family": "liprolls",
+   "split": "batch3",
+   "T": 21,
+   "n_orig": 6576
+  },
+  {
+   "ref_id": "BV19pC9BEEBW_0434",
+   "sound_id": null,
+   "family": "liprolls",
+   "split": "batch3",
+   "T": 29,
+   "n_orig": 9014
+  },
+  {
+   "ref_id": "BV1DnBKYTEuj_0049",
+   "sound_id": null,
+   "family": "liprolls",
+   "split": "batch3",
+   "T": 29,
+   "n_orig": 9014
+  },
+  {
+   "ref_id": "BV1GW411z7MC_0498",
+   "sound_id": null,
+   "family": "liprolls",
+   "split": "batch3",
+   "T": 17,
+   "n_orig": 5357
+  },
+  {
+   "ref_id": "BV1Lb411G7hR_0181",
+   "sound_id": null,
+   "family": "liprolls",
+   "split": "batch3",
+   "T": 25,
+   "n_orig": 7968
+  },
+  {
+   "ref_id": "BV1SfkDBPE86_0061",
+   "sound_id": null,
+   "family": "liprolls",
+   "split": "batch3",
+   "T": 39,
+   "n_orig": 12323
+  },
+  {
+   "ref_id": "BV1UTEv6FEiC_1045",
+   "sound_id": null,
+   "family": "liprolls",
+   "split": "batch3",
+   "T": 21,
+   "n_orig": 6576
+  },
+  {
+   "ref_id": "BV1V1Jo6qEVz_0279",
+   "sound_id": null,
+   "family": "liprolls",
+   "split": "batch3",
+   "T": 38,
+   "n_orig": 12149
+  },
+  {
+   "ref_id": "BV1WCM9zwEUR_0042",
+   "sound_id": null,
+   "family": "liprolls",
+   "split": "batch3",
+   "T": 29,
+   "n_orig": 9188
+  },
+  {
+   "ref_id": "BV1fZ39zaEQh_0335",
+   "sound_id": null,
+   "family": "liprolls",
+   "split": "batch3",
+   "T": 47,
+   "n_orig": 14936
+  },
+  {
+   "ref_id": "BV1ji4y147N9_0303",
+   "sound_id": null,
+   "family": "liprolls",
+   "split": "batch3",
+   "T": 40,
+   "n_orig": 12671
+  },
+  {
+   "ref_id": "BV11L4AeCEYo_0046",
+   "sound_id": null,
+   "family": "zippers",
+   "split": "batch3",
+   "T": 27,
+   "n_orig": 8491
+  },
+  {
+   "ref_id": "BV16jxwecERm_0525",
+   "sound_id": null,
+   "family": "zippers",
+   "split": "batch3",
+   "T": 32,
+   "n_orig": 10059
+  },
+  {
+   "ref_id": "BV19pC9BEEBW_0277",
+   "sound_id": null,
+   "family": "zippers",
+   "split": "batch3",
+   "T": 28,
+   "n_orig": 8840
+  },
+  {
+   "ref_id": "BV1CBqwYLENW_0422",
+   "sound_id": null,
+   "family": "zippers",
+   "split": "batch3",
+   "T": 26,
+   "n_orig": 8144
+  },
+  {
+   "ref_id": "BV1GHJg6qERL_0372",
+   "sound_id": null,
+   "family": "zippers",
+   "split": "batch3",
+   "T": 40,
+   "n_orig": 12671
+  },
+  {
+   "ref_id": "BV1JbZuBqEcq_0183",
+   "sound_id": null,
+   "family": "zippers",
+   "split": "batch3",
+   "T": 21,
+   "n_orig": 6576
+  },
+  {
+   "ref_id": "BV1Qb411G7Y7_0887",
+   "sound_id": null,
+   "family": "zippers",
+   "split": "batch3",
+   "T": 29,
+   "n_orig": 9188
+  },
+  {
+   "ref_id": "BV1UTEv6FEiC_0466",
+   "sound_id": null,
+   "family": "zippers",
+   "split": "batch3",
+   "T": 22,
+   "n_orig": 6750
+  },
+  {
+   "ref_id": "BV1UUvyBcEZr_0801",
+   "sound_id": null,
+   "family": "zippers",
+   "split": "batch3",
+   "T": 22,
+   "n_orig": 6924
+  },
+  {
+   "ref_id": "BV1Vhhn6hE2p_0353",
+   "sound_id": null,
+   "family": "zippers",
+   "split": "batch3",
+   "T": 40,
+   "n_orig": 12670
+  },
+  {
+   "ref_id": "BV1bSQUYsEsu_0033",
+   "sound_id": null,
+   "family": "zippers",
+   "split": "batch3",
+   "T": 22,
+   "n_orig": 6923
+  },
+  {
+   "ref_id": "BV1qs411o777_0064",
+   "sound_id": null,
+   "family": "zippers",
+   "split": "batch3",
+   "T": 32,
+   "n_orig": 10059
+  }
+ ]
+}

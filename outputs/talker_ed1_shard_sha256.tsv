@@ -1,0 +1,23 @@
+﻿# E-D1 分片哈希自证（远端实测）
+# 主机: virtaicloud-delight:/gemini/code/lightfour-train/models/Qwen3-Omni-30B-A3B-Instruct
+# 时间: 2026-10-27 19:21:51 ~ 19:36:30 (+0800)，只读，未写远端
+# 参照: HfApi(endpoint=https://hf-mirror.com).model_info('Qwen/Qwen3-Omni-30B-A3B-Instruct', files_metadata=True) 的 lfs.size / lfs.sha256
+# 说明: 直接 huggingface.co 在远端 unreachable（Errno 101），下载与 API 均走 hf-mirror.com
+shard	local_bytes	api_bytes	bytes_eq	local_sha256	api_sha256	sha256_eq	status
+model-00001-of-00015.safetensors	NA	4997899632	NA	NA	f95d142b727fbd0698f0ed9478e222d4f29467df855e21862e46bd1401049065	NA	not_landed
+model-00002-of-00015.safetensors	NA	4997754216	NA	NA	320c1f31f7ddc4efd2501891590eca2c481ce4eca3db33d70ebbb637dae85764	NA	not_landed
+model-00003-of-00015.safetensors	4997754216	4997754216	1	306f06b05ef032f1fa51eb62e72c3432324e7a084fa0d15ed17ff856adffcf33	306f06b05ef032f1fa51eb62e72c3432324e7a084fa0d15ed17ff856adffcf33	1	VERIFIED
+model-00004-of-00015.safetensors	4997755648	4997755648	1	4cb551f433bfb4d83a5843e433e74688d71a96eeb1b62217b37d719026d559b5	4cb551f433bfb4d83a5843e433e74688d71a96eeb1b62217b37d719026d559b5	1	VERIFIED
+model-00005-of-00015.safetensors	NA	4997755792	NA	NA	8aec5e8cc0e0b179a81f690af31a1149238f4b1d18ac60e3f690020fdf7d915f	NA	not_landed
+model-00006-of-00015.safetensors	4997755792	4997755792	1	8ff40a3d9e9c59a35a10257c1c5b216f472e6a102a4d6059bd31183eee03cb4c	8ff40a3d9e9c59a35a10257c1c5b216f472e6a102a4d6059bd31183eee03cb4c	1	VERIFIED
+model-00007-of-00015.safetensors	4997755792	4997755792	1	f6d84cc1d47178850f9ba1fe9c01f45ee63d9a8b9975f92821ee2b4a0387860b	f6d84cc1d47178850f9ba1fe9c01f45ee63d9a8b9975f92821ee2b4a0387860b	1	VERIFIED
+model-00008-of-00015.safetensors	4997755792	4997755792	1	9f369ccdc9d2d2a55df794005b23cdbce44494a72e4a0069a150ae471cfea720	9f369ccdc9d2d2a55df794005b23cdbce44494a72e4a0069a150ae471cfea720	1	VERIFIED
+model-00009-of-00015.safetensors	NA	4997755792	NA	NA	980f754b21c4b20f36e02d184b792f5625f7c9d24b8a5c9da94287cf3cfde11b	NA	not_landed
+model-00010-of-00015.safetensors	NA	4997755792	NA	NA	5c5a798376321d74df2eb3f235e1c8c68669f09b0c753b5698a16e681204d808	NA	not_landed
+model-00011-of-00015.safetensors	NA	4997755792	NA	NA	6f7c051bd391c89279b43e7342ff4a243ad2ba2144f4aa62233fd2b02d72fce0	NA	not_landed
+model-00012-of-00015.safetensors	NA	4997755792	NA	NA	a8b09a9367cd31ebf928e87b9eaf002492379d9d21d352b480854c2fbe6d9978	NA	not_landed
+model-00013-of-00015.safetensors	1174405120	4999771808	0	NA	d9b7441c3a33e066d109cd6338e74ed680de9aa407d4df66eba5cb3c15c6d738	NA	in_flight_23.5pct
+model-00014-of-00015.safetensors	0	4996618552	0	NA	73f09f187ff7b469a8937b39b8ac772e539e0d61311526c345558c5e6a6eb09a	NA	not_started
+model-00015-of-00015.safetensors	0	553698794	0	NA	68880d566a50643807a4e73f5227c4f468bb31532925ed5fae78a51bdd39492a	NA	not_started
+# 结论: 已落地 5 片 5/5 字节数与 sha256 双绿；13/14/15 未落地，(B-1) 未关闭
+# 复核口径: 00003 api_bytes = 4,997,754,216（不是 4,997,544,216）；本地同值，无 209,920B 差异

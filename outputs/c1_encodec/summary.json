@@ -1,0 +1,745 @@
+{
+ "overall": {
+  "n": 95,
+  "mel_L16": {
+   "n": 95,
+   "median": 0.7101,
+   "mean": 0.7325,
+   "q25": 0.5927,
+   "q75": 0.8471,
+   "verdict_allowed": true
+  },
+  "mel_L32": {
+   "n": 95,
+   "median": 0.6492,
+   "mean": 0.6802,
+   "q25": 0.5425,
+   "q75": 0.7703,
+   "verdict_allowed": true
+  },
+  "delta_pct": 8.6,
+  "mean_delta_pct": 7.1,
+  "dur_ratio_raw_median": 1.02109,
+  "dur_ratio_trim": 1.0,
+  "len_check_all_ok": true,
+  "bits_per_s_L16": 12000,
+  "bits_per_s_L32": 24000
+ },
+ "per_family": {
+  "clicks": {
+   "n": 8,
+   "mel_L16": {
+    "n": 8,
+    "median": 0.9059,
+    "mean": 0.88,
+    "q25": 0.7969,
+    "q75": 0.9433,
+    "verdict_allowed": true
+   },
+   "mel_L32": {
+    "n": 8,
+    "median": 0.7956,
+    "mean": 0.801,
+    "q25": 0.7569,
+    "q75": 0.866,
+    "verdict_allowed": true
+   },
+   "hf_absdiff_L16": {
+    "n": 8,
+    "median": 0.0262,
+    "mean": 0.0315,
+    "q25": 0.0128,
+    "q75": 0.0517,
+    "verdict_allowed": true
+   },
+   "hf_absdiff_L32": {
+    "n": 8,
+    "median": 0.0244,
+    "mean": 0.0277,
+    "q25": 0.0106,
+    "q75": 0.0408,
+    "verdict_allowed": true
+   },
+   "delta_pct": 12.2
+  },
+  "clops": {
+   "n": 3,
+   "mel_L16": {
+    "n": 3,
+    "median": 0.9544,
+    "mean": 0.958,
+    "min": 0.8454,
+    "max": 1.0742,
+    "verdict_allowed": false
+   },
+   "mel_L32": {
+    "n": 3,
+    "median": 0.9029,
+    "mean": 0.8749,
+    "min": 0.7469,
+    "max": 0.9749,
+    "verdict_allowed": false
+   },
+   "hf_absdiff_L16": {
+    "n": 3,
+    "median": 0.0336,
+    "mean": 0.0367,
+    "min": 0.0115,
+    "max": 0.0649,
+    "verdict_allowed": false
+   },
+   "hf_absdiff_L32": {
+    "n": 3,
+    "median": 0.0184,
+    "mean": 0.0218,
+    "min": 0.001,
+    "max": 0.0461,
+    "verdict_allowed": false
+   },
+   "delta_pct": 5.4
+  },
+  "cymbal": {
+   "n": 2,
+   "mel_L16": {
+    "n": 2,
+    "median": 0.602,
+    "mean": 0.602,
+    "min": 0.5281,
+    "max": 0.676,
+    "verdict_allowed": false
+   },
+   "mel_L32": {
+    "n": 2,
+    "median": 0.5545,
+    "mean": 0.5545,
+    "min": 0.4955,
+    "max": 0.6135,
+    "verdict_allowed": false
+   },
+   "hf_absdiff_L16": {
+    "n": 2,
+    "median": 0.0189,
+    "mean": 0.0189,
+    "min": 0.0073,
+    "max": 0.0305,
+    "verdict_allowed": false
+   },
+   "hf_absdiff_L32": {
+    "n": 2,
+    "median": 0.0192,
+    "mean": 0.0192,
+    "min": 0.0058,
+    "max": 0.0326,
+    "verdict_allowed": false
+   },
+   "delta_pct": 7.9
+  },
+  "drag": {
+   "n": 2,
+   "mel_L16": {
+    "n": 2,
+    "median": 0.7195,
+    "mean": 0.7195,
+    "min": 0.6631,
+    "max": 0.7758,
+    "verdict_allowed": false
+   },
+   "mel_L32": {
+    "n": 2,
+    "median": 0.6657,
+    "mean": 0.6657,
+    "min": 0.5919,
+    "max": 0.7395,
+    "verdict_allowed": false
+   },
+   "hf_absdiff_L16": {
+    "n": 2,
+    "median": 0.0105,
+    "mean": 0.0105,
+    "min": 0.0061,
+    "max": 0.0148,
+    "verdict_allowed": false
+   },
+   "hf_absdiff_L32": {
+    "n": 2,
+    "median": 0.0124,
+    "mean": 0.0124,
+    "min": 0.0067,
+    "max": 0.0181,
+    "verdict_allowed": false
+   },
+   "delta_pct": 7.5
+  },
+  "hihats": {
+   "n": 8,
+   "mel_L16": {
+    "n": 8,
+    "median": 1.0009,
+    "mean": 1.0143,
+    "q25": 0.9508,
+    "q75": 1.0897,
+    "verdict_allowed": true
+   },
+   "mel_L32": {
+    "n": 8,
+    "median": 0.967,
+    "mean": 0.9821,
+    "q25": 0.8764,
+    "q75": 1.0344,
+    "verdict_allowed": true
+   },
+   "hf_absdiff_L16": {
+    "n": 8,
+    "median": 0.0075,
+    "mean": 0.0147,
+    "q25": 0.0013,
+    "q75": 0.0187,
+    "verdict_allowed": true
+   },
+   "hf_absdiff_L32": {
+    "n": 8,
+    "median": 0.0097,
+    "mean": 0.0121,
+    "q25": 0.0035,
+    "q75": 0.0163,
+    "verdict_allowed": true
+   },
+   "delta_pct": 3.4
+  },
+  "kicks": {
+   "n": 9,
+   "mel_L16": {
+    "n": 9,
+    "median": 0.5662,
+    "mean": 0.6299,
+    "q25": 0.5031,
+    "q75": 0.7615,
+    "verdict_allowed": true
+   },
+   "mel_L32": {
+    "n": 9,
+    "median": 0.5095,
+    "mean": 0.5815,
+    "q25": 0.4802,
+    "q75": 0.7315,
+    "verdict_allowed": true
+   },
+   "hf_absdiff_L16": {
+    "n": 9,
+    "median": 0.0144,
+    "mean": 0.0176,
+    "q25": 0.0064,
+    "q75": 0.0221,
+    "verdict_allowed": true
+   },
+   "hf_absdiff_L32": {
+    "n": 9,
+    "median": 0.0076,
+    "mean": 0.0159,
+    "q25": 0.0049,
+    "q75": 0.0227,
+    "verdict_allowed": true
+   },
+   "delta_pct": 10.0
+  },
+  "lip_oscillation": {
+   "n": 7,
+   "mel_L16": {
+    "n": 7,
+    "median": 0.6449,
+    "mean": 0.6486,
+    "q25": 0.6038,
+    "q75": 0.6834,
+    "verdict_allowed": true
+   },
+   "mel_L32": {
+    "n": 7,
+    "median": 0.5723,
+    "mean": 0.5967,
+    "q25": 0.5452,
+    "q75": 0.6401,
+    "verdict_allowed": true
+   },
+   "hf_absdiff_L16": {
+    "n": 7,
+    "median": 0.0059,
+    "mean": 0.0136,
+    "q25": 0.0017,
+    "q75": 0.0134,
+    "verdict_allowed": true
+   },
+   "hf_absdiff_L32": {
+    "n": 7,
+    "median": 0.0046,
+    "mean": 0.0108,
+    "q25": 0.0013,
+    "q75": 0.0127,
+    "verdict_allowed": true
+   },
+   "delta_pct": 11.3
+  },
+  "liprolls": {
+   "n": 7,
+   "mel_L16": {
+    "n": 7,
+    "median": 0.6388,
+    "mean": 0.6045,
+    "q25": 0.5898,
+    "q75": 0.6464,
+    "verdict_allowed": true
+   },
+   "mel_L32": {
+    "n": 7,
+    "median": 0.5687,
+    "mean": 0.5448,
+    "q25": 0.5227,
+    "q75": 0.5851,
+    "verdict_allowed": true
+   },
+   "hf_absdiff_L16": {
+    "n": 7,
+    "median": 0.0066,
+    "mean": 0.0137,
+    "q25": 0.004,
+    "q75": 0.0207,
+    "verdict_allowed": true
+   },
+   "hf_absdiff_L32": {
+    "n": 7,
+    "median": 0.0113,
+    "mean": 0.0136,
+    "q25": 0.0033,
+    "q75": 0.0225,
+    "verdict_allowed": true
+   },
+   "delta_pct": 11.0
+  },
+  "nasal": {
+   "n": 2,
+   "mel_L16": {
+    "n": 2,
+    "median": 0.5736,
+    "mean": 0.5736,
+    "min": 0.5359,
+    "max": 0.6113,
+    "verdict_allowed": false
+   },
+   "mel_L32": {
+    "n": 2,
+    "median": 0.5166,
+    "mean": 0.5166,
+    "min": 0.4699,
+    "max": 0.5633,
+    "verdict_allowed": false
+   },
+   "hf_absdiff_L16": {
+    "n": 2,
+    "median": 0.007,
+    "mean": 0.007,
+    "min": 0.0017,
+    "max": 0.0123,
+    "verdict_allowed": false
+   },
+   "hf_absdiff_L32": {
+    "n": 2,
+    "median": 0.0069,
+    "mean": 0.0069,
+    "min": 0.001,
+    "max": 0.0127,
+    "verdict_allowed": false
+   },
+   "delta_pct": 9.9
+  },
+  "other": {
+   "n": 9,
+   "mel_L16": {
+    "n": 9,
+    "median": 0.6651,
+    "mean": 0.7078,
+    "q25": 0.6179,
+    "q75": 0.8488,
+    "verdict_allowed": true
+   },
+   "mel_L32": {
+    "n": 9,
+    "median": 0.641,
+    "mean": 0.65,
+    "q25": 0.5487,
+    "q75": 0.7327,
+    "verdict_allowed": true
+   },
+   "hf_absdiff_L16": {
+    "n": 9,
+    "median": 0.0122,
+    "mean": 0.0135,
+    "q25": 0.0022,
+    "q75": 0.0188,
+    "verdict_allowed": true
+   },
+   "hf_absdiff_L32": {
+    "n": 9,
+    "median": 0.013,
+    "mean": 0.0128,
+    "q25": 0.0089,
+    "q75": 0.0143,
+    "verdict_allowed": true
+   },
+   "delta_pct": 3.6
+  },
+  "reverse": {
+   "n": 2,
+   "mel_L16": {
+    "n": 2,
+    "median": 0.8453,
+    "mean": 0.8453,
+    "min": 0.7161,
+    "max": 0.9745,
+    "verdict_allowed": false
+   },
+   "mel_L32": {
+    "n": 2,
+    "median": 0.7903,
+    "mean": 0.7903,
+    "min": 0.6672,
+    "max": 0.9133,
+    "verdict_allowed": false
+   },
+   "hf_absdiff_L16": {
+    "n": 2,
+    "median": 0.0096,
+    "mean": 0.0096,
+    "min": 0.005,
+    "max": 0.0142,
+    "verdict_allowed": false
+   },
+   "hf_absdiff_L32": {
+    "n": 2,
+    "median": 0.0116,
+    "mean": 0.0116,
+    "min": 0.0099,
+    "max": 0.0133,
+    "verdict_allowed": false
+   },
+   "delta_pct": 6.5
+  },
+  "scratch": {
+   "n": 2,
+   "mel_L16": {
+    "n": 2,
+    "median": 0.8119,
+    "mean": 0.8119,
+    "min": 0.7338,
+    "max": 0.89,
+    "verdict_allowed": false
+   },
+   "mel_L32": {
+    "n": 2,
+    "median": 0.8039,
+    "mean": 0.8039,
+    "min": 0.7677,
+    "max": 0.8401,
+    "verdict_allowed": false
+   },
+   "hf_absdiff_L16": {
+    "n": 2,
+    "median": 0.0071,
+    "mean": 0.0071,
+    "min": 0.0005,
+    "max": 0.0137,
+    "verdict_allowed": false
+   },
+   "hf_absdiff_L32": {
+    "n": 2,
+    "median": 0.0168,
+    "mean": 0.0168,
+    "min": 0.0088,
+    "max": 0.0247,
+    "verdict_allowed": false
+   },
+   "delta_pct": 1.0
+  },
+  "snares": {
+   "n": 22,
+   "mel_L16": {
+    "n": 22,
+    "median": 0.6498,
+    "mean": 0.684,
+    "q25": 0.5899,
+    "q75": 0.7848,
+    "verdict_allowed": true
+   },
+   "mel_L32": {
+    "n": 22,
+    "median": 0.609,
+    "mean": 0.6342,
+    "q25": 0.5218,
+    "q75": 0.7021,
+    "verdict_allowed": true
+   },
+   "hf_absdiff_L16": {
+    "n": 22,
+    "median": 0.024,
+    "mean": 0.0247,
+    "q25": 0.0144,
+    "q75": 0.0353,
+    "verdict_allowed": true
+   },
+   "hf_absdiff_L32": {
+    "n": 22,
+    "median": 0.0285,
+    "mean": 0.0249,
+    "q25": 0.0164,
+    "q75": 0.032,
+    "verdict_allowed": true
+   },
+   "delta_pct": 6.3
+  },
+  "synth": {
+   "n": 2,
+   "mel_L16": {
+    "n": 2,
+    "median": 0.6141,
+    "mean": 0.6141,
+    "min": 0.4963,
+    "max": 0.7319,
+    "verdict_allowed": false
+   },
+   "mel_L32": {
+    "n": 2,
+    "median": 0.5748,
+    "mean": 0.5748,
+    "min": 0.4454,
+    "max": 0.7042,
+    "verdict_allowed": false
+   },
+   "hf_absdiff_L16": {
+    "n": 2,
+    "median": 0.0175,
+    "mean": 0.0175,
+    "min": 0.0067,
+    "max": 0.0283,
+    "verdict_allowed": false
+   },
+   "hf_absdiff_L32": {
+    "n": 2,
+    "median": 0.0037,
+    "mean": 0.0037,
+    "min": 0.0026,
+    "max": 0.0049,
+    "verdict_allowed": false
+   },
+   "delta_pct": 6.4
+  },
+  "teeth": {
+   "n": 2,
+   "mel_L16": {
+    "n": 2,
+    "median": 0.6529,
+    "mean": 0.6529,
+    "min": 0.5868,
+    "max": 0.719,
+    "verdict_allowed": false
+   },
+   "mel_L32": {
+    "n": 2,
+    "median": 0.6209,
+    "mean": 0.6209,
+    "min": 0.5492,
+    "max": 0.6926,
+    "verdict_allowed": false
+   },
+   "hf_absdiff_L16": {
+    "n": 2,
+    "median": 0.0387,
+    "mean": 0.0387,
+    "min": 0.0297,
+    "max": 0.0478,
+    "verdict_allowed": false
+   },
+   "hf_absdiff_L32": {
+    "n": 2,
+    "median": 0.0306,
+    "mean": 0.0306,
+    "min": 0.0084,
+    "max": 0.0528,
+    "verdict_allowed": false
+   },
+   "delta_pct": 4.9
+  },
+  "tongue": {
+   "n": 2,
+   "mel_L16": {
+    "n": 2,
+    "median": 0.6522,
+    "mean": 0.6522,
+    "min": 0.5559,
+    "max": 0.7484,
+    "verdict_allowed": false
+   },
+   "mel_L32": {
+    "n": 2,
+    "median": 0.6037,
+    "mean": 0.6037,
+    "min": 0.516,
+    "max": 0.6913,
+    "verdict_allowed": false
+   },
+   "hf_absdiff_L16": {
+    "n": 2,
+    "median": 0.0173,
+    "mean": 0.0173,
+    "min": 0.0143,
+    "max": 0.0202,
+    "verdict_allowed": false
+   },
+   "hf_absdiff_L32": {
+    "n": 2,
+    "median": 0.0155,
+    "mean": 0.0155,
+    "min": 0.0115,
+    "max": 0.0195,
+    "verdict_allowed": false
+   },
+   "delta_pct": 7.4
+  },
+  "vocal": {
+   "n": 2,
+   "mel_L16": {
+    "n": 2,
+    "median": 0.5689,
+    "mean": 0.5689,
+    "min": 0.5131,
+    "max": 0.6247,
+    "verdict_allowed": false
+   },
+   "mel_L32": {
+    "n": 2,
+    "median": 0.5181,
+    "mean": 0.5181,
+    "min": 0.4735,
+    "max": 0.5628,
+    "verdict_allowed": false
+   },
+   "hf_absdiff_L16": {
+    "n": 2,
+    "median": 0.0072,
+    "mean": 0.0072,
+    "min": 0.0026,
+    "max": 0.0117,
+    "verdict_allowed": false
+   },
+   "hf_absdiff_L32": {
+    "n": 2,
+    "median": 0.0057,
+    "mean": 0.0057,
+    "min": 0.0043,
+    "max": 0.0072,
+    "verdict_allowed": false
+   },
+   "delta_pct": 8.9
+  },
+  "whistles": {
+   "n": 2,
+   "mel_L16": {
+    "n": 2,
+    "median": 0.7755,
+    "mean": 0.7755,
+    "min": 0.7596,
+    "max": 0.7914,
+    "verdict_allowed": false
+   },
+   "mel_L32": {
+    "n": 2,
+    "median": 0.738,
+    "mean": 0.738,
+    "min": 0.7277,
+    "max": 0.7483,
+    "verdict_allowed": false
+   },
+   "hf_absdiff_L16": {
+    "n": 2,
+    "median": 0.0128,
+    "mean": 0.0128,
+    "min": 0.0027,
+    "max": 0.0228,
+    "verdict_allowed": false
+   },
+   "hf_absdiff_L32": {
+    "n": 2,
+    "median": 0.0078,
+    "mean": 0.0078,
+    "min": 0.0048,
+    "max": 0.0108,
+    "verdict_allowed": false
+   },
+   "delta_pct": 4.8
+  },
+  "zippers": {
+   "n": 2,
+   "mel_L16": {
+    "n": 2,
+    "median": 1.035,
+    "mean": 1.035,
+    "min": 0.7141,
+    "max": 1.3559,
+    "verdict_allowed": false
+   },
+   "mel_L32": {
+    "n": 2,
+    "median": 0.9635,
+    "mean": 0.9635,
+    "min": 0.6468,
+    "max": 1.2802,
+    "verdict_allowed": false
+   },
+   "hf_absdiff_L16": {
+    "n": 2,
+    "median": 0.0201,
+    "mean": 0.0201,
+    "min": 0.0137,
+    "max": 0.0265,
+    "verdict_allowed": false
+   },
+   "hf_absdiff_L32": {
+    "n": 2,
+    "median": 0.0208,
+    "mean": 0.0208,
+    "min": 0.0156,
+    "max": 0.026,
+    "verdict_allowed": false
+   },
+   "delta_pct": 6.9
+  }
+ },
+ "meta": {
+  "script_sha256_16": "33da358f1f899703",
+  "model_dir": "models/encodec_24khz",
+  "transformers": "5.16.1",
+  "torch": "2.14.0+cu130",
+  "sr": 24000,
+  "hop": 320,
+  "frame_rate_hz": 75.0,
+  "bandwidth_kbps": 24.0,
+  "n_q_total": 32,
+  "codebook_size": 1024,
+  "mel": {
+   "n_fft": 1024,
+   "hop": 256,
+   "n_mels": 128,
+   "norm": "rms->0.1"
+  },
+  "decode_padding_mask": null,
+  "input_csv": "data/eval_refaudio_testset.csv",
+  "input_sha256_16": "af21d7819535b438"
+ },
+ "tokens": {
+  "dumped": 95,
+  "ok": true,
+  "shape": [
+   32,
+   27
+  ],
+  "note": "",
+  "savez_bytes_per_file": 1531
+ }
+}

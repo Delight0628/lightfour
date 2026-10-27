@@ -1,0 +1,50 @@
+{
+ "gate": "build-self-check",
+ "pass": true,
+ "spec": "listen_blind_midband_v2（裁决 116 改写 / 126 定形；格式同 listen_blind_v2）",
+ "seed": 20261027,
+ "n_items": 12,
+ "n_wav_on_disk": 48,
+ "n_sheet_rows": 36,
+ "join_sheet_to_files": "36/36",
+ "sha1_copy_equals_source": "48/48",
+ "dup_equals_ref_bytes": "12/12",
+ "cand13p_ne_cand75_bytes": "12/12",
+ "cand75_ne_ref_bytes": "12/12",
+ "cand13p_ne_ref_bytes": "12/12",
+ "src_arms_sha1_distinct_per_hit": "12/12",
+ "dup_identity_policy": "dup 身份仅落 BLIND_KEY.json；呈现 slot 逐 item 盲化，无固定位次（裁决 162）",
+ "sheet_judgment_empty": "36/36",
+ "same_hit_item_pairs": 0,
+ "adjacent_same_hit_clause": "作废（裁决 126：每 hit 恰 1 item，119 间距条款无处适用）",
+ "arm_leak_in_filenames": [],
+ "filenames_ascii": true,
+ "wav_headers_readable": true,
+ "names_unique": true,
+ "riff_uniform": "3/1/24000/32（IEEE_FLOAT）",
+ "src_check": {
+  "hits": 12,
+  "family": "hihats 12/12",
+  "uniq_source": 12,
+  "notation": {
+   "F": 9,
+   "Tss": 1,
+   "Tch": 2
+  },
+  "sound_id": {
+   "12": 9,
+   "11": 1,
+   "13": 2
+  },
+  "split": {
+   "train": 10,
+   "test": 1,
+   "val": 1
+  },
+  "src_index_md5": "76496da2692658eda886afc6f4fc696f",
+  "src_composition_md5": "284bde6e0cea2dcd85b0e78b3010060c",
+  "per_hit_md5_crlf": "235158c7877f5620e5443790c19f30e8",
+  "per_hit_md5_lf": "6d4cbfd1910e3c9f253884566729d699"
+ },
+ "script_md5": "4aec8faadd3ff997ca0827b6946ba065"
+}

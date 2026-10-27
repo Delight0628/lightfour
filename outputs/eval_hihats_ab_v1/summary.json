@@ -1,0 +1,178 @@
+{
+ "n_items": 12,
+ "sources": [
+  "BV19kmGYUENT",
+  "BV1EeJR6TEzm",
+  "BV1Pw411F7hx",
+  "BV1Qb411G7Y7",
+  "BV1VZ4y1W7sf",
+  "BV1VonA6WEDs",
+  "BV1WCM9zwEUR",
+  "BV1XBni6yEEZ",
+  "BV1aTJR6REKS",
+  "BV1prnA6eEts",
+  "BV1rt411B7Kw"
+ ],
+ "n_sources": 11,
+ "sound_ids": [
+  "11",
+  "12",
+  "13",
+  "37",
+  "38",
+  "41",
+  "53",
+  "84"
+ ],
+ "dur_ms_range": [
+  78.0,
+  571.5
+ ],
+ "splits": [
+  "test",
+  "train",
+  "val"
+ ],
+ "by_arm": {
+  "75": {
+   "n": 12,
+   "mel_l1_mean": 0.77852,
+   "mel_l1_median": 0.80794,
+   "mel_l1_min": 0.5650337338447571,
+   "mel_l1_max": 0.9798623919487,
+   "env_corr_median": 0.9941,
+   "flux_corr_median": 0.98834,
+   "onset_delta_ms_median": 0.0,
+   "onset_delta_ms_max_abs": 0.0,
+   "hf_delta_median": -0.00591,
+   "mel_frame_diff_max": 0
+  },
+  "13c": {
+   "n": 12,
+   "mel_l1_mean": 2.04028,
+   "mel_l1_median": 1.92255,
+   "mel_l1_min": 1.1700800657272339,
+   "mel_l1_max": 3.3735411167144775,
+   "env_corr_median": 0.3715,
+   "flux_corr_median": 0.45233,
+   "onset_delta_ms_median": 0.0,
+   "onset_delta_ms_max_abs": 106.67,
+   "hf_delta_median": -0.00694,
+   "mel_frame_diff_max": 0
+  },
+  "13p": {
+   "n": 12,
+   "mel_l1_mean": 2.9364,
+   "mel_l1_median": 2.43665,
+   "mel_l1_min": 1.0095049142837524,
+   "mel_l1_max": 7.276152610778809,
+   "env_corr_median": 0.4368,
+   "flux_corr_median": 0.18475,
+   "onset_delta_ms_median": -5.335,
+   "onset_delta_ms_max_abs": 53.33,
+   "hf_delta_median": -0.00505,
+   "mel_frame_diff_max": 0
+  }
+ },
+ "by_pool": {
+  "click_60_200ms": {
+   "75": {
+    "n": 4,
+    "mel_l1_median": 0.7812,
+    "mel_l1_mean": 0.73783,
+    "env_corr_median": 0.99206,
+    "flux_corr_median": 0.98965,
+    "onset_delta_ms_median": 0.0,
+    "hf_delta_median": -0.00047
+   },
+   "13c": {
+    "n": 4,
+    "mel_l1_median": 2.61701,
+    "mel_l1_mean": 2.44441,
+    "env_corr_median": -0.0308,
+    "flux_corr_median": 0.676,
+    "onset_delta_ms_median": -5.335,
+    "hf_delta_median": -0.03411
+   },
+   "13p": {
+    "n": 4,
+    "mel_l1_median": 2.84131,
+    "mel_l1_mean": 3.49207,
+    "env_corr_median": 0.02151,
+    "flux_corr_median": 0.75758,
+    "onset_delta_ms_median": 0.0,
+    "hf_delta_median": 0.02323
+   }
+  },
+  "cymbal": {
+   "75": {
+    "n": 4,
+    "mel_l1_median": 0.78026,
+    "mel_l1_mean": 0.74926,
+    "env_corr_median": 0.99428,
+    "flux_corr_median": 0.9908,
+    "onset_delta_ms_median": 0.0,
+    "hf_delta_median": -0.00532
+   },
+   "13c": {
+    "n": 4,
+    "mel_l1_median": 1.61684,
+    "mel_l1_mean": 1.65314,
+    "env_corr_median": 0.41871,
+    "flux_corr_median": -0.09654,
+    "onset_delta_ms_median": 32.0,
+    "hf_delta_median": 0.02009
+   },
+   "13p": {
+    "n": 4,
+    "mel_l1_median": 1.98882,
+    "mel_l1_mean": 2.08383,
+    "env_corr_median": 0.58656,
+    "flux_corr_median": -0.07837,
+    "onset_delta_ms_median": -16.0,
+    "hf_delta_median": -0.03658
+   }
+  },
+  "hihats": {
+   "75": {
+    "n": 4,
+    "mel_l1_median": 0.83008,
+    "mel_l1_mean": 0.84846,
+    "env_corr_median": 0.99367,
+    "flux_corr_median": 0.98702,
+    "onset_delta_ms_median": 0.0,
+    "hf_delta_median": -0.03046
+   },
+   "13c": {
+    "n": 4,
+    "mel_l1_median": 1.93797,
+    "mel_l1_mean": 2.02329,
+    "env_corr_median": 0.47647,
+    "flux_corr_median": 0.53519,
+    "onset_delta_ms_median": -5.335,
+    "hf_delta_median": 0.00813
+   },
+   "13p": {
+    "n": 4,
+    "mel_l1_median": 2.88855,
+    "mel_l1_mean": 3.23331,
+    "env_corr_median": 0.45581,
+    "flux_corr_median": 0.18475,
+    "onset_delta_ms_median": -5.335,
+    "hf_delta_median": -0.03376
+   }
+  }
+ },
+ "card_id": "CODEC_LISTEN_HIHATS_12",
+ "source_index_md5": "e207562cc6acddf31c4ec388409e972b",
+ "source_composition_md5": "c68f781be298e9e28b9b9714eafe547d",
+ "source_pack": "E:\\lightfour\\outputs\\codec_rate_ab\\listen",
+ "n_src_wav": 48,
+ "seed": 20261027,
+ "mel_impl": {
+  "file": "scripts/mel_metric.py",
+  "md5": "240f6f188c5d342d0bb82a25f107560a",
+  "frame_policy": "min"
+ },
+ "wav_subtype_source": "FLOAT（指标与试听同源 = 同一 wav 字节）"
+}

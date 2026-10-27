@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="refresh" content="30">
+<title>Qwen3-Omni 下载进度</title>
+<style>
+  :root { color-scheme: dark; }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; min-height: 100vh; display: flex; align-items: center; justify-content: center;
+    background: radial-gradient(circle at 20% 0%, #1e293b 0%, #0b1120 55%, #060a13 100%);
+    color: #e2e8f0; font-family: "Segoe UI", "Microsoft YaHei", system-ui, sans-serif;
+  }
+  .card {
+    width: min(860px, 92vw); padding: 34px 38px; border-radius: 22px;
+    background: rgba(15, 23, 42, .82); border: 1px solid rgba(148, 163, 184, .18);
+    box-shadow: 0 24px 70px rgba(0, 0, 0, .55); backdrop-filter: blur(10px);
+  }
+  h1 { margin: 0 0 6px; font-size: 22px; font-weight: 650; letter-spacing: .3px; }
+  .sub { color: #94a3b8; font-size: 13px; margin-bottom: 26px; }
+  .big { font-size: 42px; font-weight: 700; letter-spacing: -1px; }
+  .big span { font-size: 18px; color: #94a3b8; font-weight: 500; margin-left: 8px; }
+  .bar { height: 16px; border-radius: 99px; background: #1e293b; overflow: hidden; margin: 18px 0 10px; }
+  .bar > i {
+    display: block; height: 100%; width: 42.84%; border-radius: 99px;
+    background: linear-gradient(90deg, #f59e0b, #a855f7);
+    box-shadow: 0 0 18px #f59e0b; transition: width .6s ease;
+  }
+  .meta { display: flex; justify-content: space-between; color: #94a3b8; font-size: 13px; }
+  .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 24px; }
+  .cell { background: rgba(30, 41, 59, .65); border: 1px solid rgba(148, 163, 184, .12);
+           border-radius: 14px; padding: 14px 16px; }
+  .cell b { display: block; font-size: 17px; margin-top: 6px; font-weight: 600; }
+  .label { color: #94a3b8; font-size: 12px; letter-spacing: .4px; }
+  .ok { color: #4ade80; }
+  .warn { color: #fbbf24; }
+  pre { margin: 18px 0 0; padding: 14px 16px; border-radius: 12px; background: #0b1120;
+         border: 1px solid rgba(148, 163, 184, .12); color: #94a3b8; font-size: 12px;
+         white-space: pre-wrap; word-break: break-all; max-height: 130px; overflow: auto; }
+  .foot { margin-top: 16px; color: #64748b; font-size: 12px; display: flex;
+           justify-content: space-between; }
+</style>
+</head>
+<body>
+  <div class="card">
+    <h1>Qwen3-Omni-30B-A3B-Instruct 下载进度</h1>
+    <div class="sub">/gemini/code/lightfour-train/models/Qwen3-Omni-30B-A3B-Instruct · 持久化盘 /gemini/code · 每 30s 刷新</div>
+
+    <div class="big">42.84%<span>28.14 GB / 65.69 GB</span></div>
+    <div class="bar"><i></i></div>
+    <div class="meta">
+      <span>剩余 37.55 GB</span>
+      <span>速度 采样中…</span>
+      <span>预计剩余 —</span>
+    </div>
+
+    <div class="grid">
+      <div class="cell"><div class="label">下载进程</div><b class="ok">运行中（PID 178116）</b></div>
+      <div class="cell"><div class="label">状态文件</div><b>downloading</b></div>
+      <div class="cell"><div class="label">暂存 .cache</div><b>4.86 GB</b></div>
+      <div class="cell"><div class="label">开始时间</div><b style="font-size:14px">2026-10-27 19:09:25</b></div>
+    </div>
+
+    <pre>model-00001-of-00015.safetensors%3B+filename%3D%22model-00001-of-00015.safetensors%22%3B&amp;X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Credential=cas%2F20261027%2Fus-east-1%2Fs3%2Faws4_request&amp;X-Amz-Date=20261027T051611Z&amp;X-Amz-Expires=3600&amp;X-Amz-SignedHeaders=host&amp;X-Amz-Signature=6dfedc537f7aed89cfdbc6a58ea5908b5e3d5c0fb1a4133bf78ddacde0f8371f. Make sure your token has the correct permissions. &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&lt;Error&gt;&lt;Code&gt;AccessDenied&lt;/Code&gt;&lt;Message&gt;Access denied&lt;/Message&gt;&lt;/Error&gt;</pre>
+
+    <div class="foot">
+      <span>服务器时间：2026-10-27 23:06:22 CST</span>
+      <span>本页刷新：23:06:19</span>
+    </div>
+    <div class="foot"><span>seaweedfs-filer.gemini-storage:8888:/Gemini-Snapshot/codeset/mczzavdaekmx/58108/765563779962355712/latest 14P 1.1P 13P 8% /gemini/code</span><span>进度含暂存 partial，为近似值</span></div>
+  </div>
+</body>
+</html>

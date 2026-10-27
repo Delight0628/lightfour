@@ -1,0 +1,304 @@
+{
+  "artifact": "three_arm_sensitivity",
+  "card": "INSTRUMENT_CALIBRATION (ast_lin_v0) · 识别侧三臂敏感性（裁决 143/155）",
+  "arms": {
+    "normal": "原始参考音频（= 冻结 preds.csv 链路，逐条自证一致）",
+    "silence": "等长全零静音（16 kHz，长度与 normal 相同）",
+    "shuffle": "25 ms 块级时间置乱（块=400 采样 @16 kHz，seed=20261027+i，含尾部残块；保留谱内容与长度，破坏时间包络/起音）"
+  },
+  "shuffle_note": "shuffle 为音频级置乱；三重门③（perm_null.json）是标签置换，两者不同源、不可混引。",
+  "protocol": {
+    "in_vocab": "truth_sound_id ∈ baseline_label_space.csv 的 34 个 sound_id（unknown 行除外），n=34",
+    "metric": "sound_id top-1 命中；prob_top1 未校准不作阈值",
+    "feature": "ASTModel.pooler_output（冻结 AST rev f826b80d）",
+    "identity_check": {
+      "normal_feats_vs_frozen_cache": "exact 34/34（判据 max_abs_diff ≤ 1e-5）",
+      "max_abs_diff": 0.0,
+      "normal_preds_vs_frozen_preds_csv": "34/34"
+    },
+    "featurize_source": "scripts/train_ast_lin_v0.py（按路径 import，非拷贝）"
+  },
+  "per_arm": {
+    "normal": {
+      "arm": "normal",
+      "n": 34,
+      "top1_hits": 5,
+      "top1_rate": 0.14705882352941177,
+      "wilson95": [
+        0.0645,
+        0.3013
+      ],
+      "top3_hits": 12
+    },
+    "silence": {
+      "arm": "silence",
+      "n": 34,
+      "top1_hits": 0,
+      "top1_rate": 0.0,
+      "wilson95": [
+        0.0,
+        0.1015
+      ]
+    },
+    "shuffle": {
+      "arm": "shuffle",
+      "n": 34,
+      "top1_hits": 9,
+      "top1_rate": 0.2647058823529412,
+      "wilson95": [
+        0.146,
+        0.4312
+      ]
+    }
+  },
+  "flip_vs_normal": {
+    "silence": 31,
+    "shuffle": 25,
+    "n": 34
+  },
+  "gates": {
+    "silence": {
+      "rule": "silence 臂 top-1 ≤ 0.05（103-way 随机 0.97% 的 5 倍余量；n=34 下命中 ≤1）",
+      "observed": 0.0,
+      "hits": 0,
+      "pass": true
+    },
+    "shuffle": {
+      "rule": "配对 bootstrap（normal-shuffle）95% CI 下界 > 0 才写「shuffle 显著低于 normal」",
+      "bootstrap_B": 10000,
+      "bootstrap_seed": 20261027,
+      "diff_mean": -0.1176,
+      "diff_ci95": [
+        -0.2654,
+        0.0294
+      ],
+      "P(mean<=0)": 0.9535,
+      "mcnemar_discordant": {
+        "normal_hit_shuffle_miss": 2,
+        "normal_miss_shuffle_hit": 6
+      },
+      "mcnemar_exact_p_two_sided": 0.289062,
+      "pass": false,
+      "status": "PERTURB_INVALID",
+      "note": "裁决 167：扰动无效（25ms 块置乱对 60–200ms 击打接近恒等变换，有效块数 min 3/median 11/max 33），不计入门槛、不写「未过线」"
+    }
+  },
+  "shuffle_blocks_stat": {
+    "min": 3,
+    "median": 11,
+    "max": 33
+  },
+  "supplement_feedswap": {
+    "status": "事后补充臂（解释性，不替代 25ms 注册臂；PI 未裁前不写入任何门）",
+    "definition": "跨样本错配音频：固定置换 np.random.default_rng(20261027).permutation(34)，样本位 i 喂供体 j 音频，计分仍按样本位 i 真值",
+    "n": 34,
+    "top1_hits": 1,
+    "top1_rate": 0.029411764705882353,
+    "wilson95": [
+      0.0052,
+      0.1492
+    ],
+    "audio_follow_hits": 5,
+    "diff_mean_vs_normal": 0.1176,
+    "diff_ci95": [
+      0.0,
+      0.2647
+    ],
+    "mcnemar_discordant": {
+      "normal_hit_feed_miss": 5,
+      "normal_miss_feed_hit": 1
+    },
+    "mcnemar_exact_p_two_sided": 0.21875,
+    "pass_as_shuffle": false
+  },
+  "per_family": {
+    "snares": {
+      "n": 9,
+      "normal_hit": 1,
+      "silence_hit": 0,
+      "shuffle_hit": 1
+    },
+    "kicks": {
+      "n": 6,
+      "normal_hit": 1,
+      "silence_hit": 0,
+      "shuffle_hit": 1
+    },
+    "zippers": {
+      "n": 6,
+      "normal_hit": 0,
+      "silence_hit": 0,
+      "shuffle_hit": 1
+    },
+    "clops": {
+      "n": 6,
+      "normal_hit": 0,
+      "silence_hit": 0,
+      "shuffle_hit": 0
+    },
+    "hihats": {
+      "n": 9,
+      "normal_hit": 1,
+      "silence_hit": 0,
+      "shuffle_hit": 0
+    },
+    "other": {
+      "n": 6,
+      "normal_hit": 0,
+      "silence_hit": 0,
+      "shuffle_hit": 0
+    },
+    "liprolls": {
+      "n": 3,
+      "normal_hit": 0,
+      "silence_hit": 0,
+      "shuffle_hit": 0
+    },
+    "clicks": {
+      "n": 6,
+      "normal_hit": 0,
+      "silence_hit": 0,
+      "shuffle_hit": 1
+    },
+    "drag": {
+      "n": 6,
+      "normal_hit": 1,
+      "silence_hit": 0,
+      "shuffle_hit": 0
+    },
+    "synth": {
+      "n": 6,
+      "normal_hit": 0,
+      "silence_hit": 0,
+      "shuffle_hit": 1
+    },
+    "lip_oscillation": {
+      "n": 12,
+      "normal_hit": 0,
+      "silence_hit": 0,
+      "shuffle_hit": 1
+    },
+    "whistles": {
+      "n": 3,
+      "normal_hit": 0,
+      "silence_hit": 0,
+      "shuffle_hit": 0
+    },
+    "scratch": {
+      "n": 6,
+      "normal_hit": 0,
+      "silence_hit": 0,
+      "shuffle_hit": 1
+    },
+    "reverse": {
+      "n": 3,
+      "normal_hit": 0,
+      "silence_hit": 0,
+      "shuffle_hit": 0
+    },
+    "teeth": {
+      "n": 3,
+      "normal_hit": 0,
+      "silence_hit": 0,
+      "shuffle_hit": 0
+    },
+    "tongue": {
+      "n": 3,
+      "normal_hit": 0,
+      "silence_hit": 0,
+      "shuffle_hit": 0
+    },
+    "vocal": {
+      "n": 6,
+      "normal_hit": 1,
+      "silence_hit": 0,
+      "shuffle_hit": 1
+    },
+    "cymbal": {
+      "n": 3,
+      "normal_hit": 0,
+      "silence_hit": 0,
+      "shuffle_hit": 1
+    }
+  },
+  "fail_detail": {
+    "normal_hit_but_shuffle_hit": [
+      "018_tongue_kick",
+      "062_msh_snare",
+      "087_throat_bass"
+    ],
+    "normal_miss_but_shuffle_hit": [
+      "007_inward_zipper_roll",
+      "032_click_da_phonem",
+      "052_synth_high_pitched",
+      "056_vocalized_lip_oscillation_perfect_octave",
+      "065_zede_scratch",
+      "102_crash"
+    ],
+    "silence_pred_equals_normal_pred": [
+      "005_throat_kick",
+      "009_double_hollow_clop",
+      "052_synth_high_pitched"
+    ],
+    "silence_hits": []
+  },
+  "shuffle_spec_sample": {
+    "004_inward_k_rimshot_shorter_for_fast_patterns": {
+      "n_blocks": 5,
+      "perm_head": [
+        1,
+        4,
+        3,
+        0,
+        2
+      ],
+      "seed": 20261027,
+      "chunk_samples": 400
+    },
+    "005_throat_kick": {
+      "n_blocks": 3,
+      "perm_head": [
+        2,
+        0,
+        1
+      ],
+      "seed": 20261028,
+      "chunk_samples": 400
+    },
+    "007_inward_zipper_roll": {
+      "n_blocks": 20,
+      "perm_head": [
+        8,
+        6,
+        19,
+        3,
+        10,
+        15,
+        11,
+        13
+      ],
+      "seed": 20261029,
+      "chunk_samples": 400
+    }
+  },
+  "inputs": {
+    "preds_csv_md5": "efc821bfe15b2a936d641cd4263e9c78",
+    "testset_md5": "e668ce45e311cc2873847860240d52a5",
+    "label_space_md5": "8a5788fb3ae0f3855b8e66a2793a191a",
+    "model_npz_md5": "f28bbb325c195b2d83e198a20b26e3a7"
+  },
+  "versions": {
+    "python": "3.11.8",
+    "numpy": "1.26.4",
+    "torch": "2.2.2+cpu",
+    "transformers": "4.46.3",
+    "soundfile": "0.14.0"
+  },
+  "redlines": [
+    "仪器校准材料，禁写入 agent.md §0 识别准确率",
+    "silence 门按 103-way 随机 0.97%×5 余量 = ≤5%；n=34 命中 ≤1",
+    "样本不足（n=34）结论带置信度限幅，禁外推到 103 类",
+    "shuffle 臂判 PERTURB_INVALID（裁决 167）：扰动无效不计入门槛，禁止用「未过线」暗示模型有问题",
+    "后续所有扰动臂必须附扰动有效性自检（有效块数分布/逐样本最大位移/与原信号相关系数或谱距离）+ 理论可检出上限（裁决 168）"
+  ]
+}

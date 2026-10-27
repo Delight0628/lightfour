@@ -1,0 +1,63 @@
+{
+ "pack": "outputs/listen_96_v0",
+ "purpose": "正式 96 wav 试听判决包（PI ㉝ 锁定 12/6/6）",
+ "verifier": "Codec",
+ "verified_at": "2026-10-27",
+ "artifacts": {
+  "composition.json": {"md5": "ffb0f5bdd2b28fab6031a34b13f3be23", "CRLF": 0},
+  "index.json": {"md5": "336ea1a09d6c53a0f466a2f2d7289fcb", "CRLF": 0},
+  "generator_render_listen_96.py": {"sha256_head": "ceca116d", "CRLF": 0, "note": "旁路直渲，codec_rate_ab.py 冻结件未改"},
+  "generator_listen_pack_1266.py": {"sha256_head": "99851b09"}
+ },
+ "anchor": {
+  "per_hit_csv_md5": "235158c7877f5620e5443790c19f30e8",
+  "matches_expected_R4": true,
+  "note": "R4 冻结 per_hit.csv（31 列）实测 md5 与 composition.per_hit_md5 字段一致"
+ },
+ "counts": {
+  "n_hits": 24,
+  "n_wav": 96,
+  "n_dup": 24,
+  "per_pool": {"cymbal": 12, "hihats": 6, "click_60_200ms": 6},
+  "arms_per_hit": ["true", "75", "13c", "13p"],
+  "n_sources_per_pool": {"cymbal": 12, "hihats": 6, "click_60_200ms": 5}
+ },
+ "integrity": {
+  "method": "index.json 逐文件 sha1 重算（凭证只认逐文件 sha1，pack 级 sha256 不作数）",
+  "files_checked": 120,
+  "sha1_mismatch": 0,
+  "dup_equals_true_bytes": true,
+  "result": "PASS"
+ },
+ "format": {
+  "container": "RIFF/WAVE",
+  "fmt_tag": 3,
+  "fmt_tag_name": "IEEE_FLOAT",
+  "channels": 1,
+  "sample_rate": 24000,
+  "bits": 32,
+  "files": 96,
+  "result": "PASS"
+ },
+ "hihats_judgment_pool_6": [
+  {"hit_id": "BV11m421W7Xc_1005", "source": "BV11m421W7Xc", "split": "train", "dur_ms": 114.3, "mel75_vs_true": 0.72136},
+  {"hit_id": "BV1EeJR6TEzm_0164", "source": "BV1EeJR6TEzm", "split": "train", "dur_ms": 121.6, "mel75_vs_true": 0.91871},
+  {"hit_id": "BV1Ut411Z7rw_0293", "source": "BV1Ut411Z7rw", "split": "train", "dur_ms": 78.0, "mel75_vs_true": 0.76949},
+  {"hit_id": "BV1QW411u7NJ_0494", "source": "BV1QW411u7NJ", "split": "train", "dur_ms": 107.1, "mel75_vs_true": 0.90306},
+  {"hit_id": "BV1VZ4y1W7sf_0170", "source": "BV1VZ4y1W7sf", "split": "train", "dur_ms": 121.6, "mel75_vs_true": 0.8159},
+  {"hit_id": "BV1YssozfEXU_0030", "source": "BV1YssozfEXU", "split": "train", "dur_ms": 63.5, "mel75_vs_true": 0.9904}
+ ],
+ "mel_three_numbers_do_not_mix": [
+  {"name": "登记值", "value": 0.8429, "sample": "hihats 全池 n=247（R4 冻结 summary, codec_rate_ab/summary.json）", "usage": "卡头越线登记行唯一合法字面量"},
+  {"name": "本判决包描述值", "value": 0.8595, "sample": "本包 hihats 6 条（0.7214–0.9904）", "usage": "只进「本包描述值」栏，标注 n=6 重抽"},
+  {"name": "扩样包描述值", "value": 0.8336, "sample": "listen_hihats_v2 12 条（0.7214–0.9904）", "usage": "只在 n_midband 复判卡内出现，标注 12 条重抽、非登记值"}
+ ],
+ "blind_pack_subset_note": "本包 4 臂；锁定盲包格式 24 击 × (REF + 75/13p/dup) = 96 wav 可直接由本包取 arms {true,75,13p} + dup/ 子集得到，无需重渲。13c 不进判决，仅 appendix/审计。",
+ "caveats": [
+  "click_60_200ms 6 击来自 5 个 source（BV1rt411B7Kw 出 2 击），与 cymbal/hihats 的「每 source ≤1」不同；人耳 A/B 时需知悉同源两次出现，不构成跨 split 泄漏。",
+  "split 分布 train 18 / val 3 / test 3：判决包以 train 为主，人耳结论不能单独当作泛化证据。",
+  "click_60_200ms 是时长桶（跨 12 family），非 clicks 家族；本包只供试听，不构成任何 family 已验收。",
+  "跨 exec 渲染非逐位稳定（2 字节尾数差异），任何复算须以本 index.json 的逐文件 sha1 为对照，不得重新渲染后比 pack 级 sha256。"
+ ],
+ "verdict": "COMPOSITION_READY_FOR_EVAL_CHECK"
+}

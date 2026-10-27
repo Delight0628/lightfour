@@ -1,0 +1,50 @@
+{
+  "registry_version": "1.0",
+  "created": "2026-10-27T19:20:00+08:00",
+  "author": "Talker",
+  "decision_ref": "agent.md 裁决 87（§14.25）",
+  "policy": "只改名不删；坏指纹文件永不作权重/PASS 证据引用",
+  "notes": [
+    "banned_weights_sha256 是文件内记录的【权重】指纹（损坏子集），不是 JSON 文件自身 sha256；改名门用的是内容包含式正控（文件内必须出现该坏指纹才允许改名）。",
+    "首轮误用【文件自身 sha256 前缀】做门，3/3 ABORT、零写入，已改正为内容门后重跑。",
+    "talker_load_gate_selftest.json 本地不存在（远端独有），local_state=absent。"
+  ],
+  "entries": [
+    {
+      "original_path": "outputs/talker_load_gate.json",
+      "renamed_path": "outputs/talker_load_gate.json.corrupt",
+      "json_sha256": "86b565cc8aad0a2a7eccc85a6a2fba0c204694614254ce3c81618537b74c9da7",
+      "bytes": 24310,
+      "fingerprint_field": "weights_sha256",
+      "banned_weights_sha256": "80210f5d2eeb926bc01b094a0a7d4fc951d0e5909aee4a666fefcc7535d6bfbc",
+      "reason": "记录含 1 个损坏张量的坏子集权重指纹，且 verdict=PASS",
+      "verdict": 87,
+      "remote_state": "renamed",
+      "local_state": "renamed"
+    },
+    {
+      "original_path": "outputs/talker_subset_verify.json",
+      "renamed_path": "outputs/talker_subset_verify.json.corrupt",
+      "json_sha256": "8f177e407f30ba1306536b4a16a6c832a218feefb3a5f264f3afee281939e630",
+      "bytes": 883,
+      "fingerprint_field": "sha256",
+      "banned_weights_sha256": "80210f5d2eeb926bc01b094a0a7d4fc951d0e5909aee4a666fefcc7535d6bfbc",
+      "reason": "同上，坏子集指纹的旁证文件",
+      "verdict": 87,
+      "remote_state": "renamed",
+      "local_state": "renamed"
+    },
+    {
+      "original_path": "outputs/talker_load_gate_selftest.json",
+      "renamed_path": "outputs/talker_load_gate_selftest.json.corrupt",
+      "json_sha256": "cb552833caadcdfa78fa82729e808c741645c3c58522e7e685ff8065c7800378",
+      "bytes": 1278,
+      "fingerprint_field": "weights_sha256",
+      "banned_weights_sha256": "2aeed2ff2e29d5a870d9f42a6fbebf3ccfb3dcc361e05b873007f826b418f5db",
+      "reason": "tiny smoke 自检子集权重指纹，同为坏件",
+      "verdict": 87,
+      "remote_state": "renamed",
+      "local_state": "absent"
+    }
+  ]
+}

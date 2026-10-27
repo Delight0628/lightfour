@@ -1,0 +1,19 @@
+{
+ "listen_n": 12,
+ "pool": "hihats",
+ "pool_size_total": 247,
+ "selection": "codec_rate_ab._spread_by_source(hihats_rows, 12)：每 source 取 mel13p_vs_75 中位代表后均匀取 12 → 12 个不同 source",
+ "source_of_truth": "outputs/codec_rate_ab/per_hit.csv (live R4, 31 col)",
+ "per_hit_md5": "235158c7877f5620e5443790c19f30e8",
+ "arms": [
+  "true",
+  "75",
+  "13c",
+  "13p"
+ ],
+ "subtype": "FLOAT",
+ "n_wav": 48,
+ "n_sources": 12,
+ "skipped": [],
+ "warning": "本包全部为 hihats，**只能判 hihats**；不得表述为三池/全 family 未见退化"
+}

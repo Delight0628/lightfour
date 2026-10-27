@@ -1,0 +1,253 @@
+{
+  "schema": "lightfour.listen_pack_registry/1",
+  "updated": "2026-10-27",
+  "owner": "Codec",
+  "rule_ref": "PI 60/61/62/78 + Eval 2026-10-27 核验回执",
+  "global_rules": [
+    "判决唯一入口 = outputs/codec_listen_n24_1266/listen_blind_v2（锁定格式 24 击 x REF + 75/13p/dup）",
+    "判决人 = Delight；0/1/2 三档；判决包锁定 counts 12/6/6（PI 60，后裁优先）",
+    "凭证只认逐文件 sha1；pack 级 sha256 永不作凭证",
+    "禁跨包比较、禁跨 codec 版本比较；8/8/8 配额已于 PI 60 降级为审计物，不生成"
+  ],
+  "packs": {
+    "codec_listen_n24_1266/listen": {
+      "path": "outputs/codec_listen_n24_1266/listen",
+      "role": "judgment_source",
+      "judge_allowed": false,
+      "cross_pack_compare": false,
+      "reason": "这是判决样本本体（非盲），判决走 listen_blind_v2；本目录只作源包与指纹锚",
+      "items": 24,
+      "wav": 96,
+      "arms": [
+        "true",
+        "75",
+        "13c",
+        "13p"
+      ],
+      "counts": {
+        "cymbal": 12,
+        "hihats": 6,
+        "click_60_200ms": 6,
+        "fill": 0
+      },
+      "format": "RIFF fmt=3 IEEE_FLOAT / ch1 / 24000Hz / 32bit / 96-96 同",
+      "fingerprints": {
+        "composition.json": {
+          "form": "LF",
+          "md5": "baee2cdfa2142f96271c81bc9de99e8d"
+        },
+        "index.json": {
+          "form": "LF",
+          "md5": "ad7c430f51b35027c79c474948b8377d"
+        }
+      },
+      "notes": [
+        "composition.json 顶层 14 键，不含 per_hit_md5 / generator / code_sha256（此前后两种引述作废）",
+        "R4 锚定成立方式 = index.json 与 per_hit.csv 235158c7 逐值 join 零漂移（mel75/13c/13p_vs_true、mel13c/13p_vs_75、hf_true），不是包内自锚",
+        "本目录 index.json 的 24 条 entry 无 files{}、无逐文件 sha1；逐文件 sha1 凭证在 listen_blind_v2/INDEX.json",
+        "listen_hihats_v2 的 per_hit_md5 字段不得移花接木到本包"
+      ]
+    },
+    "codec_listen_n24_1266/listen_blind": {
+      "path": "outputs/codec_listen_n24_1266/listen_blind",
+      "role": "audit_only",
+      "judge_allowed": false,
+      "cross_pack_compare": false,
+      "reason": "候选集为 4 支/击（含 13c），与锁定盲包格式 REF + 75/13p/dup（3 候选）不符，属历史格式",
+      "registered_by": "Codec",
+      "registered_on": "2026-10-27",
+      "handling": "只登记、不删、不 mv、不改名、不参与任何统计与判决",
+      "wav": 120,
+      "breakdown": {
+        "ref": 24,
+        "cand(kind=cand)": 72,
+        "dup": 24
+      },
+      "pool_file_counts": {
+        "cymbal": 60,
+        "hihats": 30,
+        "click_60_200ms": 30
+      },
+      "fingerprints": {
+        "manifest.csv": {
+          "form": "LF",
+          "md5": "f630581e37a7a51642c1ee04e4c6db86"
+        },
+        "pack_summary.json": {
+          "form": "LF",
+          "md5": "5a67c1870e1e093c47818378e7dd41ee"
+        }
+      },
+      "banned_usage": [
+        "不得用作判决输入",
+        "不得与 listen_blind_v2 并表",
+        "不得作为扩样池"
+      ]
+    },
+    "codec_listen_n24_1266/listen_blind_v2": {
+      "path": "outputs/codec_listen_n24_1266/listen_blind_v2",
+      "role": "judgment_blind",
+      "judge_allowed": true,
+      "cross_pack_compare": false,
+      "built_by": "Eval",
+      "items": 24,
+      "wav": 96,
+      "arms": [
+        "ref",
+        "75",
+        "13p",
+        "dup"
+      ],
+      "dup_rule": "dup = REF 逐字节副本，建包时 assert sha1(dup)==sha1(ref) 24/24",
+      "gate_ref": "dup 24/24 零容错；hihats n=6 三档；cymbal 12 / click 6 只报数不设线（PI 61）",
+      "fingerprints": {
+        "INDEX.json": {
+          "form": "CRLF-working-tree",
+          "md5": "ca861c698c351cbd8202a6df659a18e8",
+          "md5_lf": "61ce312113fc672910943cb9ea094740"
+        },
+        "JUDGMENT_SHEET.csv": {
+          "form": "CRLF-working-tree",
+          "md5": "6ddac877e50f1488afe543b1bb0a6362",
+          "md5_lf": "09126301465c6a787f33b21f07a820d3"
+        },
+        "RULES.md": {
+          "form": "CRLF-working-tree",
+          "md5": "d92bbb54a466cedbb3970ec9d5e3a753",
+          "md5_lf": "e3110fb5ea153694388563a174c14cb9"
+        },
+        "BLIND_KEY.json": {
+          "form": "CRLF-working-tree",
+          "md5": "ae1daf29400a342a4c4a26da2cd477a5",
+          "md5_lf": "4ed69e794336fed6d6461d3fad1e3cd8"
+        },
+        "VERIFY.json": {
+          "form": "CRLF-working-tree",
+          "md5": "44138a1a5e33542e00c46a3dcde7a8e2",
+          "md5_lf": "9ed136b83f3ed0bf753bccf5dc35bcc6"
+        },
+        "index.html": {
+          "form": "LF",
+          "md5": "6614740b027d5efe995ae836a260ca6b"
+        }
+      },
+      "notes": [
+        "BLIND_KEY.json 不随包发，只在本地留档",
+        "文件若重建，上面 6 行指纹全部失效，须重登记"
+      ]
+    },
+    "listen_96_v0": {
+      "path": "outputs/listen_96_v0",
+      "role": "historical",
+      "judge_allowed": false,
+      "cross_pack_compare": false,
+      "reason": "旧配额历史包；其 hihats 判决池与 1266 判决池重叠 0，任何跨包引用都会得出不同 hihats 结论",
+      "wav": 120,
+      "its_index_has_per_file_sha1": true,
+      "hihats_pool": {
+        "hit_ids": [
+          "BV11m421W7Xc_1005",
+          "BV1EeJR6TEzm_0164",
+          "BV1Ut411Z7rw_0293",
+          "BV1QW411u7NJ_0494",
+          "BV1VZ4y1W7sf_0170",
+          "BV1YssozfEXU_0030"
+        ],
+        "mel75_vs_true": [
+          0.72136,
+          0.91871,
+          0.76949,
+          0.90306,
+          0.8159,
+          0.9904
+        ],
+        "aggregate": "median",
+        "median": 0.85948,
+        "n_over_0.8": 4,
+        "n": 6,
+        "status": "错池、禁引"
+      },
+      "banned_usage": [
+        "0.85948 / 4-of-6 这组数字禁入任何卡、禁作判决池描述、禁与 1266 判决池并排",
+        "不得据此包宣称 hihats 判决池中位",
+        "不得搬其 dup 作 v2 盲包输入"
+      ]
+    },
+    "listen_hihats_v2": {
+      "path": "outputs/listen_hihats_v2",
+      "role": "expansion_pool",
+      "judge_allowed": false,
+      "cross_pack_compare": false,
+      "items": 12,
+      "wav": 48,
+      "arms": [
+        "true",
+        "75",
+        "13c",
+        "13p"
+      ],
+      "notes": [
+        "同池同四臂；描述中位 0.8336 只进「本包描述值」栏，登记值仍是 R4 全池 247 中位 0.8429",
+        "2026-10-27 PI 115：v1 盲包 listen_blind_midband 降 audit_only_no13p，复判 usage 已从 registry 撤掉；重建走 listen_blind_midband_v2"
+      ]
+    },
+    "codec_rate_ab/listen": {
+      "path": "outputs/codec_rate_ab/listen",
+      "role": "evidence",
+      "judge_allowed": false,
+      "wav": 48,
+      "items": 12,
+      "counts": {
+        "cymbal": 4,
+        "hihats": 4,
+        "click_60_200ms": 4
+      },
+      "notes": [
+        "12 击 x 4 臂；index e207562c；非 8/8/8，8/8/8 从未落盘（仅 listen_plan_preview.json 计划件）"
+      ]
+    },
+    "listen_hihats_v2/listen_blind_midband": {
+      "path": "outputs/listen_hihats_v2/listen_blind_midband",
+      "role": "audit_only_no13p",
+      "judge_allowed": false,
+      "cross_pack_compare": false,
+      "built_by": "Eval",
+      "items": 24,
+      "wav": 48,
+      "arms": [
+        "ref",
+        "75",
+        "dup"
+      ],
+      "missing_arm": "13p（PI 115：缺 13p = 格式缺陷，降审计物；不得作判决/仪器证据）",
+      "no_scorer": "v1 无可用评分入口：eval_hihats_ab.py --score 与 blind_pack_1266.py --score 均硬编码各自 BLIND 路径，本包 sheet 无 slot 列、BLIND_KEY 为 list → KeyError（Critic R7）",
+      "pack_role_md": "未落（PI 115 要求目录只加 PACK_ROLE.md，当前目录无此文件）",
+      "fingerprints": {
+        "BLIND_KEY.json": {
+          "form": "LF",
+          "md5": "63937d7efb86862bc14a8b2fba9bd659"
+        },
+        "INDEX.json": {
+          "form": "LF",
+          "md5": "882584f4fd58b70cbf70785eefa6e1fa"
+        },
+        "JUDGMENT_SHEET.csv": {
+          "form": "LF",
+          "md5": "264f5241868f684dd7b758c7233c0171"
+        },
+        "RULES.md": {
+          "form": "LF",
+          "md5": "fcb68fb4352220031936222fe4c28bce"
+        },
+        "VERIFY.json": {
+          "form": "LF",
+          "md5": "b63bae366d80ebfb3b3ae4d27447bde0"
+        },
+        "index.html": {
+          "form": "LF",
+          "md5": "ecdabe5fca3a8aa88e53b56da8932253"
+        }
+      }
+    }
+  }
+}

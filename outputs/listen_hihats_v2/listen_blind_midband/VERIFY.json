@@ -1,0 +1,33 @@
+{
+ "schema": "lightfour.listen_blind_midband.verify/1",
+ "source_pack": "outputs/listen_hihats_v2",
+ "source_sha1_vs_index": "48/48 bad=0",
+ "source_riff_fmt_ch_sr_bits": "3/1/24000/32 all 48",
+ "source_structure": {
+  "hits": 12,
+  "family": "hihats 12/12",
+  "uniq_source": 12,
+  "notation": {
+   "F": 9,
+   "Tch": 2,
+   "Tss": 1
+  },
+  "sound_id": {
+   "12": 9,
+   "13": 2,
+   "11": 1
+  },
+  "split": {
+   "train": 10,
+   "val": 1,
+   "test": 1
+  }
+ },
+ "blind_files_on_disk": 48,
+ "items": 24,
+ "dup_equals_ref_bytes": "12/12",
+ "real_pairs_differ_bytes": "12/12",
+ "arm_leak_in_filenames": [],
+ "dup_split_of_cand_sha1_across_items": "count-level only; per-item arm hidden in BLIND_KEY.json",
+ "mel_policy": "no mel values in this pack; scoring references frozen per_hit.csv md5 235158c7... (no recomputation)"
+}

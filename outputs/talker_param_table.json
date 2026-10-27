@@ -1,0 +1,171 @@
+{
+  "code_sha256": "0f4869c23f2a026c280dfa99e102e5194a75999fa9d8404ab8db9f22a8b47000",
+  "config": "models/qwen3_omni_config/config.json",
+  "total_params": 3324596480,
+  "total_params_b": 3.324596,
+  "groups": {
+    "layers_other": {
+      "params": 144245760,
+      "tensors": 260,
+      "examples": [
+        "model.layers.0.self_attn.q_proj.weight",
+        "model.layers.0.self_attn.k_proj.weight",
+        "model.layers.0.self_attn.v_proj.weight"
+      ],
+      "share_pct": 4.3387,
+      "params_b": 0.144246
+    },
+    "moe_experts_3d": {
+      "params": 3019898880,
+      "tensors": 40,
+      "examples": [
+        "model.layers.0.mlp.experts.gate_up_proj",
+        "model.layers.0.mlp.experts.down_proj",
+        "model.layers.1.mlp.experts.gate_up_proj"
+      ],
+      "share_pct": 90.8351,
+      "params_b": 3.019899
+    },
+    "other": {
+      "params": 6295552,
+      "tensors": 5,
+      "examples": [
+        "model.norm.weight",
+        "hidden_projection.linear_fc1.weight",
+        "hidden_projection.linear_fc1.bias"
+      ],
+      "share_pct": 0.1894,
+      "params_b": 0.006296
+    },
+    "codec_embedding": {
+      "params": 3145728,
+      "tensors": 1,
+      "examples": [
+        "model.codec_embedding.weight"
+      ],
+      "share_pct": 0.0946,
+      "params_b": 0.003146
+    },
+    "text_projection": {
+      "params": 6294528,
+      "tensors": 4,
+      "examples": [
+        "text_projection.linear_fc1.weight",
+        "text_projection.linear_fc1.bias",
+        "text_projection.linear_fc2.weight"
+      ],
+      "share_pct": 0.1893,
+      "params_b": 0.006295
+    },
+    "codec_head": {
+      "params": 3145728,
+      "tensors": 1,
+      "examples": [
+        "codec_head.weight"
+      ],
+      "share_pct": 0.0946,
+      "params_b": 0.003146
+    },
+    "cp_body": {
+      "params": 78655744,
+      "tensors": 56,
+      "examples": [
+        "code_predictor.model.layers.0.self_attn.q_proj.weight",
+        "code_predictor.model.layers.0.self_attn.k_proj.weight",
+        "code_predictor.model.layers.0.self_attn.v_proj.weight"
+      ],
+      "share_pct": 2.3659,
+      "params_b": 0.078656
+    },
+    "cp_residual_embedding_tables": {
+      "params": 31457280,
+      "tensors": 15,
+      "examples": [
+        "code_predictor.model.codec_embedding.0.weight",
+        "code_predictor.model.codec_embedding.1.weight",
+        "code_predictor.model.codec_embedding.2.weight"
+      ],
+      "share_pct": 0.9462,
+      "params_b": 0.031457
+    },
+    "cp_residual_lm_heads": {
+      "params": 31457280,
+      "tensors": 15,
+      "examples": [
+        "code_predictor.lm_head.0.weight",
+        "code_predictor.lm_head.1.weight",
+        "code_predictor.lm_head.2.weight"
+      ],
+      "share_pct": 0.9462,
+      "params_b": 0.031457
+    }
+  },
+  "v0_protocol": {
+    "codebook": 1024,
+    "groups": 16,
+    "ce_upper_bound_log1024": 6.931472,
+    "note": "PI 裁决⑪：loss 与采样双侧 mask 1024–2047 及 2048+，报数必须给 CE/上限"
+  },
+  "prior_availability": {
+    "codec_head": {
+      "v0_state": "名义有先验，语义失配",
+      "why": "预训练时 codec_head 是 3072 类（2048 码字 + 1024 special），tied 到 Qwen3-TTS 2048 码本；v0 只监督前 1024 类且目标是 EnCodec 码本，第 k 行对应的音色语义与预训练无关",
+      "must_report": "第 1 层 CE 必须与 EnCodec 码本分布对照，不能与预训练 loss 比"
+    },
+    "cp_residual_lm_heads": {
+      "v0_state": "名义有先验，语义失配（15 个全部）",
+      "why": "15 个 lm_head 各自 2048 类，预训练对齐 Qwen3-TTS 残差码本；v0 只切 0–1023 且对应 EnCodec 第 2–16 层，行号到音色的映射整体重排",
+      "must_report": "15 个 CE 必须逐个报，不能只报均值；且要报「CE/上限 log(1024)=6.9307」"
+    },
+    "cp_residual_embedding_tables": {
+      "v0_state": "名义有先验，语义失配（15 个全部）",
+      "why": "同上：15 张 2048×1024 嵌入表按 Qwen3-TTS 码本索引，EnCodec 码值同号不同义",
+      "must_report": "teacher forcing 输入是**真值**码嵌入，所以输入分布会被先验表扭曲成「看起来 loss 降得快」的假象，必须与随机初始化同结构对照"
+    },
+    "cp_body": {
+      "v0_state": "有先验（5 层 self-attn+MLP，与码本无关）",
+      "why": "只做残差层的自回归建模，不依赖码本语义，可视为可用先验",
+      "must_report": "单独报这部分的冻结/训练策略"
+    },
+    "moe_experts_3d": {
+      "v0_state": "有先验（但 v0 冻结）",
+      "why": "30B 主干专家，v0 只做 LoRA，专家不训练",
+      "must_report": "冻结比例与 LoRA 可训练占比"
+    },
+    "text_projection": {
+      "v0_state": "有先验",
+      "why": "2048→1024 的两层 MLP + SiLU， thinker 词嵌入→talker 空间的映射，与码本无关",
+      "must_report": "v0 是否解冻（决定文本条件能不能适配 beatbox 域）"
+    }
+  },
+  "retarget_params": 66060288,
+  "retarget_params_b": 0.06606,
+  "retarget_share_pct": 1.987,
+  "lora": {
+    "rank": 16,
+    "alpha": 32,
+    "skip_contains": [
+      "codec_head"
+    ],
+    "n_targets": 214,
+    "lora_params": 7602496,
+    "trainable_ratio": 0.00228674,
+    "note": "3D 融合专家不是 nn.Linear，LoRA 不覆盖；专家冻结时只能说「head + LoRA 可学」"
+  },
+  "detail": {
+    "n_residual_lm_heads": 15,
+    "n_residual_embedding_tables": 15,
+    "lm_head_shapes": [
+      [
+        2048,
+        1024
+      ]
+    ],
+    "embedding_shapes": [
+      [
+        2048,
+        1024
+      ]
+    ]
+  }
+}

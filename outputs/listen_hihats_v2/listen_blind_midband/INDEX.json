@@ -1,0 +1,338 @@
+[
+ {
+  "item": "item_01",
+  "role": "ref",
+  "file": "wav/item_01_ref.wav",
+  "sha1": "a1545200f8f5a0d7fc8f3b922407d4ac2dd0b116",
+  "bytes": 11752
+ },
+ {
+  "item": "item_01",
+  "role": "cand",
+  "file": "wav/item_01_cand.wav",
+  "sha1": "a1545200f8f5a0d7fc8f3b922407d4ac2dd0b116",
+  "bytes": 11752
+ },
+ {
+  "item": "item_02",
+  "role": "ref",
+  "file": "wav/item_02_ref.wav",
+  "sha1": "7003165453c989dfc76b8a4e8513e090d275dda1",
+  "bytes": 11756
+ },
+ {
+  "item": "item_02",
+  "role": "cand",
+  "file": "wav/item_02_cand.wav",
+  "sha1": "7003165453c989dfc76b8a4e8513e090d275dda1",
+  "bytes": 11756
+ },
+ {
+  "item": "item_03",
+  "role": "ref",
+  "file": "wav/item_03_ref.wav",
+  "sha1": "f95f9454349c2dbec8abc1ec10a510d93835b2bc",
+  "bytes": 13144
+ },
+ {
+  "item": "item_03",
+  "role": "cand",
+  "file": "wav/item_03_cand.wav",
+  "sha1": "84692f146b5151c189fd60a982a7de649e46fa00",
+  "bytes": 13144
+ },
+ {
+  "item": "item_04",
+  "role": "ref",
+  "file": "wav/item_04_ref.wav",
+  "sha1": "3bdd1df15cba3edc670a3aed737777bf23c280a6",
+  "bytes": 9660
+ },
+ {
+  "item": "item_04",
+  "role": "cand",
+  "file": "wav/item_04_cand.wav",
+  "sha1": "de62c4e966af08e2fbbe3879a4132332814f9856",
+  "bytes": 9660
+ },
+ {
+  "item": "item_05",
+  "role": "ref",
+  "file": "wav/item_05_ref.wav",
+  "sha1": "2a703baa7dd42f2b3a464f23476673e67a358c1a",
+  "bytes": 11756
+ },
+ {
+  "item": "item_05",
+  "role": "cand",
+  "file": "wav/item_05_cand.wav",
+  "sha1": "9b3ec20efa43d9dad7729afb3cf4d8ec8e2d0b81",
+  "bytes": 11756
+ },
+ {
+  "item": "item_06",
+  "role": "ref",
+  "file": "wav/item_06_ref.wav",
+  "sha1": "76938034018d58e9f0f7831bc81e61b0e83a6fdd",
+  "bytes": 8272
+ },
+ {
+  "item": "item_06",
+  "role": "cand",
+  "file": "wav/item_06_cand.wav",
+  "sha1": "347afcab233621a69fbb95343257ca618c9cfb72",
+  "bytes": 8272
+ },
+ {
+  "item": "item_07",
+  "role": "ref",
+  "file": "wav/item_07_ref.wav",
+  "sha1": "77a7fbc4adfa53967cdda92db5d88efa2a57d83f",
+  "bytes": 11756
+ },
+ {
+  "item": "item_07",
+  "role": "cand",
+  "file": "wav/item_07_cand.wav",
+  "sha1": "77a7fbc4adfa53967cdda92db5d88efa2a57d83f",
+  "bytes": 11756
+ },
+ {
+  "item": "item_08",
+  "role": "ref",
+  "file": "wav/item_08_ref.wav",
+  "sha1": "a2f853aedb7237df3ab355e3ba6273b4aea2d94c",
+  "bytes": 6176
+ },
+ {
+  "item": "item_08",
+  "role": "cand",
+  "file": "wav/item_08_cand.wav",
+  "sha1": "40dc8cf9b0d1e62de8db6da2e476dbc14c00ce96",
+  "bytes": 6176
+ },
+ {
+  "item": "item_09",
+  "role": "ref",
+  "file": "wav/item_09_ref.wav",
+  "sha1": "76938034018d58e9f0f7831bc81e61b0e83a6fdd",
+  "bytes": 8272
+ },
+ {
+  "item": "item_09",
+  "role": "cand",
+  "file": "wav/item_09_cand.wav",
+  "sha1": "76938034018d58e9f0f7831bc81e61b0e83a6fdd",
+  "bytes": 8272
+ },
+ {
+  "item": "item_10",
+  "role": "ref",
+  "file": "wav/item_10_ref.wav",
+  "sha1": "7003165453c989dfc76b8a4e8513e090d275dda1",
+  "bytes": 11756
+ },
+ {
+  "item": "item_10",
+  "role": "cand",
+  "file": "wav/item_10_cand.wav",
+  "sha1": "550bac9d26b06572ff2a72d09ffc7997aad67343",
+  "bytes": 11756
+ },
+ {
+  "item": "item_11",
+  "role": "ref",
+  "file": "wav/item_11_ref.wav",
+  "sha1": "3bdd1df15cba3edc670a3aed737777bf23c280a6",
+  "bytes": 9660
+ },
+ {
+  "item": "item_11",
+  "role": "cand",
+  "file": "wav/item_11_cand.wav",
+  "sha1": "3bdd1df15cba3edc670a3aed737777bf23c280a6",
+  "bytes": 9660
+ },
+ {
+  "item": "item_12",
+  "role": "ref",
+  "file": "wav/item_12_ref.wav",
+  "sha1": "a49533d3f484d0ee82a863be32ce936f28288296",
+  "bytes": 11756
+ },
+ {
+  "item": "item_12",
+  "role": "cand",
+  "file": "wav/item_12_cand.wav",
+  "sha1": "364cf51e72a85f2355366a399263db25f8896a4a",
+  "bytes": 11756
+ },
+ {
+  "item": "item_13",
+  "role": "ref",
+  "file": "wav/item_13_ref.wav",
+  "sha1": "ab0f55f673571b62adecec7675be691525ae8478",
+  "bytes": 8968
+ },
+ {
+  "item": "item_13",
+  "role": "cand",
+  "file": "wav/item_13_cand.wav",
+  "sha1": "ab0f55f673571b62adecec7675be691525ae8478",
+  "bytes": 8968
+ },
+ {
+  "item": "item_14",
+  "role": "ref",
+  "file": "wav/item_14_ref.wav",
+  "sha1": "ab0f55f673571b62adecec7675be691525ae8478",
+  "bytes": 8968
+ },
+ {
+  "item": "item_14",
+  "role": "cand",
+  "file": "wav/item_14_cand.wav",
+  "sha1": "c1ccbbcf42568b27e3f6ab6397b4ff10e97cae2d",
+  "bytes": 8968
+ },
+ {
+  "item": "item_15",
+  "role": "ref",
+  "file": "wav/item_15_ref.wav",
+  "sha1": "579403e3205cab6ace7cafb55e3b4dc8dd2aa6c5",
+  "bytes": 11052
+ },
+ {
+  "item": "item_15",
+  "role": "cand",
+  "file": "wav/item_15_cand.wav",
+  "sha1": "d289f77abe5264b82fa1e6c02b047e3d3b48a060",
+  "bytes": 11052
+ },
+ {
+  "item": "item_16",
+  "role": "ref",
+  "file": "wav/item_16_ref.wav",
+  "sha1": "8789b64832fd5f95db42920903fee6a8f960f71b",
+  "bytes": 14540
+ },
+ {
+  "item": "item_16",
+  "role": "cand",
+  "file": "wav/item_16_cand.wav",
+  "sha1": "8789b64832fd5f95db42920903fee6a8f960f71b",
+  "bytes": 14540
+ },
+ {
+  "item": "item_17",
+  "role": "ref",
+  "file": "wav/item_17_ref.wav",
+  "sha1": "f95f9454349c2dbec8abc1ec10a510d93835b2bc",
+  "bytes": 13144
+ },
+ {
+  "item": "item_17",
+  "role": "cand",
+  "file": "wav/item_17_cand.wav",
+  "sha1": "f95f9454349c2dbec8abc1ec10a510d93835b2bc",
+  "bytes": 13144
+ },
+ {
+  "item": "item_18",
+  "role": "ref",
+  "file": "wav/item_18_ref.wav",
+  "sha1": "2a703baa7dd42f2b3a464f23476673e67a358c1a",
+  "bytes": 11756
+ },
+ {
+  "item": "item_18",
+  "role": "cand",
+  "file": "wav/item_18_cand.wav",
+  "sha1": "2a703baa7dd42f2b3a464f23476673e67a358c1a",
+  "bytes": 11756
+ },
+ {
+  "item": "item_19",
+  "role": "ref",
+  "file": "wav/item_19_ref.wav",
+  "sha1": "a1545200f8f5a0d7fc8f3b922407d4ac2dd0b116",
+  "bytes": 11752
+ },
+ {
+  "item": "item_19",
+  "role": "cand",
+  "file": "wav/item_19_cand.wav",
+  "sha1": "28f4a9a168ae168b9292fd5b1b1059476ec8e85c",
+  "bytes": 11752
+ },
+ {
+  "item": "item_20",
+  "role": "ref",
+  "file": "wav/item_20_ref.wav",
+  "sha1": "a49533d3f484d0ee82a863be32ce936f28288296",
+  "bytes": 11756
+ },
+ {
+  "item": "item_20",
+  "role": "cand",
+  "file": "wav/item_20_cand.wav",
+  "sha1": "a49533d3f484d0ee82a863be32ce936f28288296",
+  "bytes": 11756
+ },
+ {
+  "item": "item_21",
+  "role": "ref",
+  "file": "wav/item_21_ref.wav",
+  "sha1": "8789b64832fd5f95db42920903fee6a8f960f71b",
+  "bytes": 14540
+ },
+ {
+  "item": "item_21",
+  "role": "cand",
+  "file": "wav/item_21_cand.wav",
+  "sha1": "6a886b2c64a5cec3dec9b1c028ad1445b6e42df2",
+  "bytes": 14540
+ },
+ {
+  "item": "item_22",
+  "role": "ref",
+  "file": "wav/item_22_ref.wav",
+  "sha1": "a2f853aedb7237df3ab355e3ba6273b4aea2d94c",
+  "bytes": 6176
+ },
+ {
+  "item": "item_22",
+  "role": "cand",
+  "file": "wav/item_22_cand.wav",
+  "sha1": "a2f853aedb7237df3ab355e3ba6273b4aea2d94c",
+  "bytes": 6176
+ },
+ {
+  "item": "item_23",
+  "role": "ref",
+  "file": "wav/item_23_ref.wav",
+  "sha1": "579403e3205cab6ace7cafb55e3b4dc8dd2aa6c5",
+  "bytes": 11052
+ },
+ {
+  "item": "item_23",
+  "role": "cand",
+  "file": "wav/item_23_cand.wav",
+  "sha1": "579403e3205cab6ace7cafb55e3b4dc8dd2aa6c5",
+  "bytes": 11052
+ },
+ {
+  "item": "item_24",
+  "role": "ref",
+  "file": "wav/item_24_ref.wav",
+  "sha1": "77a7fbc4adfa53967cdda92db5d88efa2a57d83f",
+  "bytes": 11756
+ },
+ {
+  "item": "item_24",
+  "role": "cand",
+  "file": "wav/item_24_cand.wav",
+  "sha1": "c2e0264014a57695df23b6987d0384f6f2efbb21",
+  "bytes": 11756
+ }
+]

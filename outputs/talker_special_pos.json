@@ -1,0 +1,172 @@
+{
+  "code_sha256": "c5e49ac6dd522e131516ae2c2ad338a49c92af2ac325c7dd11e607fc6c448667",
+  "dtype": "bfloat16",
+  "transformers": "5.16.1",
+  "talker_hidden": 1024,
+  "thinker_hidden": 2048,
+  "layers_instantiated": 1,
+  "layers_in_config": 20,
+  "text_projection_type": "Qwen3OmniMoeTalkerResizeMLP",
+  "text_projection_shapes": [
+    [
+      2048,
+      2048
+    ],
+    [
+      2048
+    ],
+    [
+      1024,
+      2048
+    ],
+    [
+      1024
+    ]
+  ],
+  "position_id_per_seconds": 13,
+  "mrope_section": [
+    24,
+    20,
+    20
+  ],
+  "head_dim": 128,
+  "special_ids": {
+    "codec_nothink": 2155,
+    "codec_think_bos": 2156,
+    "codec_think_eos": 2157,
+    "speaker": 2301,
+    "codec_pad": 2148,
+    "codec_bos": 2149
+  },
+  "special": {
+    "official_prefill_len": 9,
+    "local_prefill_len": 9,
+    "official_trailing_len": 5,
+    "local_trailing_len": 5,
+    "official_input_ids_unique": [
+      151671
+    ],
+    "expected_tts_pad_token_id": 151671,
+    "tts_ids_contract": "[bos, eos, pad]（build_assistant_frames L201: tts[:,0]=bos, [:,1]=eos, [:,2]=pad）",
+    "tts_ids_used_ok": [
+      151672,
+      151673,
+      151671
+    ],
+    "tts_ids_used_negative_control": [
+      151671,
+      151672,
+      151673
+    ],
+    "prefill_max_abs_diff": 0.0,
+    "trailing_max_abs_diff": 0.0,
+    "negative_control_prefill_max_abs_diff": 2.265625,
+    "negative_control_trailing_max_abs_diff": 2.1875,
+    "negative_control_detected": true,
+    "label_first_supervised_index": 8,
+    "label_n_supervised": 3,
+    "local_seq_len": 11,
+    "expected_seq_len_prefill_plus_T": 11,
+    "pass": true
+  },
+  "position_ids": {
+    "cases": [
+      {
+        "T": 64,
+        "N": 72,
+        "official_shape": [
+          3,
+          1,
+          72
+        ],
+        "delta_sec_shape": [
+          1,
+          1
+        ],
+        "max_abs_diff": 0,
+        "n_mismatch": 0,
+        "axis0_head": [
+          0.0,
+          1.0,
+          2.0
+        ],
+        "axis0_tail": [
+          69.0,
+          70.0,
+          71.0
+        ],
+        "all_three_axes_equal": true,
+        "pass": true
+      },
+      {
+        "T": 232,
+        "N": 240,
+        "official_shape": [
+          3,
+          1,
+          240
+        ],
+        "delta_sec_shape": [
+          1,
+          1
+        ],
+        "max_abs_diff": 0,
+        "n_mismatch": 0,
+        "axis0_head": [
+          0.0,
+          1.0,
+          2.0
+        ],
+        "axis0_tail": [
+          237.0,
+          238.0,
+          239.0
+        ],
+        "all_three_axes_equal": true,
+        "pass": true
+      },
+      {
+        "T": 600,
+        "N": 608,
+        "official_shape": [
+          3,
+          1,
+          608
+        ],
+        "delta_sec_shape": [
+          1,
+          1
+        ],
+        "max_abs_diff": 0,
+        "n_mismatch": 0,
+        "axis0_head": [
+          0.0,
+          1.0,
+          2.0
+        ],
+        "axis0_tail": [
+          605.0,
+          606.0,
+          607.0
+        ],
+        "all_three_axes_equal": true,
+        "pass": true
+      }
+    ],
+    "pass": true,
+    "note": "input_ids 全为 tts_pad_token_id，与 _get_talker_assistant_parts 返回的 input_ids 一致"
+  },
+  "mrope_consistency": {
+    "mrope_section": [
+      24,
+      20,
+      20
+    ],
+    "sum": 64,
+    "head_dim": 128,
+    "half_head_dim": 64.0,
+    "sum_equals_half_head_dim": true,
+    "note": "RoPE 的 mrope_section 按 head_dim/2 分配三轴 inv_freq；和等于 head_dim/2 才自洽"
+  },
+  "verdict": "PASS"
+}

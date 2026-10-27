@@ -1,0 +1,47 @@
+{
+ "listen_n": 24,
+ "quota_plan": {
+  "cymbal": 12,
+  "hihats": 6,
+  "click_60_200ms": 6
+ },
+ "counts": {
+  "cymbal": 12,
+  "hihats": 6,
+  "click_60_200ms": 6
+ },
+ "cymbal": 12,
+ "hihats": 6,
+ "click_60_200ms": 6,
+ "n_wav": 96,
+ "n_dup": 24,
+ "arms": [
+  "true",
+  "75",
+  "13c",
+  "13p"
+ ],
+ "dup_note": "dup/ = true 的字节副本，隐藏对照，不计入 96；判读率不达标整卡作废、不补样硬凑",
+ "subtype": "FLOAT",
+ "selection": "codec_rate_ab.build_pools → cymbal/hihats 用 _spread_by_source（每 source 至多 1 条），click_60_200ms 用 _spread；族内按 mel13p_vs_75 排序均匀取（最差/中位/最好都覆盖）",
+ "source_of_truth": "outputs/codec_rate_ab/per_hit.csv (live R4, 31 col)",
+ "per_hit_md5": "235158c7877f5620e5443790c19f30e8",
+ "generator": "codec_rate_ab.py 未修改（sha256 de837b26…），配额走旁路，不改冻结件",
+ "pool_sizes": {
+  "cymbal": 38,
+  "hihats": 247,
+  "click_60_200ms": 2891
+ },
+ "pool_n_sources": {
+  "cymbal": 20,
+  "hihats": 43,
+  "click_60_200ms": 80
+ },
+ "n_sources_picked": {
+  "cymbal": 12,
+  "hihats": 6,
+  "click_60_200ms": 5
+ },
+ "warning": "click_60_200ms 是时长桶（跨 12 family，非 clicks 家族）；本包只供人耳试听，不构成任何 family 已验收的证明",
+ "skipped": []
+}

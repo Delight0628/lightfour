@@ -1,0 +1,18 @@
+{
+ "ref": 24,
+ "cand_files": 96,
+ "cand_unique": 72,
+ "dup_hidden": 24,
+ "total_wav": 120,
+ "dup_by_pool": {
+  "hihats": 6,
+  "click_60_200ms": 6,
+  "cymbal": 12
+ },
+ "listen_composition_counts": {
+  "cymbal": 12,
+  "hihats": 6,
+  "click_60_200ms": 6,
+  "fill": 0
+ }
+}

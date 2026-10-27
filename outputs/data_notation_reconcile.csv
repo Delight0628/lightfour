@@ -1,0 +1,51 @@
+notation,sound_ids,family,in_103,in_seedlib,n_hits,label_source,action
+-b,16,hihats,Y,N,1,model:1,seed 缺项：建议补种子
+A,83|84,drag,Y,Y,777,model:776|rule_hat:1,保留
+CL*,53,clops,Y,Y,204,model:204,保留
+Chῤ,90,reverse,Y,Y,45,model:25|rule_hat:20,保留
+D,6,kicks,Y,Y,114,model:114,保留
+D*,93,other,Y,N,4,model:4,seed 缺项：建议补种子
+Df,36|97,other|snares,Y,N,4,model:4,seed 缺项：建议补种子
+Drhb,74,tongue,Y,Y,0,,有种子无序列命中：查窗口/过滤
+F,12,hihats,Y,Y,154,rule_hat:154,保留
+Hb,7,kicks,Y,Y,2,model:2,保留
+Hw,79,whistles,Y,Y,0,,有种子无序列命中：查窗口/过滤
+Juy,87,scratch,Y,Y,8,model:8,保留
+K,20|33,snares,Y,N,288,model:282|rule_hat:6,seed 缺项：建议补种子
+K',23,snares,Y,N,26,model:26,seed 缺项：建议补种子
+K'²,24,snares,Y,N,16,model:16,seed 缺项：建议补种子
+K`,25,snares,Y,Y,35,model:35,保留
+Kb,21,snares,Y,N,11,model:11,seed 缺项：建议补种子
+Kch,28|34,snares,Y,N,304,model:304,seed 缺项：建议补种子
+Km,26,snares,Y,N,6,model:6,seed 缺项：建议补种子
+K²,22,snares,Y,N,36,model:35|rule_hat:1,seed 缺项：建议补种子
+L,51,clops,Y,Y,67,model:67,保留
+L*,52,clops,Y,N,1,model:1,seed 缺项：建议补种子
+M,37,snares,Y,Y,981,model:179|rule_hat:802,保留
+Mew,101,other,Y,Y,81,model:81,保留
+O,54,vocal,Y,Y,177,model:177,保留
+Ow,91,synth,Y,Y,2,model:2,保留
+Ow🎵,92,synth,Y,Y,85,model:85,保留
+P,0|1,kicks,Y,N,3,model:3,seed 缺项：建议补种子
+Peh,38,snares,Y,Y,212,model:212,保留
+Pss,41,cymbal,Y,Y,38,model:15|rule_hat:23,保留
+Rr,57,vocal,Y,Y,18,model:18,保留
+Shuy,88,scratch,Y,Y,19,model:19,保留
+Tch,13,hihats,Y,Y,44,model:2|rule_hat:42,保留
+Tss,11,hihats,Y,Y,43,rule_hat:43,保留
+W,66,liprolls,Y,Y,95,model:95,保留
+Z,65,lip_oscillation,Y,Y,1,model:1,保留
+Zip,85,zippers,Y,Y,19,model:19,保留
+Zip~,86,zippers,Y,Y,184,model:184,保留
+d,43,clicks,Y,Y,1,model:1,保留
+da,44,clicks,Y,Y,331,model:331,保留
+do,45,clicks,Y,N,1,model:1,seed 缺项：建议补种子
+f,15,hihats,Y,N,5,rule_hat:5,seed 缺项：建议补种子
+k,18,snares,Y,N,16,model:13|rule_hat:3,seed 缺项：建议补种子
+s,31,snares,Y,N,2,model:2,seed 缺项：建议补种子
+s²,32,snares,Y,N,979,model:978|rule_hat:1,seed 缺项：建议补种子
+w°,59,lip_oscillation,Y,Y,16,model:16,保留
+w🗣️P0,60,lip_oscillation,Y,Y,0,,有种子无序列命中：查窗口/过滤
+w🗣️P8,62,lip_oscillation,Y,Y,0,,有种子无序列命中：查窗口/过滤
+🍾,94,other,Y,Y,13,model:13,保留
+🦷🗣️°,82,teeth,Y,Y,3,model:3,保留

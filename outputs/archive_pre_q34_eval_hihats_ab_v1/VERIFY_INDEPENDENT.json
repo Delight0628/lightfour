@@ -1,0 +1,9 @@
+{
+ "gate": "independent-verify",
+ "pass": true,
+ "sha1_cand_vs_source": "36/36",
+ "sha1_ref_vs_source": "12/12",
+ "file_set_bidirectional": true,
+ "sheet_join": "36/36",
+ "failures": []
+}

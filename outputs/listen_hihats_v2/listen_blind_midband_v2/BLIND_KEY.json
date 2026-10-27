@@ -1,0 +1,277 @@
+{
+ "schema": "lightfour.listen_blind_midband_v2.blind_key/1",
+ "seed": 20261027,
+ "note": "answer key - NOT distributed with the pack",
+ "src_index_md5": "76496da2692658eda886afc6f4fc696f",
+ "src_composition_md5": "284bde6e0cea2dcd85b0e78b3010060c",
+ "per_hit_md5": "235158c7877f5620e5443790c19f30e8",
+ "counts": {
+  "items": 12,
+  "cand_per_item": 3,
+  "dup": 12,
+  "arms_hidden": [
+   "75",
+   "13p",
+   "dup"
+  ],
+  "arm_order_canonical": [
+   "75",
+   "13p",
+   "dup"
+  ]
+ },
+ "items": {
+  "0": {
+   "hit_id": "BV1VZ4y1W7sf_0170",
+   "hit_index": "19",
+   "sequence_id": "SEQ-00170",
+   "source": "BV1VZ4y1W7sf",
+   "split": "train",
+   "sound_id": "13",
+   "sound_notation": "Tch",
+   "sound_family": "hihats",
+   "dur_ms": 121.6,
+   "arm_order_canonical": [
+    "75",
+    "13p",
+    "dup"
+   ],
+   "slots": {
+    "c1": "13p",
+    "c2": "dup",
+    "c3": "75"
+   }
+  },
+  "1": {
+   "hit_id": "BV1Qb411G7Y7_0732",
+   "hit_index": "8",
+   "sequence_id": "SEQ-00123",
+   "source": "BV1Qb411G7Y7",
+   "split": "train",
+   "sound_id": "12",
+   "sound_notation": "F",
+   "sound_family": "hihats",
+   "dur_ms": 121.6,
+   "arm_order_canonical": [
+    "75",
+    "13p",
+    "dup"
+   ],
+   "slots": {
+    "c1": "13p",
+    "c2": "75",
+    "c3": "dup"
+   }
+  },
+  "2": {
+   "hit_id": "BV1SW411g7qK_0355",
+   "hit_index": "1",
+   "sequence_id": "SEQ-00131",
+   "source": "BV1SW411g7qK",
+   "split": "train",
+   "sound_id": "12",
+   "sound_notation": "F",
+   "sound_family": "hihats",
+   "dur_ms": 121.6,
+   "arm_order_canonical": [
+    "75",
+    "13p",
+    "dup"
+   ],
+   "slots": {
+    "c1": "75",
+    "c2": "13p",
+    "c3": "dup"
+   }
+  },
+  "3": {
+   "hit_id": "BV1Suy5YuEYa_0291",
+   "hit_index": "11",
+   "sequence_id": "SEQ-00138",
+   "source": "BV1Suy5YuEYa",
+   "split": "train",
+   "sound_id": "12",
+   "sound_notation": "F",
+   "sound_family": "hihats",
+   "dur_ms": 99.8,
+   "arm_order_canonical": [
+    "75",
+    "13p",
+    "dup"
+   ],
+   "slots": {
+    "c1": "13p",
+    "c2": "75",
+    "c3": "dup"
+   }
+  },
+  "4": {
+   "hit_id": "BV1UEZtY2EoL_0255",
+   "hit_index": "9",
+   "sequence_id": "SEQ-00142",
+   "source": "BV1UEZtY2EoL",
+   "split": "test",
+   "sound_id": "12",
+   "sound_notation": "F",
+   "sound_family": "hihats",
+   "dur_ms": 136.1,
+   "arm_order_canonical": [
+    "75",
+    "13p",
+    "dup"
+   ],
+   "slots": {
+    "c1": "dup",
+    "c2": "75",
+    "c3": "13p"
+   }
+  },
+  "5": {
+   "hit_id": "BV122BjYFEEg_0420",
+   "hit_index": "5",
+   "sequence_id": "SEQ-00004",
+   "source": "BV122BjYFEEg",
+   "split": "train",
+   "sound_id": "12",
+   "sound_notation": "F",
+   "sound_family": "hihats",
+   "dur_ms": 121.6,
+   "arm_order_canonical": [
+    "75",
+    "13p",
+    "dup"
+   ],
+   "slots": {
+    "c1": "13p",
+    "c2": "75",
+    "c3": "dup"
+   }
+  },
+  "6": {
+   "hit_id": "BV1VonA6WEDs_1354",
+   "hit_index": "2",
+   "sequence_id": "SEQ-00183",
+   "source": "BV1VonA6WEDs",
+   "split": "train",
+   "sound_id": "13",
+   "sound_notation": "Tch",
+   "sound_family": "hihats",
+   "dur_ms": 92.6,
+   "arm_order_canonical": [
+    "75",
+    "13p",
+    "dup"
+   ],
+   "slots": {
+    "c1": "75",
+    "c2": "13p",
+    "c3": "dup"
+   }
+  },
+  "7": {
+   "hit_id": "BV1np4nzGEiN_0549",
+   "hit_index": "5",
+   "sequence_id": "SEQ-00236",
+   "source": "BV1np4nzGEiN",
+   "split": "val",
+   "sound_id": "12",
+   "sound_notation": "F",
+   "sound_family": "hihats",
+   "dur_ms": 85.3,
+   "arm_order_canonical": [
+    "75",
+    "13p",
+    "dup"
+   ],
+   "slots": {
+    "c1": "dup",
+    "c2": "13p",
+    "c3": "75"
+   }
+  },
+  "8": {
+   "hit_id": "BV1fRg1zBEyi_0104",
+   "hit_index": "1",
+   "sequence_id": "SEQ-00215",
+   "source": "BV1fRg1zBEyi",
+   "split": "train",
+   "sound_id": "12",
+   "sound_notation": "F",
+   "sound_family": "hihats",
+   "dur_ms": 150.6,
+   "arm_order_canonical": [
+    "75",
+    "13p",
+    "dup"
+   ],
+   "slots": {
+    "c1": "dup",
+    "c2": "75",
+    "c3": "13p"
+   }
+  },
+  "9": {
+   "hit_id": "BV1YssozfEXU_0030",
+   "hit_index": "0",
+   "sequence_id": "SEQ-00202",
+   "source": "BV1YssozfEXU",
+   "split": "train",
+   "sound_id": "12",
+   "sound_notation": "F",
+   "sound_family": "hihats",
+   "dur_ms": 63.5,
+   "arm_order_canonical": [
+    "75",
+    "13p",
+    "dup"
+   ],
+   "slots": {
+    "c1": "dup",
+    "c2": "13p",
+    "c3": "75"
+   }
+  },
+  "10": {
+   "hit_id": "BV11m421W7Xc_1005",
+   "hit_index": "1",
+   "sequence_id": "SEQ-00003",
+   "source": "BV11m421W7Xc",
+   "split": "train",
+   "sound_id": "12",
+   "sound_notation": "F",
+   "sound_family": "hihats",
+   "dur_ms": 114.3,
+   "arm_order_canonical": [
+    "75",
+    "13p",
+    "dup"
+   ],
+   "slots": {
+    "c1": "dup",
+    "c2": "75",
+    "c3": "13p"
+   }
+  },
+  "11": {
+   "hit_id": "BV1EeJR6TEzm_0164",
+   "hit_index": "9",
+   "sequence_id": "SEQ-00064",
+   "source": "BV1EeJR6TEzm",
+   "split": "train",
+   "sound_id": "11",
+   "sound_notation": "Tss",
+   "sound_family": "hihats",
+   "dur_ms": 121.6,
+   "arm_order_canonical": [
+    "75",
+    "13p",
+    "dup"
+   ],
+   "slots": {
+    "c1": "dup",
+    "c2": "75",
+    "c3": "13p"
+   }
+  }
+ }
+}

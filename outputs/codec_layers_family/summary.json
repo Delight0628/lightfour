@@ -1,0 +1,63 @@
+{
+ "experiment": "镲类/Hi-hats 16 层 vs 32 层（同批、同 mel 实现）",
+ "codec": "encodec_24khz / 24kbps / codebook 1024",
+ "n_sequences": 115,
+ "n_hits": 2174,
+ "mel_spec": {
+  "sr": 24000,
+  "n_fft": 1024,
+  "hop": 256,
+  "n_mels": 128,
+  "log_eps": 1e-06
+ },
+ "hf_cutoff_hz": 2000,
+ "codes16_reencode_mismatch": 0,
+ "table": [
+  {
+   "group": "target_hihats_cymbal",
+   "n": 285,
+   "mel16_median": 0.8319,
+   "mel32_median": 0.7714,
+   "delta_pct_median": -7.8,
+   "share_32_better": 0.9649,
+   "hf_true": 0.8905,
+   "hf16": 0.8819,
+   "hf32": 0.8835
+  },
+  {
+   "group": "control_other_fams",
+   "n": 1889,
+   "mel16_median": 0.7605,
+   "mel32_median": 0.6879,
+   "delta_pct_median": -9.7,
+   "share_32_better": 0.9931,
+   "hf_true": 0.6971,
+   "hf16": 0.6874,
+   "hf32": 0.6857
+  },
+  {
+   "group": "family:hihats",
+   "n": 247,
+   "mel16_median": 0.8429,
+   "mel32_median": 0.7816,
+   "delta_pct_median": -7.6,
+   "share_32_better": 0.9595,
+   "hf_true": 0.9039,
+   "hf16": 0.8962,
+   "hf32": 0.8982
+  },
+  {
+   "group": "family:cymbal",
+   "n": 38,
+   "mel16_median": 0.748,
+   "mel32_median": 0.6756,
+   "delta_pct_median": -9.7,
+   "share_32_better": 1.0,
+   "hf_true": 0.8036,
+   "hf16": 0.7891,
+   "hf32": 0.7882
+  }
+ ],
+ "gate_a_note": "§8 Gate A：mel 中位 <0.8、镲类不明显劣化；16 层 hihats 0.826 已越线",
+ "generated_by": "scripts/codec_layers_family.py"
+}

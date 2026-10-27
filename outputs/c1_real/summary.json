@@ -1,0 +1,345 @@
+{
+ "overall": {
+  "n": 96,
+  "mel_L16": {
+   "n": 96,
+   "median": 0.8219,
+   "mean": 0.8448,
+   "q25": 0.7577,
+   "q75": 0.9101,
+   "verdict_allowed": true
+  },
+  "mel_L32": {
+   "n": 96,
+   "median": 0.7556,
+   "mean": 0.7718,
+   "q25": 0.6797,
+   "q75": 0.8399,
+   "verdict_allowed": true
+  },
+  "delta_pct": 8.1,
+  "mean_delta_pct": 8.6,
+  "dur_ratio_raw_median": 1.02246,
+  "dur_ratio_trim": 1.0,
+  "len_check_all_ok": true,
+  "bits_per_s_L16": 12000,
+  "bits_per_s_L32": 24000
+ },
+ "per_family": {
+  "clicks": {
+   "n": 12,
+   "mel_L16": {
+    "n": 12,
+    "median": 0.7686,
+    "mean": 0.807,
+    "q25": 0.7445,
+    "q75": 0.8276,
+    "verdict_allowed": true
+   },
+   "mel_L32": {
+    "n": 12,
+    "median": 0.6885,
+    "mean": 0.7176,
+    "q25": 0.6705,
+    "q75": 0.723,
+    "verdict_allowed": true
+   },
+   "hf_absdiff_L16": {
+    "n": 12,
+    "median": 0.0158,
+    "mean": 0.0143,
+    "q25": 0.0108,
+    "q75": 0.0189,
+    "verdict_allowed": true
+   },
+   "hf_absdiff_L32": {
+    "n": 12,
+    "median": 0.0155,
+    "mean": 0.0149,
+    "q25": 0.0105,
+    "q75": 0.0205,
+    "verdict_allowed": true
+   },
+   "delta_pct": 10.4
+  },
+  "cymbal": {
+   "n": 12,
+   "mel_L16": {
+    "n": 12,
+    "median": 0.8685,
+    "mean": 0.9269,
+    "q25": 0.8275,
+    "q75": 0.9352,
+    "verdict_allowed": true
+   },
+   "mel_L32": {
+    "n": 12,
+    "median": 0.7759,
+    "mean": 0.8516,
+    "q25": 0.7666,
+    "q75": 0.8689,
+    "verdict_allowed": true
+   },
+   "hf_absdiff_L16": {
+    "n": 12,
+    "median": 0.0163,
+    "mean": 0.0175,
+    "q25": 0.0107,
+    "q75": 0.0236,
+    "verdict_allowed": true
+   },
+   "hf_absdiff_L32": {
+    "n": 12,
+    "median": 0.0175,
+    "mean": 0.0199,
+    "q25": 0.0145,
+    "q75": 0.0272,
+    "verdict_allowed": true
+   },
+   "delta_pct": 10.7
+  },
+  "drag": {
+   "n": 12,
+   "mel_L16": {
+    "n": 12,
+    "median": 0.7963,
+    "mean": 0.8042,
+    "q25": 0.7388,
+    "q75": 0.8294,
+    "verdict_allowed": true
+   },
+   "mel_L32": {
+    "n": 12,
+    "median": 0.7086,
+    "mean": 0.7318,
+    "q25": 0.6595,
+    "q75": 0.7644,
+    "verdict_allowed": true
+   },
+   "hf_absdiff_L16": {
+    "n": 12,
+    "median": 0.013,
+    "mean": 0.0165,
+    "q25": 0.0099,
+    "q75": 0.0188,
+    "verdict_allowed": true
+   },
+   "hf_absdiff_L32": {
+    "n": 12,
+    "median": 0.0155,
+    "mean": 0.0174,
+    "q25": 0.0133,
+    "q75": 0.0242,
+    "verdict_allowed": true
+   },
+   "delta_pct": 11.0
+  },
+  "hihats": {
+   "n": 12,
+   "mel_L16": {
+    "n": 12,
+    "median": 0.9309,
+    "mean": 0.9521,
+    "q25": 0.8974,
+    "q75": 0.9691,
+    "verdict_allowed": true
+   },
+   "mel_L32": {
+    "n": 12,
+    "median": 0.8632,
+    "mean": 0.8946,
+    "q25": 0.8364,
+    "q75": 0.9229,
+    "verdict_allowed": true
+   },
+   "hf_absdiff_L16": {
+    "n": 12,
+    "median": 0.004,
+    "mean": 0.0075,
+    "q25": 0.001,
+    "q75": 0.0084,
+    "verdict_allowed": true
+   },
+   "hf_absdiff_L32": {
+    "n": 12,
+    "median": 0.0043,
+    "mean": 0.0073,
+    "q25": 0.0029,
+    "q75": 0.0072,
+    "verdict_allowed": true
+   },
+   "delta_pct": 7.3
+  },
+  "kicks": {
+   "n": 12,
+   "mel_L16": {
+    "n": 12,
+    "median": 0.8101,
+    "mean": 0.8197,
+    "q25": 0.7536,
+    "q75": 0.9065,
+    "verdict_allowed": true
+   },
+   "mel_L32": {
+    "n": 12,
+    "median": 0.7164,
+    "mean": 0.7314,
+    "q25": 0.6874,
+    "q75": 0.7758,
+    "verdict_allowed": true
+   },
+   "hf_absdiff_L16": {
+    "n": 12,
+    "median": 0.0104,
+    "mean": 0.0135,
+    "q25": 0.0066,
+    "q75": 0.0167,
+    "verdict_allowed": true
+   },
+   "hf_absdiff_L32": {
+    "n": 12,
+    "median": 0.0097,
+    "mean": 0.012,
+    "q25": 0.0059,
+    "q75": 0.0137,
+    "verdict_allowed": true
+   },
+   "delta_pct": 11.6
+  },
+  "liprolls": {
+   "n": 12,
+   "mel_L16": {
+    "n": 12,
+    "median": 0.7609,
+    "mean": 0.7621,
+    "q25": 0.701,
+    "q75": 0.7999,
+    "verdict_allowed": true
+   },
+   "mel_L32": {
+    "n": 12,
+    "median": 0.6852,
+    "mean": 0.6914,
+    "q25": 0.6306,
+    "q75": 0.7213,
+    "verdict_allowed": true
+   },
+   "hf_absdiff_L16": {
+    "n": 12,
+    "median": 0.0155,
+    "mean": 0.0138,
+    "q25": 0.0061,
+    "q75": 0.0205,
+    "verdict_allowed": true
+   },
+   "hf_absdiff_L32": {
+    "n": 12,
+    "median": 0.0154,
+    "mean": 0.0151,
+    "q25": 0.0089,
+    "q75": 0.0214,
+    "verdict_allowed": true
+   },
+   "delta_pct": 9.9
+  },
+  "snares": {
+   "n": 12,
+   "mel_L16": {
+    "n": 12,
+    "median": 0.8572,
+    "mean": 0.885,
+    "q25": 0.8297,
+    "q75": 0.9634,
+    "verdict_allowed": true
+   },
+   "mel_L32": {
+    "n": 12,
+    "median": 0.8284,
+    "mean": 0.8286,
+    "q25": 0.773,
+    "q75": 0.8921,
+    "verdict_allowed": true
+   },
+   "hf_absdiff_L16": {
+    "n": 12,
+    "median": 0.0112,
+    "mean": 0.0125,
+    "q25": 0.0075,
+    "q75": 0.0146,
+    "verdict_allowed": true
+   },
+   "hf_absdiff_L32": {
+    "n": 12,
+    "median": 0.0126,
+    "mean": 0.012,
+    "q25": 0.0065,
+    "q75": 0.0156,
+    "verdict_allowed": true
+   },
+   "delta_pct": 3.4
+  },
+  "zippers": {
+   "n": 12,
+   "mel_L16": {
+    "n": 12,
+    "median": 0.7784,
+    "mean": 0.8014,
+    "q25": 0.7333,
+    "q75": 0.8178,
+    "verdict_allowed": true
+   },
+   "mel_L32": {
+    "n": 12,
+    "median": 0.7109,
+    "mean": 0.7273,
+    "q25": 0.6588,
+    "q75": 0.7518,
+    "verdict_allowed": true
+   },
+   "hf_absdiff_L16": {
+    "n": 12,
+    "median": 0.0211,
+    "mean": 0.0192,
+    "q25": 0.01,
+    "q75": 0.0226,
+    "verdict_allowed": true
+   },
+   "hf_absdiff_L32": {
+    "n": 12,
+    "median": 0.0187,
+    "mean": 0.019,
+    "q25": 0.013,
+    "q75": 0.026,
+    "verdict_allowed": true
+   },
+   "delta_pct": 8.7
+  }
+ },
+ "meta": {
+  "script_sha256_16": "33da358f1f899703",
+  "model_dir": "models/encodec_24khz",
+  "transformers": "5.16.1",
+  "torch": "2.14.0+cu130",
+  "sr": 24000,
+  "hop": 320,
+  "frame_rate_hz": 75.0,
+  "bandwidth_kbps": 24.0,
+  "n_q_total": 32,
+  "codebook_size": 1024,
+  "mel": {
+   "n_fft": 1024,
+   "hop": 256,
+   "n_mels": 128,
+   "norm": "rms->0.1"
+  },
+  "decode_padding_mask": null,
+  "input_csv": "data/real_bbox/hybrid_labels_all_highconf_l2.jsonl",
+  "input_sha256_16": "dfce5e0b4af4fa43"
+ },
+ "tokens": {
+  "dumped": 0,
+  "ok": true,
+  "shape": null,
+  "note": ""
+ }
+}

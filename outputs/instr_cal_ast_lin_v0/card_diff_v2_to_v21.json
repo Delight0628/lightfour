@@ -1,0 +1,346 @@
+{
+ "tool": "card_field_diff.py",
+ "tool_version": "1.0",
+ "tool_md5": "e07084bc296c1cb7cd159452fe8f4e32",
+ "old": {
+  "path": "outputs/instr_cal_ast_lin_v0/archive_pre_v21_handedit/INSTRUMENT_CALIBRATION.md",
+  "md5": "3943b33e52b1f3a77f71a49b0bdca02f"
+ },
+ "new": {
+  "path": "outputs/instr_cal_ast_lin_v0/INSTRUMENT_CALIBRATION.md",
+  "md5": "41e92309e9736d9464e98cb102aab6d3"
+ },
+ "authorized_classes": [
+  "A9_NEW_SECTION",
+  "VERSION_STRING",
+  "A3_CELLS_AND_NOTES_AUTH_169"
+ ],
+ "a3_auth_rows": [
+  "other",
+  "teeth",
+  "zippers"
+ ],
+ "counts": {
+  "A9_NEW_SECTION": 36,
+  "VERSION_STRING": 2,
+  "A3_CELLS_AND_NOTES_AUTH_169": 6,
+  "UNAUTHORIZED": 0
+ },
+ "line_level": {
+  "removed": 6,
+  "added": 37,
+  "changed_pairs": 6,
+  "changed_plus_removed_plus_added": 43
+ },
+ "diffs": [
+  {
+   "field": "HEADINGS :: heading[1:INSTRUMENT_CALIBRATION · 仪器校准卡（ast_lin_v0）**vX**]",
+   "old": "INSTRUMENT_CALIBRATION · 仪器校准卡（ast_lin_v0）**v2**",
+   "new": "INSTRUMENT_CALIBRATION · 仪器校准卡（ast_lin_v0）**v2.1**",
+   "class": "VERSION_STRING",
+   "subclass": "v2_to_v21"
+  },
+  {
+   "field": "HEADINGS :: heading[2:A9 识别侧三臂敏感性（vX 增补；裁决 165–168）]",
+   "old": null,
+   "new": "A9 识别侧三臂敏感性（v2.1 增补；裁决 165–168）",
+   "class": "A9_NEW_SECTION",
+   "subclass": "a9_heading_added"
+  },
+  {
+   "field": "HEADINGS :: heading[3:A9-硬要求：后续所有扰动臂（裁决 168）]",
+   "old": null,
+   "new": "A9-硬要求：后续所有扰动臂（裁决 168）",
+   "class": "A9_NEW_SECTION",
+   "subclass": "a9_heading_added"
+  },
+  {
+   "field": "HEADINGS :: heading[3:A9-附录：shuffle_feed（事后补充臂，**非验收门**）]",
+   "old": null,
+   "new": "A9-附录：shuffle_feed（事后补充臂，**非验收门**）",
+   "class": "A9_NEW_SECTION",
+   "subclass": "a9_heading_added"
+  },
+  {
+   "field": "INSTRUMENT_CALIBRATION · 仪器校准卡（ast_lin_v0）**vX** :: line[3]",
+   "old": "> **v2 修订范围（2026-10-27，PI 裁决 A/B 落卡）**：仅改判定段与排序口径——① 三重门 + exact binomial；② 5× 线作废声明；③ `prob_top1` 未校准警示；④ 失败清单改「同族错分 / 跨族错分」分层；⑤ family 单位「in-vocab 18 / 全体 19」；⑥ 补标签置换零分布 `perm_null.json`。**全部实测数字未动**，`preds.csv` md5=`efc821bfe15b2a936d641cd4263e9c78`、`perturb_preds.csv` md5=`cb0f76d86cebecc37df90920d77713d9` 与 v1 逐字节一致；v1 原文存档 `archive_pre_v2/INSTRUMENT_CALIBRATION.md`（md5=`7908b65f62405ad2579dca7e0e0b11da`）。",
+   "new": "> **v2 修订范围（2026-10-27，PI 裁决 A/B 落卡）**：仅改判定段与排序口径——① 三重门 + exact binomial；② 5× 线作废声明；③ `prob_top1` 未校准警示；④ 失败清单改「同族错分 / 跨族错分」分层；⑤ family 单位「in-vocab 18 / 全体 19」；⑥ 补标签置换零分布 `perm_null.json`。**勘误（裁决 169）**：v2 手签件自述「全部实测数字未动」**不属实**——其 A3 family 块状混淆矩阵有 3 格笔误（other/teeth/zippers 行，Σcells=33≠34，且与其自身 A6-2 矛盾）；v2.1 已按 `preds.csv` 数据真值改正，定性 = **手签件笔误**（非漂移、非口径分歧），详见 A9 对账注记与 `card_diff_v2_to_v21.json`。`preds.csv` md5=`efc821bfe15b2a936d641cd4263e9c78`、`perturb_preds.csv` md5=`cb0f76d86cebecc37df90920d77713d9` 与 v1 逐字节一致（两份预测源确未动）；v1 原文存档 `archive_pre_v2/INSTRUMENT_CALIBRATION.md`（md5=`7908b65f62405ad2579dca7e0e0b11da`）。",
+   "class": "A3_CELLS_AND_NOTES_AUTH_169",
+   "subclass": "selfclaim_correction_169_1"
+  },
+  {
+   "field": "INSTRUMENT_CALIBRATION · 仪器校准卡（ast_lin_v0）**vX** > A3 混淆（in-vocab，按 sound_id） :: table[true\\pred→clicks→clops→cymbal→drag→hihats→kicks→lip_oscillation→liprolls→other→reverse→scratch→snares→synth→teeth→tongue→vocal→whistles→zippers]#1 :: row[other] :: col[whistles]",
+   "old": "1",
+   "new": "0",
+   "class": "A3_CELLS_AND_NOTES_AUTH_169",
+   "subclass": "a3_family_matrix_cell"
+  },
+  {
+   "field": "INSTRUMENT_CALIBRATION · 仪器校准卡（ast_lin_v0）**vX** > A3 混淆（in-vocab，按 sound_id） :: table[true\\pred→clicks→clops→cymbal→drag→hihats→kicks→lip_oscillation→liprolls→other→reverse→scratch→snares→synth→teeth→tongue→vocal→whistles→zippers]#1 :: row[other] :: col[zippers]",
+   "old": "0",
+   "new": "1",
+   "class": "A3_CELLS_AND_NOTES_AUTH_169",
+   "subclass": "a3_family_matrix_cell"
+  },
+  {
+   "field": "INSTRUMENT_CALIBRATION · 仪器校准卡（ast_lin_v0）**vX** > A3 混淆（in-vocab，按 sound_id） :: table[true\\pred→clicks→clops→cymbal→drag→hihats→kicks→lip_oscillation→liprolls→other→reverse→scratch→snares→synth→teeth→tongue→vocal→whistles→zippers]#1 :: row[teeth] :: col[whistles]",
+   "old": "1",
+   "new": "0",
+   "class": "A3_CELLS_AND_NOTES_AUTH_169",
+   "subclass": "a3_family_matrix_cell"
+  },
+  {
+   "field": "INSTRUMENT_CALIBRATION · 仪器校准卡（ast_lin_v0）**vX** > A3 混淆（in-vocab，按 sound_id） :: table[true\\pred→clicks→clops→cymbal→drag→hihats→kicks→lip_oscillation→liprolls→other→reverse→scratch→snares→synth→teeth→tongue→vocal→whistles→zippers]#1 :: row[teeth] :: col[zippers]",
+   "old": "0",
+   "new": "1",
+   "class": "A3_CELLS_AND_NOTES_AUTH_169",
+   "subclass": "a3_family_matrix_cell"
+  },
+  {
+   "field": "INSTRUMENT_CALIBRATION · 仪器校准卡（ast_lin_v0）**vX** > A3 混淆（in-vocab，按 sound_id） :: table[true\\pred→clicks→clops→cymbal→drag→hihats→kicks→lip_oscillation→liprolls→other→reverse→scratch→snares→synth→teeth→tongue→vocal→whistles→zippers]#1 :: row[zippers] :: col[synth]",
+   "old": "0",
+   "new": "1",
+   "class": "A3_CELLS_AND_NOTES_AUTH_169",
+   "subclass": "a3_family_matrix_cell"
+  },
+  {
+   "field": "INSTRUMENT_CALIBRATION · 仪器校准卡（ast_lin_v0）**vX** > A7 结论 > 本卡验收（评测链路是否可用） :: line[1]",
+   "old": "- ✅ 卡头为 INSTRUMENT_CALIBRATION（v2）",
+   "new": "- ✅ 卡头为 INSTRUMENT_CALIBRATION（v2.1）",
+   "class": "VERSION_STRING",
+   "subclass": "v2_to_v21"
+  },
+  {
+   "field": "INSTRUMENT_CALIBRATION · 仪器校准卡（ast_lin_v0）**vX** > A9 识别侧三臂敏感性（vX 增补；裁决 165–168） :: line[1]",
+   "old": null,
+   "new": "> 附件挂卡（生成器=产物一致，指纹换代）：数据源 `three_arm/three_arm_table.json` md5=`612278186b72435bf58e0e6d42f27241`、`THREE_ARM_TABLE.md` md5=`7000306978316b0360844752324ff1b1`、`three_arm_preds.csv` md5=`3a1aa6de5e0a0efd2ca6b8923a21ea57`（本卡只引用、不改写）。in-vocab n=34；normal = 原始参考音频（与冻结 `preds.csv` 逐条自证一致 34/34）；silence = 等长全零；shuffle = 25ms（400 采样）块置乱（seed 20261027），与门③标签置换无关。本段是链路敏感性材料，**不是识别能力结论**。",
+   "class": "A9_NEW_SECTION",
+   "subclass": "a9_body"
+  },
+  {
+   "field": "INSTRUMENT_CALIBRATION · 仪器校准卡（ast_lin_v0）**vX** > A9 识别侧三臂敏感性（vX 增补；裁决 165–168） :: line[2]",
+   "old": null,
+   "new": "- **silence 门（并列）**：`0/34 = 0.0000, Wilson [0.0000, 0.1015]`；门槛 ≤5%（103-way 随机 0.97% 的 5 倍余量）。门槛分辨率脚注：**n=34 下 1 条错 = 2.94%（门内）、2 条 = 5.88%（越门）**，即该门实际等价于「错 ≤1 条通过」。",
+   "class": "A9_NEW_SECTION",
+   "subclass": "a9_body"
+  },
+  {
+   "field": "INSTRUMENT_CALIBRATION · 仪器校准卡（ast_lin_v0）**vX** > A9 识别侧三臂敏感性（vX 增补；裁决 165–168） :: line[3]",
+   "old": null,
+   "new": "- **shuffle 臂判 `PERTURB_INVALID`（裁决 167）**：9/34 反而高于 normal 5/34（配对 bootstrap 差值均值 -0.1176，95% CI [-0.2654, +0.0294]；McNemar 精确 p=0.289062），方向自相矛盾——「模型不听音频」与「置乱后更准」不可能同时成立；60–200ms 击打经 25ms 分块后有效块数 min 3 / median 11 / max 33，置乱接近恒等变换。扰动无效 ⇒ **不计入门槛、不写「未过线」、不得暗示模型有问题**；「shuffle 显著低于 normal」本臂不作判定。",
+   "class": "A9_NEW_SECTION",
+   "subclass": "a9_body"
+  },
+  {
+   "field": "INSTRUMENT_CALIBRATION · 仪器校准卡（ast_lin_v0）**vX** > A9 识别侧三臂敏感性（vX 增补；裁决 165–168） :: line[4]",
+   "old": null,
+   "new": "- 合成读数（保守版）：silence 0/34 + 跨样本错配后掉到 chance（见 A9-附录）+ 预测跟随音频内容（5/34）——三者合起来反驳「模板背诵 / 不听音频」；均为链路级证据，**不构成识别能力结论**。",
+   "class": "A9_NEW_SECTION",
+   "subclass": "a9_body"
+  },
+  {
+   "field": "INSTRUMENT_CALIBRATION · 仪器校准卡（ast_lin_v0）**vX** > A9 识别侧三臂敏感性（vX 增补；裁决 165–168） :: table[臂→n→top-1→95% Wilson CI→与 normal 预测翻转数→状态]#1 :: row[normal] :: col[95% Wilson CI]",
+   "old": null,
+   "new": "[0.0645, 0.3013]",
+   "class": "A9_NEW_SECTION",
+   "subclass": "a9_body"
+  },
+  {
+   "field": "INSTRUMENT_CALIBRATION · 仪器校准卡（ast_lin_v0）**vX** > A9 识别侧三臂敏感性（vX 增补；裁决 165–168） :: table[臂→n→top-1→95% Wilson CI→与 normal 预测翻转数→状态]#1 :: row[normal] :: col[n]",
+   "old": null,
+   "new": "34",
+   "class": "A9_NEW_SECTION",
+   "subclass": "a9_body"
+  },
+  {
+   "field": "INSTRUMENT_CALIBRATION · 仪器校准卡（ast_lin_v0）**vX** > A9 识别侧三臂敏感性（vX 增补；裁决 165–168） :: table[臂→n→top-1→95% Wilson CI→与 normal 预测翻转数→状态]#1 :: row[normal] :: col[top-1]",
+   "old": null,
+   "new": "5/34 = 0.1471",
+   "class": "A9_NEW_SECTION",
+   "subclass": "a9_body"
+  },
+  {
+   "field": "INSTRUMENT_CALIBRATION · 仪器校准卡（ast_lin_v0）**vX** > A9 识别侧三臂敏感性（vX 增补；裁决 165–168） :: table[臂→n→top-1→95% Wilson CI→与 normal 预测翻转数→状态]#1 :: row[normal] :: col[与 normal 预测翻转数]",
+   "old": null,
+   "new": "—",
+   "class": "A9_NEW_SECTION",
+   "subclass": "a9_body"
+  },
+  {
+   "field": "INSTRUMENT_CALIBRATION · 仪器校准卡（ast_lin_v0）**vX** > A9 识别侧三臂敏感性（vX 增补；裁决 165–168） :: table[臂→n→top-1→95% Wilson CI→与 normal 预测翻转数→状态]#1 :: row[normal] :: col[状态]",
+   "old": null,
+   "new": "基准",
+   "class": "A9_NEW_SECTION",
+   "subclass": "a9_body"
+  },
+  {
+   "field": "INSTRUMENT_CALIBRATION · 仪器校准卡（ast_lin_v0）**vX** > A9 识别侧三臂敏感性（vX 增补；裁决 165–168） :: table[臂→n→top-1→95% Wilson CI→与 normal 预测翻转数→状态]#1 :: row[normal] :: col[臂]",
+   "old": null,
+   "new": "normal",
+   "class": "A9_NEW_SECTION",
+   "subclass": "a9_body"
+  },
+  {
+   "field": "INSTRUMENT_CALIBRATION · 仪器校准卡（ast_lin_v0）**vX** > A9 识别侧三臂敏感性（vX 增补；裁决 165–168） :: table[臂→n→top-1→95% Wilson CI→与 normal 预测翻转数→状态]#1 :: row[shuffle] :: col[95% Wilson CI]",
+   "old": null,
+   "new": "[0.1460, 0.4312]",
+   "class": "A9_NEW_SECTION",
+   "subclass": "a9_body"
+  },
+  {
+   "field": "INSTRUMENT_CALIBRATION · 仪器校准卡（ast_lin_v0）**vX** > A9 识别侧三臂敏感性（vX 增补；裁决 165–168） :: table[臂→n→top-1→95% Wilson CI→与 normal 预测翻转数→状态]#1 :: row[shuffle] :: col[n]",
+   "old": null,
+   "new": "34",
+   "class": "A9_NEW_SECTION",
+   "subclass": "a9_body"
+  },
+  {
+   "field": "INSTRUMENT_CALIBRATION · 仪器校准卡（ast_lin_v0）**vX** > A9 识别侧三臂敏感性（vX 增补；裁决 165–168） :: table[臂→n→top-1→95% Wilson CI→与 normal 预测翻转数→状态]#1 :: row[shuffle] :: col[top-1]",
+   "old": null,
+   "new": "9/34 = 0.2647",
+   "class": "A9_NEW_SECTION",
+   "subclass": "a9_body"
+  },
+  {
+   "field": "INSTRUMENT_CALIBRATION · 仪器校准卡（ast_lin_v0）**vX** > A9 识别侧三臂敏感性（vX 增补；裁决 165–168） :: table[臂→n→top-1→95% Wilson CI→与 normal 预测翻转数→状态]#1 :: row[shuffle] :: col[与 normal 预测翻转数]",
+   "old": null,
+   "new": "25",
+   "class": "A9_NEW_SECTION",
+   "subclass": "a9_body"
+  },
+  {
+   "field": "INSTRUMENT_CALIBRATION · 仪器校准卡（ast_lin_v0）**vX** > A9 识别侧三臂敏感性（vX 增补；裁决 165–168） :: table[臂→n→top-1→95% Wilson CI→与 normal 预测翻转数→状态]#1 :: row[shuffle] :: col[状态]",
+   "old": null,
+   "new": "**`PERTURB_INVALID`（扰动无效，不计入）**",
+   "class": "A9_NEW_SECTION",
+   "subclass": "a9_body"
+  },
+  {
+   "field": "INSTRUMENT_CALIBRATION · 仪器校准卡（ast_lin_v0）**vX** > A9 识别侧三臂敏感性（vX 增补；裁决 165–168） :: table[臂→n→top-1→95% Wilson CI→与 normal 预测翻转数→状态]#1 :: row[shuffle] :: col[臂]",
+   "old": null,
+   "new": "shuffle",
+   "class": "A9_NEW_SECTION",
+   "subclass": "a9_body"
+  },
+  {
+   "field": "INSTRUMENT_CALIBRATION · 仪器校准卡（ast_lin_v0）**vX** > A9 识别侧三臂敏感性（vX 增补；裁决 165–168） :: table[臂→n→top-1→95% Wilson CI→与 normal 预测翻转数→状态]#1 :: row[silence] :: col[95% Wilson CI]",
+   "old": null,
+   "new": "[0.0000, 0.1015]",
+   "class": "A9_NEW_SECTION",
+   "subclass": "a9_body"
+  },
+  {
+   "field": "INSTRUMENT_CALIBRATION · 仪器校准卡（ast_lin_v0）**vX** > A9 识别侧三臂敏感性（vX 增补；裁决 165–168） :: table[臂→n→top-1→95% Wilson CI→与 normal 预测翻转数→状态]#1 :: row[silence] :: col[n]",
+   "old": null,
+   "new": "34",
+   "class": "A9_NEW_SECTION",
+   "subclass": "a9_body"
+  },
+  {
+   "field": "INSTRUMENT_CALIBRATION · 仪器校准卡（ast_lin_v0）**vX** > A9 识别侧三臂敏感性（vX 增补；裁决 165–168） :: table[臂→n→top-1→95% Wilson CI→与 normal 预测翻转数→状态]#1 :: row[silence] :: col[top-1]",
+   "old": null,
+   "new": "0/34 = 0.0000",
+   "class": "A9_NEW_SECTION",
+   "subclass": "a9_body"
+  },
+  {
+   "field": "INSTRUMENT_CALIBRATION · 仪器校准卡（ast_lin_v0）**vX** > A9 识别侧三臂敏感性（vX 增补；裁决 165–168） :: table[臂→n→top-1→95% Wilson CI→与 normal 预测翻转数→状态]#1 :: row[silence] :: col[与 normal 预测翻转数]",
+   "old": null,
+   "new": "31",
+   "class": "A9_NEW_SECTION",
+   "subclass": "a9_body"
+  },
+  {
+   "field": "INSTRUMENT_CALIBRATION · 仪器校准卡（ast_lin_v0）**vX** > A9 识别侧三臂敏感性（vX 增补；裁决 165–168） :: table[臂→n→top-1→95% Wilson CI→与 normal 预测翻转数→状态]#1 :: row[silence] :: col[状态]",
+   "old": null,
+   "new": "**PASS**（≤5% 门）",
+   "class": "A9_NEW_SECTION",
+   "subclass": "a9_body"
+  },
+  {
+   "field": "INSTRUMENT_CALIBRATION · 仪器校准卡（ast_lin_v0）**vX** > A9 识别侧三臂敏感性（vX 增补；裁决 165–168） :: table[臂→n→top-1→95% Wilson CI→与 normal 预测翻转数→状态]#1 :: row[silence] :: col[臂]",
+   "old": null,
+   "new": "silence",
+   "class": "A9_NEW_SECTION",
+   "subclass": "a9_body"
+  },
+  {
+   "field": "INSTRUMENT_CALIBRATION · 仪器校准卡（ast_lin_v0）**vX** > A9 识别侧三臂敏感性（vX 增补；裁决 165–168） > A9-硬要求：后续所有扰动臂（裁决 168） :: line[1]",
+   "old": null,
+   "new": "- 报结果必须附**扰动有效性自检**（有效块数分布 / 逐样本最大位移 / 与原信号相关系数或谱距离）+ 该扰动的**理论可检出上限**。",
+   "class": "A9_NEW_SECTION",
+   "subclass": "a9_body"
+  },
+  {
+   "field": "INSTRUMENT_CALIBRATION · 仪器校准卡（ast_lin_v0）**vX** > A9 识别侧三臂敏感性（vX 增补；裁决 165–168） > A9-硬要求：后续所有扰动臂（裁决 168） :: line[2]",
+   "old": null,
+   "new": "- 有效性不达标只能打 `PERTURB_INVALID`，**禁止**用「未过线」来暗示模型有问题。",
+   "class": "A9_NEW_SECTION",
+   "subclass": "a9_body"
+  },
+  {
+   "field": "INSTRUMENT_CALIBRATION · 仪器校准卡（ast_lin_v0）**vX** > A9 识别侧三臂敏感性（vX 增补；裁决 165–168） > A9-硬要求：后续所有扰动臂（裁决 168） :: line[3]",
+   "old": null,
+   "new": "- 对账注记（裁决 169）：本卡 v2.1 与手签件 v2（`archive_pre_v21_handedit/INSTRUMENT_CALIBRATION.md`，md5=`3943b33e`）逐字段比对，允许差异仅三类：① A9 新增段；② 版本号 v2→v2.1；③ 裁决 169 授权的 A3 三格（family 块状矩阵 other/teeth/zippers 行，按 `preds.csv` 数据真值写入）与对账注记、v2 自述句删改。三格定性 = **手签件笔误**（Σcells=33≠34，且与手签件自身 A6-2 矛盾），非漂移、非口径分歧；v2 自述「全部实测数字未动」不属实，已按 169-1 删改。逐字段对账件 ``outputs/instr_cal_ast_lin_v0/card_diff_v2_to_v21.json`（裁决 170，`scripts/card_field_diff.py` 可复算，同对文件重跑同 JSON）。除此之外任何数字变化 = 停手报 PI（165② 验收条件的 169 修订版）。",
+   "class": "A9_NEW_SECTION",
+   "subclass": "recon_note"
+  },
+  {
+   "field": "INSTRUMENT_CALIBRATION · 仪器校准卡（ast_lin_v0）**vX** > A9 识别侧三臂敏感性（vX 增补；裁决 165–168） > A9-附录：shuffle_feed（事后补充臂，**非验收门**） :: line[1]",
+   "old": null,
+   "new": "- 标注一：**n=34 欠功效**；标注二：**CI 下界 = 0**；标注三：**非验收门**（裁决 168）。",
+   "class": "A9_NEW_SECTION",
+   "subclass": "a9_body"
+  },
+  {
+   "field": "INSTRUMENT_CALIBRATION · 仪器校准卡（ast_lin_v0）**vX** > A9 识别侧三臂敏感性（vX 增补；裁决 165–168） > A9-附录：shuffle_feed（事后补充臂，**非验收门**） :: line[2]",
+   "old": null,
+   "new": "- **禁写「掉到 chance 已证明依赖音频」**——CI 下界 = 0，该结论没有统计支撑。",
+   "class": "A9_NEW_SECTION",
+   "subclass": "a9_body"
+  },
+  {
+   "field": "INSTRUMENT_CALIBRATION · 仪器校准卡（ast_lin_v0）**vX** > A9 识别侧三臂敏感性（vX 增补；裁决 165–168） > A9-附录：shuffle_feed（事后补充臂，**非验收门**） :: table[项→值]#1 :: row[top-1] :: col[值]",
+   "old": null,
+   "new": "1/34 = 0.0294，Wilson [0.0052, 0.1492]",
+   "class": "A9_NEW_SECTION",
+   "subclass": "a9_body"
+  },
+  {
+   "field": "INSTRUMENT_CALIBRATION · 仪器校准卡（ast_lin_v0）**vX** > A9 识别侧三臂敏感性（vX 增补；裁决 165–168） > A9-附录：shuffle_feed（事后补充臂，**非验收门**） :: table[项→值]#1 :: row[top-1] :: col[项]",
+   "old": null,
+   "new": "top-1",
+   "class": "A9_NEW_SECTION",
+   "subclass": "a9_body"
+  },
+  {
+   "field": "INSTRUMENT_CALIBRATION · 仪器校准卡（ast_lin_v0）**vX** > A9 识别侧三臂敏感性（vX 增补；裁决 165–168） > A9-附录：shuffle_feed（事后补充臂，**非验收门**） :: table[项→值]#1 :: row[与 normal 配对差值] :: col[值]",
+   "old": null,
+   "new": "+0.1176，95% CI [0.0000, 0.2647]（McNemar 精确 p=0.218750）",
+   "class": "A9_NEW_SECTION",
+   "subclass": "a9_body"
+  },
+  {
+   "field": "INSTRUMENT_CALIBRATION · 仪器校准卡（ast_lin_v0）**vX** > A9 识别侧三臂敏感性（vX 增补；裁决 165–168） > A9-附录：shuffle_feed（事后补充臂，**非验收门**） :: table[项→值]#1 :: row[与 normal 配对差值] :: col[项]",
+   "old": null,
+   "new": "与 normal 配对差值",
+   "class": "A9_NEW_SECTION",
+   "subclass": "a9_body"
+  },
+  {
+   "field": "INSTRUMENT_CALIBRATION · 仪器校准卡（ast_lin_v0）**vX** > A9 识别侧三臂敏感性（vX 增补；裁决 165–168） > A9-附录：shuffle_feed（事后补充臂，**非验收门**） :: table[项→值]#1 :: row[预测跟随供体音频] :: col[值]",
+   "old": null,
+   "new": "5/34",
+   "class": "A9_NEW_SECTION",
+   "subclass": "a9_body"
+  },
+  {
+   "field": "INSTRUMENT_CALIBRATION · 仪器校准卡（ast_lin_v0）**vX** > A9 识别侧三臂敏感性（vX 增补；裁决 165–168） > A9-附录：shuffle_feed（事后补充臂，**非验收门**） :: table[项→值]#1 :: row[预测跟随供体音频] :: col[项]",
+   "old": null,
+   "new": "预测跟随供体音频",
+   "class": "A9_NEW_SECTION",
+   "subclass": "a9_body"
+  }
+ ],
+ "verdict": "AUTHORIZED_ONLY"
+}

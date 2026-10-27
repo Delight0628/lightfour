@@ -1,0 +1,813 @@
+{
+ "spec": "mel_layers_reissue v1（agent.md 裁决 82/83 重出门槛）",
+ "codec": "encodec_24khz / 24kbps / layers 16 / codebook 1024",
+ "estimator": "degradation = mel13X_vs_true / mel75_vs_true - 1; agg = median; CI = cluster bootstrap by source",
+ "seed": 20261027,
+ "n_boot": 2000,
+ "input": {
+  "path": "outputs/codec_rate_ab/per_hit.csv",
+  "md5": "235158c7877f5620e5443790c19f30e8",
+  "bytes": 1284083,
+  "n_sequences": 287,
+  "n_hits": 5472,
+  "n_families": 16
+ },
+ "code_sha256": "e4fd4c3d249870dbf4cd1adcd90e87c8f8aa7f344d7a6bd35e1bc198836576b5",
+ "spec_sha256": "e0f4ab300dff97a4e855e91c7e4a170151c349897f3e0b6dc9795d0836cc6300",
+ "layers": [
+  {
+   "column": "mel*_vs_true",
+   "aggregate": "median",
+   "pool": "all_hits",
+   "filter": "全部行",
+   "n": 5472,
+   "layer": "L1 逐条 min-arm（raw）",
+   "pool_definition": "全部击打段（287 序列滑窗内所有 hit）",
+   "n_sequences": 287,
+   "n_sources": 80,
+   "degr_median_pct": 151.2,
+   "degr_mean_pct": 166.7,
+   "ci95_median_pct": [
+    143.4,
+    158.5
+   ],
+   "ci_method": "cluster bootstrap by source",
+   "n_boot": 2000,
+   "seed": 20261027
+  },
+  {
+   "column": "mel*_vs_true",
+   "aggregate": "median",
+   "pool": "all_hits",
+   "filter": "全部行",
+   "n": 5472,
+   "layer": "L2 组级 13c 臂（raw，单臂）",
+   "pool_definition": "全部击打段（287 序列滑窗内所有 hit）",
+   "n_sequences": 287,
+   "n_sources": 80,
+   "degr_median_pct": 156.5,
+   "degr_mean_pct": 177.7,
+   "ci95_median_pct": [
+    149.1,
+    163.9
+   ],
+   "ci_method": "cluster bootstrap by source",
+   "n_boot": 2000,
+   "seed": 20261027
+  },
+  {
+   "column": "mel*_vs_true",
+   "aggregate": "median",
+   "pool": "all_hits",
+   "filter": "全部行",
+   "n": 5472,
+   "layer": "L3 组级 13p 臂（raw，单臂）",
+   "pool_definition": "全部击打段（287 序列滑窗内所有 hit）",
+   "n_sequences": 287,
+   "n_sources": 80,
+   "degr_median_pct": 223.8,
+   "degr_mean_pct": 241.6,
+   "ci95_median_pct": [
+    210.8,
+    235.9
+   ],
+   "ci_method": "cluster bootstrap by source",
+   "n_boot": 2000,
+   "seed": 20261027
+  },
+  {
+   "column": "mel*_vs_true",
+   "aggregate": "median",
+   "pool": "click_60_200ms",
+   "filter": "0.060 <= dur <= 0.200",
+   "n": 3100,
+   "layer": "L1 逐条 min-arm（raw）",
+   "pool_definition": "时长桶 60–200ms（跨 12 family，**不是** clicks 家族）",
+   "n_sequences": 285,
+   "n_sources": 80,
+   "degr_median_pct": 176.2,
+   "degr_mean_pct": 189.4,
+   "ci95_median_pct": [
+    165.6,
+    185.6
+   ],
+   "ci_method": "cluster bootstrap by source",
+   "n_boot": 2000,
+   "seed": 20261027
+  },
+  {
+   "column": "mel*_vs_true",
+   "aggregate": "median",
+   "pool": "click_60_200ms",
+   "filter": "0.060 <= dur <= 0.200",
+   "n": 3100,
+   "layer": "L2 组级 13c 臂（raw，单臂）",
+   "pool_definition": "时长桶 60–200ms（跨 12 family，**不是** clicks 家族）",
+   "n_sequences": 285,
+   "n_sources": 80,
+   "degr_median_pct": 183.6,
+   "degr_mean_pct": 205.1,
+   "ci95_median_pct": [
+    173.2,
+    193.1
+   ],
+   "ci_method": "cluster bootstrap by source",
+   "n_boot": 2000,
+   "seed": 20261027
+  },
+  {
+   "column": "mel*_vs_true",
+   "aggregate": "median",
+   "pool": "click_60_200ms",
+   "filter": "0.060 <= dur <= 0.200",
+   "n": 3100,
+   "layer": "L3 组级 13p 臂（raw，单臂）",
+   "pool_definition": "时长桶 60–200ms（跨 12 family，**不是** clicks 家族）",
+   "n_sequences": 285,
+   "n_sources": 80,
+   "degr_median_pct": 258.5,
+   "degr_mean_pct": 272.1,
+   "ci95_median_pct": [
+    241.8,
+    273.1
+   ],
+   "ci_method": "cluster bootstrap by source",
+   "n_boot": 2000,
+   "seed": 20261027
+  },
+  {
+   "column": "mel*_vs_true",
+   "aggregate": "median",
+   "pool": "hihats",
+   "filter": "sound_family == 'hihats'",
+   "n": 247,
+   "layer": "L1 逐条 min-arm（raw）",
+   "pool_definition": "sound_family == hihats",
+   "n_sequences": 96,
+   "n_sources": 43,
+   "degr_median_pct": 145.6,
+   "degr_mean_pct": 153.3,
+   "ci95_median_pct": [
+    124.9,
+    161.9
+   ],
+   "ci_method": "cluster bootstrap by source",
+   "n_boot": 2000,
+   "seed": 20261027
+  },
+  {
+   "column": "mel*_vs_true",
+   "aggregate": "median",
+   "pool": "hihats",
+   "filter": "sound_family == 'hihats'",
+   "n": 247,
+   "layer": "L2 组级 13c 臂（raw，单臂）",
+   "pool_definition": "sound_family == hihats",
+   "n_sequences": 96,
+   "n_sources": 43,
+   "degr_median_pct": 153.7,
+   "degr_mean_pct": 165.3,
+   "ci95_median_pct": [
+    135.4,
+    170.8
+   ],
+   "ci_method": "cluster bootstrap by source",
+   "n_boot": 2000,
+   "seed": 20261027
+  },
+  {
+   "column": "mel*_vs_true",
+   "aggregate": "median",
+   "pool": "hihats",
+   "filter": "sound_family == 'hihats'",
+   "n": 247,
+   "layer": "L3 组级 13p 臂（raw，单臂）",
+   "pool_definition": "sound_family == hihats",
+   "n_sequences": 96,
+   "n_sources": 43,
+   "degr_median_pct": 240.7,
+   "degr_mean_pct": 257.0,
+   "ci95_median_pct": [
+    197.7,
+    275.1
+   ],
+   "ci_method": "cluster bootstrap by source",
+   "n_boot": 2000,
+   "seed": 20261027
+  },
+  {
+   "column": "mel*_vs_true",
+   "aggregate": "median",
+   "pool": "cymbal",
+   "filter": "sound_family == 'cymbal'",
+   "n": 38,
+   "layer": "L1 逐条 min-arm（raw）",
+   "pool_definition": "sound_family == cymbal（镲类单列，禁与 hihats 合并）",
+   "n_sequences": 30,
+   "n_sources": 20,
+   "degr_median_pct": 100.6,
+   "degr_mean_pct": 106.6,
+   "ci95_median_pct": [
+    87.9,
+    113.5
+   ],
+   "ci_method": "cluster bootstrap by source",
+   "n_boot": 2000,
+   "seed": 20261027
+  },
+  {
+   "column": "mel*_vs_true",
+   "aggregate": "median",
+   "pool": "cymbal",
+   "filter": "sound_family == 'cymbal'",
+   "n": 38,
+   "layer": "L2 组级 13c 臂（raw，单臂）",
+   "pool_definition": "sound_family == cymbal（镲类单列，禁与 hihats 合并）",
+   "n_sequences": 30,
+   "n_sources": 20,
+   "degr_median_pct": 102.4,
+   "degr_mean_pct": 108.9,
+   "ci95_median_pct": [
+    87.9,
+    115.9
+   ],
+   "ci_method": "cluster bootstrap by source",
+   "n_boot": 2000,
+   "seed": 20261027
+  },
+  {
+   "column": "mel*_vs_true",
+   "aggregate": "median",
+   "pool": "cymbal",
+   "filter": "sound_family == 'cymbal'",
+   "n": 38,
+   "layer": "L3 组级 13p 臂（raw，单臂）",
+   "pool_definition": "sound_family == cymbal（镲类单列，禁与 hihats 合并）",
+   "n_sequences": 30,
+   "n_sources": 20,
+   "degr_median_pct": 149.9,
+   "degr_mean_pct": 156.2,
+   "ci95_median_pct": [
+    128.1,
+    171.7
+   ],
+   "ci_method": "cluster bootstrap by source",
+   "n_boot": 2000,
+   "seed": 20261027
+  }
+ ],
+ "families_16": [
+  {
+   "family": "snares",
+   "n": 2916,
+   "n_sequences": 270,
+   "n_sources": 75,
+   "mel75_median": 0.7556,
+   "minarm_median_pct": 161.7,
+   "minarm_ci95": [
+    155.3,
+    169.0
+   ],
+   "arm13c_median_pct": 166.6,
+   "arm13c_ci95": [
+    160.1,
+    174.4
+   ],
+   "arm13p_median_pct": 240.6,
+   "arm13p_ci95": [
+    229.8,
+    251.1
+   ],
+   "column": "mel*_vs_true",
+   "aggregate": "median",
+   "filter": "sound_family == 'snares'",
+   "confidence_note": ""
+  },
+  {
+   "family": "drag",
+   "n": 777,
+   "n_sequences": 205,
+   "n_sources": 75,
+   "mel75_median": 0.7217,
+   "minarm_median_pct": 154.1,
+   "minarm_ci95": [
+    144.6,
+    160.9
+   ],
+   "arm13c_median_pct": 156.9,
+   "arm13c_ci95": [
+    148.6,
+    164.2
+   ],
+   "arm13p_median_pct": 231.3,
+   "arm13p_ci95": [
+    221.4,
+    246.9
+   ],
+   "column": "mel*_vs_true",
+   "aggregate": "median",
+   "filter": "sound_family == 'drag'",
+   "confidence_note": ""
+  },
+  {
+   "family": "clicks",
+   "n": 333,
+   "n_sequences": 115,
+   "n_sources": 49,
+   "mel75_median": 0.7252,
+   "minarm_median_pct": 160.4,
+   "minarm_ci95": [
+    146.4,
+    186.8
+   ],
+   "arm13c_median_pct": 167.4,
+   "arm13c_ci95": [
+    153.9,
+    195.3
+   ],
+   "arm13p_median_pct": 229.9,
+   "arm13p_ci95": [
+    201.5,
+    252.1
+   ],
+   "column": "mel*_vs_true",
+   "aggregate": "median",
+   "filter": "sound_family == 'clicks'",
+   "confidence_note": ""
+  },
+  {
+   "family": "clops",
+   "n": 272,
+   "n_sequences": 114,
+   "n_sources": 54,
+   "mel75_median": 0.6943,
+   "minarm_median_pct": 154.3,
+   "minarm_ci95": [
+    131.6,
+    178.1
+   ],
+   "arm13c_median_pct": 160.4,
+   "arm13c_ci95": [
+    138.0,
+    186.4
+   ],
+   "arm13p_median_pct": 223.3,
+   "arm13p_ci95": [
+    186.3,
+    264.6
+   ],
+   "column": "mel*_vs_true",
+   "aggregate": "median",
+   "filter": "sound_family == 'clops'",
+   "confidence_note": ""
+  },
+  {
+   "family": "hihats",
+   "n": 247,
+   "n_sequences": 96,
+   "n_sources": 43,
+   "mel75_median": 0.8429,
+   "minarm_median_pct": 145.6,
+   "minarm_ci95": [
+    124.9,
+    161.9
+   ],
+   "arm13c_median_pct": 153.7,
+   "arm13c_ci95": [
+    135.4,
+    170.8
+   ],
+   "arm13p_median_pct": 240.7,
+   "arm13p_ci95": [
+    197.7,
+    275.1
+   ],
+   "column": "mel*_vs_true",
+   "aggregate": "median",
+   "filter": "sound_family == 'hihats'",
+   "confidence_note": ""
+  },
+  {
+   "family": "zippers",
+   "n": 203,
+   "n_sequences": 97,
+   "n_sources": 45,
+   "mel75_median": 0.7239,
+   "minarm_median_pct": 133.8,
+   "minarm_ci95": [
+    122.3,
+    144.6
+   ],
+   "arm13c_median_pct": 133.9,
+   "arm13c_ci95": [
+    122.3,
+    145.6
+   ],
+   "arm13p_median_pct": 193.9,
+   "arm13p_ci95": [
+    180.1,
+    209.5
+   ],
+   "column": "mel*_vs_true",
+   "aggregate": "median",
+   "filter": "sound_family == 'zippers'",
+   "confidence_note": ""
+  },
+  {
+   "family": "vocal",
+   "n": 195,
+   "n_sequences": 45,
+   "n_sources": 25,
+   "mel75_median": 0.64,
+   "minarm_median_pct": 109.4,
+   "minarm_ci95": [
+    104.4,
+    124.5
+   ],
+   "arm13c_median_pct": 110.5,
+   "arm13c_ci95": [
+    105.3,
+    127.4
+   ],
+   "arm13p_median_pct": 137.6,
+   "arm13p_ci95": [
+    132.9,
+    169.0
+   ],
+   "column": "mel*_vs_true",
+   "aggregate": "median",
+   "filter": "sound_family == 'vocal'",
+   "confidence_note": ""
+  },
+  {
+   "family": "kicks",
+   "n": 119,
+   "n_sequences": 49,
+   "n_sources": 29,
+   "mel75_median": 0.6693,
+   "minarm_median_pct": 134.0,
+   "minarm_ci95": [
+    122.5,
+    165.7
+   ],
+   "arm13c_median_pct": 147.9,
+   "arm13c_ci95": [
+    136.7,
+    185.2
+   ],
+   "arm13p_median_pct": 180.1,
+   "arm13p_ci95": [
+    164.7,
+    286.7
+   ],
+   "column": "mel*_vs_true",
+   "aggregate": "median",
+   "filter": "sound_family == 'kicks'",
+   "confidence_note": ""
+  },
+  {
+   "family": "other",
+   "n": 98,
+   "n_sequences": 61,
+   "n_sources": 36,
+   "mel75_median": 0.7049,
+   "minarm_median_pct": 117.4,
+   "minarm_ci95": [
+    107.4,
+    126.2
+   ],
+   "arm13c_median_pct": 117.4,
+   "arm13c_ci95": [
+    108.4,
+    126.2
+   ],
+   "arm13p_median_pct": 160.5,
+   "arm13p_ci95": [
+    145.9,
+    183.6
+   ],
+   "column": "mel*_vs_true",
+   "aggregate": "median",
+   "filter": "sound_family == 'other'",
+   "confidence_note": ""
+  },
+  {
+   "family": "liprolls",
+   "n": 95,
+   "n_sequences": 45,
+   "n_sources": 28,
+   "mel75_median": 0.6758,
+   "minarm_median_pct": 120.3,
+   "minarm_ci95": [
+    108.7,
+    127.8
+   ],
+   "arm13c_median_pct": 121.0,
+   "arm13c_ci95": [
+    111.3,
+    131.7
+   ],
+   "arm13p_median_pct": 160.6,
+   "arm13p_ci95": [
+    143.3,
+    178.1
+   ],
+   "column": "mel*_vs_true",
+   "aggregate": "median",
+   "filter": "sound_family == 'liprolls'",
+   "confidence_note": ""
+  },
+  {
+   "family": "synth",
+   "n": 87,
+   "n_sequences": 20,
+   "n_sources": 11,
+   "mel75_median": 0.7291,
+   "minarm_median_pct": 140.5,
+   "minarm_ci95": [
+    127.3,
+    170.2
+   ],
+   "arm13c_median_pct": 148.1,
+   "arm13c_ci95": [
+    133.8,
+    184.1
+   ],
+   "arm13p_median_pct": 175.2,
+   "arm13p_ci95": [
+    148.3,
+    230.8
+   ],
+   "column": "mel*_vs_true",
+   "aggregate": "median",
+   "filter": "sound_family == 'synth'",
+   "confidence_note": ""
+  },
+  {
+   "family": "reverse",
+   "n": 45,
+   "n_sequences": 33,
+   "n_sources": 23,
+   "mel75_median": 0.7355,
+   "minarm_median_pct": 175.8,
+   "minarm_ci95": [
+    137.1,
+    227.9
+   ],
+   "arm13c_median_pct": 179.6,
+   "arm13c_ci95": [
+    148.9,
+    241.5
+   ],
+   "arm13p_median_pct": 234.0,
+   "arm13p_ci95": [
+    205.2,
+    290.8
+   ],
+   "column": "mel*_vs_true",
+   "aggregate": "median",
+   "filter": "sound_family == 'reverse'",
+   "confidence_note": ""
+  },
+  {
+   "family": "cymbal",
+   "n": 38,
+   "n_sequences": 30,
+   "n_sources": 20,
+   "mel75_median": 0.748,
+   "minarm_median_pct": 100.6,
+   "minarm_ci95": [
+    87.9,
+    113.5
+   ],
+   "arm13c_median_pct": 102.4,
+   "arm13c_ci95": [
+    87.9,
+    115.9
+   ],
+   "arm13p_median_pct": 149.9,
+   "arm13p_ci95": [
+    128.1,
+    171.7
+   ],
+   "column": "mel*_vs_true",
+   "aggregate": "median",
+   "filter": "sound_family == 'cymbal'",
+   "confidence_note": ""
+  },
+  {
+   "family": "scratch",
+   "n": 27,
+   "n_sequences": 23,
+   "n_sources": 17,
+   "mel75_median": 0.7306,
+   "minarm_median_pct": 145.1,
+   "minarm_ci95": [
+    128.2,
+    175.1
+   ],
+   "arm13c_median_pct": 145.1,
+   "arm13c_ci95": [
+    128.2,
+    175.1
+   ],
+   "arm13p_median_pct": 222.4,
+   "arm13p_ci95": [
+    166.0,
+    311.8
+   ],
+   "column": "mel*_vs_true",
+   "aggregate": "median",
+   "filter": "sound_family == 'scratch'",
+   "confidence_note": "n<30 仅报数，不入结论句"
+  },
+  {
+   "family": "lip_oscillation",
+   "n": 17,
+   "n_sequences": 14,
+   "n_sources": 10,
+   "mel75_median": 0.6894,
+   "minarm_median_pct": 129.2,
+   "minarm_ci95": [
+    111.2,
+    134.5
+   ],
+   "arm13c_median_pct": 131.2,
+   "arm13c_ci95": [
+    129.0,
+    158.5
+   ],
+   "arm13p_median_pct": 135.0,
+   "arm13p_ci95": [
+    130.2,
+    158.6
+   ],
+   "column": "mel*_vs_true",
+   "aggregate": "median",
+   "filter": "sound_family == 'lip_oscillation'",
+   "confidence_note": "n<30 仅报数，不入结论句"
+  },
+  {
+   "family": "teeth",
+   "n": 3,
+   "n_sequences": 2,
+   "n_sources": 2,
+   "mel75_median": 0.795,
+   "minarm_median_pct": 151.0,
+   "minarm_ci95": [
+    134.9,
+    245.1
+   ],
+   "arm13c_median_pct": 151.2,
+   "arm13c_ci95": [
+    135.0,
+    245.1
+   ],
+   "arm13p_median_pct": 260.9,
+   "arm13p_ci95": [
+    211.8,
+    260.9
+   ],
+   "column": "mel*_vs_true",
+   "aggregate": "median",
+   "filter": "sound_family == 'teeth'",
+   "confidence_note": "n<30 仅报数，不入结论句"
+  }
+ ],
+ "cross_column_reference": [
+  {
+   "column": "nmel*_vs_true",
+   "aggregate": "median",
+   "pool": "all_hits",
+   "filter": "全部行",
+   "n": 5472,
+   "arm": "13c",
+   "n_sources": 80,
+   "degr_median_pct": 145.9,
+   "ci95_median_pct": [
+    139.0,
+    151.8
+   ],
+   "label": "跨列参考，禁引（不进卡面数字栏、不进结论句、不与 mel 列并排）",
+   "quote_allowed": false
+  },
+  {
+   "column": "nmel*_vs_true",
+   "aggregate": "median",
+   "pool": "all_hits",
+   "filter": "全部行",
+   "n": 5472,
+   "arm": "13p",
+   "n_sources": 80,
+   "degr_median_pct": 147.5,
+   "ci95_median_pct": [
+    143.2,
+    152.8
+   ],
+   "label": "跨列参考，禁引（不进卡面数字栏、不进结论句、不与 mel 列并排）",
+   "quote_allowed": false
+  },
+  {
+   "column": "nmel*_vs_true",
+   "aggregate": "median",
+   "pool": "click_60_200ms",
+   "filter": "0.060 <= dur <= 0.200",
+   "n": 3100,
+   "arm": "13c",
+   "n_sources": 80,
+   "degr_median_pct": 162.1,
+   "ci95_median_pct": [
+    153.7,
+    168.9
+   ],
+   "label": "跨列参考，禁引（不进卡面数字栏、不进结论句、不与 mel 列并排）",
+   "quote_allowed": false
+  },
+  {
+   "column": "nmel*_vs_true",
+   "aggregate": "median",
+   "pool": "click_60_200ms",
+   "filter": "0.060 <= dur <= 0.200",
+   "n": 3100,
+   "arm": "13p",
+   "n_sources": 80,
+   "degr_median_pct": 155.4,
+   "ci95_median_pct": [
+    150.5,
+    161.6
+   ],
+   "label": "跨列参考，禁引（不进卡面数字栏、不进结论句、不与 mel 列并排）",
+   "quote_allowed": false
+  },
+  {
+   "column": "nmel*_vs_true",
+   "aggregate": "median",
+   "pool": "hihats",
+   "filter": "sound_family == 'hihats'",
+   "n": 247,
+   "arm": "13c",
+   "n_sources": 43,
+   "degr_median_pct": 145.5,
+   "ci95_median_pct": [
+    132.9,
+    163.2
+   ],
+   "label": "跨列参考，禁引（不进卡面数字栏、不进结论句、不与 mel 列并排）",
+   "quote_allowed": false
+  },
+  {
+   "column": "nmel*_vs_true",
+   "aggregate": "median",
+   "pool": "hihats",
+   "filter": "sound_family == 'hihats'",
+   "n": 247,
+   "arm": "13p",
+   "n_sources": 43,
+   "degr_median_pct": 128.3,
+   "ci95_median_pct": [
+    114.4,
+    144.5
+   ],
+   "label": "跨列参考，禁引（不进卡面数字栏、不进结论句、不与 mel 列并排）",
+   "quote_allowed": false
+  },
+  {
+   "column": "nmel*_vs_true",
+   "aggregate": "median",
+   "pool": "cymbal",
+   "filter": "sound_family == 'cymbal'",
+   "n": 38,
+   "arm": "13c",
+   "n_sources": 20,
+   "degr_median_pct": 101.6,
+   "ci95_median_pct": [
+    88.7,
+    118.7
+   ],
+   "label": "跨列参考，禁引（不进卡面数字栏、不进结论句、不与 mel 列并排）",
+   "quote_allowed": false
+  },
+  {
+   "column": "nmel*_vs_true",
+   "aggregate": "median",
+   "pool": "cymbal",
+   "filter": "sound_family == 'cymbal'",
+   "n": 38,
+   "arm": "13p",
+   "n_sources": 20,
+   "degr_median_pct": 120.4,
+   "ci95_median_pct": [
+    107.5,
+    139.0
+   ],
+   "label": "跨列参考，禁引（不进卡面数字栏、不进结论句、不与 mel 列并排）",
+   "quote_allowed": false
+  }
+ ],
+ "notes": [
+  "三层全部落在 mel 列；gm 列存在但在 nmel* 前缀下、已被裁决 82 禁引（nmel* 即 gm 本体），故本表 gm 格永久空缺；本条为手工文案补丁，生成器待重出。",
+  "13c/13p 双 CI 已按 mel 列重算；nmel 列旧 CI（如 120.4 [107.5,139.0]）不得沿用。",
+  "镲类是否跨 100% 在双签前禁写任一方向（裁决 83 冻结）。",
+  "每行四元组 = (column, aggregate, pool+filter, n)；缺任一格不得入卡。"
+ ]
+}

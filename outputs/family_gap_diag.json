@@ -1,0 +1,280 @@
+{
+  "baseline": {
+    "min_hits": 12,
+    "windows": 287,
+    "hits": 5472,
+    "drops": {
+      "seed_dist": 227,
+      "family_mix": 75
+    }
+  },
+  "control": {
+    "min_hits": 3,
+    "windows": 522,
+    "hits": 7486
+  },
+  "note": "family 由 crosswalk->taxonomy 取 canonical，不用 labels 自带 sound_family",
+  "families": [
+    {
+      "family": "nasal",
+      "taxonomy_sounds": 2,
+      "n_seeds": 0,
+      "n_label_hits": 9,
+      "n_label_hits_in_window": 0,
+      "n_windows_minhits12": 0,
+      "n_windows_minhits3": 2,
+      "judge": "a",
+      "drops": {}
+    },
+    {
+      "family": "tongue",
+      "taxonomy_sounds": 3,
+      "n_seeds": 1,
+      "n_label_hits": 1,
+      "n_label_hits_in_window": 1,
+      "n_windows_minhits12": 0,
+      "n_windows_minhits3": 0,
+      "judge": "b",
+      "drops": {
+        "family_mix": 1
+      }
+    },
+    {
+      "family": "whistles",
+      "taxonomy_sounds": 3,
+      "n_seeds": 15,
+      "n_label_hits": 69,
+      "n_label_hits_in_window": 14,
+      "n_windows_minhits12": 0,
+      "n_windows_minhits3": 3,
+      "judge": "a+b",
+      "drops": {
+        "seed_dist": 9
+      }
+    },
+    {
+      "family": "teeth",
+      "taxonomy_sounds": 2,
+      "n_seeds": 11,
+      "n_label_hits": 38,
+      "n_label_hits_in_window": 17,
+      "n_windows_minhits12": 2,
+      "n_windows_minhits3": 3,
+      "judge": "ok",
+      "drops": {
+        "seed_dist": 3,
+        "family_mix": 5
+      }
+    },
+    {
+      "family": "lip_oscillation",
+      "taxonomy_sounds": 8,
+      "n_seeds": 22,
+      "n_label_hits": 189,
+      "n_label_hits_in_window": 48,
+      "n_windows_minhits12": 14,
+      "n_windows_minhits3": 24,
+      "judge": "ok",
+      "drops": {
+        "family_mix": 8,
+        "seed_dist": 17
+      }
+    },
+    {
+      "family": "synth",
+      "taxonomy_sounds": 2,
+      "n_seeds": 25,
+      "n_label_hits": 426,
+      "n_label_hits_in_window": 181,
+      "n_windows_minhits12": 20,
+      "n_windows_minhits3": 32,
+      "judge": "ok",
+      "drops": {
+        "family_mix": 16,
+        "seed_dist": 10
+      }
+    },
+    {
+      "family": "scratch",
+      "taxonomy_sounds": 2,
+      "n_seeds": 20,
+      "n_label_hits": 176,
+      "n_label_hits_in_window": 60,
+      "n_windows_minhits12": 23,
+      "n_windows_minhits3": 40,
+      "judge": "ok",
+      "drops": {
+        "family_mix": 12,
+        "seed_dist": 15
+      }
+    },
+    {
+      "family": "cymbal",
+      "taxonomy_sounds": 2,
+      "n_seeds": 25,
+      "n_label_hits": 666,
+      "n_label_hits_in_window": 178,
+      "n_windows_minhits12": 30,
+      "n_windows_minhits3": 52,
+      "judge": "ok",
+      "drops": {
+        "seed_dist": 89,
+        "family_mix": 5
+      }
+    },
+    {
+      "family": "reverse",
+      "taxonomy_sounds": 2,
+      "n_seeds": 15,
+      "n_label_hits": 253,
+      "n_label_hits_in_window": 97,
+      "n_windows_minhits12": 33,
+      "n_windows_minhits3": 47,
+      "judge": "ok",
+      "drops": {
+        "family_mix": 18,
+        "seed_dist": 22
+      }
+    },
+    {
+      "family": "liprolls",
+      "taxonomy_sounds": 7,
+      "n_seeds": 25,
+      "n_label_hits": 1002,
+      "n_label_hits_in_window": 297,
+      "n_windows_minhits12": 45,
+      "n_windows_minhits3": 96,
+      "judge": "ok",
+      "drops": {
+        "seed_dist": 58,
+        "family_mix": 47
+      }
+    },
+    {
+      "family": "vocal",
+      "taxonomy_sounds": 4,
+      "n_seeds": 25,
+      "n_label_hits": 1265,
+      "n_label_hits_in_window": 443,
+      "n_windows_minhits12": 45,
+      "n_windows_minhits3": 99,
+      "judge": "ok",
+      "drops": {
+        "seed_dist": 33,
+        "family_mix": 42
+      }
+    },
+    {
+      "family": "kicks",
+      "taxonomy_sounds": 9,
+      "n_seeds": 25,
+      "n_label_hits": 1057,
+      "n_label_hits_in_window": 343,
+      "n_windows_minhits12": 49,
+      "n_windows_minhits3": 98,
+      "judge": "ok",
+      "drops": {
+        "seed_dist": 44,
+        "family_mix": 49
+      }
+    },
+    {
+      "family": "other",
+      "taxonomy_sounds": 10,
+      "n_seeds": 27,
+      "n_label_hits": 978,
+      "n_label_hits_in_window": 303,
+      "n_windows_minhits12": 61,
+      "n_windows_minhits3": 105,
+      "judge": "ok",
+      "drops": {
+        "seed_dist": 89,
+        "family_mix": 46
+      }
+    },
+    {
+      "family": "hihats",
+      "taxonomy_sounds": 8,
+      "n_seeds": 25,
+      "n_label_hits": 2115,
+      "n_label_hits_in_window": 821,
+      "n_windows_minhits12": 96,
+      "n_windows_minhits3": 148,
+      "judge": "ok",
+      "drops": {
+        "family_mix": 27,
+        "seed_dist": 140
+      }
+    },
+    {
+      "family": "zippers",
+      "taxonomy_sounds": 2,
+      "n_seeds": 25,
+      "n_label_hits": 1016,
+      "n_label_hits_in_window": 412,
+      "n_windows_minhits12": 97,
+      "n_windows_minhits3": 168,
+      "judge": "ok",
+      "drops": {
+        "seed_dist": 72,
+        "family_mix": 45
+      }
+    },
+    {
+      "family": "clops",
+      "taxonomy_sounds": 3,
+      "n_seeds": 47,
+      "n_label_hits": 1420,
+      "n_label_hits_in_window": 562,
+      "n_windows_minhits12": 114,
+      "n_windows_minhits3": 190,
+      "judge": "ok",
+      "drops": {
+        "family_mix": 63,
+        "seed_dist": 63
+      }
+    },
+    {
+      "family": "clicks",
+      "taxonomy_sounds": 8,
+      "n_seeds": 25,
+      "n_label_hits": 1589,
+      "n_label_hits_in_window": 707,
+      "n_windows_minhits12": 115,
+      "n_windows_minhits3": 177,
+      "judge": "ok",
+      "drops": {
+        "seed_dist": 68,
+        "family_mix": 62
+      }
+    },
+    {
+      "family": "drag",
+      "taxonomy_sounds": 2,
+      "n_seeds": 25,
+      "n_label_hits": 3220,
+      "n_label_hits_in_window": 1339,
+      "n_windows_minhits12": 205,
+      "n_windows_minhits3": 342,
+      "judge": "ok",
+      "drops": {
+        "family_mix": 66,
+        "seed_dist": 121
+      }
+    },
+    {
+      "family": "snares",
+      "taxonomy_sounds": 24,
+      "n_seeds": 25,
+      "n_label_hits": 13000,
+      "n_label_hits_in_window": 5640,
+      "n_windows_minhits12": 270,
+      "n_windows_minhits3": 461,
+      "judge": "ok",
+      "drops": {
+        "seed_dist": 209,
+        "family_mix": 72
+      }
+    }
+  ]
+}

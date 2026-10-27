@@ -1,0 +1,12 @@
+{
+ "gate": "build-self-check",
+ "pass": true,
+ "n_items": 12,
+ "n_wav_on_disk": 48,
+ "n_sheet_rows": 36,
+ "join_sheet_to_files": "36/36",
+ "sha1_copy_equals_source": "36/36",
+ "filenames_ascii": true,
+ "wav_headers_readable": true,
+ "names_unique": true
+}

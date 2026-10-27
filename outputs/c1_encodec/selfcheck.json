@@ -1,0 +1,965 @@
+{
+ "bug_demo": {
+  "ref_id": "001_double_inward_k_rimshot",
+  "n_orig": 8463,
+  "T": 27,
+  "expected_T_x_320": 8640,
+  "buggy_frame_mask_len": 27,
+  "buggy_decoded_samples": 27,
+  "fixed_decoded_samples": 8640,
+  "note": "帧级 mask 被当成采样点上限 -> 输出退化成 T 个采样点；None 才是正确路径"
+ },
+ "per_file": [
+  {
+   "ref_id": "001_double_inward_k_rimshot",
+   "n_orig": 8463,
+   "T": 27,
+   "raw_L16": 8640,
+   "raw_L32": 8640,
+   "trim_L16": 8463,
+   "trim_L32": 8463,
+   "ok": true
+  },
+  {
+   "ref_id": "002_hollow_click",
+   "n_orig": 3887,
+   "T": 13,
+   "raw_L16": 4160,
+   "raw_L32": 4160,
+   "trim_L16": 3887,
+   "trim_L32": 3887,
+   "ok": true
+  },
+  {
+   "ref_id": "003_slap_kick",
+   "n_orig": 8175,
+   "T": 26,
+   "raw_L16": 8320,
+   "raw_L32": 8320,
+   "trim_L16": 8175,
+   "trim_L32": 8175,
+   "ok": true
+  },
+  {
+   "ref_id": "004_inward_k_rimshot_shorter_for_fast_patterns",
+   "n_orig": 2819,
+   "T": 9,
+   "raw_L16": 2880,
+   "raw_L32": 2880,
+   "trim_L16": 2819,
+   "trim_L32": 2819,
+   "ok": true
+  },
+  {
+   "ref_id": "005_throat_kick",
+   "n_orig": 1697,
+   "T": 6,
+   "raw_L16": 1920,
+   "raw_L32": 1920,
+   "trim_L16": 1697,
+   "trim_L32": 1697,
+   "ok": true
+  },
+  {
+   "ref_id": "006_fat_kick_long",
+   "n_orig": 18626,
+   "T": 59,
+   "raw_L16": 18880,
+   "raw_L32": 18880,
+   "trim_L16": 18626,
+   "trim_L32": 18626,
+   "ok": true
+  },
+  {
+   "ref_id": "007_inward_zipper_roll",
+   "n_orig": 11882,
+   "T": 38,
+   "raw_L16": 12160,
+   "raw_L32": 12160,
+   "trim_L16": 11882,
+   "trim_L32": 11882,
+   "ok": true
+  },
+  {
+   "ref_id": "008_double_spit_snare",
+   "n_orig": 5391,
+   "T": 17,
+   "raw_L16": 5440,
+   "raw_L32": 5440,
+   "trim_L16": 5391,
+   "trim_L32": 5391,
+   "ok": true
+  },
+  {
+   "ref_id": "009_double_hollow_clop",
+   "n_orig": 4965,
+   "T": 16,
+   "raw_L16": 5120,
+   "raw_L32": 5120,
+   "trim_L16": 4965,
+   "trim_L32": 4965,
+   "ok": true
+  },
+  {
+   "ref_id": "011_inward_k_snare_closing_release",
+   "n_orig": 1967,
+   "T": 7,
+   "raw_L16": 2240,
+   "raw_L32": 2240,
+   "trim_L16": 1967,
+   "trim_L32": 1967,
+   "ok": true
+  },
+  {
+   "ref_id": "012_click_do_phonem",
+   "n_orig": 1893,
+   "T": 6,
+   "raw_L16": 1920,
+   "raw_L32": 1920,
+   "trim_L16": 1893,
+   "trim_L32": 1893,
+   "ok": true
+  },
+  {
+   "ref_id": "013_fat_kick_short",
+   "n_orig": 7856,
+   "T": 25,
+   "raw_L16": 8000,
+   "raw_L32": 8000,
+   "trim_L16": 7856,
+   "trim_L32": 7856,
+   "ok": true
+  },
+  {
+   "ref_id": "014_sub_bass_snare",
+   "n_orig": 6377,
+   "T": 20,
+   "raw_L16": 6400,
+   "raw_L32": 6400,
+   "trim_L16": 6377,
+   "trim_L32": 6377,
+   "ok": true
+  },
+  {
+   "ref_id": "015_hi_hat_f",
+   "n_orig": 2999,
+   "T": 10,
+   "raw_L16": 3200,
+   "raw_L32": 3200,
+   "trim_L16": 2999,
+   "trim_L32": 2999,
+   "ok": true
+  },
+  {
+   "ref_id": "018_tongue_kick",
+   "n_orig": 1532,
+   "T": 5,
+   "raw_L16": 1600,
+   "raw_L32": 1600,
+   "trim_L16": 1532,
+   "trim_L32": 1532,
+   "ok": true
+  },
+  {
+   "ref_id": "019_pop_sound",
+   "n_orig": 5467,
+   "T": 18,
+   "raw_L16": 5760,
+   "raw_L32": 5760,
+   "trim_L16": 5467,
+   "trim_L32": 5467,
+   "ok": true
+  },
+  {
+   "ref_id": "020_snore_bass",
+   "n_orig": 15964,
+   "T": 50,
+   "raw_L16": 16000,
+   "raw_L32": 16000,
+   "trim_L16": 15964,
+   "trim_L32": 15964,
+   "ok": true
+  },
+  {
+   "ref_id": "021_hi_hat_f_humming",
+   "n_orig": 4954,
+   "T": 16,
+   "raw_L16": 5120,
+   "raw_L32": 5120,
+   "trim_L16": 4954,
+   "trim_L32": 4954,
+   "ok": true
+  },
+  {
+   "ref_id": "022_outward_k_snare",
+   "n_orig": 6676,
+   "T": 21,
+   "raw_L16": 6720,
+   "raw_L32": 6720,
+   "trim_L16": 6676,
+   "trim_L32": 6676,
+   "ok": true
+  },
+  {
+   "ref_id": "023_lip_roll",
+   "n_orig": 10742,
+   "T": 34,
+   "raw_L16": 10880,
+   "raw_L32": 10880,
+   "trim_L16": 10742,
+   "trim_L32": 10742,
+   "ok": true
+  },
+  {
+   "ref_id": "024_hi_hat_t",
+   "n_orig": 4155,
+   "T": 13,
+   "raw_L16": 4160,
+   "raw_L32": 4160,
+   "trim_L16": 4155,
+   "trim_L32": 4155,
+   "ok": true
+  },
+  {
+   "ref_id": "025_kick",
+   "n_orig": 4709,
+   "T": 15,
+   "raw_L16": 4800,
+   "raw_L32": 4800,
+   "trim_L16": 4709,
+   "trim_L32": 4709,
+   "ok": true
+  },
+  {
+   "ref_id": "026_outward_kch_snare_vocalized",
+   "n_orig": 33537,
+   "T": 105,
+   "raw_L16": 33600,
+   "raw_L32": 33600,
+   "trim_L16": 33537,
+   "trim_L32": 33537,
+   "ok": true
+  },
+  {
+   "ref_id": "027_inward_k_rimshot",
+   "n_orig": 7246,
+   "T": 23,
+   "raw_L16": 7360,
+   "raw_L32": 7360,
+   "trim_L16": 7246,
+   "trim_L32": 7246,
+   "ok": true
+  },
+  {
+   "ref_id": "028_kiss_hi_hat",
+   "n_orig": 2384,
+   "T": 8,
+   "raw_L16": 2560,
+   "raw_L32": 2560,
+   "trim_L16": 2384,
+   "trim_L32": 2384,
+   "ok": true
+  },
+  {
+   "ref_id": "029_inward_lip_roll",
+   "n_orig": 15806,
+   "T": 50,
+   "raw_L16": 16000,
+   "raw_L32": 16000,
+   "trim_L16": 15806,
+   "trim_L32": 15806,
+   "ok": true
+  },
+  {
+   "ref_id": "030_reverse_kick",
+   "n_orig": 2018,
+   "T": 7,
+   "raw_L16": 2240,
+   "raw_L32": 2240,
+   "trim_L16": 2018,
+   "trim_L32": 2018,
+   "ok": true
+  },
+  {
+   "ref_id": "031_spit_snare",
+   "n_orig": 8081,
+   "T": 26,
+   "raw_L16": 8320,
+   "raw_L32": 8320,
+   "trim_L16": 8081,
+   "trim_L32": 8081,
+   "ok": true
+  },
+  {
+   "ref_id": "032_click_da_phonem",
+   "n_orig": 2852,
+   "T": 9,
+   "raw_L16": 2880,
+   "raw_L32": 2880,
+   "trim_L16": 2852,
+   "trim_L32": 2852,
+   "ok": true
+  },
+  {
+   "ref_id": "033_inward_kick",
+   "n_orig": 2953,
+   "T": 10,
+   "raw_L16": 3200,
+   "raw_L32": 3200,
+   "trim_L16": 2953,
+   "trim_L32": 2953,
+   "ok": true
+  },
+  {
+   "ref_id": "034_kick_w_chest_bass",
+   "n_orig": 12103,
+   "T": 38,
+   "raw_L16": 12160,
+   "raw_L32": 12160,
+   "trim_L16": 12103,
+   "trim_L32": 12103,
+   "ok": true
+  },
+  {
+   "ref_id": "035_outward_drag",
+   "n_orig": 6885,
+   "T": 22,
+   "raw_L16": 7040,
+   "raw_L32": 7040,
+   "trim_L16": 6885,
+   "trim_L32": 6885,
+   "ok": true
+  },
+  {
+   "ref_id": "037_synth",
+   "n_orig": 11210,
+   "T": 36,
+   "raw_L16": 11520,
+   "raw_L32": 11520,
+   "trim_L16": 11210,
+   "trim_L32": 11210,
+   "ok": true
+  },
+  {
+   "ref_id": "038_hollow_lip_roll",
+   "n_orig": 9816,
+   "T": 31,
+   "raw_L16": 9920,
+   "raw_L32": 9920,
+   "trim_L16": 9816,
+   "trim_L32": 9816,
+   "ok": true
+  },
+  {
+   "ref_id": "039_pf_snare",
+   "n_orig": 10413,
+   "T": 33,
+   "raw_L16": 10560,
+   "raw_L32": 10560,
+   "trim_L16": 10413,
+   "trim_L32": 10413,
+   "ok": true
+  },
+  {
+   "ref_id": "040_k_palate_snare",
+   "n_orig": 1491,
+   "T": 5,
+   "raw_L16": 1600,
+   "raw_L32": 1600,
+   "trim_L16": 1491,
+   "trim_L32": 1491,
+   "ok": true
+  },
+  {
+   "ref_id": "041_bongo_drum",
+   "n_orig": 4908,
+   "T": 16,
+   "raw_L16": 5120,
+   "raw_L32": 5120,
+   "trim_L16": 4908,
+   "trim_L32": 4908,
+   "ok": true
+  },
+  {
+   "ref_id": "042_double_inward_k_snare",
+   "n_orig": 5193,
+   "T": 17,
+   "raw_L16": 5440,
+   "raw_L32": 5440,
+   "trim_L16": 5193,
+   "trim_L32": 5193,
+   "ok": true
+  },
+  {
+   "ref_id": "043_tongue_clap",
+   "n_orig": 6561,
+   "T": 21,
+   "raw_L16": 6720,
+   "raw_L32": 6720,
+   "trim_L16": 6561,
+   "trim_L32": 6561,
+   "ok": true
+  },
+  {
+   "ref_id": "044_inward_k_snare",
+   "n_orig": 6380,
+   "T": 20,
+   "raw_L16": 6400,
+   "raw_L32": 6400,
+   "trim_L16": 6380,
+   "trim_L32": 6380,
+   "ok": true
+  },
+  {
+   "ref_id": "045_inward_fd",
+   "n_orig": 4308,
+   "T": 14,
+   "raw_L16": 4480,
+   "raw_L32": 4480,
+   "trim_L16": 4308,
+   "trim_L32": 4308,
+   "ok": true
+  },
+  {
+   "ref_id": "046_lip_oscillation_classic",
+   "n_orig": 10386,
+   "T": 33,
+   "raw_L16": 10560,
+   "raw_L32": 10560,
+   "trim_L16": 10386,
+   "trim_L32": 10386,
+   "ok": true
+  },
+  {
+   "ref_id": "047_inward_dp",
+   "n_orig": 2418,
+   "T": 8,
+   "raw_L16": 2560,
+   "raw_L32": 2560,
+   "trim_L16": 2418,
+   "trim_L32": 2418,
+   "ok": true
+  },
+  {
+   "ref_id": "048_sucker_punch",
+   "n_orig": 5000,
+   "T": 16,
+   "raw_L16": 5120,
+   "raw_L32": 5120,
+   "trim_L16": 5000,
+   "trim_L32": 5000,
+   "ok": true
+  },
+  {
+   "ref_id": "049_inward_hollow_lip_roll_short",
+   "n_orig": 10861,
+   "T": 34,
+   "raw_L16": 10880,
+   "raw_L32": 10880,
+   "trim_L16": 10861,
+   "trim_L32": 10861,
+   "ok": true
+  },
+  {
+   "ref_id": "050_inward_lip_roll_with_tongue",
+   "n_orig": 14002,
+   "T": 44,
+   "raw_L16": 14080,
+   "raw_L32": 14080,
+   "trim_L16": 14002,
+   "trim_L32": 14002,
+   "ok": true
+  },
+  {
+   "ref_id": "051_duf_snare",
+   "n_orig": 16513,
+   "T": 52,
+   "raw_L16": 16640,
+   "raw_L32": 16640,
+   "trim_L16": 16513,
+   "trim_L32": 16513,
+   "ok": true
+  },
+  {
+   "ref_id": "052_synth_high_pitched",
+   "n_orig": 7874,
+   "T": 25,
+   "raw_L16": 8000,
+   "raw_L32": 8000,
+   "trim_L16": 7874,
+   "trim_L32": 7874,
+   "ok": true
+  },
+  {
+   "ref_id": "053_inward_drag",
+   "n_orig": 3937,
+   "T": 13,
+   "raw_L16": 4160,
+   "raw_L32": 4160,
+   "trim_L16": 3937,
+   "trim_L32": 3937,
+   "ok": true
+  },
+  {
+   "ref_id": "054_tch_hi_hat",
+   "n_orig": 2110,
+   "T": 7,
+   "raw_L16": 2240,
+   "raw_L32": 2240,
+   "trim_L16": 2110,
+   "trim_L32": 2110,
+   "ok": true
+  },
+  {
+   "ref_id": "055_tight_tongue_roll",
+   "n_orig": 3968,
+   "T": 13,
+   "raw_L16": 4160,
+   "raw_L32": 4160,
+   "trim_L16": 3968,
+   "trim_L32": 3968,
+   "ok": true
+  },
+  {
+   "ref_id": "056_vocalized_lip_oscillation_perfect_octave",
+   "n_orig": 19652,
+   "T": 62,
+   "raw_L16": 19840,
+   "raw_L32": 19840,
+   "trim_L16": 19652,
+   "trim_L32": 19652,
+   "ok": true
+  },
+  {
+   "ref_id": "057_clop",
+   "n_orig": 4693,
+   "T": 15,
+   "raw_L16": 4800,
+   "raw_L32": 4800,
+   "trim_L16": 4693,
+   "trim_L32": 4693,
+   "ok": true
+  },
+  {
+   "ref_id": "058_dry_kick",
+   "n_orig": 2294,
+   "T": 8,
+   "raw_L16": 2560,
+   "raw_L32": 2560,
+   "trim_L16": 2294,
+   "trim_L32": 2294,
+   "ok": true
+  },
+  {
+   "ref_id": "059_vocalized_lip_oscillation_unisson",
+   "n_orig": 12117,
+   "T": 38,
+   "raw_L16": 12160,
+   "raw_L32": 12160,
+   "trim_L16": 12117,
+   "trim_L32": 12117,
+   "ok": true
+  },
+  {
+   "ref_id": "060_inward_kch_snare",
+   "n_orig": 4449,
+   "T": 14,
+   "raw_L16": 4480,
+   "raw_L32": 4480,
+   "trim_L16": 4449,
+   "trim_L32": 4449,
+   "ok": true
+  },
+  {
+   "ref_id": "061_throat_kick_with_nasal_resonance",
+   "n_orig": 2523,
+   "T": 8,
+   "raw_L16": 2560,
+   "raw_L32": 2560,
+   "trim_L16": 2523,
+   "trim_L32": 2523,
+   "ok": true
+  },
+  {
+   "ref_id": "062_msh_snare",
+   "n_orig": 4184,
+   "T": 14,
+   "raw_L16": 4480,
+   "raw_L32": 4480,
+   "trim_L16": 4184,
+   "trim_L32": 4184,
+   "ok": true
+  },
+  {
+   "ref_id": "063_hollow_whistle",
+   "n_orig": 12849,
+   "T": 41,
+   "raw_L16": 13120,
+   "raw_L32": 13120,
+   "trim_L16": 12849,
+   "trim_L32": 12849,
+   "ok": true
+  },
+  {
+   "ref_id": "064_k_palate_snare_short_for_fast_patterns",
+   "n_orig": 1025,
+   "T": 4,
+   "raw_L16": 1280,
+   "raw_L32": 1280,
+   "trim_L16": 1025,
+   "trim_L32": 1025,
+   "ok": true
+  },
+  {
+   "ref_id": "065_zede_scratch",
+   "n_orig": 2588,
+   "T": 9,
+   "raw_L16": 2880,
+   "raw_L32": 2880,
+   "trim_L16": 2588,
+   "trim_L32": 2588,
+   "ok": true
+  },
+  {
+   "ref_id": "066_hi_hat_t_humming",
+   "n_orig": 3349,
+   "T": 11,
+   "raw_L16": 3520,
+   "raw_L32": 3520,
+   "trim_L16": 3349,
+   "trim_L32": 3349,
+   "ok": true
+  },
+  {
+   "ref_id": "067_dsh_snare",
+   "n_orig": 8395,
+   "T": 27,
+   "raw_L16": 8640,
+   "raw_L32": 8640,
+   "trim_L16": 8395,
+   "trim_L32": 8395,
+   "ok": true
+  },
+  {
+   "ref_id": "068_reverse_snare",
+   "n_orig": 5825,
+   "T": 19,
+   "raw_L16": 6080,
+   "raw_L32": 6080,
+   "trim_L16": 5825,
+   "trim_L32": 5825,
+   "ok": true
+  },
+  {
+   "ref_id": "070_inward_hollow_lip_roll_longer",
+   "n_orig": 15423,
+   "T": 49,
+   "raw_L16": 15680,
+   "raw_L32": 15680,
+   "trim_L16": 15423,
+   "trim_L32": 15423,
+   "ok": true
+  },
+  {
+   "ref_id": "071_uvula_click_ga_phonem",
+   "n_orig": 2922,
+   "T": 10,
+   "raw_L16": 3200,
+   "raw_L32": 3200,
+   "trim_L16": 2922,
+   "trim_L32": 2922,
+   "ok": true
+  },
+  {
+   "ref_id": "072_inward_vocalized_tooth_whistle",
+   "n_orig": 10927,
+   "T": 35,
+   "raw_L16": 11200,
+   "raw_L32": 11200,
+   "trim_L16": 10927,
+   "trim_L32": 10927,
+   "ok": true
+  },
+  {
+   "ref_id": "073_hollow_clop",
+   "n_orig": 3211,
+   "T": 11,
+   "raw_L16": 3520,
+   "raw_L32": 3520,
+   "trim_L16": 3211,
+   "trim_L32": 3211,
+   "ok": true
+  },
+  {
+   "ref_id": "074_inward_hd",
+   "n_orig": 2809,
+   "T": 9,
+   "raw_L16": 2880,
+   "raw_L32": 2880,
+   "trim_L16": 2809,
+   "trim_L32": 2809,
+   "ok": true
+  },
+  {
+   "ref_id": "075_inward_df",
+   "n_orig": 2684,
+   "T": 9,
+   "raw_L16": 2880,
+   "raw_L32": 2880,
+   "trim_L16": 2684,
+   "trim_L32": 2684,
+   "ok": true
+  },
+  {
+   "ref_id": "076_vibrator_lip_bass_short",
+   "n_orig": 6367,
+   "T": 20,
+   "raw_L16": 6400,
+   "raw_L32": 6400,
+   "trim_L16": 6367,
+   "trim_L32": 6367,
+   "ok": true
+  },
+  {
+   "ref_id": "077_whistling_crash",
+   "n_orig": 13439,
+   "T": 42,
+   "raw_L16": 13440,
+   "raw_L32": 13440,
+   "trim_L16": 13439,
+   "trim_L32": 13439,
+   "ok": true
+  },
+  {
+   "ref_id": "078_inward_click_roll_whistle",
+   "n_orig": 11499,
+   "T": 36,
+   "raw_L16": 11520,
+   "raw_L32": 11520,
+   "trim_L16": 11499,
+   "trim_L32": 11499,
+   "ok": true
+  },
+  {
+   "ref_id": "079_fart_bass",
+   "n_orig": 9678,
+   "T": 31,
+   "raw_L16": 9920,
+   "raw_L32": 9920,
+   "trim_L16": 9678,
+   "trim_L32": 9678,
+   "ok": true
+  },
+  {
+   "ref_id": "080_uvula_click",
+   "n_orig": 3376,
+   "T": 11,
+   "raw_L16": 3520,
+   "raw_L32": 3520,
+   "trim_L16": 3376,
+   "trim_L32": 3376,
+   "ok": true
+  },
+  {
+   "ref_id": "081_inward_click_roll",
+   "n_orig": 9756,
+   "T": 31,
+   "raw_L16": 9920,
+   "raw_L32": 9920,
+   "trim_L16": 9756,
+   "trim_L32": 9756,
+   "ok": true
+  },
+  {
+   "ref_id": "082_tooth_whistle",
+   "n_orig": 7405,
+   "T": 24,
+   "raw_L16": 7680,
+   "raw_L32": 7680,
+   "trim_L16": 7405,
+   "trim_L32": 7405,
+   "ok": true
+  },
+  {
+   "ref_id": "083_hi_hat_t_short_for_fast_patterns",
+   "n_orig": 2527,
+   "T": 8,
+   "raw_L16": 2560,
+   "raw_L32": 2560,
+   "trim_L16": 2527,
+   "trim_L32": 2527,
+   "ok": true
+  },
+  {
+   "ref_id": "084_mew_squeak",
+   "n_orig": 15231,
+   "T": 48,
+   "raw_L16": 15360,
+   "raw_L32": 15360,
+   "trim_L16": 15231,
+   "trim_L32": 15231,
+   "ok": true
+  },
+  {
+   "ref_id": "085_inward_click_roll_closing_release",
+   "n_orig": 2726,
+   "T": 9,
+   "raw_L16": 2880,
+   "raw_L32": 2880,
+   "trim_L16": 2726,
+   "trim_L32": 2726,
+   "ok": true
+  },
+  {
+   "ref_id": "086_peh_snare",
+   "n_orig": 4923,
+   "T": 16,
+   "raw_L16": 5120,
+   "raw_L32": 5120,
+   "trim_L16": 4923,
+   "trim_L32": 4923,
+   "ok": true
+  },
+  {
+   "ref_id": "087_throat_bass",
+   "n_orig": 8153,
+   "T": 26,
+   "raw_L16": 8320,
+   "raw_L32": 8320,
+   "trim_L16": 8153,
+   "trim_L32": 8153,
+   "ok": true
+  },
+  {
+   "ref_id": "088_uvula_bass",
+   "n_orig": 10527,
+   "T": 33,
+   "raw_L16": 10560,
+   "raw_L32": 10560,
+   "trim_L16": 10527,
+   "trim_L32": 10527,
+   "ok": true
+  },
+  {
+   "ref_id": "089_click",
+   "n_orig": 2877,
+   "T": 9,
+   "raw_L16": 2880,
+   "raw_L32": 2880,
+   "trim_L16": 2877,
+   "trim_L32": 2877,
+   "ok": true
+  },
+  {
+   "ref_id": "092_uvula_click_go_phonem",
+   "n_orig": 4049,
+   "T": 13,
+   "raw_L16": 4160,
+   "raw_L32": 4160,
+   "trim_L16": 4049,
+   "trim_L32": 4049,
+   "ok": true
+  },
+  {
+   "ref_id": "093_hi_hat_opened",
+   "n_orig": 7095,
+   "T": 23,
+   "raw_L16": 7360,
+   "raw_L32": 7360,
+   "trim_L16": 7095,
+   "trim_L32": 7095,
+   "ok": true
+  },
+  {
+   "ref_id": "094_inward_k_tonal_rimshot",
+   "n_orig": 7018,
+   "T": 22,
+   "raw_L16": 7040,
+   "raw_L32": 7040,
+   "trim_L16": 7018,
+   "trim_L32": 7018,
+   "ok": true
+  },
+  {
+   "ref_id": "095_inward_sub_lip_roll",
+   "n_orig": 14672,
+   "T": 46,
+   "raw_L16": 14720,
+   "raw_L32": 14720,
+   "trim_L16": 14672,
+   "trim_L32": 14672,
+   "ok": true
+  },
+  {
+   "ref_id": "096_nasal_bass",
+   "n_orig": 12094,
+   "T": 38,
+   "raw_L16": 12160,
+   "raw_L32": 12160,
+   "trim_L16": 12094,
+   "trim_L32": 12094,
+   "ok": true
+  },
+  {
+   "ref_id": "097_vocalized_lip_oscillation_perfect_fifth",
+   "n_orig": 14395,
+   "T": 45,
+   "raw_L16": 14400,
+   "raw_L32": 14400,
+   "trim_L16": 14395,
+   "trim_L32": 14395,
+   "ok": true
+  },
+  {
+   "ref_id": "099_zipper",
+   "n_orig": 8787,
+   "T": 28,
+   "raw_L16": 8960,
+   "raw_L32": 8960,
+   "trim_L16": 8787,
+   "trim_L32": 8787,
+   "ok": true
+  },
+  {
+   "ref_id": "100_whistling_lip_oscillation",
+   "n_orig": 12577,
+   "T": 40,
+   "raw_L16": 12800,
+   "raw_L32": 12800,
+   "trim_L16": 12577,
+   "trim_L32": 12577,
+   "ok": true
+  },
+  {
+   "ref_id": "101_inward_k_snare_click_roll",
+   "n_orig": 7568,
+   "T": 24,
+   "raw_L16": 7680,
+   "raw_L32": 7680,
+   "trim_L16": 7568,
+   "trim_L32": 7568,
+   "ok": true
+  },
+  {
+   "ref_id": "102_crash",
+   "n_orig": 12339,
+   "T": 39,
+   "raw_L16": 12480,
+   "raw_L32": 12480,
+   "trim_L16": 12339,
+   "trim_L32": 12339,
+   "ok": true
+  },
+  {
+   "ref_id": "103_shuy_air_scratch",
+   "n_orig": 3715,
+   "T": 12,
+   "raw_L16": 3840,
+   "raw_L32": 3840,
+   "trim_L16": 3715,
+   "trim_L32": 3715,
+   "ok": true
+  }
+ ],
+ "asserts": {}
+}

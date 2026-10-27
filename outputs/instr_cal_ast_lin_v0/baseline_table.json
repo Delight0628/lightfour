@@ -1,0 +1,88 @@
+{
+ "artifact": "baseline_table_v0",
+ "owner": "Eval",
+ "sources": {
+  "preds.csv": "efc821bf",
+  "baseline_train_index.csv": "8186ab5d",
+  "baseline_label_space.csv": "8a5788fb",
+  "eval_refaudio_testset.csv": "e668ce45"
+ },
+ "metric": "mel-free; classification baseline table",
+ "scope_A": {
+  "label_space": "K=34 notation",
+  "n": 34,
+  "sound_id_top1": {
+   "hit": 5,
+   "acc": 0.1471
+  },
+  "family_top1": {
+   "hit": 7,
+   "acc": 0.2059
+  },
+  "zero_dist": {
+   "dist": "Binom(n=34,p=1/34)",
+   "p_ge_5": 0.003005,
+   "p_ge_4": 0.017177
+  },
+  "baselines": {
+   "uniform_34way": 0.0294,
+   "majority_family": 0.1176,
+   "per_family_majority_oracle_family": 0.5294
+  }
+ },
+ "scope_B": {
+  "label_space": "K=95 sound_id",
+  "n": 95,
+  "sound_id_top1": {
+   "hit": 5,
+   "acc": 0.0526
+  },
+  "family_top1": {
+   "hit": 9,
+   "acc": 0.0947
+  },
+  "baselines": {
+   "uniform_95way": 0.0105,
+   "majority_family_snares": 0.2316
+  },
+  "warning": "family acc below majority baseline; do not mix with scope_A"
+ },
+ "train_n_strat_sound_id": {
+  "A": {
+   "0": 0,
+   "1-3": 0,
+   "4-10": 1,
+   "11+": 4
+  },
+  "B": {
+   "0": 0,
+   "1-3": 0,
+   "4-10": 1,
+   "11+": 4
+  },
+  "note": "hits all in train_n>=11 bucket; OOV 62/62 forced classification"
+ },
+ "family_layer_ceiling": {
+  "A": "7/34"
+ },
+ "ncc_leakage_max_probe_env_sim": {
+  "n": 319,
+  "max": 0.9862,
+  "p90": 0.9215,
+  "median": 0.7619,
+  "gt_0.9": 49,
+  "gt_0.8": 134,
+  "status": "known false-positive-prone proxy; risk flag only"
+ },
+ "reject_rate": {
+  "status": "not_implemented",
+  "distinct_pred_ids": 20,
+  "oov_forced": 62,
+  "oov_hit": 0
+ },
+ "void_thresholds": [
+  "5x_random_baseline_line",
+  "family_ge_15_pass_line",
+  "prob_top1_as_threshold"
+ ]
+}
