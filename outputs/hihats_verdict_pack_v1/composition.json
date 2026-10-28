@@ -1,0 +1,87 @@
+{
+ "pack_id": "HIHATS_VERDICT_V1",
+ "listen_n": 12,
+ "pool": "hihats",
+ "pool_size_total": 247,
+ "pool_size_after_exclusion": 235,
+ "selection": "先剔除旧 12 条 → 记法配额 {Tch:3, Tss:3, F:6}（按池 7/2/2、小众补到 3、大类封顶 6）→ 每记法内 source 分层（每 source 至多 1 条、取 mel13p_vs_75 中位代表、按退化均匀铺开）→ 12 条 12 source",
+ "quota_by_notation": {
+  "Tch": 3,
+  "Tss": 3,
+  "F": 6
+ },
+ "rejected_unconstrained_draw": {
+  "rule": "codec_rate_ab._spread_by_source(235 rows, 12)（PI 原话字面口径）",
+  "reason": "产出 F 11 / Tss 1 / Tch 0，单记法包场，无法代表 hihats 三个 sound_id",
+  "hit_ids": [
+   "BV11m421W7Xc_1005",
+   "BV1UEZtY2EoL_0255",
+   "BV1prnA6eEts_0155",
+   "BV1fRg1zBEyi_0104",
+   "BV1Qb411G7Y7_0732",
+   "BV177tpz7EC3_0594",
+   "BV1VT411L7Hc_0039",
+   "BV1GW411z7MC_0386",
+   "BV1Pw411F7hx_1080",
+   "BV1CPnr6VEeE_0321",
+   "BV18W41167do_0604",
+   "BV1eykBY1EW9_0160"
+  ],
+  "notation_counts": {
+   "F": 11,
+   "Tss": 1
+  }
+ },
+ "source_of_truth": "outputs/codec_rate_ab/per_hit.csv (live R4, 31 col)",
+ "per_hit_md5": "235158c7877f5620e5443790c19f30e8",
+ "excluded_old12": {
+  "n": 12,
+  "source_file": "outputs/eval_hihats_ab_v1/overwritten_hihats12_index_recovered.json",
+  "source_md5": "59a58a2a24a739301df93ac6e5a8177b",
+  "hit_ids": [
+   "BV1VZ4y1W7sf_0122",
+   "BV1VZ4y1W7sf_0511",
+   "BV1rp4y1t7Qv_0501",
+   "BV1YssozfEXU_0030",
+   "BV177tpz7EC3_0641",
+   "BV1rp4y1t7Qv_0495",
+   "BV1VonA6WEDs_0570",
+   "BV1fRg1zBEyi_0211",
+   "BV1np4nzGEiN_0893",
+   "BV1rp4y1t7Qv_0513",
+   "BV1wzpEezEFd_0376",
+   "BV1DW411u7oK_0300"
+  ],
+  "role": "附录 only，不入判决、不重渲"
+ },
+ "old12_item_overlap": [],
+ "old12_source_overlap": [
+  "BV177tpz7EC3",
+  "BV1VonA6WEDs"
+ ],
+ "old12_source_overlap_note": "旧 12 条从未被判决（JUDGMENT_SHEET 未填），同 source 不同击打不构成听感暴露；如需 source 级全新鲜，由 @Eval 提请在 235 段上追加排除后重抽（会改变样本，需重渲）",
+ "arms": [
+  "true",
+  "75",
+  "13c",
+  "13p"
+ ],
+ "subtype": "FLOAT (libsndfile PEAK chunk stripped：块内含 wall-clock，会破坏字节复现)",
+ "n_wav": 48,
+ "n_sources": 12,
+ "split_counts": {
+  "test": 1,
+  "train": 11
+ },
+ "notation_counts": {
+  "F": 6,
+  "Tch": 3,
+  "Tss": 3
+ },
+ "dur_ms_range": [
+  85.3,
+  230.4
+ ],
+ "skipped": [],
+ "warning": "本包全部为 hihats，只能判 hihats；不得表述为三池/全 family 未见退化"
+}
