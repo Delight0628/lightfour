@@ -1,0 +1,194 @@
+{
+ "000_75997e56_c1.wav": {
+  "sha1": "5d0a389e354a9ba4ed3698fe56a728914c8d3235",
+  "bytes": 10336
+ },
+ "000_75997e56_c2.wav": {
+  "sha1": "54bc6f79ce2ac896fd18fb2f190c0a6e354b4ba7",
+  "bytes": 10336
+ },
+ "000_75997e56_c3.wav": {
+  "sha1": "2dc82e1ed10b881bf62e8d70e7743af984dcbf5f",
+  "bytes": 10336
+ },
+ "000_75997e56_ref.wav": {
+  "sha1": "2dc82e1ed10b881bf62e8d70e7743af984dcbf5f",
+  "bytes": 10336
+ },
+ "001_f889dc8c_c1.wav": {
+  "sha1": "0f8f9d95d207577afb4fdec2f8221054635318e8",
+  "bytes": 11028
+ },
+ "001_f889dc8c_c2.wav": {
+  "sha1": "ec2fdf8f4aa35112010a0a5c3e620b8b5846b62d",
+  "bytes": 11028
+ },
+ "001_f889dc8c_c3.wav": {
+  "sha1": "7a8119c0f46e8bd092499e9c140b4b78fc9bc401",
+  "bytes": 11028
+ },
+ "001_f889dc8c_ref.wav": {
+  "sha1": "7a8119c0f46e8bd092499e9c140b4b78fc9bc401",
+  "bytes": 11028
+ },
+ "002_3bb2fa94_c1.wav": {
+  "sha1": "cbd7d5bcce246c3fbe41284ed641c04e32021f9b",
+  "bytes": 14512
+ },
+ "002_3bb2fa94_c2.wav": {
+  "sha1": "a118a58c18598517d974023618387a0e88c45aa2",
+  "bytes": 14512
+ },
+ "002_3bb2fa94_c3.wav": {
+  "sha1": "ef3c72f7bb697e3fb305e905788d0cb35977a21a",
+  "bytes": 14512
+ },
+ "002_3bb2fa94_ref.wav": {
+  "sha1": "cbd7d5bcce246c3fbe41284ed641c04e32021f9b",
+  "bytes": 14512
+ },
+ "003_98b0b687_c1.wav": {
+  "sha1": "e9e376d2a4e832f451ce1053d360a3ee4251178c",
+  "bytes": 20780
+ },
+ "003_98b0b687_c2.wav": {
+  "sha1": "a2e2f5b8ac1dc4b95ec68c9893f86d0fa4a1e9ce",
+  "bytes": 20780
+ },
+ "003_98b0b687_c3.wav": {
+  "sha1": "ead8a8c93a00cc7ea2f42e9057bf8cb87658b124",
+  "bytes": 20780
+ },
+ "003_98b0b687_ref.wav": {
+  "sha1": "a2e2f5b8ac1dc4b95ec68c9893f86d0fa4a1e9ce",
+  "bytes": 20780
+ },
+ "004_d3de192b_c1.wav": {
+  "sha1": "4cdb2932fd29ec0c68042e060ea6d79ccb3f2782",
+  "bytes": 22176
+ },
+ "004_d3de192b_c2.wav": {
+  "sha1": "e9a102b24b0477b1654b7c9fba657fc940560a8f",
+  "bytes": 22176
+ },
+ "004_d3de192b_c3.wav": {
+  "sha1": "492a063078d693031aeeb9a991fa35a4177646a0",
+  "bytes": 22176
+ },
+ "004_d3de192b_ref.wav": {
+  "sha1": "4cdb2932fd29ec0c68042e060ea6d79ccb3f2782",
+  "bytes": 22176
+ },
+ "005_3768da00_c1.wav": {
+  "sha1": "67567b35f43715bdcb0025324ccce7961b9f5a7d",
+  "bytes": 15904
+ },
+ "005_3768da00_c2.wav": {
+  "sha1": "e42b03103660d01d9a25c617f8a45390a80f4a6c",
+  "bytes": 15904
+ },
+ "005_3768da00_c3.wav": {
+  "sha1": "98d15013894ddc880955cd68234a308ec79b06ce",
+  "bytes": 15904
+ },
+ "005_3768da00_ref.wav": {
+  "sha1": "e42b03103660d01d9a25c617f8a45390a80f4a6c",
+  "bytes": 15904
+ },
+ "006_95baafc6_c1.wav": {
+  "sha1": "6aff5ea073550145f6231a887d417a15019b2747",
+  "bytes": 10340
+ },
+ "006_95baafc6_c2.wav": {
+  "sha1": "8ebdb9af838731ecf5ee03489ed65936b7d6a9ce",
+  "bytes": 10340
+ },
+ "006_95baafc6_c3.wav": {
+  "sha1": "297af35f33d7fb6993e430d3b71f22c5d3c32d44",
+  "bytes": 10340
+ },
+ "006_95baafc6_ref.wav": {
+  "sha1": "6aff5ea073550145f6231a887d417a15019b2747",
+  "bytes": 10340
+ },
+ "007_a808be48_c1.wav": {
+  "sha1": "1b0c6146067fbb9a47183423254c55dcc120f85d",
+  "bytes": 8244
+ },
+ "007_a808be48_c2.wav": {
+  "sha1": "dfda094de31a8480a672780350706fb8e72458b4",
+  "bytes": 8244
+ },
+ "007_a808be48_c3.wav": {
+  "sha1": "9ee6496263a20071a21aa2b18100680b868fdbc0",
+  "bytes": 8244
+ },
+ "007_a808be48_ref.wav": {
+  "sha1": "dfda094de31a8480a672780350706fb8e72458b4",
+  "bytes": 8244
+ },
+ "008_c6dbf050_c1.wav": {
+  "sha1": "b2c1c1b1e0943cbd0ca16cbdc66a235c5c1d5bac",
+  "bytes": 11028
+ },
+ "008_c6dbf050_c2.wav": {
+  "sha1": "aa1469ecc9f2f6962305db8cc3eb94d18f7b2fd9",
+  "bytes": 11028
+ },
+ "008_c6dbf050_c3.wav": {
+  "sha1": "bec5933351e798e075b938addc6038386bec75ed",
+  "bytes": 11028
+ },
+ "008_c6dbf050_ref.wav": {
+  "sha1": "bec5933351e798e075b938addc6038386bec75ed",
+  "bytes": 11028
+ },
+ "009_bc5ee1fe_c1.wav": {
+  "sha1": "58bffeda42f109a268c64f58d6f4871579a1cd9f",
+  "bytes": 12420
+ },
+ "009_bc5ee1fe_c2.wav": {
+  "sha1": "100eb25c8816580f24dc65b143228eb3620660a0",
+  "bytes": 12420
+ },
+ "009_bc5ee1fe_c3.wav": {
+  "sha1": "28dc33355abe3ca0186100b1d980dc516c4c4f58",
+  "bytes": 12420
+ },
+ "009_bc5ee1fe_ref.wav": {
+  "sha1": "58bffeda42f109a268c64f58d6f4871579a1cd9f",
+  "bytes": 12420
+ },
+ "010_c6799b49_c1.wav": {
+  "sha1": "425180c7759afe9320112167f65c36d51d2d448e",
+  "bytes": 14512
+ },
+ "010_c6799b49_c2.wav": {
+  "sha1": "f84064f9ca2ec24a1e1a7e3aff9992e329411bcd",
+  "bytes": 14512
+ },
+ "010_c6799b49_c3.wav": {
+  "sha1": "955cc37000b86814200621027e1be2fc70e8e300",
+  "bytes": 14512
+ },
+ "010_c6799b49_ref.wav": {
+  "sha1": "955cc37000b86814200621027e1be2fc70e8e300",
+  "bytes": 14512
+ },
+ "011_eb365f62_c1.wav": {
+  "sha1": "64e3e1b5e30dff30ab59fcf6c9e0da6125358e1d",
+  "bytes": 8944
+ },
+ "011_eb365f62_c2.wav": {
+  "sha1": "5ce381d4e0fec2dd433869338cbdff082aa214f2",
+  "bytes": 8944
+ },
+ "011_eb365f62_c3.wav": {
+  "sha1": "a642ee82cad15b45f988c2890cbe23e8163d989a",
+  "bytes": 8944
+ },
+ "011_eb365f62_ref.wav": {
+  "sha1": "5ce381d4e0fec2dd433869338cbdff082aa214f2",
+  "bytes": 8944
+ }
+}

@@ -1,0 +1,22 @@
+{
+ "gate": "independent-verify",
+ "pass": true,
+ "n_wav": 48,
+ "sha1_recompute_vs_index": "48/48",
+ "dup_equals_ref_bytes": "12/12",
+ "file_set_bidirectional": true,
+ "sheet_join": "36/36",
+ "sheet_rows": 36,
+ "sheet_filled_rows": 0,
+ "sheet_status": "未判（Delight 未填）",
+ "candidate_sha1_in_src_true75_13p": "36/36",
+ "sha1_overlap_with_13c": 0,
+ "distinct_hits": 12,
+ "distinct_sources": 12,
+ "notation_counts": {
+  "F": 6,
+  "Tch": 3,
+  "Tss": 3
+ },
+ "failures": []
+}

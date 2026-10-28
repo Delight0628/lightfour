@@ -1,0 +1,35 @@
+{
+  "artifact": "eval_gen_audio_convergence",
+  "date": "2026-10-28",
+  "claimer": "Eval",
+  "diff_summary": {
+    "local": {
+      "bytes": 6432,
+      "lines": 185,
+      "raw_md5": "a194a76ef7274f58f0694f4d4d6d871e",
+      "lf_md5": "0d21b52fed5c2e6a97e628f99524e80e"
+    },
+    "remote_before": {
+      "bytes": 5259,
+      "lines": 167,
+      "raw_md5": "b8ce9b4cffb5ef0defea81c55d4cccf5"
+    },
+    "direction": "local_wins_superset",
+    "local_only": [
+      "first_onset() 样本级浮点 + 线性插值（校准误差 <1ms；远端旧实现 RMS 帧索引 hop=64，实测系统性低估 1 帧）",
+      "onset_err 换算去量化（/24000*1000 浮点）",
+      "rec 增加 gen_file / gt_file 字段（report 行可 join 回磁盘 wav）",
+      "聚合列注释「gen/gt_file 不聚合」"
+    ],
+    "remote_only": "仅被替换旧行（旧 first_onset、量化 onset_err、无 join 字段），无远端独有功能",
+    "note": "双方均无『缺失原因』占位文本；本地非 78 行骨架，PI 转述与实况不符（疑为旧快照或误指）"
+  },
+  "action": {
+    "remote_backup": "/gemini/code/lightfour-train/backups/2026-10-28_eval_gen_audio_b8ce9b4c.py (md5 b8ce9b4c, 原件未删)",
+    "pushed": "local -> /gemini/code/lightfour-train/scripts/eval_gen_audio.py",
+    "readback_md5": "a194a76ef7274f58f0694f4d4d6d871e (双端一致, CRLF 形态)",
+    "py_compile_remote": "COMPILE_OK",
+    "restore": "若 PI 裁定回退远端版：cp backups/2026-10-28_eval_gen_audio_b8ce9b4c.py 回 scripts/"
+  },
+  "red_line": "mel 绝对值口径不变：本文件 mel_dist 继续 provisional，禁与 C1 卡并表（裁决⑥分链路恢复）"
+}

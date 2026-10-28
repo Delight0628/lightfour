@@ -1,0 +1,30 @@
+{
+ "gate": "independent-verify",
+ "pass": true,
+ "pack_version": "HIHATS_VERDICT_AB_V2",
+ "n_wav": 48,
+ "sha1_recompute_vs_index": "48/48",
+ "index_ref": "../ADMIN/INDEX_ADMIN.json（完整索引，不随包发放）",
+ "dup_equals_ref_bytes": "12/12",
+ "file_set_bidirectional": true,
+ "sheet_join": "36/36",
+ "sheet_rows": 36,
+ "sheet_filled_rows": 0,
+ "sheet_status": "未判（Delight 未填）",
+ "candidate_sha1_in_src_true75_13p": "36/36",
+ "sha1_overlap_with_13c": 0,
+ "distinct_hits": 12,
+ "distinct_sources": 12,
+ "notation_counts": {
+  "Tch": 3,
+  "Tss": 3,
+  "F": 6
+ },
+ "public_leak_scan": {
+  "answer_field_hits": 0,
+  "answer_key_file_present": false,
+  "full_index_file_present": false,
+  "scanned_text_files": 6
+ },
+ "failures": []
+}

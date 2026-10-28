@@ -1,0 +1,37 @@
+{
+ "gate": "build-self-check",
+ "pack_version": "HIHATS_VERDICT_AB_V2",
+ "n_items": 12,
+ "n_wav_on_disk": 48,
+ "n_sheet_rows": 36,
+ "join_sheet_to_files": "36/36",
+ "dup_equals_ref_bytes": "12/12",
+ "sha1_copy_equals_source": "36/36",
+ "sha1_recompute_vs_admin_index": "48/48",
+ "filenames_ascii": true,
+ "wav_headers_readable": true,
+ "names_unique": true,
+ "riff_uniform": "format=3(IEEE_FLOAT) ch=1 sr=24000 bits=32（n_distinct=1）",
+ "slot_balance": {
+  "75": "4/4/4",
+  "13p": "4/4/4",
+  "dup": "4/4/4"
+ },
+ "candidate_13c_in_pack": false,
+ "sha1_overlap_with_13c_src": 0,
+ "notation_counts": {
+  "Tch": 3,
+  "Tss": 3,
+  "F": 6
+ },
+ "n_sources": 12,
+ "public_index": "INDEX_PUBLIC.json（无臂别/击打映射字段）",
+ "answer_admin_dir": "../ADMIN（答案键与完整索引，不随包发放）",
+ "public_leak_scan": {
+  "answer_field_hits": 0,
+  "answer_key_file_present": false,
+  "full_index_file_present": false,
+  "scanned_text_files": 6
+ },
+ "pass": true
+}
