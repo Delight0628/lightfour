@@ -172,6 +172,45 @@ def load_talker_weights(model, model_dir):
     return model
 
 
+# ------------------------------------------------------------------ codec_head re-tie
+def _find_module(model, leaf, cls):
+    hits = [(n, m) for n, m in model.named_modules()
+            if n.split(".")[-1] == leaf and isinstance(m, cls)]
+    if len(hits) != 1:
+        raise SystemExit(f"[fatal] {leaf} 匹配 {len(hits)} 个（期望 1）: {[n for n, _ in hits]}")
+    return hits[0][1]
+
+
+def retie_codec_head(model, step=None):
+    """codec_head.weight ← model.codec_embedding.weight（同一个 Parameter 对象）。
+
+    实测（outputs/talker_load_gate.json / PI 裁决 186）：
+      transformers 5.16.1 的 `tie_weights()` **没有**接通这一对
+      （tied_before=False / tied_after=False，talker config 的 tie_word_embeddings 也是 False）。
+      只在 config 里声明 = 训练与生成时 head 与码本各走各的，属于静默错训。
+    因此每步显式 re-tie；data_ptr 不相等直接 exit 9，不写假绿灯。
+    """
+    head = _find_module(model, "codec_head", nn.Linear)
+    emb = _find_module(model, "codec_embedding", nn.Embedding)
+    if head.weight is not emb.weight:
+        head.weight = emb.weight
+    ok = head.weight.data_ptr() == emb.weight.data_ptr()
+    if not ok:
+        raise SystemExit("[fatal] codec_head re-tie 失败：data_ptr 不相等（exit 9）")
+    if step is not None and RETIE_STATE["ok"] is None:
+        RETIE_STATE["ok"] = ok
+    RETIE_STATE["n_calls"] += 1
+    RETIE_STATE["last_step"] = step
+    RETIE_STATE["data_ptr_equal"] = ok
+    RETIE_STATE["shape"] = list(head.weight.shape)
+    RETIE_STATE["requires_grad"] = bool(head.weight.requires_grad)
+    return dict(RETIE_STATE)
+
+
+RETIE_STATE = {"ok": None, "n_calls": 0, "last_step": None,
+               "data_ptr_equal": None, "shape": None, "requires_grad": None}
+
+
 # ------------------------------------------------------------------ 输入拼装
 class TextEmbedder(nn.Module):
     """thinker 词嵌入。有 30B 权重时用真实矩阵，bench 时用同宽随机矩阵。"""
@@ -298,6 +337,10 @@ def self_test(args):
     cfg = make_talker_config(snap, tiny=(2, 1))
     model = build_talker(cfg, quant="bf16", device="cpu")
     model.train()
+    _t = retie_codec_head(model, step=0)
+    assert _t["data_ptr_equal"] is True, "self-test: codec_head re-tie 失败"
+    print(f"[self-test] codec_head ↔ codec_embedding 已 tie shape={_t['shape']} "
+          f"data_ptr_equal=True")
     cfg_t = model.config
     TH = model.config.thinker_hidden_size   # text_projection 的输入宽（=2048），不是 talker hidden
     T = 11
@@ -484,6 +527,10 @@ def train(args):
                                           "gate_proj", "up_proj", "down_proj"])
         model = get_peft_model(model, lcfg)
         model.print_trainable_parameters()
+    # PI 裁决 186：tie 只声明不执行 = 静默错训，建模型即 re-tie 一次
+    _tie = retie_codec_head(model, step=0)
+    print(f"[tie] codec_head ↔ codec_embedding data_ptr_equal=True "
+          f"shape={_tie['shape']} requires_grad={_tie['requires_grad']}", flush=True)
 
     tok = AutoTokenizer.from_pretrained(args.model) if Path(args.model).exists() else None
     if tok is None:
@@ -568,6 +615,8 @@ def train(args):
                 torch.nn.utils.clip_grad_norm_(params, 1.0)
                 opt.step()
                 opt.zero_grad(set_to_none=True)
+                # 每步 re-tie：优化器或量化若替换了任一权重，这里立刻暴露（失败 exit 9）
+                retie_codec_head(model, step=step + 1)
             step += 1
             if step % args.log_every == 0:
                 el = time.time() - t_start
@@ -596,7 +645,8 @@ def train(args):
                "first_loss": hist[0]["loss"] if hist else None,
                "last_loss": hist[-1]["loss"] if hist else None,
                "lora_r": args.lora_r, "quant": args.quant, "grad_ckpt": args.grad_ckpt,
-               "frame_rate": FRAME_RATE, "layers": LAYERS}
+               "frame_rate": FRAME_RATE, "layers": LAYERS,
+               "codec_head_tie": dict(RETIE_STATE)}
     (out_dir / "summary.json").write_text(json.dumps(summary, ensure_ascii=False, indent=1),
                                           encoding="utf-8")
     print(f"[done] {summary}")

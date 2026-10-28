@@ -1,0 +1,18 @@
+{
+  "schema": "talker_subset_verify/v1",
+  "purpose": "重启后按 SUBSET.sha256 复核子集（PI 裁决 182 / 186）",
+  "subset_file": "models/talker_subset_v2_shift/talker_subset.safetensors",
+  "subset_bytes": 7273097224,
+  "subset_bytes_expected": 7273097224,
+  "bytes_match": true,
+  "sha256_recomputed": "2c3c2c2e22105557533cf63141b4841d1a0b62e6445f6506389d74c660b583d3",
+  "sha256_expected": "2c3c2c2e22105557533cf63141b4841d1a0b62e6445f6506389d74c660b583d3",
+  "sha256_match": true,
+  "expected_name": "talker_subset.safetensors",
+  "command": "cd models/talker_subset_v2_shift && sha256sum -b talker_subset.safetensors",
+  "started_utc": "2026-10-28T04:50:02Z",
+  "ended_utc": "2026-10-28T04:56:31Z",
+  "elapsed_sec": 389.0,
+  "stderr_bytes": 0,
+  "verdict": "PASS"
+}
