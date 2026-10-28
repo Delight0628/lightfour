@@ -40,6 +40,20 @@ TAXONOMY = DATA / "beatbox_taxonomy.json"
 CROSSWALK = DATA / "beatbox_seed_crosswalk.csv"
 SEED_AUDIO = DATA / "beatbox_seeds" / "audio"
 
+STATIC_ALLOW_PREFIXES = ("/data/bbox_raw/", "/data/beatbox_seeds/audio/")
+
+
+def _static_allowed(p):
+    """公网暴露时的静态白名单：仅切片音频与参考音，且必须是仓库内的普通文件。"""
+    if not any(p.startswith(pref) for pref in STATIC_ALLOW_PREFIXES):
+        return False
+    try:
+        target = (BASE / p.lstrip("/")).resolve()
+        target.relative_to(BASE.resolve())
+    except (ValueError, OSError):
+        return False
+    return target.is_file()
+
 
 def load_queue():
     rows = list(csv.DictReader(open(ANNOT_CSV, encoding="utf-8-sig")))
@@ -477,6 +491,12 @@ class Handler(SimpleHTTPRequestHandler):
         if p == "/api/plan":
             items, _tax, _ref = load_queue()
             self._json(build_plan(items))
+            return
+        # 静态文件白名单：只放行听音频所需的两类路径，其余一律 404。
+        # 加这条是因为一旦用隧道暴露到公网，SimpleHTTPRequestHandler 会把
+        # 整个仓库（含 secrets/、agent.md、outputs/）以 HTTP 200 直接送出去。
+        if not _static_allowed(p):
+            self.send_error(404)
             return
         super().do_GET()
 
