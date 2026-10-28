@@ -1,0 +1,22 @@
+{
+ "generated_at": "2026-10-28T13:06:16+0800",
+ "kind": "pylibs_torch (CPU torch, isolated --target dir)",
+ "exe": "/root/miniconda3/bin/python",
+ "python_version": "3.11.8",
+ "platform": "Linux-5.4.0-42-generic-x86_64-with-glibc2.35",
+ "target_path": "/root/pylibs_torch",
+ "target_size_bytes": 1470412793,
+ "target_n_files": 31773,
+ "torch_version": "2.8.0+cpu",
+ "torch_cuda_available": false,
+ "torch_device_count": 0,
+ "torch_file": "/root/pylibs_torch/torch/__init__.py",
+ "transformers_version": "4.57.1",
+ "numpy_version": "2.4.6",
+ "librosa_version": "0.11.0",
+ "soundfile_version": "0.14.0",
+ "torch_install_source": "local wheel /tmp/pip-unpack-ve8gbkkz/torch-2.8.0+cpu-cp311-cp311-manylinux_2_28_x86_64.whl",
+ "install_cmd": "/root/miniconda3/bin/python -m pip install --no-cache-dir --ignore-installed --index-url https://pypi.tuna.tsinghua.edu.cn/simple --target /root/pylibs_torch sympy networkx jinja2 filelock fsspec typing_extensions && /root/miniconda3/bin/python -m pip install --no-cache-dir --ignore-installed --no-deps --index-url https://download.pytorch.org/whl/cpu --target /root/pylibs_torch torch==2.8.0+cpu && /root/miniconda3/bin/python -m pip install --no-cache-dir --ignore-installed --index-url https://pypi.tuna.tsinghua.edu.cn/simple --target /root/pylibs_torch transformers==4.57.1 librosa soundfile",
+ "script_sha256": "f71ec8b3b23b0965da1f859c568bc965d542b67db93362cd7bf004840f93af0a",
+ "import_guard": "assert torch.__file__ startswith target; assert +cpu; assert cuda False"
+}
